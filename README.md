@@ -5,7 +5,7 @@ Ce projet est un exemple pour les L3 MIAGE de grenoble. Il peut être utilisé c
 # Prérequis
 
 ## Pour les VM
-
+ 
 Plusieurs installations sont nécessaires pour les VMs :
 1) Installer JDK 11
     ```shell
@@ -115,6 +115,11 @@ sudo npm install -g @angular/cli
 ```
 ssh-keygen -t ed25519
 ```
+<<<<<<< HEAD
 
 # Rapport
 <a href="https://docs.google.com/document/d/1Bp4XaOXH1FVUw2vxkg5jgJTxqfsGw8XaN9A-QbvmfQw/edit?usp=sharing">Rapport</a>
+=======
+#test kyks'
+
+>>>>>>> 646d40bf0bbd0711119fa1ddac8b007e9f7dfdac
