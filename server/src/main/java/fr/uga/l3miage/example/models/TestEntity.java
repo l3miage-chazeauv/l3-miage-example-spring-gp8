@@ -26,7 +26,7 @@ import java.util.Objects;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class TestEntity {
+public class    TestEntity {
     /**
      * Les annotations :
      * <ul>
