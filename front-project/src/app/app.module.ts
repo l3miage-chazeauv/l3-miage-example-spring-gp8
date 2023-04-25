@@ -9,12 +9,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppComponent } from './app.component';
 import { QuestionComponent } from './question/question.component';
 import { ReponseComponent } from './reponse/reponse.component';
+import { MiahootComponent } from './miahoot/miahoot.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReponseComponent,
-    QuestionComponent
+    QuestionComponent,
+    // ComponentQuestionComponent,
+    // ComponentReponseComponent,
+   
+    MiahootComponent
   ],
   imports: [
     BrowserModule,
