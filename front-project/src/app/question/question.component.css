@@ -10,12 +10,11 @@ section{
 
 label{
     font-size: 1.5rem;
+    padding-bottom: 15px;
 }
 
 app-reponse{
     width: max-content;
     margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: inline;
 }
