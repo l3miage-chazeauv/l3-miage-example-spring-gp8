@@ -1,7 +1,5 @@
-<div>
-    <!-- <label>{{label}}</label> -->
-    <input type="checkbox"/>
-           
-</div>
-<!-- [class.coche]="estValide"
-           [class.noncoche]="estValide"/> -->
+<section>
+    <label>{{reponse.label}}</label>
+    <input type="checkbox" [class.coche]="reponse.estValide"
+        [class.noncoche]="!reponse.estValide"/>     
+</section>

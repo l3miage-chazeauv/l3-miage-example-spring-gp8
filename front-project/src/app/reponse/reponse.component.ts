@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Reponse } from '../QcmDefinitions';
 
 @Component({
   selector: 'app-reponse',
@@ -8,6 +9,8 @@ import { Component } from '@angular/core';
 
 export class ReponseComponent {
 
+  @Input() reponse: Reponse = { label: '', estValide: false};
   
+  constructor() { }
   
 }

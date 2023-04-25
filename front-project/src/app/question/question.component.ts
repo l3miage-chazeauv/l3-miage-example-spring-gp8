@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Question } from '../QcmDefinitions';
 
 @Component({
   selector: 'app-question',
@@ -9,11 +10,8 @@ import { Component } from '@angular/core';
 
 export class QuestionComponent {
 
-  // private label:String="question de base"
-  // private reponses:Reponse[]<Reponse>;
+  @Input() question: Question = { label: '', reponses: []};
 
-}
-interface Response {
-  // label: string[];
-  // estValide: Boolean;  
+  constructor() { }
+
 }
