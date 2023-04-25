@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 // import { ComponentQuestionComponent } from './component-question/component-question.component';
 // import { ComponentReponseComponent } from './component-reponse/component-reponse.component';
 import { ReponseComponent } from './reponse/reponse.component';
+import { MiahootComponent } from './miahoot/miahoot.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     // ComponentQuestionComponent,
     // ComponentReponseComponent,
-    ReponseComponent
+    ReponseComponent,
+    MiahootComponent
   ],
   imports: [
     BrowserModule,
