@@ -7,16 +7,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppComponent } from './app.component';
-// import { ComponentQuestionComponent } from './component-question/component-question.component';
-// import { ComponentReponseComponent } from './component-reponse/component-reponse.component';
+import { QuestionComponent } from './question/question.component';
 import { ReponseComponent } from './reponse/reponse.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    // ComponentQuestionComponent,
-    // ComponentReponseComponent,
-    ReponseComponent
+    ReponseComponent,
+    QuestionComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,12 @@
-mat-toolbar{
+.toolbar{
     box-shadow: 0px 7px 15px 5px rgba(143,143,143,0.58);
     padding: 10px 30px;
     top: 0;
+    position: absolute;
+    width: 100%;
+}
+
+span{
+    font-size: 1.2rem;
+    margin: 50px 0;
 }
