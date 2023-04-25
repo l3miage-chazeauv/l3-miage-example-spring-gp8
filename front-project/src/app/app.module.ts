@@ -17,10 +17,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
     // ComponentQuestionComponent,
     // ComponentReponseComponent,
-    ReponseComponent,
+    ReponseComponent
   ],
   imports: [
     BrowserModule,
