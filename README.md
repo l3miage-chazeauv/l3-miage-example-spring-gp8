@@ -111,3 +111,6 @@ Pour installer angular sur la vm, lancer les commandes suivantes
 ```
 sudo npm install -g @angular/cli
 ```
+#test
+
+salut
