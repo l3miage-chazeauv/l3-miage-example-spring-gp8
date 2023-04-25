@@ -10,7 +10,7 @@ import java.util.List;
  * @param <E>
  */
 public interface CRUDRepository<I,E> {
-    E save(E enitiy);
+    E save(E entity);
 
     E get(I id);
 
