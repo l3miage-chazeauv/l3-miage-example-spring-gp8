@@ -1,4 +1,9 @@
 export interface Reponse{
   label: string;
-  coche: boolean;
+  estValide: boolean;
+}
+
+export interface Question{
+  label: string;
+  reponses: Reponse[];
 }
