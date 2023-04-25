@@ -104,3 +104,10 @@ Dans votre éditeur vous n'avez qu'à lancer le main dans le fichier `ExampleSpr
 
 * Vous trouverez le swagger, lorsque votre serveur est **démarré**, à l'adresse suivante : 
 <a href="http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/">swagger</a>
+
+# Installer Angular sur la VM
+
+Pour installer angular sur la vm, lancer les commandes suivantes
+```
+sudo npm install -g @angular/cli
+```
