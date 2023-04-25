@@ -115,3 +115,6 @@ sudo npm install -g @angular/cli
 ```
 ssh-keygen -t ed25519
 ```
+
+# Rapport
+<a href="https://docs.google.com/document/d/1Bp4XaOXH1FVUw2vxkg5jgJTxqfsGw8XaN9A-QbvmfQw/edit?usp=sharing">Rapport</a>
