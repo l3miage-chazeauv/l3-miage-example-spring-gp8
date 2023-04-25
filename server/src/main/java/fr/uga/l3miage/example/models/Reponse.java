@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "Reponse")
 public class Reponse {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,4 +19,7 @@ public class Reponse {
 
     @Column(nullable = false)
     private boolean estValide;
+
+    @ManyToOne
+    private Question question;
 }
