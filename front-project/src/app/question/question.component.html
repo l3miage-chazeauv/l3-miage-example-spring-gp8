@@ -1,4 +1,5 @@
 <section>
     <label>{{question.label}}</label>
-    <div *ngFor="let reponse of question.reponses"/>
+    <app-reponse *ngFor="let reponse of question.reponses"
+        [reponse]="reponse"></app-reponse>
 </section>

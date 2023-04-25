@@ -1,3 +1,11 @@
-.coche{
-    background-color: green;
+.checkbox{
+    appearance: none; /* pour masquer le style par défaut */
+  -webkit-appearance: none; /* pour les anciennes versions de navigateurs WebKit */
+  border-radius: 4px; /* pour arrondir les coins */
+  border: 2px solid #ccc; /* pour ajouter une bordure grise */
+  width: 20px; /* pour définir la largeur */
+  height: 20px; /* pour définir la hauteur */
+  margin-right: 5px; /* pour ajouter un espace entre le label et l'input */
+  vertical-align: middle; /* pour centrer l'input */
 }
+
