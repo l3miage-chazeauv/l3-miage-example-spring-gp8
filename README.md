@@ -5,7 +5,7 @@ Ce projet est un exemple pour les L3 MIAGE de grenoble. Il peut être utilisé c
 # Prérequis
 
 ## Pour les VM
-
+ 
 Plusieurs installations sont nécessaires pour les VMs :
 1) Installer JDK 11
     ```shell
