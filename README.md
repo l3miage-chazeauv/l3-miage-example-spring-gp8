@@ -5,7 +5,7 @@ Ce projet est un exemple pour les L3 MIAGE de grenoble. Il peut être utilisé c
 # Prérequis
 
 ## Pour les VM
-
+ 
 Plusieurs installations sont nécessaires pour les VMs :
 1) Installer JDK 11
     ```shell
@@ -111,6 +111,10 @@ Pour installer angular sur la vm, lancer les commandes suivantes
 ```
 sudo npm install -g @angular/cli
 ```
-#test
+# Creer clef ssh
+```
+ssh-keygen -t ed25519
+```
 
-salut
+# Rapport
+<a href="https://docs.google.com/document/d/1Bp4XaOXH1FVUw2vxkg5jgJTxqfsGw8XaN9A-QbvmfQw/edit?usp=sharing">Rapport</a>
