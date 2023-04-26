@@ -6,4 +6,5 @@ export interface Reponse{
 export interface Question{
   label: string;
   reponses: Reponse[];
+
 }
