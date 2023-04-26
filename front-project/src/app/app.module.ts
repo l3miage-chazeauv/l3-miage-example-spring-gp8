@@ -28,6 +28,10 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { RechercheMiaComponent } from './recherche-mia/recherche-mia.component';
 import { FormsModule } from '@angular/forms';
 import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 @NgModule({
   declarations: [
@@ -47,6 +51,8 @@ import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
     MatIconModule,
     MatMenuModule,
     MatProgressSpinnerModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),

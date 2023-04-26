@@ -4,7 +4,6 @@
   <section class="TBButtons" *ngIf="user | async as U; else unlogged">
 
     <div id="username"> {{U.displayName}} </div>
-
    <!-- <button id="ppButton" [matMenuTriggerFor]="menu"><img id="pp" [src]="U.photoURL" /></button>  -->
 
     <mat-menu #menu="matMenu">
