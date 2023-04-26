@@ -6,19 +6,21 @@ import lombok.Data;
 
 @Data
 @Builder
-@Schema(description = "correspond au DTO de l'entité Utilisateur")
+@Schema(description = "correspond au DTO de l'entité Personne")
 public class UtilisateurDTO {
 
-    @Schema(description = "correspond à l'Id de l'utilisateur",example = "1")
-    Long userId;
+    @Schema(description = "correspond à l'Id de la personne",example = "1")
+    Long id;
 
-    @Schema(description = "correspond au nom de l'Utilisateur",example = "Salaheddin")
+    @Schema(description = "correspond au nom de la personne",example = "Salaheddin")
     String nom;
 
-    @Schema(description = "correspond au login de l'Utilisateur",example = "mesouaks")
+    @Schema(description = "correspond au login de la personne",example = "mesouaks")
     String login;
 
-    @Schema(description = "correspond au password de l'Utilisateur",example = "123456789")
+    @Schema(description = "correspond au password de la personne",example = "123456789")
     String password;
+
+
 
 }
