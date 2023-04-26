@@ -27,6 +27,7 @@ import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { RechercheMiaComponent } from './recherche-mia/recherche-mia.component';
 import { FormsModule } from '@angular/forms';
+import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { FormsModule } from '@angular/forms';
     QuestionComponent,
     MiahootComponent,
     AccountConfigComponent,
-    RechercheMiaComponent
+    RechercheMiaComponent,
+    WaitingRoomComponent
   ],
   imports: [
     FormsModule,
