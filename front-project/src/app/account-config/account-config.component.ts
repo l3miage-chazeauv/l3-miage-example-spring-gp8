@@ -3,7 +3,7 @@ import { Auth, User } from '@angular/fire/auth';
 import { doc, Firestore } from '@angular/fire/firestore';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { updateDoc } from '@firebase/firestore';
-import { DataService, MiahootUser } from '../data.service';
+import { DataService, MiahootUser } from '../miahoot.service';
 import { Storage,  ref, uploadBytes } from '@angular/fire/storage';
 import { getDownloadURL } from 'firebase/storage';
 import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
