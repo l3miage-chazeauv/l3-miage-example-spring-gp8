@@ -106,8 +106,8 @@
             "prerender": false,
             "ssr": false,
             "browserTarget": "front-project:build:production",
-            "firebaseProject": "projetintmiahoot",
-            "firebaseHostingSite": "projetintmiahoot"
+            "firebaseProject": "miahoot-project-firebase",
+            "firebaseHostingSite": "miahoot-project-firebase"
           }
         }
       }
