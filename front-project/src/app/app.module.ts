@@ -27,6 +27,7 @@ import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { RechercheMiaComponent } from './recherche-mia/recherche-mia.component';
 import { FormsModule } from '@angular/forms';
+import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -39,7 +40,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     QuestionComponent,
     MiahootComponent,
     AccountConfigComponent,
-    RechercheMiaComponent
+    RechercheMiaComponent,
+    WaitingRoomComponent
   ],
   imports: [
     FormsModule,
