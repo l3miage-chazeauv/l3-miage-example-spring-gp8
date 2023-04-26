@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Auth, authState, GoogleAuthProvider, signInWithPopup, signOut, User } from '@angular/fire/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { QcmService } from './qcm.service';
+import { Firestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
   title = 'Miahoot';
@@ -14,8 +16,8 @@ export class AppComponent {
   bsAuth = new BehaviorSubject<boolean>(false); // état de la connection
   public readonly user: Observable<User | null>; // utilisateur connecté
 
-  constructor(private auth: Auth, private qs: QcmService) {
-    this.user = authState(auth); // récupération de l'utilisateur connecté
+  constructor(private auth: Auth, firestore: Firestore) {
+    this.user = authState(this.auth); // récupération de l'utilisateur connecté
   }
 
   async login() {
@@ -33,6 +35,10 @@ export class AppComponent {
     }
 
     this.bsAuth.next(false); // on passe l'état de la connection à false
+  }
+
+  async logout() {
+    await signOut(this.auth); // on se déconnecte
   }
 
 }

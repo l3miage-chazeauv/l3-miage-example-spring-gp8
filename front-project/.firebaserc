@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "miahoot-project-firebase": {
+      "hosting": {
+        "front-project": [
+          "miahoot-project-firebase"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "miahoot-project-firebase"
+  }
+}
