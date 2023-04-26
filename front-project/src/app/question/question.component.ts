@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Question, Reponse } from '../QcmDefinitions';
 
 @Component({
-  selector: 'app-question [id]',
+  selector: 'app-question[questionId]',
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -11,7 +11,7 @@ import { Question, Reponse } from '../QcmDefinitions';
 
 export class QuestionComponent {
 
-  @Input() id!: number 
+  @Input() questionId!: number 
   label:String =''
   reponses:Reponse[]=[]
 
