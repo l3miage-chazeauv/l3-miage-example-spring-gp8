@@ -1,14 +1,13 @@
 package fr.uga.l3miage.example.models;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
-@Table(name = "Personne")
-public class Personne {
+@Table(name="Utilisateur")
+public class Utilisateur{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long userId;
 
     @Column(nullable = false)
     private String nom;
@@ -18,5 +17,4 @@ public class Personne {
 
     @Column(nullable = false)
     private String password;
-
 }

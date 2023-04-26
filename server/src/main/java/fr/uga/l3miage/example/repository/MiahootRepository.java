@@ -1,39 +1,24 @@
 package fr.uga.l3miage.example.repository;
 
-import fr.uga.l3miage.example.exception.rest.TestEntityNotDeletedRestException;
 import fr.uga.l3miage.example.models.Miahoot;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public class MiahootRepository implements CRUDRepository<Long, Miahoot> {
-    private EntityManager entityManager;
+public interface MiahootRepository extends JpaRepository<Miahoot,Long> {
 
-    @Autowired
-    public MiahootRepository(EntityManager entityManager){
-        this.entityManager = entityManager;
-    }
+    List<Miahoot> findAllByUserId(final long userId);
 
-    @Override
-    public Miahoot save(Miahoot enitiy) {
-        return null;
-    }
+    List<Miahoot> findAllByNom(final String nom);
 
-    @Override
-    public Miahoot get(Long id) {
-        return null;
-    }
+    Optional<Miahoot> findByUserIdAndNom(final long userId, final String nom);
 
-    @Override
-    public void delete(Miahoot entity) throws TestEntityNotDeletedRestException {
+    int deleteByUserIdAndNom(final long userId, final String nom);
 
-    }
-
-    @Override
-    public List<Miahoot> all() {
-        return null;
-    }
 }
