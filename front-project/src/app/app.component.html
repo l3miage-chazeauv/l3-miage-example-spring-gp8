@@ -4,7 +4,7 @@
   <section class="TBButtons" *ngIf="user | async as U; else unlogged">
 
     <div id="username"> {{U.displayName}} </div>
-   <!-- <button id="ppButton" [matMenuTriggerFor]="menu"><img id="pp" [src]="U.photoURL" /></button>  -->
+   <img id="pp"  (click)="logout()" [src]="U.photoURL" /> 
 
     <mat-menu #menu="matMenu">
       <button mat-menu-item>Mon compte</button>
@@ -24,11 +24,6 @@
   <mat-spinner></mat-spinner>
   <p>Connexion en cours...</p>
 </section> 
-<<<<<<< HEAD
 
 <app-recherche-mia *ngIf="this.user!==null">
 </app-recherche-mia>
-=======
-<router-outlet></router-outlet>
-
->>>>>>> fdd2737ff89736019189c99c03704271f5fd98f0

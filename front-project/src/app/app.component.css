@@ -47,3 +47,11 @@ span{
 mat-spinner{
     margin: 0 auto;
 } 
+
+#pp{
+    width: 50px;
+    height: 50px;
+    border-radius: 70%;
+    margin-right: 10px;
+    margin-left: 10px
+}
