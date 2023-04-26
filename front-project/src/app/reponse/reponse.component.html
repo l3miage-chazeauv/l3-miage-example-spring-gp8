@@ -1,6 +1,7 @@
 <section>
-    <input type="checkbox" class="checkbox" 
-        [class.coche]="reponse.estValide"
-        [class.noncoche]="!reponse.estValide"/>
+    <input type="checkbox"
+        [class.coche]="reponse.estValide === true"
+        [class.noncoche]="reponse.estValide === false"
+        (click)="reponse.estValide=!reponse.estValide"/>
     <label>{{reponse.label}}</label>
 </section>
