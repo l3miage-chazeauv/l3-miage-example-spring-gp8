@@ -12,6 +12,10 @@
       <button mat-menu-item>Déconnexion</button>
     </mat-menu>
   </section>
+
+  <ng-template #unlogged>
+    <button mat-stroked-button (click)="login()">Connexion</button>
+  </ng-template>
 </div>
 
 <section *ngIf="bsAuth | async" id="logProgress">
