@@ -16,9 +16,6 @@ import { MiahootComponent } from './miahoot/miahoot.component';
     AppComponent,
     ReponseComponent,
     QuestionComponent,
-    // ComponentQuestionComponent,
-    // ComponentReponseComponent,
-   
     MiahootComponent
   ],
   imports: [
