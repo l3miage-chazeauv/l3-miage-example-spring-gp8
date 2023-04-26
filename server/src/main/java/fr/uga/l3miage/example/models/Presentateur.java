@@ -5,6 +5,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Presentateur")
-public class Presentateur extends  Personne{
+public class Presentateur extends Utilisateur {
 
 }
