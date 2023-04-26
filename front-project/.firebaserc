@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "projetintmiahoot": {
+      "hosting": {
+        "front-project": [
+          "projetintmiahoot"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "projetintmiahoot"
+  }
+}
