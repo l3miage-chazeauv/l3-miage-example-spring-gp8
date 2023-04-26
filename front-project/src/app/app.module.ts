@@ -29,7 +29,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     AppComponent,
     ReponseComponent,
     QuestionComponent,
-    MiahootComponent
+    MiahootComponent,
+    AccountConfigComponent
   ],
   imports: [
     BrowserModule,
