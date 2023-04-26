@@ -18,3 +18,32 @@ span{
     -ms-transform: translateY(-50%);
     transform: translateY(-50%); */
 }
+
+.TBButtons{
+    margin-left: auto;
+    margin-right: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#username{
+    margin-right: 5px;
+    height: max-content;
+}
+
+#logProgress{
+    position: absolute;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0 0 -50px;
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+mat-spinner{
+    margin: 0 auto;
+}

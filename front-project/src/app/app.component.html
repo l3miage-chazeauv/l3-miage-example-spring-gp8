@@ -1,3 +1,20 @@
 <div class="toolbar">
   <span>MIAHOOT</span>
+
+  <section class="TBButtons" *ngIf="user | async as U; else unlogged">
+
+    <div id="username"> {{U.displayName}} </div>
+
+    <!-- <button id="ppButton" [matMenuTriggerFor]="menu"><img id="pp" [src]="U.photoURL" /></button> -->
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Mon compte</button>
+      <button mat-menu-item>Déconnexion</button>
+    </mat-menu>
+  </section>
 </div>
+
+<section *ngIf="bsAuth | async" id="logProgress">
+  <mat-spinner></mat-spinner>
+  <p>Connexion en cours...</p>
+</section>
