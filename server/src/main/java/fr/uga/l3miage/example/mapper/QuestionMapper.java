@@ -13,7 +13,7 @@ public interface QuestionMapper {
 
     QuestionDTO toDto(Question entity);
 
-    QuestionDTO toEntity(CreateTestRequest request);
+    Question toEntity(CreateTestRequest request);
 
 
 }

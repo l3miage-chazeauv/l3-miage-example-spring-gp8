@@ -1,6 +1,7 @@
 package fr.uga.l3miage.example.repository;
 
 import fr.uga.l3miage.example.exception.rest.TestEntityNotDeletedRestException;
+import fr.uga.l3miage.example.models.Miahoot;
 import fr.uga.l3miage.example.models.Question;
 import fr.uga.l3miage.example.models.Reponse;
 import fr.uga.l3miage.example.models.TestEntity;
@@ -16,38 +17,14 @@ import javax.persistence.criteria.Root;
 import java.util.Optional;
 
 @Repository
-public class ReponseRepository implements CRUDRepository<Long, Reponse> {
+public interface ReponseRepository extends JpaRepository<Reponse,Long> {
 
-    private EntityManager entityManager;
-    CriteriaBuilder cb;
+    List<Reponse> findAllByQuestion(final Question question);
 
-    @Autowired
-    public ReponseRepository (EntityManager entityManager) {
-        this.entityManager = entityManager;
-        this.cb = this.entityManager.getCriteriaBuilder();
+    Optional<Reponse> findById(final Long id);
 
-    }
+    void deleteById(final Long id);
 
-    @Override
-    public Reponse save(Reponse entity) {
-        entityManager.persist(entity);
-        return entity;
-    }
+    void deleteAllByQuestion(final Question question);
 
-    @Override
-    public Reponse get(Long id) {
-        return entityManager.find(Reponse.class, id);
-    }
-
-    @Override
-    public void delete(Reponse entity) throws TestEntityNotDeletedRestException {
-        entityManager.remove(entity);
-    }
-
-    @Override
-    public List<Reponse> all() {
-        CriteriaQuery<Reponse> query = this.cb.createQuery(Reponse.class);
-        Root<Reponse> root = query.from(Reponse.class); //necessaire pour ne pas avoir de bug à l'execution meme si pas utilisé
-        return this.entityManager.createQuery(query).getResultList();
-    }
 }

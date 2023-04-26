@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Question } from '../QcmDefinitions';
+import { Question, Reponse } from '../QcmDefinitions';
 
 @Component({
   selector: 'app-question',
@@ -12,6 +12,7 @@ export class QuestionComponent {
 
   @Input() question: Question = { label: '', reponses: [] };
 
-  constructor() { }
+  constructor(){
+  }
 
 }

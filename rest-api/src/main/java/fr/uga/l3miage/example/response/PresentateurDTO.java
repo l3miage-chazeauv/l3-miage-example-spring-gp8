@@ -8,4 +8,11 @@ import lombok.Data;
 @Builder
 @Schema(description = "correspond au DTO de l'entité Presentateur")
 public class PresentateurDTO {
+
+    @Schema(description = "correspond à l'Id du Presentateur",example = "1")
+    Long userId;
+
+    @Schema(description = "correspond au nom du Presentateur",example = "Salaheddin")
+    String nom;
+
 }

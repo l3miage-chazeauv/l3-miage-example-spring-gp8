@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Builder
 @Schema(description = "correspond au DTO de l'entité Personne")
-public class PersonneDTO {
+public class UtilisateurDTO {
 
     @Schema(description = "correspond à l'Id de la personne",example = "1")
     Long id;
