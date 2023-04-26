@@ -1,0 +1,8 @@
+.account-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .account-form > * {
+    width: 100%;
+  }
