@@ -9,10 +9,7 @@
     }
   },
   "projects": {
-<<<<<<< HEAD
+
     "default": "miahoot-project-firebase"
-=======
-    "default": "projet-integra"
->>>>>>> 016b0797c274ba0690ba19ef4eda20f3a8acdf13
   }
 }
