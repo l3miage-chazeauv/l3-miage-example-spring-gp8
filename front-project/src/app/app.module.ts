@@ -24,6 +24,8 @@ import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { RechercheMiaComponent } from './recherche-mia/recherche-mia.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,9 +33,11 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     ReponseComponent,
     QuestionComponent,
     MiahootComponent,
-    AccountConfigComponent
+    AccountConfigComponent,
+    RechercheMiaComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
