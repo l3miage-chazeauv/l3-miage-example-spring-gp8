@@ -11,8 +11,8 @@ import { QcmService } from './qcm.service';
 export class AppComponent {
   title = 'Miahoot';
 
-  //bsAuth = new BehaviorSubject<boolean>(false); // état de la connection
-  /*public readonly user: Observable<User | null>; // utilisateur connecté
+  bsAuth = new BehaviorSubject<boolean>(false); // état de la connection
+  public readonly user: Observable<User | null>; // utilisateur connecté
 
   constructor(private auth: Auth, private qs: QcmService) {
     this.user = authState(auth); // récupération de l'utilisateur connecté
@@ -33,6 +33,6 @@ export class AppComponent {
     }
 
     this.bsAuth.next(false); // on passe l'état de la connection à false
-  }*/
+  }
 
 }
