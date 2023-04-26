@@ -11,7 +11,9 @@ import { Reponse } from '../QcmDefinitions';
 export class ReponseComponent {
 
   @Input() reponse: Reponse = { label: '', estValide: false};
-  
+
+
   constructor() { }
-  
+
+
 }
