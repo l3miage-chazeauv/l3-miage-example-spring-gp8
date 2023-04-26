@@ -4,10 +4,9 @@ import { doc, Firestore } from '@angular/fire/firestore';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { updateDoc } from '@firebase/firestore';
 import { DataService, MiahootUser } from '../data.service';
-import { Storage, getStorage, ref, uploadBytes } from '@angular/fire/storage';
+import { Storage,  ref, uploadBytes } from '@angular/fire/storage';
 import { getDownloadURL } from 'firebase/storage';
-import { BehaviorSubject, Observable, Subject, map, of, switchMap } from 'rxjs';
-
+import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-account-config',
