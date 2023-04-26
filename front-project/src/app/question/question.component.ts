@@ -1,8 +1,9 @@
+import { R3PartialDeclaration } from '@angular/compiler';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Question, Reponse } from '../QcmDefinitions';
 
 @Component({
-  selector: 'app-question',
+  selector: 'app-question [id]',
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -10,7 +11,9 @@ import { Question, Reponse } from '../QcmDefinitions';
 
 export class QuestionComponent {
 
-  @Input() question: Question = {id:1, label: '', reponses: [] };
+  @Input() id!: number 
+  label:String =''
+  reponses:Reponse[]=[]
 
   constructor(){
   }

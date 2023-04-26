@@ -1,11 +1,19 @@
 <div class="toolbar">
+<<<<<<< HEAD
    <span>MIAHOOT</span>
 
+=======
+  <span>MIAHOOT</span>
+>>>>>>> 035b6310b6589d0d5141ab42a513c576f0858abe
   <section class="TBButtons" *ngIf="user | async as U; else unlogged">
 
     <div id="username"> {{U.displayName}} </div>
 
+<<<<<<< HEAD
    <button id="ppButton" [matMenuTriggerFor]="menu"><img id="pp" [src]="U.photoURL" /></button> 
+=======
+     <button id="ppButton" [matMenuTriggerFor]="menu"><img id="pp" [src]="U.photoURL" /></button> 
+>>>>>>> 035b6310b6589d0d5141ab42a513c576f0858abe
 
     <mat-menu #menu="matMenu">
       <button mat-menu-item>Mon compte</button>

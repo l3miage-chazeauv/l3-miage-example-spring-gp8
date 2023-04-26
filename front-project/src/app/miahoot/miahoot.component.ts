@@ -7,8 +7,19 @@ import { Question } from '../QcmDefinitions';
   styleUrls: ['./miahoot.component.css']
 })
 
-
-export class MiahootComponent {
+export class MiahootComponent /*implements OnInit*/ {
 
   @Input() listeQuestions:Question[]=[{id:1,label: 'test', reponses: []}];
+  // questions: Question[];
+
+  // constructor(private questionService: QuestionService) { }
+
+  // ngOnInit(): void {
+  //   this.getQuestions();
+  // }
+
+  // getQuestions(): void {
+  //   this.questionService.getQuestions()
+  //     .subscribe(questions => this.questions = questions);
+  // }
 }

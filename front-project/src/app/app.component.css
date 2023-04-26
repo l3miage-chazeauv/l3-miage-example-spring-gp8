@@ -19,7 +19,7 @@ span{
     transform: translateY(-50%); */
 }
 
-.TBButtons{
+ .TBButtons{
     margin-left: auto;
     margin-right: 0;
     display: flex;
@@ -46,4 +46,4 @@ span{
 
 mat-spinner{
     margin: 0 auto;
-}
+} 
