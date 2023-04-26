@@ -5,7 +5,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Concepteur")
-public class Concepteur extends Personne {
+public class Concepteur extends Utilisateur {
 
 
 }
