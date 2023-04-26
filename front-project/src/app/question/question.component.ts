@@ -10,7 +10,7 @@ import { Question, Reponse } from '../QcmDefinitions';
 
 export class QuestionComponent {
 
-  @Input() question: Question = { label: '', reponses: [] };
+  @Input() question: Question = {id:1, label: '', reponses: [] };
 
   constructor(){
   }

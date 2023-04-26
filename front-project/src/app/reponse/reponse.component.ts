@@ -10,7 +10,7 @@ import { Reponse } from '../QcmDefinitions';
 
 export class ReponseComponent {
 
-  @Input() reponse: Reponse = { label: '', estValide: false};
+  @Input() reponse: Reponse = {id:1, label: '', estValide: false, estCorrecte: false};
   
   constructor() { }
   

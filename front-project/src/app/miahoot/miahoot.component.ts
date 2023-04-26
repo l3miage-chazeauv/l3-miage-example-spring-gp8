@@ -10,6 +10,5 @@ import { Question } from '../QcmDefinitions';
 
 export class MiahootComponent {
 
-  @Input() listeQuestions:Question[]=[{ label: 'test', reponses: []}];
-
+  @Input() listeQuestions:Question[]=[{id:1,label: 'test', reponses: []}];
 }
