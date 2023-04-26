@@ -12,7 +12,7 @@ export class ReponseComponent {
 
   @Input() reponse: Reponse = {id:1, label: '', estValide: false, estCorrecte: false};
   
-  constructor() { }
+  constructor() {}
 
 
 }
