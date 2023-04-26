@@ -1,6 +1,5 @@
 <p>miahoot works!</p>
 
 
-<app-question *ngFor="let question in listeQuestions;let i = index" 
-              [id]="i+1">
+<app-question *ngFor="let question of listeQuestions;let i = index" [questionId]="i">
 </app-question>

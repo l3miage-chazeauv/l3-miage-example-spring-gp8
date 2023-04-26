@@ -4,8 +4,8 @@
   <section class="TBButtons" *ngIf="user | async as U; else unlogged">
 
     <div id="username"> {{U.displayName}} </div>
-   <img id="pp"  (click)="logout()" [src]="U.photoURL" /> 
-
+   <!-- <img id="pp"  (click)="logout()" [src]="U.photoURL" />  -->
+   <button mat-button id="menu" [matMenuTriggerFor]="menu"><img id="pp"  [src]="U.photoURL" /></button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item>Mon compte</button>
       <button mat-menu-item (click)="logout()">Déconnexion</button>
@@ -26,6 +26,5 @@
 </section> 
 
 <app-recherche-mia></app-recherche-mia>
-<app-waiting-room></app-waiting-room>
 <router-outlet></router-outlet>
 

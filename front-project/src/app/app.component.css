@@ -55,3 +55,7 @@ mat-spinner{
     margin-right: 10px;
     margin-left: 10px
 }
+
+#menu{
+    background-color: rgba(red, green, blue, 0);
+}
