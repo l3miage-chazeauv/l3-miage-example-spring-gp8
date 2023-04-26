@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "projet-integra": {
+      "hosting": {
+        "front-project": [
+          "projet-integra"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "projet-integra"
+  }
+}

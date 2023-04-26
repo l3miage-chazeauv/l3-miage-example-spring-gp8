@@ -1,11 +1,11 @@
 <div class="toolbar">
-  <span>MIAHOOT</span>
+   <span>MIAHOOT</span>
 
   <section class="TBButtons" *ngIf="user | async as U; else unlogged">
 
     <div id="username"> {{U.displayName}} </div>
 
-    <!-- <button id="ppButton" [matMenuTriggerFor]="menu"><img id="pp" [src]="U.photoURL" /></button> -->
+   <button id="ppButton" [matMenuTriggerFor]="menu"><img id="pp" [src]="U.photoURL" /></button> 
 
     <mat-menu #menu="matMenu">
       <button mat-menu-item>Mon compte</button>
@@ -15,10 +15,13 @@
 
   <ng-template #unlogged>
     <button mat-stroked-button (click)="login()">Connexion</button>
-  </ng-template>
+  </ng-template> 
 </div>
 
-<section *ngIf="bsAuth | async" id="logProgress">
+ <section *ngIf="bsAuth | async" id="logProgress">
   <mat-spinner></mat-spinner>
   <p>Connexion en cours...</p>
-</section>
+</section> 
+
+<router-outlet></router-outlet>
+

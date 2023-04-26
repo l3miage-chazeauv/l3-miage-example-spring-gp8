@@ -35,4 +35,8 @@ export class AppComponent {
     this.bsAuth.next(false); // on passe l'état de la connection à false
   }
 
+  async logout() {
+    return signOut(this.auth);
+  }
+
 }
