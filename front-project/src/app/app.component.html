@@ -1,13 +1,17 @@
 <div class="toolbar">
-   <span>MIAHOOT</span>
+   <img id="logo" src="https://fontmeme.com/permalink/230426/9a2dc2344db7b8bbcdc132813937cecc.png"/>
 
   <section class="TBButtons" *ngIf="user | async as U; else unlogged">
 
-    <div id="username"> {{U.displayName}} </div>
-   <!-- <img id="pp"  (click)="logout()" [src]="U.photoURL" />  -->
-   <button mat-button id="menu" [matMenuTriggerFor]="menu"><img id="pp"  [src]="U.photoURL" /></button>
+    <div id="username"> {{U.displayName | uppercase}} </div>
+
+   <div id="button-wrapper">
+      <button id="menu" [matMenuTriggerFor]="menu"><img id="pp"  [src]="U.photoURL" /></button>
+   </div>
+
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>Mon compte</button>
+      <button mat-menu-item (click)="toAccountConfig()">Mon compte</button>
+      <button mat-menu-item (click)="toMiahootResearch()">Recherche de parties</button>
       <button mat-menu-item (click)="logout()">Déconnexion</button>
     </mat-menu>
   </section>
@@ -25,6 +29,5 @@
   <p>Connexion en cours...</p>
 </section> 
 
-<app-recherche-mia></app-recherche-mia>
 <router-outlet></router-outlet>
 
