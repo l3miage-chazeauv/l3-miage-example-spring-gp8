@@ -20,6 +20,7 @@ export class AppComponent {
     this.user = authState(this.auth); // récupération de l'utilisateur connecté
   }
 
+  //Fonction pour se connecter à firebase
   async login() {
     this.bsAuth.next(true); // on passe l'état de la connection à true
     const googleProvider = new GoogleAuthProvider(); // on utilise le provider Google
@@ -37,6 +38,7 @@ export class AppComponent {
     this.bsAuth.next(false); // on passe l'état de la connection à false
   }
 
+  //fonction pour se deconnecter de firebase
   async logout() {
     await signOut(this.auth); // on se déconnecte
   }

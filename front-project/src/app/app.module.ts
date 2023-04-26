@@ -25,6 +25,13 @@ import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { RechercheMiaComponent } from './recherche-mia/recherche-mia.component';
+import { FormsModule } from '@angular/forms';
+import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 @NgModule({
   declarations: [
@@ -32,15 +39,20 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     ReponseComponent,
     QuestionComponent,
     MiahootComponent,
-    AccountConfigComponent
+    AccountConfigComponent,
+    RechercheMiaComponent,
+    WaitingRoomComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,
     MatProgressSpinnerModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
