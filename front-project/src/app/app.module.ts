@@ -12,6 +12,8 @@ import { AppComponent } from './app.component';
 import { QuestionComponent } from './question/question.component';
 import { ReponseComponent } from './reponse/reponse.component';
 import { MiahootComponent } from './miahoot/miahoot.component';
+import { AccountConfigComponent } from './account-config/account-config.component';
+
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
