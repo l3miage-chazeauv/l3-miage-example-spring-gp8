@@ -1,5 +1,8 @@
 <section>
     <label>{{question.label}}</label>
+    <br/>
+    <div class="seperator"></div>
+    <br/>
     <app-reponse *ngFor="let reponse of question.reponses"
         [reponse]="reponse"></app-reponse>
 </section>
