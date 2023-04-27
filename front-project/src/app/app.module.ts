@@ -32,6 +32,7 @@ import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { QcmEditingComponent } from './qcm-editing/qcm-editing.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MiahootComponent,
     AccountConfigComponent,
     RechercheMiaComponent,
-    WaitingRoomComponent
+    WaitingRoomComponent,
+    QcmEditingComponent
   ],
   imports: [
     FormsModule,
