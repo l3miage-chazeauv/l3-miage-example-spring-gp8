@@ -21,6 +21,7 @@ import { QcmEditingComponent } from './qcm-editing/qcm-editing.component';
 import { Reponse2Component } from './reponse2/reponse2.component';
 import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
 import { RechercheMiaComponent } from './recherche-mia/recherche-mia.component';
+import { CsstestComponent } from './csstest/csstest.component'
 
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
