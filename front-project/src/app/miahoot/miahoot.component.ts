@@ -9,7 +9,15 @@ import { Question } from '../QcmDefinitions';
 
 export class MiahootComponent /*implements OnInit*/ {
 
-  @Input() listeQuestions:Question[]=[{questionId:1,label: 'test', reponses: []}];
+  @Input() listeQuestions:Question[]=[{questionId:999,label: 'montre toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
+                                                                                      {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]},
+                                      {questionId:998,label: 'cache toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
+                                                                                     {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]}];
+
+  public idCourant:number=0;
+  
+  
+  
   // questions: Question[];
 
   // constructor(private questionService: QuestionService) { }
