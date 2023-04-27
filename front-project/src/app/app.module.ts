@@ -34,6 +34,7 @@ import { MatInputModule } from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { QcmEditingComponent } from './qcm-editing/qcm-editing.component';
 import { Reponse2Component } from './reponse2/reponse2.component';
+import { CsstestComponent } from './csstest/csstest.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { Reponse2Component } from './reponse2/reponse2.component';
     RechercheMiaComponent,
     WaitingRoomComponent,
     QcmEditingComponent,
-    Reponse2Component
+    Reponse2Component,
+    CsstestComponent
   ],
   imports: [
     FormsModule,
