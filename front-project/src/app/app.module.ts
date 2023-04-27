@@ -11,7 +11,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { AppComponent } from './app.component';
 import { QuestionComponent } from './question/question.component';
-import { ReponseComponent } from './reponse/reponse.component';
+
 import { MiahootComponent } from './miahoot/miahoot.component';
 import { AccountConfigComponent } from './account-config/account-config.component';
 
@@ -39,7 +39,6 @@ import { Reponse2Component } from './reponse2/reponse2.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ReponseComponent,
     QuestionComponent,
     MiahootComponent,
     AccountConfigComponent,
