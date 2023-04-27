@@ -71,7 +71,7 @@ mat-spinner{
     border: none;
 }
 
-#menu img, .connectB, .connectB button{
+#menu img, .connectB button{
     cursor: pointer;
 }
 
@@ -95,3 +95,5 @@ mat-spinner{
     left: auto;
     position: absolute;
 }
+
+
