@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class MonService {
+
+export class APIService {
 
   private apiUrl = 'http://129.88.210.95:8080';
 

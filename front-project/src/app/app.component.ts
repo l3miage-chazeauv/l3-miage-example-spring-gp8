@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { QcmService } from './qcm.service';
 import { Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { APIService } from './api.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ export class AppComponent {
   bsAuth = new BehaviorSubject<boolean>(false); // état de la connection
   public readonly user: Observable<User | null>; // utilisateur connecté
 
-  constructor(private auth: Auth, firestore: Firestore, private router: Router) {
+  constructor(private auth: Auth, firestore: Firestore, private router: Router, private apiMia: APIService) {
     this.user = authState(this.auth); // récupération de l'utilisateur connecté
   }
 
@@ -54,6 +55,12 @@ export class AppComponent {
 
   toHome(){
     this.router.navigateByUrl(""); // on redirige vers la page d'accueil
+  }
+
+  getMiahoot() {
+    this.apiMia.getAPI('miahoot').subscribe((data: any) => {
+    console.log(data);
+    });
   }
 
 }
