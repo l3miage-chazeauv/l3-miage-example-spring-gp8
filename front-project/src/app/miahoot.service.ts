@@ -30,6 +30,7 @@ const conv : FirestoreDataConverter<MiahootUser> = {
 @Injectable({
   providedIn: 'root'
 })
+
 export class DataService{
 
   obsMiahootUser$ : Observable<MiahootUser|undefined>;

@@ -5,28 +5,18 @@
     position: absolute;
     width: 100%;
     height: 8%;
-    background: linear-gradient(125deg, #ECFCFF 0%, #ECFCFF 40%, #B2FCFF calc(40% + 1px), #B2FCFF 60%, #5EDFFF calc(60% + 1px), #5EDFFF 72%, #3E64FF calc(72% + 1px), #3E64FF 100%);
+    background: linear-gradient(-45deg,#6bc5f8, #5973e6,#6bc5f8, #5973e6);
     background-color: #005ee1;
     color: aliceblue;
     display: flex;
     align-items: center;
 }
 
-#logo{
-    width: 200px;
-    height: 38px;
-    margin-left: 20px;
-    margin-right: 10px;
-    cursor: pointer;
-}
 
 span{
     font-size: 1.5rem;
     margin: 0 10px;
-    /* top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%); */
-}
+    }
 
  .TBButtons{
     margin-left: auto;
@@ -37,7 +27,6 @@ span{
 }
 
 #username{
-    /* margin-right: 5px; */
     height: max-content;
     font-size: 1.1rem;
     font-weight: 500;
@@ -71,7 +60,7 @@ mat-spinner{
     border: none;
 }
 
-#menu img, .connectB, .connectB button{
+#menu img, .connectB button{
     cursor: pointer;
 }
 
@@ -95,3 +84,5 @@ mat-spinner{
     left: auto;
     position: absolute;
 }
+
+

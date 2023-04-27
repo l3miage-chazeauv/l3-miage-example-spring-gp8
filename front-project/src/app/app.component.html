@@ -1,5 +1,7 @@
 <div class="toolbar">
-   <img id="logo" (click)="toHome()" src="https://fontmeme.com/permalink/230426/9a2dc2344db7b8bbcdc132813937cecc.png"/>
+   <img id="logo" 
+        (click)="toHome()" 
+        src="https://fontmeme.com/permalink/230426/9a2dc2344db7b8bbcdc132813937cecc.png">      
 
   <section class="TBButtons" *ngIf="user | async as U; else unlogged">
 
@@ -19,13 +21,12 @@
   <ng-template #unlogged class="ngtp">
     <div class="connectB">
       <button (click)="login()">Connexion</button> 
+      // peut etre integrer la connexion anonyme ici 
     </div>
   </ng-template>
-
-  
-
 </div>
 
+<div class="body">
  <section *ngIf="bsAuth | async" id="logProgress">
   <mat-spinner></mat-spinner>
   <p>Connexion en cours...</p>
