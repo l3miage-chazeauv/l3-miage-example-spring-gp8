@@ -6,7 +6,7 @@ import { updateDoc } from '@firebase/firestore';
 import { DataService, MiahootUser } from '../miahoot.service';
 import { Storage,  ref, uploadBytes } from '@angular/fire/storage';
 import { getDownloadURL } from 'firebase/storage';
-import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-account-config',
