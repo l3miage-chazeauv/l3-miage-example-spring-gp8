@@ -5,7 +5,7 @@
 
   <section class="TBButtons" *ngIf="user | async as U; else unlogged">
 
-    <div id="username"> {{U.displayName | uppercase}} </div>
+    <div id="username"> {{U.displayName}} </div>
 
    <div id="button-wrapper">
       <button id="menu" [matMenuTriggerFor]="menu"><img id="pp"  [src]="U.photoURL" /></button>
@@ -31,3 +31,21 @@
 </section> 
 
 <router-outlet></router-outlet>
+
+<button (click)="getMiahoot()">GET</button>
+<button>POST</button>
+
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+<section *ngIf="user | async as U; else unlogged">
+<p> {{user}} </p>
+</section>
+
+<router-outlet></router-outlet>
+
