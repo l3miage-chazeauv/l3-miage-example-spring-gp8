@@ -33,6 +33,7 @@ const conv : FirestoreDataConverter<MiahootUser> = {
 export class DataService{
 
   obsMiahootUser$ : Observable<MiahootUser|undefined>;
+  public test : number = 555;
 
   constructor(private auth: Auth, private fs : Firestore) {
     authState(this.auth).pipe(
@@ -68,6 +69,13 @@ export class DataService{
       const userRef = doc(this.fs, `users/${user.uid}`).withConverter(conv)
       updateDoc(userRef, up)
     }
+    
+  }
+
+  //mettre a jour photo de profil
+  updatePhoto(up: Partial<MiahootUser>) {
+    const user = this.auth.currentUser;
+    this.test = 555;
   }
 
 }

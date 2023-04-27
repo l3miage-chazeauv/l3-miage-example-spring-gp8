@@ -1,6 +1,6 @@
 
 import { AppRoutingModule } from './app-routing.module';
-import { NgModule } from '@angular/core';
+import { NgModule,Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -30,10 +30,8 @@ import { RechercheMiaComponent } from './recherche-mia/recherche-mia.component';
 import { FormsModule } from '@angular/forms';
 import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
 import { QcmEditingComponent } from './qcm-editing/qcm-editing.component';
-
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -54,9 +52,9 @@ import { QcmEditingComponent } from './qcm-editing/qcm-editing.component';
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,
+    MatFormFieldModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),

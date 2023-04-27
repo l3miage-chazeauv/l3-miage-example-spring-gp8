@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Output,ChangeDetectorRef } from '@angular/core';
 import { Auth, User } from '@angular/fire/auth';
 import { doc, Firestore } from '@angular/fire/firestore';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -18,7 +18,6 @@ export class AccountConfigComponent {
   user !: MiahootUser;
   preview : Observable<string>;
 
-
   public fg: FormGroup<{ 
     name:      FormControl<string>, 
     photoURL:  FormControl<string> 
@@ -29,7 +28,8 @@ export class AccountConfigComponent {
               private fs : Firestore, 
               private fb: FormBuilder,
               private storage: Storage,
-              private auth: Auth) {
+              private auth: Auth,
+              private cd: ChangeDetectorRef) {
             
     this.dataUserService.obsMiahootUser$.subscribe(
       u => {
@@ -73,6 +73,7 @@ export class AccountConfigComponent {
       name: this.fg.controls.name.value,
       photoUrl: this.fg.controls.photoURL.value,
     })
+    this.cd.detectChanges();
     
   }
 
