@@ -1,10 +1,13 @@
-<section>
-    <label>{{label}}</label>
-    <br/>
-    <div class="seperator"></div>
-    <br/>
-    <!-- <app-reponse *ngFor="let reponse of reponses; let i = index"
-                 [reponseId]="i"> 
+<div>
+  <h3>question numéro {{questionId}} : {{ label }}</h3>
+    <p *ngFor="let reponse of reponses; let i = index">
+      <app-reponse2
+        [reponseId]="i"
+        [label]="reponse.label"
+        [estCorrecte]="reponse.estCorrecte"
+      ></app-reponse2>
+    </p>
+</div>
 
-    </app-reponse>-->
-</section>
+
+  

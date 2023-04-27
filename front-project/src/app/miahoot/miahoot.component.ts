@@ -16,6 +16,14 @@ export class MiahootComponent /*implements OnInit*/ {
 
   public idCourant:number=0;
   
+  questionSuivante():void{
+    this.idCourant=this.idCourant+1;
+  }
+  questionPrecedente():void{
+    if(this.idCourant>0){
+      this.idCourant=this.idCourant-1;
+    }
+  }
   
   
   // questions: Question[];

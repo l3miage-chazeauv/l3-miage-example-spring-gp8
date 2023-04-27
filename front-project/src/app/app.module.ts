@@ -33,6 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { QcmEditingComponent } from './qcm-editing/qcm-editing.component';
+import { Reponse2Component } from './reponse2/reponse2.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { QcmEditingComponent } from './qcm-editing/qcm-editing.component';
     AccountConfigComponent,
     RechercheMiaComponent,
     WaitingRoomComponent,
-    QcmEditingComponent
+    QcmEditingComponent,
+    Reponse2Component
   ],
   imports: [
     FormsModule,

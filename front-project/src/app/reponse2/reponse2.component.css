@@ -1,0 +1,46 @@
+.noncoche {
+  appearance: none; /* pour masquer le style par défaut */
+  -webkit-appearance: none; /* pour les anciennes versions de navigateurs WebKit */
+  border-radius: 10px; 
+  border: 2px solid #ccc; 
+  width: 20px; 
+  height: 20px;
+  margin-right: 5px; 
+  vertical-align: middle;
+}
+
+.coche{
+  appearance: none; 
+  -webkit-appearance: none; 
+  border-radius: 10px; 
+  border: 2px solid #ccc; 
+  width: 20px; 
+  height: 20px; 
+  margin-right: 5px; 
+  vertical-align: middle; 
+  background-color: #565cfe;
+}
+
+.BonneReponse{
+  appearance: none; 
+  -webkit-appearance: none; 
+  border-radius: 10px; 
+  border: 2px solid #ccc; 
+  width: 20px; 
+  height: 20px; 
+  margin-right: 5px; 
+  vertical-align: middle; 
+  background-color: #56fe56;
+}
+
+.MauvaiseReponse{
+  appearance: none; 
+  -webkit-appearance: none; 
+  border-radius: 10px; 
+  border: 2px solid #ccc; 
+  width: 20px; 
+  height: 20px; 
+  margin-right: 5px; 
+  vertical-align: middle; 
+  background-color: #fe5656;
+}
