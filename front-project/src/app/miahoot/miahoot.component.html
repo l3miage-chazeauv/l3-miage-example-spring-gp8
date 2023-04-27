@@ -1,2 +1,20 @@
-<app-question *ngFor="let question of listeQuestions;let i = index" [questionId]="i">
+<div class="changementQuestion">
+    <h2>{{idCourant}}</h2>
+    <button (click)="this.questionPrecedente()">
+        revenons a la question {{this.idCourant-1}}</button>
+    <button (click)="this.questionSuivante()">
+        passons a la question {{this.idCourant+1}}</button>
+</div>
+
+<div class="questions"
+     *ngFor="let question of listeQuestions;let i = index" >
+    <app-question class="question"
+                 [questionId]="i"
+                 [label]="question.label"
+                 [reponses]="question.reponses"
+                 [class.showQuestion]="i === idCourant"
+                 [class.hideQuestion]="i !== idCourant">
 </app-question>
+</div>
+
+

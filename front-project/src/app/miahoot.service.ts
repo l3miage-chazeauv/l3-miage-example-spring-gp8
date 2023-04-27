@@ -11,6 +11,7 @@ export interface MiahootUser{
   readonly photoUrl : string
 }
 
+
 const conv : FirestoreDataConverter<MiahootUser> = {
   toFirestore : val => val,
   fromFirestore(
