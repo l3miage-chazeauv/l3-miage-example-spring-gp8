@@ -1,9 +1,9 @@
 <section>
     <input type="checkbox"
-        [class.coche]="reponse.estValide === true"
-        [class.noncoche]="reponse.estValide === false"
-        (click)="reponse.estValide=!reponse.estValide"
-        [class.MauvaiseReponse]="reponse.estValide === true && reponse.estCorrecte === false"
-        [class.BonneReponse]="reponse.estValide === true && reponse.estCorrecte === true"/>
+        [class.coche]="reponse.estCochee === true"
+        [class.noncoche]="reponse.estCochee === false"
+        (click)="reponse.estCochee=!reponse.estCochee"
+        [class.MauvaiseReponse]="reponse.estCochee === true && reponse.estCorrecte === false"
+        [class.BonneReponse]="reponse.estCochee === true && reponse.estCorrecte === true"/>
     <label>{{reponse.label}}</label>
 </section>

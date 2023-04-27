@@ -9,7 +9,7 @@ import { Question } from '../QcmDefinitions';
 
 export class MiahootComponent /*implements OnInit*/ {
 
-  @Input() listeQuestions:Question[]=[{id:1,label: 'test', reponses: []}];
+  @Input() listeQuestions:Question[]=[{questionId:1,label: 'test', reponses: []}];
   // questions: Question[];
 
   // constructor(private questionService: QuestionService) { }

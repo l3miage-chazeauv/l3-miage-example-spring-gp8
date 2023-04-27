@@ -1,12 +1,12 @@
 export interface Reponse{
-  id:number;
+  reponseId:number;
   label: string;
-  estValide: boolean;
+  estCochee: boolean;
   estCorrecte: boolean;
 }
 
 export interface Question{
-  id:number;
+  questionId:number;
   label: string;
   reponses: Reponse[];
 }
