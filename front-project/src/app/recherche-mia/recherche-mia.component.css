@@ -1,16 +1,211 @@
-
-.barreRecherche{
-    box-shadow: 0px 0px 13px 5px rgba(143,143,143,0.67);
+.card {
     position: absolute;
-    top: 50%;
-    left: 50%;
     transform: translate(-50%,-50%);
-    padding: 20px;
+    left:50%;
+    top:50%;
+    box-sizing: border-box;
+    background: linear-gradient(-45deg,#6bc5f8, #5973e6,#6bc5f8, #5973e6);
+    animation: gradient 5s ease infinite;
+    background-size: 500% 500%;
+    width: 20%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 2%;
+    border-radius: 20px;
+  }
+  
+  @keyframes gradient {
+    0% {
+      background-position: 0 50%;
+      box-shadow: 0px 0px 2px #ffffff,
+        0px 0px 5px #ffffff,
+        0px 0px 10px #6bc5f8,
+        0px 0px 50px #6bc5f8;
+    }
+  
+    50% {
+      background-position: 100% 50%;
+      box-shadow: 0px 0px 2px #ffffff,
+        0px 0px 5px #ffffff,
+        0px 0px 10px #5973e6,
+        0px 0px 50px #5973e6;
+    }
+  
+    100% {
+      background-position: 0 50%;
+      box-shadow: 0px 0px 2px #ffffff,
+            0px 0px 5px #ffffff,
+            0px 0px 10px #6bc5f8,
+            0px 0px 50px #6bc5f8;
+    }
+  }
+  
+  .heading {
+    color: white;
+    font-weight: 500;
+    font-size: 150%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-}
-
-button{
-    margin: 10px;
-}
+    gap: 5px;
+  }
+  
+  .heading span {
+    font-size: 2em;
+    font-weight: 800;
+    filter: drop-shadow(0px 0px 10px rgb(255, 255, 255));
+    animation: flickering 2s linear infinite both;
+  }
+  
+  @keyframes flickering {
+    0%,
+    100% {
+      opacity: 1;
+    }
+  
+    41.99% {
+      opacity: 1;
+    }
+  
+    42% {
+      opacity: 0;
+    }
+  
+    43% {
+      opacity: 0;
+    }
+  
+    43.01% {
+      opacity: 1;
+    }
+  
+    47.99% {
+      opacity: 1;
+    }
+  
+    48% {
+      opacity: 0;
+    }
+  
+    49% {
+      opacity: 0;
+    }
+  
+    49.01% {
+      opacity: 1;
+    }
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: fit-content;
+    gap: 10px;
+  }
+  
+  .item {
+    color: white;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: default;
+  }
+  
+  .item svg {
+    transition-duration: .3s;
+  }
+  
+  .item:hover svg {
+    filter: drop-shadow(0px 0px 10px white);
+    transition-duration: .3s;
+  }
+  
+  button {
+    width: 100%;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 100px white;
+    transition-duration: .3s;
+  }
+  
+  button:hover {
+    letter-spacing: 1.5px;
+    transition-duration: .3s;
+  }
+  
+   
+  .input__container {
+    position: relative;
+    background: rgba(255, 255, 255, 0.664);
+    padding: 10px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-radius: 22px;
+    max-width: 300px;
+    transition: transform 400ms;
+    transform-style: preserve-3d;
+    perspective: 500px;
+  }
+  
+  .shadow__input {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    filter: blur(30px);
+    border-radius: 20px;
+    background-color: #999cff;
+    background-image: radial-gradient(at 85% 51%, hsla(60,60%,61%,1) 0px, transparent 50%),
+      radial-gradient(at 74% 68%, hsla(235,69%,77%,1) 0px, transparent 50%),
+      radial-gradient(at 64% 79%, hsla(284,72%,73%,1) 0px, transparent 50%),
+      radial-gradient(at 75% 16%, hsla(283,60%,72%,1) 0px, transparent 50%),
+      radial-gradient(at 90% 65%, hsla(153,70%,64%,1) 0px, transparent 50%),
+      radial-gradient(at 91% 83%, hsla(283,74%,69%,1) 0px, transparent 50%),
+      radial-gradient(at 72% 91%, hsla(213,75%,75%,1) 0px, transparent 50%);
+  }
+  
+  .input__button__shadow {
+    cursor: pointer;
+    border: none;
+    background: none;
+    transition: transform 400ms, background 400ms;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    padding: 5px;
+  }
+  
+  .input__button__shadow:hover {
+    background: rgba(255, 255, 255, 0.411);
+  }
+  
+  .input__search {
+    width: 100%;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    padding: 8px;
+    position: relative;
+  }
