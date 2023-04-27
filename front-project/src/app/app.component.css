@@ -4,7 +4,7 @@
     top: 0;
     position: absolute;
     width: 100%;
-    height: 6%;
+    height: 8%;
     background: linear-gradient(125deg, #ECFCFF 0%, #ECFCFF 40%, #B2FCFF calc(40% + 1px), #B2FCFF 60%, #5EDFFF calc(60% + 1px), #5EDFFF 72%, #3E64FF calc(72% + 1px), #3E64FF 100%);
     background-color: #005ee1;
     color: aliceblue;
@@ -66,11 +66,32 @@ mat-spinner{
     margin-left: 10px
 }
 
-#menu{
+#menu, .connectB button{
     background-color: rgba(143,143,143,0);
     border: none;
 }
 
-#menu img{
+#menu img, .connectB, .connectB button{
     cursor: pointer;
+}
+
+.ngtp{
+    position: absolute;
+    right: 0;
+}
+
+.connectB{
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: aliceblue;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 500;
+    right: 0;
+    left: auto;
+    position: absolute;
 }
