@@ -1,5 +1,5 @@
 <div class="toolbar">
-   <img id="logo" src="https://fontmeme.com/permalink/230426/9a2dc2344db7b8bbcdc132813937cecc.png"/>
+   <img id="logo" (click)="toHome()" src="https://fontmeme.com/permalink/230426/9a2dc2344db7b8bbcdc132813937cecc.png"/>
 
   <section class="TBButtons" *ngIf="user | async as U; else unlogged">
 

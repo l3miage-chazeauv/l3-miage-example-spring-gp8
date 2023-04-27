@@ -52,4 +52,8 @@ export class AppComponent {
     this.router.navigateByUrl("miahootResearch"); // on redirige vers la page de recherche de miahoot
   }
 
+  toHome(){
+    this.router.navigateByUrl(""); // on redirige vers la page d'accueil
+  }
+
 }
