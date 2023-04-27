@@ -20,17 +20,14 @@
 
   <ng-template #unlogged class="ngtp">
     <div class="connectB">
-      <button (click)="login()">Connexion</button> 
-      // peut etre integrer la connexion anonyme ici 
+      <button (click)="login()">Connexion</button>
     </div>
   </ng-template>
 </div>
 
-<div class="body">
  <section *ngIf="bsAuth | async" id="logProgress">
   <mat-spinner></mat-spinner>
   <p>Connexion en cours...</p>
 </section> 
 
-<app-miahoot></app-miahoot>
-</div>
+<router-outlet></router-outlet>
