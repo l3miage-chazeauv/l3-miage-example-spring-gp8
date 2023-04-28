@@ -10,7 +10,7 @@
                        class="input__search" 
                        placeholder="code d'accès au Miahoot..."
                        [(ngModel)]="idRecherche"
-                       (keyup.enter)="findMiahootById() ; this.rt.toMiahoot()">
+                       (keyup.enter)="findMiahootById() ; this.rt.toMiahoot(idRecherche)">
             </div>
         </div>
 </div>

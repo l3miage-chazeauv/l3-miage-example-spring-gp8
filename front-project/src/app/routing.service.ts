@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { indexedDBLocalPersistence } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -29,7 +30,13 @@ export class RoutingService{
     this.router.navigateByUrl("waitingRoom"); // on redirige vers la page de salle d'attente
   }
 
-  toMiahoot(){
-    this.router.navigateByUrl("miahoot"); // on redirige vers la page de miahoot
+  toMiahoot(id:number | undefined){
+    try{
+      this.router.navigateByUrl("miahoot/"+id)
+    }
+    catch(error:any){
+      console.error("Une erreur est survenue lors de la redirection vers la page de miahoot :", error);
+      this.toMiahootResearch();
+    }
   }
 }
