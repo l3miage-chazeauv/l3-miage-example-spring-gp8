@@ -29,7 +29,7 @@ export class RoutingService{
     this.router.navigateByUrl("waitingRoom"); // on redirige vers la page de salle d'attente
   }
 
-  toMiahoot(){
-    this.router.navigateByUrl("miahoot"); // on redirige vers la page de miahoot
+  toMiahoot(id:number){
+    this.router.navigateByUrl("miahoot/"+id); // on redirige vers la page de miahoot
   }
 }

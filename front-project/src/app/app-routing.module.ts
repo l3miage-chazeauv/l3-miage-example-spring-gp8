@@ -24,7 +24,7 @@ const routes: Routes = [
   path:'waitingRoom',
   component: WaitingRoomComponent,
 }, {
-  path:'miahoot',
+  path:'miahoot/{id}',
   component: MiahootComponent,
 }, {
   path: '**',
