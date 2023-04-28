@@ -14,9 +14,11 @@ export class RechercheMiaComponent {
   constructor(private apiMia : APIService, private routing: RoutingService) { }
 
   findMiahootById():void{
-    this.apiMia.getAPIById('miahoot/' + this.idRecherche).subscribe((data:any)=>{
+    this.apiMia.getAPI('miahoot/' + this.idRecherche).subscribe((data:any)=>{
       console.log(data)
     
     })
+    
+
   }
 }
