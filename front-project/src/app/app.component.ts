@@ -5,6 +5,7 @@ import { QcmService } from './qcm.service';
 import { Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { APIService } from './api.service';
+import { RoutingService } from './routing.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent {
   bsAuth = new BehaviorSubject<boolean>(false); // état de la connection
   public readonly user: Observable<User | null>; // utilisateur connecté
 
-  constructor(private auth: Auth, firestore: Firestore, private router: Router, private apiMia: APIService) {
+  constructor(private auth: Auth, firestore: Firestore, protected router: RoutingService, private apiMia: APIService) {
     this.user = authState(this.auth); // récupération de l'utilisateur connecté
   }
 
@@ -42,23 +43,7 @@ export class AppComponent {
   //fonction pour se deconnecter de firebase
   async logout() {
     await signOut(this.auth); // on se déconnecte
-    this.router.navigateByUrl(""); // on redirige vers la page d'accueil
-  }
-
-  toAccountConfig(){
-    this.router.navigateByUrl("accountConfig"); // on redirige vers la page de configuration du compte
-  }
-
-  toMiahootResearch(){
-    this.router.navigateByUrl("miahootResearch"); // on redirige vers la page de recherche de miahoot
-  }
-
-  toHome(){
-    this.router.navigateByUrl(""); // on redirige vers la page d'accueil
-  }
-
-  toEditing(){
-    this.router.navigateByUrl("qcmEditing"); // on redirige vers la page d'édition de qcm
+    this.router.toHome(); // on retourne à la page d'accueil
   }
 
 }
