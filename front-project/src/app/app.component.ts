@@ -57,10 +57,8 @@ export class AppComponent {
     this.router.navigateByUrl(""); // on redirige vers la page d'accueil
   }
 
-  getMiahoot() {
-    this.apiMia.getAPI('miahoot').subscribe((data: any) => {
-    console.log(data);
-    });
+  toEditing(){
+    this.router.navigateByUrl("qcmEditing"); // on redirige vers la page d'édition de qcm
   }
 
 }
