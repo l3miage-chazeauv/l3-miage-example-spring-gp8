@@ -6,15 +6,17 @@
         passons a la question {{this.idCourant+1}}</button>
 </div>
 
+<app-waiting-room *ngIf="this.idCourant === 0"></app-waiting-room>
+
 <div class="questions"
      *ngFor="let question of listeQuestions;let i = index" >
     <app-question class="question"
-                 [questionId]="i"
+                 [questionId]="i+1"
                  [label]="question.label"
                  [reponses]="question.reponses"
-                 [class.showQuestion]="i === idCourant"
-                 [class.hideQuestion]="i !== idCourant">
-</app-question>
+                 [class.showQuestion]="i+1 === idCourant"
+                 [class.hideQuestion]="i+1 !== idCourant">
+    </app-question>
 </div>
 
 
