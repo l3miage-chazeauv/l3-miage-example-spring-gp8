@@ -87,3 +87,8 @@ app-reponse{
     padding: 2%;
     border-radius: 10px;
   }
+
+  p{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
