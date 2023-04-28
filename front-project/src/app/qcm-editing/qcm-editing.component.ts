@@ -7,6 +7,12 @@ import { APIService } from '../api.service';
   styleUrls: ['./qcm-editing.component.css']
 })
 export class QcmEditingComponent {
+  
+  public idQuestion?:number;
+  public idReponse?:number;
+
+  public nameMia?:string;
+  public descriptionMia?:string;
 
   constructor(private apiMia: APIService) {}
 
@@ -16,8 +22,19 @@ export class QcmEditingComponent {
     });
   }
 
-  getQuestions(miahootId: number){
-    this.apiMia.getAPI('miahoot').subscribe((data: any) => {
+  postMiahoot(){
+    this.apiMia.postAPIMiahoot('miahoot', [this.nameMia, this.descriptionMia])
+    this.getMiahoot();
+  }
+  
+  getQuestions(){
+    this.apiMia.getAPI('question/'+this.idQuestion).subscribe((data: any) => {
+    console.log(data);
+    });
+  }
+
+  getReponses(){
+    this.apiMia.getAPI('reponse/').subscribe((data: any) => {
     console.log(data);
     });
   }

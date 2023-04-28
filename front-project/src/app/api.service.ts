@@ -20,18 +20,15 @@ export class APIService {
   }
 
     // Fonction pour la méthode POST
-  postAPI(endpoint: string, data: any): Observable<any> {
+  postAPIMiahoot(endpoint: string, data: any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}/`;
+    const body = { nom: data.nameMia, description: data.descriptionMia};
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'nom': data.nameMia,
+        'description': data.descriptionMia
       })
     };
-    return this.http.post(url, data, httpOptions);
-  }
-
-  getQuestions(miahootId: string): Observable<any> {
-    const url = `${this.apiUrl}/miahoots/${miahootId}/questions`;
-    return this.http.get(url);
+    return this.http.post<any>(url, data, httpOptions);
   }
 }
