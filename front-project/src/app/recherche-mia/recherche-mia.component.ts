@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { APIService } from '../api.service';
 
 @Component({
@@ -10,7 +11,8 @@ export class RechercheMiaComponent {
 
   public idRecherche?:number;
 
-  constructor(private apiMia : APIService) { }
+  constructor(private apiMia : APIService, private router: Router) { }
+
   /* Fonction de recherche parID qui interogera la BD et si le miahoot existe nous dirige sur la waitingRoom de ce miahoot
   searchMiahootById(id:string):void*/
 

@@ -35,4 +35,9 @@ export class APIService {
     };
     return this.http.post(url, data, httpOptions);
   }
+
+  getQuestions(miahootId: string): Observable<any> {
+    const url = `${this.apiUrl}/miahoots/${miahootId}/questions`;
+    return this.http.get(url);
+  }
 }

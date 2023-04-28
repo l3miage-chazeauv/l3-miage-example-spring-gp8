@@ -24,4 +24,6 @@ export class RoutingService{
   toEditing(){
     this.router.navigateByUrl("qcmEditing"); // on redirige vers la page d'édition de qcm
   }
+
+
 }
