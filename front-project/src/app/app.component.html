@@ -15,6 +15,7 @@
       <button mat-menu-item (click)="toAccountConfig()">Mon compte</button>
       <button mat-menu-item (click)="toMiahootResearch()">Recherche de parties</button>
       <button mat-menu-item (click)="logout()">Déconnexion</button>
+      <button mat-menu-item (click)="toEditing()">Edition Miahoot</button>
     </mat-menu>
   </section>
 
@@ -29,23 +30,6 @@
   <mat-spinner></mat-spinner>
   <p>Connexion en cours...</p>
 </section> 
-
-<router-outlet></router-outlet>
-
-<button (click)="getMiahoot()">GET</button>
-<button>POST</button>
-
-
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-
-
-<section *ngIf="user | async as U; else unlogged">
-<p> {{user}} </p>
-</section>
 
 <router-outlet></router-outlet>
 
