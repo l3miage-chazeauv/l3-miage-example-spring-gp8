@@ -236,8 +236,8 @@
       background-position: 0 50%;
       box-shadow: 0px 0px 2px #ffffff,
         0px 0px 5px #ffffff,
-        0px 0px 10px #5e5c5c,
-        0px 0px 50px #5e5c5c;
+        0px 0px 10px #fefefe,
+        0px 0px 50px #fefefe;
     }
   
     50% {
@@ -253,6 +253,6 @@
       box-shadow: 0px 0px 2px #ffffff,
             0px 0px 5px #ffffff,
             0px 0px 10px #5e5c5c,
-            0px 0px 50px #5e5c5c;
+            0px 0px 50px #fefefe;
     }
   }

@@ -10,24 +10,27 @@ import { RoutingService } from '../routing.service';
 })
 export class RechercheMiaComponent {
 
-  public idRecherche?:number;
-  public existe:boolean=true;
+  public idRecherche?: number;
+  public existe: boolean = true;
 
-  constructor(private apiMia : APIService, protected rt: RoutingService) { }
+  constructor(private apiMia: APIService, protected rt: RoutingService) { }
 
-  findMiahootByIdAndGo():void{
+  findMiahootByIdAndGo(): void {
+    console.log(this.idRecherche)
     this.apiMia.getAPI('miahoot/' + this.idRecherche).pipe(
-      catchError(e =>{
+      catchError(e => {
         console.log(e.status);
-        this.existe=false;
+        this.existe = false;
         return of();
       })
-      )  
-    .subscribe((data:any)=>{
-      console.log(data),
-      this.rt.toMiahoot(this.idRecherche);
-    })
+    )
+      .subscribe((data: any) => {
+        console.log(data),
+          this.rt.toMiahoot(this.idRecherche);
+      })
+
+
   }
 
-  
+
 }
