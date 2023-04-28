@@ -16,6 +16,13 @@ export class APIService {
   getAPI(endpoint: string): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}/`;
     return this.http.get(url);
+    
+  }
+
+  // Fonction pour la méthode GET
+  getAPIById(endpoint: string): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.get(url);
   }
 
   // Fonction pour la méthode POST
