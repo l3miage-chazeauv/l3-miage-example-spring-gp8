@@ -45,7 +45,6 @@ import { environment } from '../environments/environment';
     WaitingRoomComponent,
     QcmEditingComponent,
     Reponse2Component,
-    CsstestComponent
   ],
   imports: [
     HttpClientModule,
