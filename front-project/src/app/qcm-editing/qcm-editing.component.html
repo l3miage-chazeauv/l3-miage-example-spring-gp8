@@ -1,14 +1,21 @@
 <div id="testAPI">
     Tests Miahoot
     <button (click)="getMiahoot()">GET</button>
-    <button>POST</button>
+    <br/><br/> 
+    <input placeholder="nom d'un miahoot" [(ngModel)] ="nameMia">
+    <input placeholder="description d'un miahoot" [(ngModel)] = "descriptionMia">
+    <button (click)="postMiahoot()">POST</button>
     <br/><br/>
-    Tests Question
-    <button>GET</button>
-    <button>POST</button>
+    Tests Question 
+    <br/><br/> 
+    Id d'un Miahoot
+    <input type="text" [(ngModel)]="idQuestion" />
+    <button (click)="getQuestions()">GET : renvoie toutes les questions d'un miahoot</button>
+    <button (click)="postQuestion()">POST</button>
     <br/><br/>
     Tests Réponse
-    <button>GET</button>
+    <input type="text" [(ngModel)]="idReponse" />
+    <button (click)="getReponses()">GET reponse par ID</button>
     <button>POST</button>
 
 </div>
