@@ -8,10 +8,10 @@ import { APIService } from '../api.service';
 })
 export class QcmEditingComponent {
 
-  constructor(private api: APIService) {}
+  constructor(private apiMia: APIService) {}
 
   getMiahoot() {
-    this.api.getAPI('miahoot').subscribe((data: any) => {
+    this.apiMia.getAPI('miahoot').subscribe((data: any) => {
     console.log(data);
     });
   }

@@ -4,6 +4,7 @@ import {MiahootComponent} from "./miahoot/miahoot.component";
 import {RechercheMiaComponent} from "./recherche-mia/recherche-mia.component";
 import {AccountConfigComponent} from "./account-config/account-config.component";
 import { AppComponent } from './app.component';
+import { QcmEditingComponent } from './qcm-editing/qcm-editing.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,9 @@ const routes: Routes = [
 }, {
   path:'miahootResearch',
   component: RechercheMiaComponent,
+}, {
+  path:'qcmEditing',
+  component: QcmEditingComponent,
 }, {
   path: '**',
     component: AppComponent }
