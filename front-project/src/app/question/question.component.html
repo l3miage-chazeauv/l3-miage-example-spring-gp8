@@ -1,12 +1,16 @@
-<div>
-  <h3>question numéro {{questionId}} : {{ label }}</h3>
-    <p *ngFor="let reponse of reponses; let i = index">
-      <app-reponse2
-        [reponseId]="i"
-        [label]="reponse.label"
-        [estCorrecte]="reponse.estCorrecte"
-      ></app-reponse2>
-    </p>
+<div class="card">
+  <h3 class="heading">Question n°{{questionId}}
+    <span>{{ label }}</span>
+  </h3>
+    <div class="propositions">
+      <p *ngFor="let reponse of reponses; let i = index">
+        <app-reponse2
+          [reponseId]="i"
+          [label]="reponse.label"
+          [estCorrecte]="reponse.estCorrecte"
+        ></app-reponse2>
+      </p>
+    </div>
 </div>
 
 

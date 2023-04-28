@@ -18,12 +18,17 @@ span{
     margin: 0 10px;
     }
 
- .TBButtons{
+.TBButtons{
     margin-left: auto;
-    margin-right: 10px;
+    margin-right: 2%;
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+#logo{
+    width: 16%;
+    margin: 2%;
 }
 
 #username{
@@ -70,8 +75,10 @@ mat-spinner{
 }
 
 .connectB{
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-right: 2%;
+    width: 5%;
+    height: 25%;
+    text-align: center;
     background-color: aliceblue;
     color: black;
     border: none;
