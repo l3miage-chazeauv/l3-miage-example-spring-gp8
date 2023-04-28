@@ -16,9 +16,6 @@ export class RechercheMiaComponent {
   findMiahootById():void{
     this.apiMia.getAPI('miahoot/' + this.idRecherche).subscribe((data:any)=>{
       console.log(data)
-    
     })
-    
-
   }
 }

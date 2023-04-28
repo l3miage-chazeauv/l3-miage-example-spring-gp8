@@ -2,13 +2,14 @@ import { Component, Input } from '@angular/core';
 import { Question } from '../QcmDefinitions';
 
 @Component({
-  selector: 'app-miahoot',
+  selector: 'app-miahoot[idMiahoot]',
   templateUrl: './miahoot.component.html',
   styleUrls: ['./miahoot.component.css']
 })
 
-export class MiahootComponent /*implements OnInit*/ {
+export class MiahootComponent{
 
+  @Input() idMiahoot!:number;
   @Input() listeQuestions:Question[]=[{questionId:999,label: 'montre toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
                                                                                       {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]},
                                       {questionId:998,label: 'cache toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
@@ -24,18 +25,4 @@ export class MiahootComponent /*implements OnInit*/ {
       this.idCourant=this.idCourant-1;
     }
   }
-  
-  
-  // questions: Question[];
-
-  // constructor(private questionService: QuestionService) { }
-
-  // ngOnInit(): void {
-  //   this.getQuestions();
-  // }
-
-  // getQuestions(): void {
-  //   this.questionService.getQuestions()
-  //     .subscribe(questions => this.questions = questions);
-  // }
 }
