@@ -31,12 +31,6 @@ export class RoutingService{
   }
 
   toMiahoot(id:number | undefined){
-    try{
-      this.router.navigateByUrl("miahoot/"+id)
-    }
-    catch(error:any){
-      console.error("Une erreur est survenue lors de la redirection vers la page de miahoot :", error);
-      this.toMiahootResearch();
-    }
+    this.router.navigateByUrl("miahoot/"+id)   
   }
 }
