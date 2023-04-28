@@ -19,9 +19,7 @@ export class APIService {
     
   }
 
-  
-
-  // Fonction pour la méthode POST
+    // Fonction pour la méthode POST
   postAPI(endpoint: string, data: any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}/`;
     const httpOptions = {

@@ -10,7 +10,13 @@ export class QcmEditingComponent {
 
   constructor(private apiMia: APIService) {}
 
-  getMiahoot() {
+  getMiahoot(){
+    this.apiMia.getAPI('miahoot').subscribe((data: any) => {
+    console.log(data);
+    });
+  }
+
+  getQuestions(miahootId: number){
     this.apiMia.getAPI('miahoot').subscribe((data: any) => {
     console.log(data);
     });

@@ -1,8 +1,11 @@
-<div class="card">
+<div class="card"
+     [class.cardExiste]="existe"
+     [class.cardErreur]="!existe">
     <div class="heading">Rejoindre le miahoot 
         <span>MIAHOOT</span>
     </div>
-    <div class="content">
+    <div class="content"
+         >
         <div class="item item--create">    
             <div class="input__container">
                 <input type="text" 
@@ -10,7 +13,7 @@
                        class="input__search" 
                        placeholder="code d'accès au Miahoot..."
                        [(ngModel)]="idRecherche"
-                       (keyup.enter)="findMiahootById() ; this.rt.toMiahoot()">
+                       (keyup.enter)="findMiahootByIdAndGo()">
             </div>
         </div>
 </div>
