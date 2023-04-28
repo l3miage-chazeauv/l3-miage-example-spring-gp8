@@ -24,4 +24,12 @@ export class RoutingService{
   toEditing(){
     this.router.navigateByUrl("qcmEditing"); // on redirige vers la page d'édition de qcm
   }
+
+  toWaitingRoom(){
+    this.router.navigateByUrl("waitingRoom"); // on redirige vers la page de salle d'attente
+  }
+
+  toMiahoot(){
+    this.router.navigateByUrl("miahoot"); // on redirige vers la page de miahoot
+  }
 }

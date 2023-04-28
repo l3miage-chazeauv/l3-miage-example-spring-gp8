@@ -5,6 +5,7 @@ import {RechercheMiaComponent} from "./recherche-mia/recherche-mia.component";
 import {AccountConfigComponent} from "./account-config/account-config.component";
 import { AppComponent } from './app.component';
 import { QcmEditingComponent } from './qcm-editing/qcm-editing.component';
+import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,12 @@ const routes: Routes = [
 }, {
   path:'qcmEditing',
   component: QcmEditingComponent,
+}, {
+  path:'waitingRoom',
+  component: WaitingRoomComponent,
+}, {
+  path:'miahoot',
+  component: MiahootComponent,
 }, {
   path: '**',
     component: AppComponent }
