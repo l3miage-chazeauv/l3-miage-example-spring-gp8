@@ -22,13 +22,13 @@ export class APIService {
     // Fonction pour la méthode POST
   postAPIMiahoot(endpoint: string, data: any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}/`;
-    const body = { nom: data.nameMia, description: data.descriptionMia};
+    const body = { nom: 'data.nameMia', description: 'data.descriptionMia'};
     const httpOptions = {
       headers: new HttpHeaders({
         'nom': data.nameMia,
         'description': data.descriptionMia
       })
     };
-    return this.http.post<any>(url, data, httpOptions);
+    return this.http.post<any>(url, body);
   }
 }
