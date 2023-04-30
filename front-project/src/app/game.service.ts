@@ -5,6 +5,14 @@ import { Reponse } from './QcmDefinitions';
   providedIn: 'root'
 })
 
-export class QcmService{
+export class GameService{
+
+  inGame: boolean = false;
+
+  constructor() { }
+
+  startGame(): void {
+    this.inGame = true;
+  }
 
 }

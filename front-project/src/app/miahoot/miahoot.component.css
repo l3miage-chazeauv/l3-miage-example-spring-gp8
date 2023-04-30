@@ -1,3 +1,44 @@
+#game{
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left:50%;
+    top:50%;
+    box-sizing: border-box;
+    background: linear-gradient(-45deg,#6bc5f8, #49b7f7,#6bc5f8, #49b7f7);
+    animation: gradient 5s ease infinite;
+    background-size: 500% 500%;
+    width: 20%;
+    height: 30%;
+    padding: 2%;
+    border-radius: 20px;
+}
+
+@keyframes gradient {
+    0% {
+      background-position: 0 50%;
+      box-shadow: 0px 0px 2px #ffffff,
+        0px 0px 5px #ffffff,
+        0px 0px 10px #6bc5f8,
+        0px 0px 50px #6bc5f8;
+    }
+  
+    50% {
+      background-position: 100% 50%;
+      box-shadow: 0px 0px 2px #ffffff,
+        0px 0px 5px #ffffff,
+        0px 0px 10px #49b7f7,
+        0px 0px 50px #49b7f7;
+    }
+  
+    100% {
+      background-position: 0 50%;
+      box-shadow: 0px 0px 2px #ffffff,
+            0px 0px 5px #ffffff,
+            0px 0px 10px #6bc5f8,
+            0px 0px 50px #6bc5f8;
+    }
+  }
+
 .showQuestion{
     box-shadow: 0px 0px 13px 5px rgba(143,143,143,0.67);
     transform: translate(-50%,-50%);

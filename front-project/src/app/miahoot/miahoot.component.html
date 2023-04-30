@@ -1,22 +1,22 @@
-<div class="changementQuestion">
-    <h2>{{idCourant}}</h2>
-    <button (click)="this.questionPrecedente()">
-        revenons a la question {{this.idCourant-1}}</button>
-    <button (click)="this.questionSuivante()">
-        passons a la question {{this.idCourant+1}}</button>
+<div *ngIf="this.gs.inGame === true" id="game">
+    <div class="changementQuestion">
+        <h2>{{idCourant}}</h2>
+        <button (click)="this.questionPrecedente()">
+            revenons a la question {{this.idCourant-1}}</button>
+        <button (click)="this.questionSuivante()">
+            passons a la question {{this.idCourant+1}}</button>
+    </div>
+    
+    <div class="questions"
+         *ngFor="let question of listeQuestions;let i = index" >
+        <app-question class="question"
+                     [questionId]="i+1"
+                     [label]="question.label"
+                     [reponses]="question.reponses"
+                     [class.showQuestion]="i+1 === idCourant"
+                     [class.hideQuestion]="i+1 !== idCourant">
+        </app-question>
+    </div>
 </div>
 
-<app-waiting-room *ngIf="this.idCourant === 0"></app-waiting-room>
-
-<div class="questions"
-     *ngFor="let question of listeQuestions;let i = index" >
-    <app-question class="question"
-                 [questionId]="i+1"
-                 [label]="question.label"
-                 [reponses]="question.reponses"
-                 [class.showQuestion]="i+1 === idCourant"
-                 [class.hideQuestion]="i+1 !== idCourant">
-    </app-question>
-</div>
-
-
+<app-waiting-room *ngIf="this.gs.inGame === false"></app-waiting-room>

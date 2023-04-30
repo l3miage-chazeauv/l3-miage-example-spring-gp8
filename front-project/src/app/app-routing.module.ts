@@ -21,7 +21,7 @@ const routes: Routes = [
   path:'qcmEditing',
   component: QcmEditingComponent,
 }, {
-  path:'waitingRoom',
+  path:'waitingRoom/{id}',
   component: WaitingRoomComponent,
 }, {
   path:'miahoot/{id}',
