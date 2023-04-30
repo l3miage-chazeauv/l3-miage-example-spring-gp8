@@ -27,10 +27,10 @@ export class RoutingService{
   }
 
   toWaitingRoom(id: number | undefined){
-    this.router.navigateByUrl("waitingRoom/"+id); // on redirige vers la page de salle d'attente
+    this.router.navigateByUrl("waitingRoom/"+id, { state: { idWRRouting: id } }); // on redirige vers la page de salle d'attente
   }
 
   toMiahoot(id:number | undefined){
-    this.router.navigateByUrl("miahoot/"+id); // on redirige vers la page de miahoot 
+    this.router.navigateByUrl("miahoot/"+id, { state: { idMiahootRouting: id } }); // on redirige vers la page de miahoot 
   }
 }

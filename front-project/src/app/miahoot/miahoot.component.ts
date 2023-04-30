@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Question } from '../QcmDefinitions';
 import { GameService } from '../game.service';
+import { APIService } from '../api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-miahoot[idMiahoot]',
@@ -16,17 +18,29 @@ export class MiahootComponent{
                                                                                       {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]},
                                       {questionId:998,label: 'cache toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
                                                                                      {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]}];
-  
-  constructor(protected gs: GameService) { }
 
   public idCourant:number=0;
   
-  questionSuivante():void{
-    this.idCourant=this.idCourant+1;
+  constructor(private apiMia: APIService, private router: Router, protected gs: GameService) { 
+    const state = this.router.getCurrentNavigation()?.extras.state; // On récupère les données de la route
+    this.idMiahoot = state?.['idMiahootRouting'] ?? -1; // On récupère l'id du miahoot
+    console.log("Constructeur: " + state);
+   }
+
+  ngOnInit(): void {
+    console.log("Initialisation: " + this.idMiahoot);
+    this.apiMia.getAPI('question/'+this.idMiahoot).subscribe((data: any) => { // On récupère les questions
+      this.listeQuestions=data;
+    });
   }
+  
+  questionSuivante():void{
+    this.idCourant=this.idCourant+1; // On passe à la question suivante
+  }
+
   questionPrecedente():void{
     if(this.idCourant>0){
-      this.idCourant=this.idCourant-1;
+      this.idCourant=this.idCourant-1; // On passe à la question précédente
     }
   }
 }

@@ -23,11 +23,10 @@ export class RechercheMiaComponent {
         this.existe = false;
         return of();
       })
-    )
-      .subscribe((data: any) => {
+    ).subscribe((data: any) => {
         console.log(data),
-          this.rt.toMiahoot(this.idRecherche);
-      })
+        this.rt.toMiahoot(this.idRecherche);
+    })
 
 
   }
