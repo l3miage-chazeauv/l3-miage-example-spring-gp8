@@ -26,10 +26,23 @@
   </ng-template>
 </div>
 
- <section *ngIf="bsAuth | async" id="logProgress">
+ <!-- <section *ngIf="bsAuth | async" id="logProgress">
   <mat-spinner></mat-spinner>
   <p>Connexion en cours...</p>
-</section> 
+</section>  -->
+<section *ngIf="bsAuth | async" id="logProgress">
+  <div class="loaderWrapper">
+    <div class="loader">
+      <div class="face">
+          <div class="circle"></div>
+      </div>
+      <div class="face">
+          <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+  <p id="logText">Connexion en cours...</p>
+</section>
 
 <router-outlet></router-outlet>
 
