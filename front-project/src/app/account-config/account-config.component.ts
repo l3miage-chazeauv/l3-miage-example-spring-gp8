@@ -7,6 +7,7 @@ import { DataService, MiahootUser } from '../miahoot.service';
 import { Storage,  ref, uploadBytes } from '@angular/fire/storage';
 import { getDownloadURL } from 'firebase/storage';
 import { Observable, of, switchMap } from 'rxjs';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-account-config',
@@ -24,7 +25,7 @@ export class AccountConfigComponent {
     photoFile: FormControl<File | undefined> 
     }>;
   
-  constructor(private dataUserService : DataService, 
+  constructor(private dataUserService : DataService,
               private fs : Firestore, 
               private fb: FormBuilder,
               private storage: Storage,
@@ -74,7 +75,6 @@ export class AccountConfigComponent {
       photoUrl: this.fg.controls.photoURL.value,
     })
     this.cd.detectChanges();
-    
   }
 
   async uploadPhoto(){

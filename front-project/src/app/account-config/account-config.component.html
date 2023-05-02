@@ -1,13 +1,21 @@
+
+
 <div [formGroup] = "fg" class="modification">
   <h2>Pseudonyme </h2>
-  <input matInput type="text" formControlName="name" placeholder="Username"/>
+  <input matInput type="text" 
+         formControlName="name" 
+         placeholder="Username"/>
   <br/>
   <h2>URL photo de profil </h2>
-  <input matInput type="text" formControlName ="photoURL" placeholder="URL de votre photo..."/>
+  <input matInput type="text" 
+         formControlName ="photoURL" 
+         placeholder="URL de votre photo..."/>
   <br/>
-  <img [src]="preview | async" style="max-width : 200px"/>
+  <img [src]="preview | async" 
+        style="max-width : 200px"/>
   <br/>
-  <button mat-raised-button color="primary" (click)="update()">Sauvegarder</button>
+  <button mat-raised-button color="primary" 
+          (click)="update()">Sauvegarder</button>
 
 </div>
 

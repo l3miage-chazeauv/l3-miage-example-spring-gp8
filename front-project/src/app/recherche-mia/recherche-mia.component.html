@@ -1,6 +1,6 @@
 <div class="card"
-     [class.cardExiste]="existe"
-     [class.cardErreur]="!existe">
+     [class.cardExiste]="existe==true"
+     [class.cardErreur]="existe==false">
     <div class="heading">Rejoindre le miahoot 
         <span>MIAHOOT</span>
     </div>
@@ -14,6 +14,7 @@
                        placeholder="code d'accès au Miahoot..."
                        [(ngModel)]="idRecherche"
                        (keyup.enter)="findMiahootByIdAndGo()">
+                <span>{{this.existe}}</span>
             </div>
         </div>
 </div>
