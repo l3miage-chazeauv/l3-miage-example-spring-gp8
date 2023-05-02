@@ -26,12 +26,7 @@ export class AccountConfigComponent {
     photoFile: FormControl<File | undefined> 
     }>;
   
-<<<<<<< HEAD
-  constructor(private us : AppComponent,
-    private dataUserService : DataService, 
-=======
   constructor(private dataUserService : DataService,
->>>>>>> 5a726314b085404df46ec19adb44bc6548bee9ed
               private fs : Firestore, 
               private fb: FormBuilder,
               private storage: Storage,
@@ -81,10 +76,6 @@ export class AccountConfigComponent {
       photoUrl: this.fg.controls.photoURL.value,
     })
     this.cd.detectChanges();
-<<<<<<< HEAD
-    this.user.name = this.name;
-=======
->>>>>>> 5a726314b085404df46ec19adb44bc6548bee9ed
   }
 
   async uploadPhoto(){

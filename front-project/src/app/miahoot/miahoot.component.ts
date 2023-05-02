@@ -27,10 +27,10 @@ export class MiahootComponent{
    }
 
   ngOnInit(): void {
-    // this.apiMia.getAPI('question/'+this.idMiahoot).subscribe((data: any) => { // On récupère les questions
-    //   this.listeQuestions=data;
-    // });
-    // this.gs.miahootGame
+    this.apiMia.getMiahootByID('miahoot', this.idMiahoot).subscribe((data: any) => {
+      this.gs.miahootGame.idMiahoot = data.idMiahoot;
+      this.gs.miahootGame.listeQuestions = data.listeQuestions;
+    }); // On récupère le miahoot
   }
   
   questionSuivante():void{

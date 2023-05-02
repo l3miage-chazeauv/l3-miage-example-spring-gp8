@@ -9,7 +9,7 @@
     </div>
     
     <div class="questions"
-         *ngFor="let question of listeQuestions;let i = index" >
+         *ngFor="let question of this.gs.miahootGame.listeQuestions;let i = index" >
         <app-question class="question"
                      [questionId]="i+1"
                      [label]="question.label"

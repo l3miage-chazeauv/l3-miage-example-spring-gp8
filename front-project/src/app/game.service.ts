@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Question, Reponse } from './QcmDefinitions';
-
-interface miahootGame {
-  idMiahoot: number;
-  listeQuestions: Question[];
-}
+import { Question, Reponse, miahootGame } from './QcmDefinitions';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +8,7 @@ interface miahootGame {
 export class GameService{
 
   inGame: boolean = false;
+  miahootGame: miahootGame = {idMiahoot: -1, listeQuestions: []};
 
   constructor() { }
 
