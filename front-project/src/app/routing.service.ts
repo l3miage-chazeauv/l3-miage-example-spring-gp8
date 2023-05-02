@@ -26,11 +26,11 @@ export class RoutingService{
     this.router.navigateByUrl("qcmEditing"); // on redirige vers la page d'édition de qcm
   }
 
-  toWaitingRoom(){
-    this.router.navigateByUrl("waitingRoom"); // on redirige vers la page de salle d'attente
+  toWaitingRoom(id: number | undefined){
+    this.router.navigateByUrl("waitingRoom/"+id, { state: { idWRRouting: id } }); // on redirige vers la page de salle d'attente
   }
 
   toMiahoot(id:number | undefined){
-    this.router.navigateByUrl("miahoot/"+id)   
+    this.router.navigateByUrl("miahoot/"+id, { state: { idMiahootRouting: id } }); // on redirige vers la page de miahoot 
   }
 }

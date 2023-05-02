@@ -1,4 +1,4 @@
-section{
+/* section{
     box-shadow: 0px 0px 13px 5px rgba(143,143,143,0.67);
     position: absolute;
     top: 50%;
@@ -17,4 +17,78 @@ app-reponse{
     width: max-content;
     margin-top: 20px;
     display: inline;
-}
+} */
+
+.card {
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left:50%;
+    top:50%;
+    box-sizing: border-box;
+    background: linear-gradient(-45deg,#6bc5f8, #30b2fd,#6bc5f8, #30b2fd);
+    animation: gradient 5s ease infinite;
+    background-size: 500% 500%;
+    width: 20%;
+    height: max-content;
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 2%;
+    border-radius: 20px;
+  }
+  
+  @keyframes gradient {
+    0% {
+      background-position: 0 50%;
+      box-shadow: 0px 0px 2px #ffffff,
+        0px 0px 5px #ffffff,
+        0px 0px 10px #6bc5f8,
+        0px 0px 50px #6bc5f8;
+    }
+  
+    50% {
+      background-position: 100% 50%;
+      box-shadow: 0px 0px 2px #ffffff,
+        0px 0px 5px #ffffff,
+        0px 0px 10px #30b2fd,
+        0px 0px 50px #30b2fd;
+    }
+  
+    100% {
+      background-position: 0 50%;
+      box-shadow: 0px 0px 2px #ffffff,
+            0px 0px 5px #ffffff,
+            0px 0px 10px #6bc5f8,
+            0px 0px 50px #6bc5f8;
+    }
+  }
+
+  .heading {
+    color: white;
+    font-weight: 500;
+    font-size: 150%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .heading span {
+    font-size: 1.5em;
+    font-weight: 800;
+    filter: drop-shadow(0px 0px 10px rgb(255, 255, 255));
+    animation: flickering 2s linear infinite both;
+  }
+
+  .propositions {
+    background-color: aliceblue;
+    padding: 2%;
+    border-radius: 10px;
+  }
+
+  p{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }

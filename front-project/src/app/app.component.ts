@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Auth, authState, GoogleAuthProvider, signInWithPopup, signOut, User } from '@angular/fire/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { QcmService } from './qcm.service';
+import { GameService } from './game.service';
 import { Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { APIService } from './api.service';
