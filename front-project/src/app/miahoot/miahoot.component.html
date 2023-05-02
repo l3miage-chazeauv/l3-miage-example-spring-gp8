@@ -1,10 +1,11 @@
 <div *ngIf="this.gs.inGame === true" id="game">
     <div class="changementQuestion">
         <h2>{{idCourant}}</h2>
-        <button (click)="this.questionPrecedente()">
-            revenons a la question {{this.idCourant-1}}</button>
+        <button (click)="this.questionPrecedente()"
+                [class.hideQuestion]="this.idCourant<=1">
+            question précédente ({{this.idCourant-1}})</button>
         <button (click)="this.questionSuivante()">
-            passons a la question {{this.idCourant+1}}</button>
+            question suivante ({{this.idCourant+1}})</button>
     </div>
     
     <div class="questions"
