@@ -25,12 +25,6 @@ export class QcmEditingComponent {
     });
   }
 
-  getMiahootByID(){
-    this.apiMia.getMiahootByID('miahoot', this.idMiahoot).subscribe((data: any) => {
-    console.log(data);
-    });
-  }
-
 
   //Test mais renvoie une erreur 400 voir la fonctionAPIMiahoot 
   //Pour avoir plus de précision sur l'erreur et sur mes avancées
@@ -63,10 +57,12 @@ export class QcmEditingComponent {
 
   
   getQuestions(){
-    this.apiMia.getAPI('question/'+this.idQuestion).subscribe((data: any) => {
+    this.apiMia.getMiahootByID('miahoot',this.idMiahoot).subscribe((data: any) => {
     console.log(data);
     });
   }
+
+
 
   getReponses(){
     this.apiMia.getAPI('reponse/').subscribe((data: any) => {

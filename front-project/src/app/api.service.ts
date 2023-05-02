@@ -24,9 +24,8 @@ export class APIService {
 
   // Fonction pour la méthode GET
   getMiahootByID(endpoint: string, idMiahoot: number): Observable<any> {
-    const url = `${this.apiUrl}/${endpoint}/${idMiahoot}/`;
+    const url = `${this.apiUrl}/${endpoint}/${idMiahoot}/questions`;
     return this.http.get(url);
-    
   }
 
 
