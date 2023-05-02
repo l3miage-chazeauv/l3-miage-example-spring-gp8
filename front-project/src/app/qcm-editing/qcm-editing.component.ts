@@ -32,7 +32,7 @@ export class QcmEditingComponent {
   postMiahoot(){
     const data = {
       "nom": this.nameMia,
-        "description": this.descriptionMia
+      "description": this.descriptionMia
     };
     const jsonData = JSON.stringify(data);
 
