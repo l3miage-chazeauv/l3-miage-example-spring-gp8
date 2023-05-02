@@ -3,6 +3,7 @@ import { Question } from '../QcmDefinitions';
 import { GameService } from '../game.service';
 import { APIService } from '../api.service';
 import { Router } from '@angular/router';
+import { map, of } from 'rxjs';
 
 @Component({
   selector: 'app-miahoot[idMiahoot]',
@@ -24,13 +25,24 @@ export class MiahootComponent{
   constructor(private apiMia: APIService, private router: Router, protected gs: GameService, private cdRef: ChangeDetectorRef) { 
     const state = this.router.getCurrentNavigation()?.extras.state; // On récupère les données de la route
     this.idMiahoot = state?.['idMiahootRouting'] ?? -1; // On récupère l'id du miahoot
-   }
-
-  ngOnInit(): void {
     this.apiMia.getMiahootByID('miahoot', this.idMiahoot).subscribe((data: any) => {
       this.gs.miahootGame.idMiahoot = data.idMiahoot;
       this.gs.miahootGame.listeQuestions = data.listeQuestions;
     }); // On récupère le miahoot
+
+    this.gs.obsMiahootGame$.pipe(
+      map(mg => {
+        if(mg === undefined){
+          this.gs.miahootGame.listeQuestions = [];
+        } else {
+          this.gs.miahootGame.listeQuestions = mg.listeQuestions;
+        }
+      })
+    )
+   }
+
+  ngOnInit(): void {
+    
   }
   
   questionSuivante():void{
