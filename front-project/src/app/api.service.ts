@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders,  } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,8 +9,11 @@ import { Observable } from 'rxjs';
 export class APIService {
 
   private apiUrl = 'http://129.88.210.111:8080';
+  private headers = new HttpHeaders({'Content-Type':  'application/json'});
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+
+   }
 
   // Fonction pour la méthode GET
   getAPI(endpoint: string): Observable<any> {
@@ -18,6 +21,14 @@ export class APIService {
     return this.http.get(url);
     
   }
+
+  // Fonction pour la méthode GET
+  getMiahootByID(endpoint: string, idMiahoot): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}//${idMiahoot}/`;
+    return this.http.get(url);
+    
+  }
+
 
 
 //   curl -X 'POST' \
@@ -43,9 +54,22 @@ export class APIService {
     //de chose sur la formulation de la requête (ma fait passé d'une erreur 500 à 400, 
     //c'est un bon début)
     //Courage si tu fais ca Lundi, tu devrais avoir toutes les infos que j'ai comprise vendredi 
+
+
+/* {
+  const response = await fetch(myUrl, {
+  method: 'POST',
+  body: content,
+  headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'} });
+
+*/
+
   postAPIMiahoot(endpoint: string, data: any): Observable<any> {
+    
     const url = `${this.apiUrl}/${endpoint}/`;
-    const headers = {'accept': '*/*',  'Content-Type': 'application/json'};
+    const headers = {'accept': '*/*',  
+                     'Content-Type': 'application/json'};
+    
     return this.http.post(url,  data,{ headers} );
   }
 

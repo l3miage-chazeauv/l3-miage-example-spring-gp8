@@ -7,7 +7,7 @@ import { filter, map, Observable, of, switchMap, tap } from 'rxjs';
 
 
 export interface MiahootUser{
-  readonly name: string
+  name: string
   readonly photoUrl : string
 }
 
