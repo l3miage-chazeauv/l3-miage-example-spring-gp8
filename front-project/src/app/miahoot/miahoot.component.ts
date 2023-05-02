@@ -23,19 +23,22 @@ export class MiahootComponent{
   public idCourant:number = 0;;
   
   constructor(private apiMia: APIService, private router: Router, protected gs: GameService, private cdRef: ChangeDetectorRef) { 
+    console.log("construction mc");
     const state = this.router.getCurrentNavigation()?.extras.state; // On récupère les données de la route
     this.idMiahoot = state?.['idMiahootRouting'] ?? -1; // On récupère l'id du miahoot
     this.apiMia.getMiahootByID('miahoot', this.idMiahoot).subscribe((data: any) => {
       this.gs.miahootGame.idMiahoot = data.idMiahoot;
       this.gs.miahootGame.listeQuestions = data.listeQuestions;
     }); // On récupère le miahoot
-
+    console.log("Init obsMiahoot");
     this.gs.obsMiahootGame$.pipe(
       map(mg => {
         if(mg === undefined){
           this.gs.miahootGame.listeQuestions = [];
+          console.log("obsMiahoot: undefined");
         } else {
           this.gs.miahootGame.listeQuestions = mg.listeQuestions;
+          console.log("obsMiahoot:" + this.gs.miahootGame.listeQuestions);
         }
       })
     )
