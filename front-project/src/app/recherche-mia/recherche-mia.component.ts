@@ -24,7 +24,7 @@ export class RechercheMiaComponent {
         return of();
       })
     ).subscribe((data: any) => {
-        console.log(data),
+      console.log("appel de toMiahoot avec: " + this.idRecherche);
         this.rt.toMiahoot(this.idRecherche);
     })
 

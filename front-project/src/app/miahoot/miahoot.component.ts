@@ -22,6 +22,7 @@ export class MiahootComponent{
   public idCourant:number=0;
   
   constructor(private apiMia: APIService, private router: Router, protected gs: GameService) { 
+    console.log("miahoot instancié avec succès");
     const state = this.router.getCurrentNavigation()?.extras.state; // On récupère les données de la route
     this.idMiahoot = state?.['idMiahootRouting'] ?? -1; // On récupère l'id du miahoot
     console.log("Constructeur: " + state);
