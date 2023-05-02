@@ -31,8 +31,6 @@ export class RoutingService{
   }
 
   toMiahoot(id:number | undefined){
-    console.log("routing vers miahoot...");
-    this.router.navigateByUrl("miahoot/"+id, { state: { idMiahootRouting: id } }); // on redirige vers la page de miahoot 
-    console.log("routing réalisé avec succès");
+    this.router.navigateByUrl("miahoot/"+id, { state: { idMiahootRouting: id } }); // on redirige vers la page de miahoot
   }
 }

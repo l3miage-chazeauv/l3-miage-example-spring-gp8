@@ -16,7 +16,7 @@ export class RechercheMiaComponent {
   constructor(private apiMia: APIService, protected rt: RoutingService, private cdRef: ChangeDetectorRef) { }
 
   findMiahootByIdAndGo(): void {
-    console.log(this.idRecherche)
+    console.log("Recherche: " + this.idRecherche);
     this.apiMia.getAPI('miahoot/' + this.idRecherche).pipe(
       catchError(e => {
         console.log(e.status);
