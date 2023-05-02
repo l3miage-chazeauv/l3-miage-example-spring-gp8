@@ -20,7 +20,7 @@ export class QcmEditingComponent {
   constructor(private apiMia: APIService) {}
 
   getAllMiahoot(){
-    this.apiMia.getMiahoots('miahoot').subscribe((data: any) => {
+    this.apiMia.getAPIMiahoots('miahoot').subscribe((data: any) => {
     console.log(data);
     });
   }
@@ -42,23 +42,30 @@ export class QcmEditingComponent {
       });
   }
 
-  postQuestion(){
-    this.apiMia.postAPIQuestion('miahoot/' + this.idMiahoot+"/question?label="+ this.labelQuestion).subscribe(
-        
-      
-        //Permet de voir l'erreur dans la console ou le bon fonctionnement
-        error => {
-        console.error(error);
-        
-      });
-  }
 
-  
   getQuestions(){
-    this.apiMia.getMiahootByID('miahoot',this.idMiahoot).subscribe((data: any) => {
+    this.apiMia.getAPIMiahootByID('miahoot',this.idMiahoot).subscribe((data: any) => {
     console.log(data);
     });
   }
+
+  
+  postQuestion(){
+    this.apiMia.postAPIQuestion('miahoot/' + this.idMiahoot+"/question?label="+ this.labelQuestion).subscribe(
+      (data: any) => {
+        console.log(data);
+      });
+  }
+
+
+  getReponses(){
+    this.apiMia.getAPIReponses('reponse').subscribe((data: any) => {
+    console.log(data);
+    });
+  }
+
+  
+  
 
 
   
