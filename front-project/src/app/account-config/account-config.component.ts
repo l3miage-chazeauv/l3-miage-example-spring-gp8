@@ -18,6 +18,7 @@ import { AppComponent } from '../app.component';
 export class AccountConfigComponent {
   user !: MiahootUser;
   preview : Observable<string>;
+  name : string ="";
 
   public fg: FormGroup<{ 
     name:      FormControl<string>, 

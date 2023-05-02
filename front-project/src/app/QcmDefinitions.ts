@@ -1,3 +1,7 @@
+export interface miahootGame {
+  idMiahoot: number;
+  listeQuestions: Question[];
+}
 export interface Reponse{
   reponseId:number;
   label: string;
