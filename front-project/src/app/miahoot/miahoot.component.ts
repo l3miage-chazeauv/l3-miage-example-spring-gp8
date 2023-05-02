@@ -16,7 +16,7 @@ export class MiahootComponent{
   @Input() idMiahoot!:number;
   @Input() listeQuestions:Question[]=[{questionId:999,label: 'montre toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
                                                                                       {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]},
-                                      {questionId:998,label: 'cache toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
+                                      {questionId:999,label: 'cache toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
                                                                                      {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]}];
 
   public idCourant:number=1;
@@ -32,7 +32,6 @@ export class MiahootComponent{
   ngOnInit(): void {
     console.log("Initialisation: " + this.idMiahoot);
     this.apiMia.getAPI('question/'+this.idMiahoot).subscribe((data: any) => { // On récupère les questions
-      
       this.listeQuestions=data;
     });
   }

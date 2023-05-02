@@ -29,7 +29,6 @@ span{
     width: 16%;
     margin: 2%;
     filter: drop-shadow(0px 0px 10px rgb(255, 255, 255));
-    animation: flickering 4s linear infinite both;
 }
 
 @keyframes flickering {
