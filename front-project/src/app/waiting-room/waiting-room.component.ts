@@ -11,7 +11,7 @@ import { GameService } from '../game.service';
 export class WaitingRoomComponent {
 
   utilisateurs: MiahootUser[] = [];
-  timer: number = 2;
+  timer: number = 0.5;
 
   constructor(private cdr: ChangeDetectorRef, private gs: GameService) {}
 
