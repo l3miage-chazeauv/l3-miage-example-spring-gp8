@@ -25,7 +25,7 @@ app-reponse{
     left:50%;
     top:50%;
     box-sizing: border-box;
-    background: linear-gradient(-45deg,#6bc5f8, #30b2fd,#6bc5f8, #30b2fd);
+    background: linear-gradient(-45deg,#6bc5f8, #29abf7,#6bc5f8, #29abf7);
     animation: gradient 5s ease infinite;
     background-size: 500% 500%;
     width: 20%;
@@ -51,8 +51,8 @@ app-reponse{
       background-position: 100% 50%;
       box-shadow: 0px 0px 2px #ffffff,
         0px 0px 5px #ffffff,
-        0px 0px 10px #30b2fd,
-        0px 0px 50px #30b2fd;
+        0px 0px 10px #29abf7,
+        0px 0px 50px #29abf7;
     }
   
     100% {
