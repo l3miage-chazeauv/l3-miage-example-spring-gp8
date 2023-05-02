@@ -11,6 +11,8 @@ export class QcmEditingComponent {
   public idQuestion?:number;
   public idReponse?:number;
 
+  public idMiahoot:number =1;
+
   public nameMia?:string;
   public descriptionMia?:string;
   public dataMia?:[string];
@@ -19,6 +21,12 @@ export class QcmEditingComponent {
 
   getMiahoot(){
     this.apiMia.getAPI('miahoot').subscribe((data: any) => {
+    console.log(data);
+    });
+  }
+
+  getMiahootByID(){
+    this.apiMia.getMiahootByID('miahoot', this.idMiahoot).subscribe((data: any) => {
     console.log(data);
     });
   }
