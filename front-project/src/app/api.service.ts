@@ -23,8 +23,8 @@ export class APIService {
   }
 
   // Fonction pour la méthode GET
-  getMiahootByID(endpoint: string, idMiahoot): Observable<any> {
-    const url = `${this.apiUrl}/${endpoint}//${idMiahoot}/`;
+  getMiahootByID(endpoint: string, idMiahoot: number): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}/${idMiahoot}/`;
     return this.http.get(url);
     
   }
