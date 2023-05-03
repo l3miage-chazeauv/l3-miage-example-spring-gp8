@@ -4,6 +4,7 @@ import { GameService } from '../game.service';
 import { APIService } from '../api.service';
 import { Router } from '@angular/router';
 import { map, of } from 'rxjs';
+import { MiahootUser } from '../miahoot.service';
 
 @Component({
   selector: 'app-miahoot[idMiahoot]',
@@ -20,7 +21,9 @@ export class MiahootComponent{
   //                                     {questionId:998,label: 'cache toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
   //                                                                                    {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]}];
 
-  public idCourant:number = 0;;
+  public idCourant:number = 0; // On initialise l'id courant à 0
+
+  private concepteurs: MiahootUser[]
   
   constructor(private apiMia: APIService, private router: Router, protected gs: GameService, private cdRef: ChangeDetectorRef) { 
 
