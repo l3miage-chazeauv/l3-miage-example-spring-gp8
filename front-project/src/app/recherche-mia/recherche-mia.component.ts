@@ -10,23 +10,27 @@ import { RoutingService } from '../routing.service';
 })
 export class RechercheMiaComponent {
 
-  public idRecherche?: number;
+  public idRecherche? : number;
   public existe: boolean = true;
 
   constructor(private apiMia: APIService, protected rt: RoutingService, private cdRef: ChangeDetectorRef) { }
 
   findMiahootByIdAndGo(): void {
-    console.log("Recherche: " + this.idRecherche);
-    this.apiMia.getAPIMiahoots('miahoot/' + this.idRecherche).pipe(
-      catchError(e => {
-        console.log(e.status);
-        this.existe = false;
-        this.cdRef.detectChanges();
-        return of();
-      })
-    ).subscribe((data: any) => {
-      console.log("appel de toMiahoot avec: " + this.idRecherche);
-        this.rt.toMiahoot(this.idRecherche);
-    })
+    if (!(this.idRecherche === undefined || this.idRecherche === null)) 
+      {
+        console.log("Recherche: " + this.idRecherche);
+        this.apiMia.getAPIMiahootById(this.idRecherche).pipe(
+          catchError(e => {
+            console.log(e.status);
+            this.existe = false;
+            this.cdRef.detectChanges();
+            return of();
+          })
+        ).subscribe((data: any) => {
+          console.log("appel de toMiahoot avec: " + this.idRecherche);
+          this.rt.toMiahoot(this.idRecherche);
+        })
+      }
+
+    }
   }
-}

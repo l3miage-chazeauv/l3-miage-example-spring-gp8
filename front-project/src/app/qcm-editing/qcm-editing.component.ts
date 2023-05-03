@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { APIService } from '../api.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-qcm-editing',
@@ -12,9 +13,7 @@ export class QcmEditingComponent {
 
   public idMia:number =1;
   public labelQuestion?:string;
-  public nameMia?:string;
-  public descriptionMia?:string;
-  public dataMia?:[string];
+  
 
   public labelReponse?:string;
   public estValide?:string;
@@ -23,32 +22,45 @@ export class QcmEditingComponent {
 
   constructor(private apiMia: APIService) {}
 
-  getAllMiahoot(){
-    this.apiMia.getAPIMiahoots('miahoot').subscribe((data: any) => {
+  getAllMiahoots(){
+    this.apiMia.getAPIAllMiahoots().subscribe((data: any) => {
     console.log(data);
     });
   }
 
-  postMiahoot(){
-    const data = {
-      "nom": this.nameMia,
-      "description": this.descriptionMia
-    };
-    const jsonData = JSON.stringify(data);
+  /*
+postMiahoot(form : NgForm){
+      const data = {
+        "nom": form.value.name,
+        "description": form.value.description,
+      };
 
-    this.apiMia.postAPIMiahoot('miahoot', data).subscribe(
-        
-      
-        //Permet de voir l'erreur dans la console ou le bon fonctionnement
-        error => {
-        console.error(error);
-        
-      });
-  }
+  */
+
+
+
+postMiahoot(form : NgForm){
+  
+  const data = {
+      "nom": form.value.nameMia,
+      "description": form.value.descriptionMia,
+  };
+  this.apiMia.postAPIMiahoot(data).subscribe(
+      //Permet de voir l'erreur dans la console ou le bon fonctionnement
+      data => {
+          if(data == null){
+              console.log("Miahoot créé");
+          }else{
+              console.error(data);
+          }          
+      }
+  );
+}
+    
 
 
   getQuestions(idMiahoot : number){
-    this.apiMia.getAPIQuestionsByMiahootID(this.idMia).subscribe((data: any) => {
+    this.apiMia.getAPIQuestionsByMiahootID(idMiahoot).subscribe((data: any) => {
     console.log(data);
     });
   }
@@ -82,13 +94,5 @@ export class QcmEditingComponent {
         console.log(data);
       });
   }
-
-
-  
-  
-
-
-  
-  
 
 }
