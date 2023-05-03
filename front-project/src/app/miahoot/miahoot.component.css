@@ -20,7 +20,7 @@
   border-radius: 16px;
   border-width: 0 0 4px;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #1e7db4;
   cursor: pointer;
   display: inline-block;
   font-family: din-round,sans-serif;
@@ -46,7 +46,7 @@
 
 .button-19:after {
   background-clip: padding-box;
-  background-color: #1e7db4;
+  background-color: #FFFFFF;
   border: solid transparent;
   border-radius: 16px;
   border-width: 0 0 4px;
