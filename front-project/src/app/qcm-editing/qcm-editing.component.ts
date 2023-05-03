@@ -81,11 +81,12 @@ postMiahoot(form : NgForm){
   }
 
 
-  postReponse(){
+  postReponse(form : NgForm){
+    console.log(form.value);
     const data = {
-      "label": this.labelReponse,
-      "estValide": true,
-      "questionId": this.questionId
+      "label": form.value.labelReponse,
+      "estValide": form.value.estValide,
+      "questionId": form.value.questionId
     };
     const jsonData = JSON.stringify(data);
     this.apiMia.postAPIReponse('question/' + this.questionId+"/reponse", jsonData).subscribe(
