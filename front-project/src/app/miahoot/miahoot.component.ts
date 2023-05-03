@@ -21,8 +21,7 @@ export class MiahootComponent{
   //                                     {questionId:998,label: 'cache toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
   //                                                                                    {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]}];
 
-  public idCourant:number = 1; // On initialise l'id courant à 0
-
+  public idCourant:number = 1;
   private concepteurs?: MiahootUser[];
   private presentateurs?: MiahootUser[];
   
@@ -32,7 +31,7 @@ export class MiahootComponent{
     this.idMiahoot = state?.['idMiahootRouting'] ?? -1; // On récupère l'id du miahoot
 
     this.apiMia.getAPIQuestionsByMiahootID(this.idMiahoot).subscribe((data: any) => {
-      console.log("Data: " + JSON.stringify(data));
+      // console.log("Data: " + JSON.stringify(data));
       data.map((obj: { id: any, label: any, miahootId: any,reponses: any }) => {
         let question: Question = {
           label: obj.label, 

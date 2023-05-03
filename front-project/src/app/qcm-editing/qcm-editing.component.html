@@ -12,23 +12,56 @@
     <tr>Renvoie tous les miahoot :
         <td><button (click)="getAllMiahoots()">GET</button></td>
     </tr>
+
     <tr>Id d'un Miahoot : GET
-        <td><input [(ngModel)]="idMia" placeholder="ID d'un Miahoot" /></td>
-        <td><button (click)="getQuestions(idMia)">GET </button></td>
+
+        <td>
+            <input [(ngModel)]="idMiahoot" placeholder="ID d'un Miahoot" />
+            <button (click)="getQuestions()" >GET </button>
+            <form #questionForm="ngForm" (ngSubmit)="postQuestion(questionForm)">
+                <input name="labelQuestion" placeholder="label question" />
+                <button type="submit">POST</button>
+            </form>
+        </td>
     </tr>
-    <tr>label de la question : POST
-        <td><input [(ngModel)]="labelQuestion" placeholder="label question" /></td>
-        <td><button (click)="postQuestion()">POST</button></td>
-    </tr>
+
     <tr>Renvoie toutes les reponses pour tous les miahoots :
         <td><button (click)="getAllReponses()">GET</button></td>
     </tr>
     <tr>creation d'une reponse : POST
-        <form #reponseForm="ngForm" (ngSubmit)="postMiahoot(miahootForm)">
-        <td><input type="text" name="labelReponse" placeholder="label de la reponse" /></td>
-        <td><input type="text" name="estValide" placeholder="true or false only" /></td>
-        <td><input type="number" name="questionId" placeholder="id de la question" /></td>
-        <td><button (submit)="postReponse(reponseForm)">POST</button></td>
-    </form>
+
+        <td>
+            <form #reponseForm="ngForm" (ngSubmit)="postReponse(reponseForm)">
+                <input type="number" name="idRep" placeholder="id de la question" ngModel ngDefaultControl />
+                <input type="text" name="labelReponse" placeholder="label de la reponse" ngModel ngDefaultControl />
+                <input type="text" name="estValide" placeholder="vrai ou faux" ngModel ngDefaultControl />
+                <button type="submit">POST</button>
+            </form>
+        </td>
+
+    </tr>
+
+    <tr>Suppression d'un miahoot : DELETE
+        <td>
+            <input [(ngModel)]="idMiahoot" placeholder="ID du Miahoot à supprimer" />
+            <button (click)="deleteMiahoot()" >GET </button>
+        </td>
+
+    </tr>
+
+    <tr>Suppression d'une question : DELETE
+        <td>
+            <input [(ngModel)]="idQuestion" placeholder="ID de la question à supprimer" />
+            <button (click)="deleteQuestion()" >GET </button>
+        </td>
+
+    </tr>
+
+    <tr>Suppression d'une reponse : DELETE
+        <td>
+            <input [(ngModel)]="idReponse" placeholder="ID de la reponse à supprimer" />
+            <button (click)="deleteReponse()" >GET </button>
+        </td>
+
     </tr>
 </table>

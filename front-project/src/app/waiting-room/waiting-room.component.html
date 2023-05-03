@@ -1,12 +1,15 @@
 <div id="waitingRoom">
     <h1>Salle d'attente</h1>
-    <br>
-    <br>
     <p *ngIf="timer > 0">Temps restant : {{ timer }} secondes</p>
     <p *ngIf="timer === 0">Temps écoulé</p>
     <label>il y a {{utilisateurs.length}} utilisateurs dans la room</label>
     <ul>
         <li *ngFor="let utilisateur of utilisateurs">{{utilisateur.name}}</li>
     </ul>
+</div>
+
+<div class="buttonsContainer">
+      <button class="button-19"
+             (click)="this.gs.startGame()">SKIP LE TEMPS</button>
 </div>
   

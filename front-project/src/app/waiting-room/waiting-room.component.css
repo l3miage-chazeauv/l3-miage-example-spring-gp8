@@ -5,7 +5,7 @@
     left:50%;
     top:50%;
     box-sizing: border-box;
-    background: linear-gradient(-45deg,#6bc5f8, #30b2fd,#6bc5f8, #30b2fd);
+    background: linear-gradient(-45deg,#29abf7, #1e7db4,#29abf7, #1e7db4);
     animation: gradient 5s ease infinite;
     background-size: 500% 500%;
     width: 20%;
@@ -55,4 +55,101 @@ h1{
     font-size: 1.5em;
     font-weight: 800;
     filter: drop-shadow(0px 0px 10px rgb(255, 255, 255));
+}
+
+.buttonsContainer{
+  display: flex;
+  flex-direction:row;
+  position:absolute;
+  justify-content: center;
+  left:24.6%;
+  top: 65%;
+  width: 50%;
+  padding: 10px; 
+}
+
+.button-19 {
+  appearance: button;
+  background: linear-gradient(-45deg,#3585CD, #1e7db4,#3585CD, #1e7db4);
+  animation: gradient 5s ease infinite;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #3585CD;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round,sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 3%;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 20%;
+}
+
+.button-19:after {
+  background-clip: padding-box;
+  background-color: #ffffff;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.button-19:main,
+.button-19:focus {
+  user-select: auto;
+}
+
+.button-19:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
+
+.button-19:disabled {
+  cursor: auto;
+}
+@keyframes gradient {
+  0% {
+    background-position: 0 50%;
+    box-shadow: 0px 0px 2px #ffffff,
+      0px 0px 5px #ffffff,
+      0px 0px 10px #1e7db4,
+      0px 0px 50px #1e7db4;
+  }
+
+  50% {
+    background-position: 100% 50%;
+    box-shadow: 0px 0px 2px #ffffff,
+      0px 0px 5px #ffffff,
+      0px 0px 10px #29abf7,
+      0px 0px 50px #29abf7;
+  }
+
+  100% {
+    background-position: 0 50%;
+    box-shadow: 0px 0px 2px #ffffff,
+          0px 0px 5px #ffffff,
+          0px 0px 10px #1e7db4,
+          0px 0px 50px #1e7db4;
+  }
 }
