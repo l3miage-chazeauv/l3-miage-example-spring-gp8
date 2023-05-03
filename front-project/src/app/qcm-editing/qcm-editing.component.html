@@ -17,13 +17,13 @@
 
         <td>
             <input [(ngModel)]="idMiahoot" placeholder="ID d'un Miahoot" />
-            <button (click)="getQuestions()" >GET Questions pour Miahoot </button><br/>
-            <button (click)="getAllQuestions()" >GET All questions </button><br/>
+            <button (click)="getQuestions()">GET Questions pour Miahoot </button><br />
+            <button (click)="getAllQuestions()">GET All questions </button><br />
             <button (click)="getQuestion()">Renvoie une question par son ID ici : {{idMiahoot}}</button>
             <form #questionPostForm="ngForm" (ngSubmit)="postQuestion(questionPostForm)">
                 <input name="labelQuestion" placeholder="label question" ngModel ngDefaultControl />
-                <td><button type="submit">POST</button></td>
-            </form>
+        <td><button type="submit">POST</button></td>
+        </form>
         </td>
     </tr>
 
@@ -46,7 +46,7 @@
     <tr>Suppression d'un miahoot : DELETE
         <td>
             <input [(ngModel)]="idMiahoot" placeholder="ID du Miahoot à supprimer" />
-            <button (click)="deleteMiahoot()" >DELETE </button>
+            <button (click)="deleteMiahoot()">DELETE </button>
         </td>
 
     </tr>
@@ -54,7 +54,7 @@
     <tr>Suppression d'une question : DELETE
         <td>
             <input [(ngModel)]="idQuestion" placeholder="ID de la question à supprimer" />
-            <button (click)="deleteQuestion()" >DELETE </button>
+            <button (click)="deleteQuestion()">DELETE </button>
         </td>
 
     </tr>
@@ -62,7 +62,7 @@
     <tr>Suppression d'une reponse : DELETE
         <td>
             <input [(ngModel)]="idReponse" placeholder="ID de la reponse à supprimer" />
-            <button (click)="deleteReponse()" >DELETE </button>
+            <button (click)="deleteReponse()">DELETE </button>
         </td>
 
     </tr>
@@ -72,7 +72,8 @@
             <form #miahootPatchForm="ngForm" (ngSubmit)="patchMiahoot(miahootPatchForm)">
                 <input type="number" name="idMia" placeholder="id du miahoot" ngModel ngDefaultControl />
                 <input type="text" name="nomMia" placeholder="nom du miahoot" ngModel ngDefaultControl />
-                <input type="text" name="descriptionMia" placeholder="description du miahoot" ngModel ngDefaultControl />
+                <input type="text" name="descriptionMia" placeholder="description du miahoot" ngModel
+                    ngDefaultControl />
                 <button type="submit">PATCH</button>
             </form>
         </td>
@@ -104,4 +105,43 @@
         </td>
 
     </tr>
+
+
+    <tr>Recuperer tous les utilisateur : GET
+        <td>
+            <button (click)="getAllUsers()">GET USERS</button>
+        </td>
+    </tr>
+    <tr>Creer un utilisateur : POST
+        <td>
+            <form #utilisateurPostForm="ngForm" (ngSubmit)="postUser(utilisateurPostForm)">
+                <input type="text" name="username" placeholder="nom de l'utilisateur" ngModel ngDefaultControl />
+                <input type="text" name="firebaseId" placeholder="id de Firebase" ngModel ngDefaultControl />
+                <button type="submit">POST</button>
+            </form>
+            <input [(ngModel)]="idUtilisateur" placeholder="ID de l'utilisateur" />
+            <button (click)="getUserById()">GET le User {{idUtilisateur}}</button>
+        </td>
+
+
+    </tr>
+
+    <tr>Supprimer un utilisateur : DELETE
+        <td>
+            <input [(ngModel)]="idUtilisateur" placeholder="ID de l'utilisateur" />
+            <button (click)="deleteUser()">DELETE</button>
+        </td>
+    </tr>
+    <tr>Modifier un utilisateur : PATCH
+        <td>
+            <form #utilisateurPatchForm="ngForm" (ngSubmit)="patchUser(utilisateurPatchForm)">
+                <input type="number" name="idUtilisateur" placeholder="id de l'utilisateur" ngModel ngDefaultControl />
+                <input type="text" name="username" placeholder="nom de l'utilisateur" ngModel ngDefaultControl />
+                <input type="text" name="firebaseId" placeholder="id de Firebase" ngModel ngDefaultControl />
+                <button type="submit">PATCH</button>
+            </form>
+        </td>
+
+    </tr>
+
 </table>

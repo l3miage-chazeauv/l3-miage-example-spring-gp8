@@ -15,17 +15,29 @@ export class APIService {
   /* UTILISATEURS */
   postAPIUser(data:any): Observable<any> {
     const url = `${this.apiUrl}/utilisateur/`;
-    const body = {
-      "nom": data.username,
-      "description": data.firebaseId
-    };
-    return this.http.post(url, body);
+    return this.http.post(url, data);
   }
   
   getAPIAllUsers(): Observable<any> {
     const url = `${this.apiUrl}/utilisateur/`;
     return this.http.get(url);
   }
+
+  getAPIUserById(idUser : number): Observable<any> {
+    const url = `${this.apiUrl}/utilisateur/${idUser}`;
+    return this.http.get(url);
+  }
+
+  deleteAPIUserById(id:number): Observable<any> {
+    const url = `${this.apiUrl}/utilisateur/${id}`;
+    return this.http.delete(url);
+  }
+
+  patchAPIUserById(id:number, data:any): Observable<any> {
+    const url = `${this.apiUrl}/utilisateur/${id}`;
+    return this.http.patch(url, data);
+  }
+  
 
   /* MIAHOOTS */
   getAPIAllMiahoots(): Observable<any> {

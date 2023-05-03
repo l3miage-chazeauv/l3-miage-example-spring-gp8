@@ -12,6 +12,7 @@ export class QcmEditingComponent {
   public idMiahoot: number = 1;
   public idQuestion: number = 1;
   public idReponse: number = 1;
+  public idUtilisateur: number = 1;
 
   constructor(private apiMia: APIService) { }
 
@@ -21,23 +22,7 @@ export class QcmEditingComponent {
     });
   }
 
-  postMiahoot(form: NgForm) {
-
-    const data = {
-      "nom": form.value.nameMia,
-      "description": form.value.descriptionMia,
-    };
-    this.apiMia.postAPIMiahoot(data).subscribe(
-      //Permet de voir l'erreur dans la console ou le bon fonctionnement
-      data => {
-        if (data == null) {
-          console.log("Miahoot créé");
-        } else {
-          console.error(data);
-        }
-      }
-    );
-  }
+  
 
   getAllQuestions() {
     this.apiMia.getAPIAllQuestions().subscribe((data: any) => {
@@ -58,6 +43,62 @@ export class QcmEditingComponent {
   }
 
 
+  getAllReponses() {
+    this.apiMia.getAPIReponses('reponse').subscribe((data: any) => {
+      console.log(data);
+    });
+  }
+
+  getAllUsers() {
+    this.apiMia.getAPIAllUsers().subscribe((data: any) => {
+      console.log(data);
+    });
+  }
+
+  getUserById() {
+    this.apiMia.getAPIUserById(this.idUtilisateur).subscribe((data: any) => {
+      console.log(data);
+    });
+  }
+
+  postUser(form: NgForm) {
+    const data = {
+      "username": form.value.username,
+      "firebaseId": form.value.firebaseId,
+    };
+    this.apiMia.postAPIUser(data).subscribe(
+      //Permet de voir l'erreur dans la console ou le bon fonctionnement
+      data => {
+        if (data == null) {
+          console.log("Utilisateur créé");
+        } else {
+          console.error(data);
+        }
+      }
+    );
+  }
+
+
+
+  postMiahoot(form: NgForm) {
+
+    const data = {
+      "nom": form.value.nameMia,
+      "description": form.value.descriptionMia,
+    };
+    this.apiMia.postAPIMiahoot(data).subscribe(
+      //Permet de voir l'erreur dans la console ou le bon fonctionnement
+      data => {
+        if (data == null) {
+          console.log("Miahoot créé");
+        } else {
+          console.error(data);
+        }
+      }
+    );
+  }
+
+
   postQuestion(form: NgForm) {
     console.log(form.value.labelQuestion);
     this.apiMia.postAPIQuestion('miahoot/' + this.idMiahoot + "/question?label=" + form.value.labelQuestion).subscribe(
@@ -69,13 +110,6 @@ export class QcmEditingComponent {
           console.error(data);
         }
       });
-  }
-
-
-  getAllReponses() {
-    this.apiMia.getAPIReponses('reponse').subscribe((data: any) => {
-      console.log(data);
-    });
   }
 
 
@@ -195,4 +229,32 @@ export class QcmEditingComponent {
         }
       });
   }
+
+
+  deleteUser() {
+    this.apiMia.deleteAPIUserById(this.idUtilisateur).subscribe(
+      (data: any) => {
+        if (data == null) {
+          console.log("Utilisateur supprimé");
+        } else {
+          console.error(data);
+        }
+      });
+  }
+
+  patchUser(form: NgForm) {
+    const data = {
+      "id": form.value.idUtilisateur,
+      "username": form.value.username,
+      "firebaseId": form.value.firebaseId,
+    };
+    this.apiMia.patchAPIUserById(form.value.idUtilisateur, data).subscribe(
+      (data: any) => {
+        if (data == null) {
+          console.log("Utilisateur modifié");
+        } else {
+          console.error(data);
+        }
+      });
+    }
 }
