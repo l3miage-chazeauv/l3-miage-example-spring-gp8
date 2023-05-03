@@ -1,10 +1,13 @@
 <table class="apiservice">
     <th>Modification des miahoots</th>
-<tr>creation d'un miahoot : POST<td><form #miahootForm="ngForm">
-    <input placeholder="nom d'un miahoot" name="name">
-    <input placeholder="description d'un miahoot" name="description">
-    <button (click)="postMiahoot(miahootForm)">POST</button></form></td>
-</tr>
+    <tr>creation d'un miahoot : POST<td>
+        <form #miahootForm="ngForm" (ngSubmit)="postMiahoot(miahootForm)">
+            <input placeholder="nom d'un miahoot" name="nameMia" ngModel ngDefaultControl>
+            <input placeholder="description d'un miahoot" name="descriptionMia" ngModel ngDefaultControl>
+            <button type="submit">POST</button>
+        </form>
+        </td>
+    </tr>
     <tr>Renvoie tous les miahoot :
         <td><button (click)="getAllMiahoots()">GET</button></td>
     </tr>

@@ -43,7 +43,9 @@ export class APIService {
   // Fonction pour la methode POST
   postAPIMiahoot(data: any): Observable<any> {
     const url = `${this.apiUrl}/miahoot/`;
-    return this.http.post(url,  data);
+    const headers = {'accept': '*/*',  
+                     'Content-Type': 'application/json'};
+    return this.http.post(url,  data, {headers});
   }
 
   
