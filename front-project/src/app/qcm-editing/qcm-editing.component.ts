@@ -9,15 +9,7 @@ import { NgForm } from '@angular/forms';
 })
 export class QcmEditingComponent {
   
-  public idReponse?:number;
-
-  public idMia:number =1;
-  public labelQuestion?:string;
-  
-
-  public labelReponse?:string;
-  public estValide?:string;
-  public questionId?:string;
+  public idMia: number =1;
 
 
   constructor(private apiMia: APIService) {}
@@ -59,17 +51,22 @@ postMiahoot(form : NgForm){
     
 
 
-  getQuestions(idMiahoot : number){
-    this.apiMia.getAPIQuestionsByMiahootID(idMiahoot).subscribe((data: any) => {
+  getQuestions(){
+    this.apiMia.getAPIQuestionsByMiahootID(this.idMia).subscribe((data: any) => {
     console.log(data);
     });
   }
 
   
-  postQuestion(){
-    this.apiMia.postAPIQuestion('miahoot/' + this.idMia+"/question?label="+ this.labelQuestion).subscribe(
-      (data: any) => {
-        console.log(data);
+  postQuestion(form : NgForm){
+    this.apiMia.postAPIQuestion('miahoot/' + this.idMia+"/question?label="+ form.value.labelQuestion).subscribe(
+      //Permet de voir l'erreur dans la console ou le bon fonctionnement
+      data => {
+          if(data == null){
+              console.log("Question créé");
+          }else{
+              console.error(data);
+          }          
       });
   }
 
@@ -82,18 +79,27 @@ postMiahoot(form : NgForm){
 
 
   postReponse(form : NgForm){
-    console.log(form.value);
+    
+    let boolRep = false;
+    if(form.value.estValide == "vrai"){
+      boolRep = true;
+    }
+    //Formater en format JSON
     const data = {
       "label": form.value.labelReponse,
-      "estValide": form.value.estValide,
+      "estValide": boolRep,
       "questionId": form.value.questionId
     };
-    const jsonData = JSON.stringify(data);
-    this.apiMia.postAPIReponse('question/' + this.questionId+"/reponse", jsonData).subscribe(
+    
+    this.apiMia.postAPIReponse('question/' + form.value.idRep+"/reponse", data).subscribe(
       (data: any) => {
-        console.error(data);
-        console.log(data);
-      });
+        if(data == null){
+          console.log("Reponse créee");
+      }else{
+          console.error(data);
+      } 
+      });        
+    
   }
 
 }
