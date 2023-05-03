@@ -1,9 +1,8 @@
 <div *ngIf="this.gs.inGame === true" id="game">
-    <div *ngIf="this.gs.obsMiahootGame$ | async as MIA">
         <div class="changementQuestion">
             <h2>{{idCourant}}</h2>
             <button (click)="this.questionPrecedente()"
-                    [class.hideQuestion]="this.idCourant<=1">
+                    [class.hideQuestion]="this.idCourant <= 1">
                 question précédente ({{this.idCourant-1}})</button>
             <button (click)="this.questionSuivante()">
                 question suivante ({{this.idCourant+1}})</button>
@@ -19,7 +18,6 @@
                          [class.hideQuestion]="i+1 !== idCourant">
             </app-question>
         </div>
-    </div>
 </div>
 
 <app-waiting-room *ngIf="this.gs.inGame === false"></app-waiting-room>

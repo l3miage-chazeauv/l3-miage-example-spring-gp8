@@ -23,22 +23,26 @@ export class MiahootComponent{
   public idCourant:number = 0;;
   
   constructor(private apiMia: APIService, private router: Router, protected gs: GameService, private cdRef: ChangeDetectorRef) { 
+
     const state = this.router.getCurrentNavigation()?.extras.state; // On récupère les données de la route
     this.idMiahoot = state?.['idMiahootRouting'] ?? -1; // On récupère l'id du miahoot
-    this.apiMia.getMiahootByID('miahoot', this.idMiahoot).subscribe((data: any) => {
+    this.apiMia.getAPIMiahootByID('miahoot', this.idMiahoot).subscribe((data: any) => {
       this.gs.miahootGame.idMiahoot = data.idMiahoot;
-      this.gs.miahootGame.listeQuestions = data.listeQuestions;
+      this.gs.miahootGame.listeQuestions = this.apiMia.getAPIQuestionsById(data.idMiahoo);
     }); // On récupère le miahoot
+    console.log("Liste des questions" + this.gs.miahootGame.listeQuestions);
 
-    this.gs.obsMiahootGame$.pipe(
-      map(mg => {
-        if(mg === undefined){
-          this.gs.miahootGame.listeQuestions = [];
-        } else {
-          this.gs.miahootGame.listeQuestions = mg.listeQuestions;
-        }
-      })
-    )
+    // this.gs.obsMiahootGame$.pipe(
+    //   map(mg => {
+    //     if(mg === undefined){
+    //       this.gs.miahootGame.listeQuestions = [];
+    //       console.log("obsMiahoot: undefined");
+    //     } else {
+    //       this.gs.miahootGame.listeQuestions = mg.listeQuestions;
+    //       console.log("obsMiahoot:" + this.gs.miahootGame.listeQuestions);
+    //     }
+    //   })
+    // );
    }
 
   ngOnInit(): void {
@@ -48,12 +52,14 @@ export class MiahootComponent{
   questionSuivante():void{
     this.idCourant=this.idCourant+1; // On passe à la question suivante
     this.cdRef.detectChanges();
+    console.log(this.idCourant);
   }
 
   questionPrecedente():void{
     if(this.idCourant>0){
       this.idCourant=this.idCourant-1; // On passe à la question précédente
       this.cdRef.detectChanges();
+      console.log(this.idCourant);
     }
   }
 }

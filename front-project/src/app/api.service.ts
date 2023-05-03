@@ -15,14 +15,14 @@ export class APIService {
    }
 
   // Fonction pour la méthode GET
-  getMiahoots(endpoint: string): Observable<any> {
+  getAPIMiahoots(endpoint: string): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}/`;
     return this.http.get(url);
     
   }
 
   // Fonction pour la méthode GET
-  getMiahootByID(endpoint: string, idMiahoot: number): Observable<any> {
+  getAPIMiahootByID(endpoint: string, idMiahoot: number): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}/${idMiahoot}/questions`;
     return this.http.get(url);
   }
@@ -42,6 +42,25 @@ export class APIService {
   postAPIQuestion(endpoint: string): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
     const headers = {'accept': '*/*'};
-    return this.http.post(url,{ headers} );
+    return this.http.post(url,[] );
   }
+
+
+  // Fonction pour la méthode GET
+  getAPIReponses(endpoint: string): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}/`;
+    return this.http.get(url);
+  }
+
+
+
+
+  // Fonction pour la méthode POST
+  postAPIReponse(endpoint: string, data :any): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    const headers = {'accept': '*/*'};
+    return this.http.post(url,data,{ headers} );
+  }
+
+
 }

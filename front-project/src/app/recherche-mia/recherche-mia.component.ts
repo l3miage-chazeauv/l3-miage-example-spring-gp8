@@ -17,7 +17,7 @@ export class RechercheMiaComponent {
 
   findMiahootByIdAndGo(): void {
     console.log("Recherche: " + this.idRecherche);
-    this.apiMia.getMiahoots('miahoot/' + this.idRecherche).pipe(
+    this.apiMia.getAPIMiahoots('miahoot/' + this.idRecherche).pipe(
       catchError(e => {
         console.log(e.status);
         this.existe = false;
