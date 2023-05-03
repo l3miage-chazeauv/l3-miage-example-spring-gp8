@@ -43,14 +43,12 @@ export class MiahootComponent{
   questionSuivante():void{
     this.idCourant=this.idCourant+1; // On passe à la question suivante
     this.cdRef.detectChanges();
-    console.log(this.idCourant);
   }
 
   questionPrecedente():void{
     if(this.idCourant>0){
       this.idCourant=this.idCourant-1; // On passe à la question précédente
       this.cdRef.detectChanges();
-      console.log(this.idCourant);
     }
   }
 }

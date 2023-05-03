@@ -7,7 +7,7 @@
     background: linear-gradient(-45deg,#6bc5f8, #29abf7,#6bc5f8, #29abf7);
     animation: gradient 5s ease infinite;
     background-size: 500% 500%;
-    width: 20%;
+    width: 40%;
     height: max-content;
     display: flex;
     /* align-items: center; */
@@ -53,21 +53,20 @@
     align-items: center;
     gap: 5px;
   }
-  
+/*   
   .heading span {
-    font-size: 1.5em;
-    font-weight: 800;
+    font-size: 100%;
+    font-weight: 100%;
     filter: drop-shadow(0px 0px 10px rgb(255, 255, 255));
-    animation: flickering 2s linear infinite both;
-  }
+  } */
 
   .propositions {
-    background-color: aliceblue;
+    background-color: white;
     padding: 2%;
     border-radius: 10px;
   }
 
   p{
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 5%;
+    margin-bottom: 5%;
   }
