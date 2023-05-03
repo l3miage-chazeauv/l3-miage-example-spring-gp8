@@ -21,8 +21,7 @@ export class MiahootComponent{
   //                                     {questionId:998,label: 'cache toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
   //                                                                                    {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]}];
 
-  public idCourant:number = 1; // On initialise l'id courant à 0
-
+  public idCourant:number = 1;
   private concepteurs?: MiahootUser[];
   private presentateurs?: MiahootUser[];
   
