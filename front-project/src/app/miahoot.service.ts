@@ -7,6 +7,7 @@ import { filter, map, Observable, of, switchMap, tap } from 'rxjs';
 
 
 export interface MiahootUser{
+  readonly miahootId ?: number; // L'id pas obligatoire c'est plus du bricolage qu'autre chose...
   name: string
   readonly photoUrl : string
 }
@@ -21,6 +22,7 @@ const conv : FirestoreDataConverter<MiahootUser> = {
     const data = snapshot.data(options)!;
     
     return {
+      miahootId: data['id'],
       name : data['name'],
       photoUrl: data['photoUrl']
     }

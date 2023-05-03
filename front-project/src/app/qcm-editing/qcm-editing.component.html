@@ -1,10 +1,14 @@
 <table class="apiservice">
     <th>Modification des miahoots</th>
-<tr>creation d'un miahoot : POST<td><form #miahootForm="ngForm">
-    <input placeholder="nom d'un miahoot" name="name">
-    <input placeholder="description d'un miahoot" name="description">
-    <button (click)="postMiahoot(miahootForm)">POST</button></form></td>
-</tr>
+    <tr>creation d'un miahoot : POST
+        <td>
+            <form #miahootForm="ngForm" (ngSubmit)="postMiahoot(miahootForm)">
+                <input placeholder="nom d'un miahoot" name="nameMia" ngModel ngDefaultControl>
+                <input placeholder="description d'un miahoot" name="descriptionMia" ngModel ngDefaultControl>
+                <button type="submit">POST</button>
+            </form>
+        </td>
+    </tr>
     <tr>Renvoie tous les miahoot :
         <td><button (click)="getAllMiahoots()">GET</button></td>
     </tr>
@@ -20,9 +24,11 @@
         <td><button (click)="getAllReponses()">GET</button></td>
     </tr>
     <tr>creation d'une reponse : POST
-        <td><input type="text" [(ngModel)]="labelReponse" placeholder="label de la reponse" /></td>
-        <td><input type="text" [(ngModel)]="estValide" placeholder="true or false only" /></td>
-        <td><input type="number" [(ngModel)]="questionId" placeholder="id de la question" /></td>
-        <td><button (click)="postReponse()">POST</button></td>
+        <form #reponseForm="ngForm" (ngSubmit)="postMiahoot(miahootForm)">
+        <td><input type="text" name="labelReponse" placeholder="label de la reponse" /></td>
+        <td><input type="text" name="estValide" placeholder="true or false only" /></td>
+        <td><input type="number" name="questionId" placeholder="id de la question" /></td>
+        <td><button (submit)="postReponse(reponseForm)">POST</button></td>
+    </form>
     </tr>
 </table>

@@ -13,9 +13,7 @@ export class QcmEditingComponent {
 
   public idMia:number =1;
   public labelQuestion?:string;
-  public nameMia?:string;
-  public descriptionMia?:string;
-  public dataMia?:[string];
+  
 
   public labelReponse?:string;
   public estValide?:string;
@@ -30,20 +28,35 @@ export class QcmEditingComponent {
     });
   }
 
-  postMiahoot(form : NgForm){
-    const data = {
-      "nom": form.value.name,
-      "description": form.value.description,
-    };
-    this.apiMia.postAPIMiahoot( data).subscribe(
-        
-      
-        //Permet de voir l'erreur dans la console ou le bon fonctionnement
-        error => {
-        console.error(error);
-        
-      });
-  }
+  /*
+postMiahoot(form : NgForm){
+      const data = {
+        "nom": form.value.name,
+        "description": form.value.description,
+      };
+
+  */
+
+
+
+postMiahoot(form : NgForm){
+  
+  const data = {
+      "nom": form.value.nameMia,
+      "description": form.value.descriptionMia,
+  };
+  this.apiMia.postAPIMiahoot(data).subscribe(
+      //Permet de voir l'erreur dans la console ou le bon fonctionnement
+      data => {
+          if(data == null){
+              console.log("Miahoot créé");
+          }else{
+              console.error(data);
+          }          
+      }
+  );
+}
+    
 
 
   getQuestions(idMiahoot : number){
@@ -68,11 +81,12 @@ export class QcmEditingComponent {
   }
 
 
-  postReponse(){
+  postReponse(form : NgForm){
+    console.log(form.value);
     const data = {
-      "label": this.labelReponse,
-      "estValide": true,
-      "questionId": this.questionId
+      "label": form.value.labelReponse,
+      "estValide": form.value.estValide,
+      "questionId": form.value.questionId
     };
     const jsonData = JSON.stringify(data);
     this.apiMia.postAPIReponse('question/' + this.questionId+"/reponse", jsonData).subscribe(
