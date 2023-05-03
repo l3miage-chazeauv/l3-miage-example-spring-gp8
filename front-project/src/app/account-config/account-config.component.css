@@ -1,13 +1,4 @@
-.modification{
-  /* box-shadow: 0px 0px 13px 5px rgba(143,143,143,0.67);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center; */
+/* .card{
   position: absolute;
   transform: translate(-50%,-50%);
   left:50%;
@@ -19,7 +10,6 @@
   width: 20%;
   height: max-content;
   display: flex;
-  /* align-items: center; */
   justify-content: space-between;
   flex-direction: column;
   padding: 2%;
@@ -50,7 +40,7 @@
             0px 0px 10px #6bc5f8,
             0px 0px 50px #6bc5f8;
     }
-  }
+  } */
 
 button{
   box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
@@ -74,6 +64,7 @@ h2{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   gap: 5px;
   font-size: 1.5em;
   font-weight: 800;

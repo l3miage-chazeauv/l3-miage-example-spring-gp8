@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Question, Reponse, miahootGame } from './QcmDefinitions';
+import { Question, Reponse, MiahootGame } from './QcmDefinitions';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,13 +10,13 @@ export class GameService{
 
   
   inGame: boolean = false;
-  miahootGame: miahootGame = {isPresented: false, idMiahoot: -1, listeQuestions: []};
+  miahootGame: MiahootGame = {isPresented: false, miahoot: {idMiahoot: 0, listeQuestions: []}};
 
-  obsMiahootGame$ = new Observable<miahootGame | undefined>;
+  obsMiahootGame$ = new Observable<MiahootGame | undefined>;
 
   constructor() { }
 
-  letsGoParty(miahootGame: miahootGame): void { // On initialise le jeu (fonction utilisable par un présentateur/concepteur)
+  letsGoParty(miahootGame: MiahootGame): void { // On initialise le jeu (fonction utilisable par un présentateur/concepteur)
     miahootGame.isPresented = true;
   }
 

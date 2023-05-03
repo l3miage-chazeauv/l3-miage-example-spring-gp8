@@ -4,7 +4,7 @@ import { docData, Firestore, FirestoreDataConverter, QueryDocumentSnapshot, Snap
 import { FormControl, FormGroup } from '@angular/forms';
 import { doc, getDoc, setDoc, updateDoc } from '@firebase/firestore';
 import { filter, map, Observable, of, switchMap, tap } from 'rxjs';
-import { miahootGame } from './QcmDefinitions';
+import { MiahootGame } from './QcmDefinitions';
 
 
 export interface MiahootUser{
@@ -36,7 +36,7 @@ const conv : FirestoreDataConverter<MiahootUser> = {
 
 export class DataService{
 
-  obsMiahootGames$ = new Observable<miahootGame[] | undefined>;
+  obsMiahootGames$ = new Observable<MiahootGame[] | undefined>;
   listeMiahootPresentes: number[] = [8,1]; // Liste des miahoots présentés (id seulement)
 
   obsMiahootUser$ : Observable<MiahootUser|undefined>;

@@ -1,8 +1,13 @@
-export interface miahootGame {
-  isPresented: boolean;
+export interface Miahoot{
   idMiahoot: number;
   listeQuestions: Question[];
 }
+
+export interface MiahootGame{
+  isPresented: boolean;
+  miahoot: Miahoot;
+}
+
 export interface Reponse{
   reponseId:number;
   label: string;

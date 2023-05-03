@@ -1,9 +1,9 @@
 <app-waiting-room *ngIf="this.gs.inGame === false"></app-waiting-room>
 
 <div *ngIf="this.gs.inGame === true">
-    <div *ngIf="this.gs.miahootGame.listeQuestions">
+    <div *ngIf="this.gs.miahootGame.miahoot.listeQuestions">
         <div class="questions" 
-            *ngFor="let question of this.gs.miahootGame.listeQuestions;let i = index">
+            *ngFor="let question of this.gs.miahootGame.miahoot.listeQuestions;let i = index">
             <app-question class="question" 
                          [questionId]="i+1" 
                          [label]="question.label" 
@@ -20,6 +20,6 @@
             [class.button-19]="this.idCourant > 1"
             [class.hide]="this.idCourant <= 1">Précédente ({{this.idCourant-1}})</button>
     <button (click)="this.questionSuivante()"
-            [class.button-19]="this.idCourant < this.gs.miahootGame.listeQuestions.length"
-            [class.hide]="this.idCourant >= this.gs.miahootGame.listeQuestions.length">Suivante ({{this.idCourant+1}})</button>
+            [class.button-19]="this.idCourant < this.gs.miahootGame.miahoot.listeQuestions.length"
+            [class.hide]="this.idCourant >= this.gs.miahootGame.miahoot.listeQuestions.length">Suivante ({{this.idCourant+1}})</button>
 </div>

@@ -3,7 +3,7 @@ import { catchError, of } from 'rxjs';
 import { APIService } from '../api.service';
 import { RoutingService } from '../routing.service';
 import { DataService } from '../miahoot.service';
-import { miahootGame } from '../QcmDefinitions';
+import { MiahootGame } from '../QcmDefinitions';
 
 @Component({
   selector: 'app-recherche-mia',

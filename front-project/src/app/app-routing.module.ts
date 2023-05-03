@@ -6,6 +6,7 @@ import {AccountConfigComponent} from "./account-config/account-config.component"
 import { AppComponent } from './app.component';
 import { QcmEditingComponent } from './qcm-editing/qcm-editing.component';
 import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
+import { PresentationsComponent } from './presentations/presentations.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,9 @@ const routes: Routes = [
 }, {
   path:'miahoot/:id',
   component: MiahootComponent,
+}, {
+  path:'presentations',
+  component: PresentationsComponent,
 }, {
   path: '**',
     component: AppComponent }

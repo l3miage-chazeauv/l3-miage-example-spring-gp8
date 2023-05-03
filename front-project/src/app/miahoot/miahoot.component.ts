@@ -38,7 +38,7 @@ export class MiahootComponent{
           reponses: obj.reponses,
           questionId: obj.id
         };
-        this.gs.miahootGame.listeQuestions.push(question);
+        this.gs.miahootGame.miahoot.listeQuestions.push(question);
       })
 
       // console.log("Liste des questions: " + this.gs.miahootGame.listeQuestions);
