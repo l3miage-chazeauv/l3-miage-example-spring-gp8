@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { APIService } from '../api.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-qcm-editing',
@@ -23,20 +24,18 @@ export class QcmEditingComponent {
 
   constructor(private apiMia: APIService) {}
 
-  getAllMiahoot(){
-    this.apiMia.getAPIMiahoots('miahoot').subscribe((data: any) => {
+  getAllMiahoots(){
+    this.apiMia.getAPIAllMiahoots().subscribe((data: any) => {
     console.log(data);
     });
   }
 
-  postMiahoot(){
+  postMiahoot(form : NgForm){
     const data = {
-      "nom": this.nameMia,
-      "description": this.descriptionMia
+      "nom": form.value.name,
+      "description": form.value.description,
     };
-    const jsonData = JSON.stringify(data);
-
-    this.apiMia.postAPIMiahoot('miahoot', data).subscribe(
+    this.apiMia.postAPIMiahoot( data).subscribe(
         
       
         //Permet de voir l'erreur dans la console ou le bon fonctionnement
@@ -48,7 +47,7 @@ export class QcmEditingComponent {
 
 
   getQuestions(idMiahoot : number){
-    this.apiMia.getAPIQuestionsByMiahootID(this.idMia).subscribe((data: any) => {
+    this.apiMia.getAPIQuestionsByMiahootID(idMiahoot).subscribe((data: any) => {
     console.log(data);
     });
   }
@@ -82,13 +81,5 @@ export class QcmEditingComponent {
         console.log(data);
       });
   }
-
-
-  
-  
-
-
-  
-  
 
 }

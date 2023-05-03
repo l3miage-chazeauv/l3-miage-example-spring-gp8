@@ -1,43 +1,28 @@
-<div id="testAPI">
-    Renvoie tous les miahoot
-    <button (click)="getAllMiahoot()">GET</button>
-    <br/><br/> 
-    
-    <input placeholder="nom d'un miahoot" [(ngModel)] ="nameMia">
-    <br/>
-    <input placeholder="description d'un miahoot" [(ngModel)] = "descriptionMia">
-    <br/>
-    <button (click)="postMiahoot()">POST</button>
-    <br/><br/>
-    <br/><br/> 
-    Id d'un Miahoot
-    <br/>
-    <input [(ngModel)]="idMia" placeholder="ID d'un Miahoot"/>
-    <br/>
-    <button (click)="getQuestions(idMia)">GET </button>
-    <br/><br/>
-    <input [(ngModel)]="labelQuestion" placeholder="label question"/>
-    <br/>
-    <button (click)="postQuestion()">POST</button>
-
-    <br/><br/>
-    <br/><br/>
-    Tests Réponse
-    <br/>
-    Renvoie toutes les réponses pour tous les miahoots
-    <input type="text" [(ngModel)]="idReponse" placeholder="id de la réponse" />
-    <br/>
-    
-    <button (click)="getAllReponses()">GET reponse par ID</button>
-    <br/>
-    
-    <br/>
-    <input type="text" [(ngModel)]="labelReponse" placeholder="label de la réponse" />
-    <br/>
-    <input type="text" [(ngModel)]="estValide" placeholder="true or false only"/>
-    <br/>
-    <input type="number" [(ngModel)]="questionId" placeholder="id de la question" />
-    <br/>
-    <button (click)="postReponse()">POST</button>
-
-</div>
+<table class="apiservice">
+    <th>Modification des miahoots</th>
+<tr>creation d'un miahoot : POST<td><form #miahootForm="ngForm">
+    <input placeholder="nom d'un miahoot" name="name">
+    <input placeholder="description d'un miahoot" name="description">
+    <button (click)="postMiahoot(miahootForm)">POST</button></form></td>
+</tr>
+    <tr>Renvoie tous les miahoot :
+        <td><button (click)="getAllMiahoots()">GET</button></td>
+    </tr>
+    <tr>Id d'un Miahoot : GET
+        <td><input [(ngModel)]="idMia" placeholder="ID d'un Miahoot" /></td>
+        <td><button (click)="getQuestions(idMia)">GET </button></td>
+    </tr>
+    <tr>label de la question : POST
+        <td><input [(ngModel)]="labelQuestion" placeholder="label question" /></td>
+        <td><button (click)="postQuestion()">POST</button></td>
+    </tr>
+    <tr>Renvoie toutes les reponses pour tous les miahoots :
+        <td><button (click)="getAllReponses()">GET</button></td>
+    </tr>
+    <tr>creation d'une reponse : POST
+        <td><input type="text" [(ngModel)]="labelReponse" placeholder="label de la reponse" /></td>
+        <td><input type="text" [(ngModel)]="estValide" placeholder="true or false only" /></td>
+        <td><input type="number" [(ngModel)]="questionId" placeholder="id de la question" /></td>
+        <td><button (click)="postReponse()">POST</button></td>
+    </tr>
+</table>
