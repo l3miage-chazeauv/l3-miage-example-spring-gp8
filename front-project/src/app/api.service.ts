@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders,  } from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,71 +10,88 @@ export class APIService {
 
   private apiUrl = 'http://129.88.210.111:8080';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {}
 
-   }
-
-  // Fonction pour la méthode GET
-  getAPIMiahoots(endpoint: string): Observable<any> {
-    const url = `${this.apiUrl}/${endpoint}/`;
+  /* UTILISATEURS */
+  postAPIUser(data:any): Observable<any> {
+    const url = `${this.apiUrl}/utilisateur/`;
+    const body = {
+      "nom": data.username,
+      "description": data.firebaseId
+    };
+    return this.http.post(url, body);
+  }
+  
+  getAPIAllUsers(): Observable<any> {
+    const url = `${this.apiUrl}/utilisateur/`;
     return this.http.get(url);
-    
   }
 
-  // Fonction pour la méthode GET
-  getAPIMiahootById(endpoint: string, idMiahoot : number): Observable<any> {
-    const url = `${this.apiUrl}/${endpoint}/${idMiahoot}`;
+  /* MIAHOOTS */
+  getAPIAllMiahoots(): Observable<any> {
+    const url = `${this.apiUrl}/miahoot/`;
     return this.http.get(url);
-    
   }
 
-  // Fonction pour la méthode GET
+  getAPIMiahootById(idMiahoot : number): Observable<any> {
+    const url = `${this.apiUrl}/miahoot/${idMiahoot}`;
+    return this.http.get(url);
+  }
+
+
+
+  // Fonction pour la methode POST
+  postAPIMiahoot(data: any): Observable<any> {
+    const url = `${this.apiUrl}/miahoot/`;
+    return this.http.post(url,  data);
+  }
+
+  
+
+  // Fonction pour la methode DELETE des miahoots
+  deleteAPIQMiahootsById(id:number): Observable<any> {
+    const url = `${this.apiUrl}/miahoot/${id}`;
+    return this.http.delete(url);
+  }
+
+  // Fonction pour la methode PATCH des miahoots
+  patchAPIMiahootById(id:number, data:any): Observable<any> {
+    const url = `${this.apiUrl}/miahoot/${id}`;
+    const body = {
+      "nom": data.nom,
+      "description": data.description
+    };
+    return this.http.patch(url, body);
+  }
+  /* QUESTIONS */
+  // Fonction pour la methode GET des questions d'un miahoot donnee
   getAPIQuestionsByMiahootID(idMiahoot: number): Observable<any> {
     const url = `${this.apiUrl}/miahoot/${idMiahoot}/questions`;
     return this.http.get(url);
   }
 
-  
-  
-  // Fonction pour la méthode POST
-  postAPIMiahoot(endpoint: string, data: any): Observable<any> {
-    
-    const url = `${this.apiUrl}/${endpoint}/`;
-    const headers = {'accept': '*/*',  
-                     'Content-Type': 'application/json'};
-    
-    return this.http.post(url, data);
+  // Fonction pour la methode DELETE des questions
+  deleteAPIQuestionById(id:number): Observable<any> {
+    const url = `${this.apiUrl}/question/${id}`;
+    return this.http.delete(url);
   }
 
-  // Fonction pour la méthode POST
+  // Fonction pour la methode POST
   postAPIQuestion(endpoint: string): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
-    
     return this.http.post(url,[] );
   }
 
-
-  // Fonction pour la méthode GET
+  /* REPONSES */
+  // Fonction pour la methode GET
   getAPIReponses(endpoint: string): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}/`;
     return this.http.get(url);
   }
 
-
-
-
-  // Fonction pour la méthode POST
+  // Fonction pour la methode POST
   postAPIReponse(endpoint: string, data :any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
-    
-    return this.http.post(url,data);
-  }
-
-
-  // Fonction pour la méthode DELETE des questions 
-  deleteAPIQuestionById(idQuestion :number): Observable<any> {
-    const url = `${this.apiUrl}/question/${idQuestion}`;
-    
-    return this.http.delete(url);
+    return this.http.post(url,data );
   }
 }

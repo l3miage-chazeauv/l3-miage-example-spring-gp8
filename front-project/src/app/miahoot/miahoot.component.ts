@@ -26,7 +26,7 @@ export class MiahootComponent{
 
     const state = this.router.getCurrentNavigation()?.extras.state; // On récupère les données de la route
     this.idMiahoot = state?.['idMiahootRouting'] ?? -1; // On récupère l'id du miahoot
-    this.apiMia.getAPIMiahootById('miahoot', this.idMiahoot).subscribe((data: any) => {
+    this.apiMia.getAPIMiahootById(this.idMiahoot).subscribe((data: any) => {
       //this.gs.miahootGame.idMiahoot = data.idMiahoot;
       //this.gs.miahootGame.listeQuestions = this.apiMia.getAPIQuestionsByMiahootID(data.idMiahoo);
     }); // On récupère le miahoot
