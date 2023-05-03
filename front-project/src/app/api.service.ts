@@ -60,9 +60,6 @@ export class APIService {
     return this.http.get(url);
   }
 
-
-
-
   // Fonction pour la méthode POST
   postAPIReponse(endpoint: string, data :any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
@@ -74,7 +71,6 @@ export class APIService {
   // Fonction pour la méthode DELETE des questions 
   deleteAPIQuestionById(idQuestion :number): Observable<any> {
     const url = `${this.apiUrl}/question/${idQuestion}`;
-    
     return this.http.delete(url);
   }
 }
