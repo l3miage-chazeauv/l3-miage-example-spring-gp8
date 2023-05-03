@@ -22,11 +22,19 @@ export class APIService {
   }
 
   // Fonction pour la méthode GET
-  getAPIMiahootByID(endpoint: string, idMiahoot: number): Observable<any> {
-    const url = `${this.apiUrl}/${endpoint}/${idMiahoot}/questions`;
+  getAPIMiahootById(endpoint: string, idMiahoot : number): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}/${idMiahoot}`;
+    return this.http.get(url);
+    
+  }
+
+  // Fonction pour la méthode GET
+  getAPIQuestionsByMiahootID(idMiahoot: number): Observable<any> {
+    const url = `${this.apiUrl}/miahoot/${idMiahoot}/questions`;
     return this.http.get(url);
   }
 
+  
   
   // Fonction pour la méthode POST
   postAPIMiahoot(endpoint: string, data: any): Observable<any> {

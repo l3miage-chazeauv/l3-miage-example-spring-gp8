@@ -48,7 +48,7 @@ export class QcmEditingComponent {
 
 
   getQuestions(idMiahoot : number){
-    this.apiMia.getAPIMiahootByID('miahoot',this.idMia).subscribe((data: any) => {
+    this.apiMia.getAPIQuestionsByMiahootID(this.idMia).subscribe((data: any) => {
     console.log(data);
     });
   }
