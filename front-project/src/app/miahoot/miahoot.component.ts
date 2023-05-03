@@ -23,7 +23,8 @@ export class MiahootComponent{
 
   public idCourant:number = 1; // On initialise l'id courant à 0
 
-  private concepteurs: MiahootUser[]
+  private concepteurs?: MiahootUser[];
+  private presentateurs?: MiahootUser[];
   
   constructor(private apiMia: APIService, private router: Router, protected gs: GameService, private cdRef: ChangeDetectorRef) { 
 
