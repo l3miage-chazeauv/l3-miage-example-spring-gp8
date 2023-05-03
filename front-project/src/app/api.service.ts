@@ -51,7 +51,7 @@ export class APIService {
   
 
   // Fonction pour la methode DELETE des miahoots
-  deleteAPIQMiahootsById(id:number): Observable<any> {
+  deleteAPIQMiahootById(id:number): Observable<any> {
     const url = `${this.apiUrl}/miahoot/${id}`;
     return this.http.delete(url);
   }

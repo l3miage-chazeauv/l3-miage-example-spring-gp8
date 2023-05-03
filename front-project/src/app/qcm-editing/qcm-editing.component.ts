@@ -8,15 +8,16 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./qcm-editing.component.css']
 })
 export class QcmEditingComponent {
-  
-  public idMia: number =1;
 
+  public idMiahoot: number = 1;
+  public idQuestion: number = 1;
+  public idReponse: number = 1;
 
-  constructor(private apiMia: APIService) {}
+  constructor(private apiMia: APIService) { }
 
-  getAllMiahoots(){
+  getAllMiahoots() {
     this.apiMia.getAPIAllMiahoots().subscribe((data: any) => {
-    console.log(data);
+      console.log(data);
     });
   }
 
@@ -31,57 +32,57 @@ postMiahoot(form : NgForm){
 
 
 
-postMiahoot(form : NgForm){
-  
-  const data = {
+  postMiahoot(form: NgForm) {
+
+    const data = {
       "nom": form.value.nameMia,
       "description": form.value.descriptionMia,
-  };
-  this.apiMia.postAPIMiahoot(data).subscribe(
+    };
+    this.apiMia.postAPIMiahoot(data).subscribe(
       //Permet de voir l'erreur dans la console ou le bon fonctionnement
       data => {
-          if(data == null){
-              console.log("Miahoot créé");
-          }else{
-              console.error(data);
-          }          
+        if (data == null) {
+          console.log("Miahoot créé");
+        } else {
+          console.error(data);
+        }
       }
-  );
-}
-    
+    );
+  }
 
 
-  getQuestions(){
-    this.apiMia.getAPIQuestionsByMiahootID(this.idMia).subscribe((data: any) => {
-    console.log(data);
+
+  getQuestions() {
+    this.apiMia.getAPIQuestionsByMiahootID(this.idMiahoot).subscribe((data: any) => {
+      console.log(data);
     });
   }
 
-  
-  postQuestion(form : NgForm){
-    this.apiMia.postAPIQuestion('miahoot/' + this.idMia+"/question?label="+ form.value.labelQuestion).subscribe(
+
+  postQuestion(form: NgForm) {
+    this.apiMia.postAPIQuestion('miahoot/' + this.idMiahoot + "/question?label=" + form.value.labelQuestion).subscribe(
       //Permet de voir l'erreur dans la console ou le bon fonctionnement
       data => {
-          if(data == null){
-              console.log("Question créé");
-          }else{
-              console.error(data);
-          }          
+        if (data == null) {
+          console.log("Question créé");
+        } else {
+          console.error(data);
+        }
       });
   }
 
 
-  getAllReponses(){
+  getAllReponses() {
     this.apiMia.getAPIReponses('reponse').subscribe((data: any) => {
-    console.log(data);
+      console.log(data);
     });
   }
 
 
-  postReponse(form : NgForm){
-    
+  postReponse(form: NgForm) {
+
     let boolRep = false;
-    if(form.value.estValide == "vrai"){
+    if (form.value.estValide == "vrai") {
       boolRep = true;
     }
     //Formater en format JSON
@@ -90,16 +91,37 @@ postMiahoot(form : NgForm){
       "estValide": boolRep,
       "questionId": form.value.questionId
     };
-    
-    this.apiMia.postAPIReponse('question/' + form.value.idRep+"/reponse", data).subscribe(
+
+    this.apiMia.postAPIReponse('question/' + form.value.idRep + "/reponse", data).subscribe(
       (data: any) => {
-        if(data == null){
+        if (data == null) {
           console.log("Reponse créee");
-      }else{
+        } else {
           console.error(data);
-      } 
-      });        
-    
+        }
+      });
+
   }
 
+  deleteMiahoot() {
+    this.apiMia.deleteAPIQMiahootById(this.idMiahoot).subscribe(
+      (data: any) => {
+        if (data == null) {
+          console.log("Miahoot supprimé");
+        } else {
+          console.error(data);
+        }
+      });
+  }
+
+  deleteQuestion() {
+    this.apiMia.deleteAPIQuestionById(this.idQuestion).subscribe(
+      (data: any) => {
+        if (data == null) {
+          console.log("Question supprimé");
+        } else {
+          console.error(data);
+        }
+      });
+  }
 }

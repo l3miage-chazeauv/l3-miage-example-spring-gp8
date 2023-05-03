@@ -32,7 +32,7 @@ export class MiahootComponent{
     this.idMiahoot = state?.['idMiahootRouting'] ?? -1; // On récupère l'id du miahoot
 
     this.apiMia.getAPIQuestionsByMiahootID(this.idMiahoot).subscribe((data: any) => {
-      console.log("Data: " + JSON.stringify(data));
+      // console.log("Data: " + JSON.stringify(data));
       data.map((obj: { id: any, label: any, miahootId: any,reponses: any }) => {
         let question: Question = {
           label: obj.label, 

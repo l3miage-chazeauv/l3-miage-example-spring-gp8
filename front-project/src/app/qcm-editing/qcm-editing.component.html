@@ -16,7 +16,7 @@
     <tr>Id d'un Miahoot : GET
 
         <td>
-            <input [(ngModel)]="idMia" placeholder="ID d'un Miahoot" />
+            <input [(ngModel)]="idMiahoot" placeholder="ID d'un Miahoot" />
             <button (click)="getQuestions()" >GET </button>
             <form #questionForm="ngForm" (ngSubmit)="postQuestion(questionForm)">
                 <input name="labelQuestion" placeholder="label question" />
@@ -37,6 +37,30 @@
                 <input type="text" name="estValide" placeholder="vrai ou faux" ngModel ngDefaultControl />
                 <button type="submit">POST</button>
             </form>
+        </td>
+
+    </tr>
+
+    <tr>Suppression d'un miahoot : DELETE
+        <td>
+            <input [(ngModel)]="idMiahoot" placeholder="ID du Miahoot à supprimer" />
+            <button (click)="deleteMiahoot()" >GET </button>
+        </td>
+
+    </tr>
+
+    <tr>Suppression d'une question : DELETE
+        <td>
+            <input [(ngModel)]="idQuestion" placeholder="ID de la question à supprimer" />
+            <button (click)="deleteQuestion()" >GET </button>
+        </td>
+
+    </tr>
+
+    <tr>Suppression d'une reponse : DELETE
+        <td>
+            <input [(ngModel)]="idReponse" placeholder="ID de la reponse à supprimer" />
+            <button (click)="deleteReponse()" >GET </button>
         </td>
 
     </tr>
