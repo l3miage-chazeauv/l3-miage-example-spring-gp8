@@ -33,6 +33,7 @@ import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
+import { PresentationsComponent } from './presentations/presentations.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { environment } from '../environments/environment';
     WaitingRoomComponent,
     QcmEditingComponent,
     Reponse2Component,
+    PresentationsComponent,
   ],
   imports: [
     HttpClientModule,

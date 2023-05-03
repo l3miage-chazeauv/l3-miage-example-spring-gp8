@@ -8,11 +8,17 @@ import { Observable } from 'rxjs';
 
 export class GameService{
 
+  
   inGame: boolean = false;
-  miahootGame: miahootGame = {idMiahoot: -1, listeQuestions: []};
+  miahootGame: miahootGame = {isPresented: false, idMiahoot: -1, listeQuestions: []};
+
   obsMiahootGame$ = new Observable<miahootGame | undefined>;
 
   constructor() { }
+
+  letsGoParty(miahootGame: miahootGame): void { // On initialise le jeu (fonction utilisable par un présentateur/concepteur)
+    miahootGame.isPresented = true;
+  }
 
   startGame(): void {
     this.inGame = true;

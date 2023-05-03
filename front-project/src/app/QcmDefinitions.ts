@@ -1,4 +1,5 @@
 export interface miahootGame {
+  isPresented: boolean;
   idMiahoot: number;
   listeQuestions: Question[];
 }
