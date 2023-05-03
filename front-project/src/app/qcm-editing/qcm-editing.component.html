@@ -2,7 +2,7 @@
     <th>Modification des miahoots</th>
     <tr>creation d'un miahoot : POST
         <td>
-            <form #miahootForm="ngForm" (ngSubmit)="postMiahoot(miahootForm)">
+            <form #miahootPostForm="ngForm" (ngSubmit)="postMiahoot(miahootPostForm)">
                 <input placeholder="nom d'un miahoot" name="nameMia" ngModel ngDefaultControl>
                 <input placeholder="description d'un miahoot" name="descriptionMia" ngModel ngDefaultControl>
                 <button type="submit">POST</button>
@@ -18,20 +18,20 @@
         <td>
             <input [(ngModel)]="idMiahoot" placeholder="ID d'un Miahoot" />
             <button (click)="getQuestions()" >GET </button>
-            <form #questionForm="ngForm" (ngSubmit)="postQuestion(questionForm)">
+            <form #questionPostForm="ngForm" (ngSubmit)="postQuestion(questionPostForm)">
                 <input name="labelQuestion" placeholder="label question" />
-                <button type="submit">POST</button>
+                <td><button type="submit">POST</button></td>
             </form>
         </td>
     </tr>
 
-    <tr>Renvoie toutes les reponses pour tous les miahoots :
+    <tr>Renvoie toutes les reponses : GET
         <td><button (click)="getAllReponses()">GET</button></td>
     </tr>
     <tr>creation d'une reponse : POST
 
         <td>
-            <form #reponseForm="ngForm" (ngSubmit)="postReponse(reponseForm)">
+            <form #reponsePostForm="ngForm" (ngSubmit)="postReponse(reponsePostForm)">
                 <input type="number" name="idRep" placeholder="id de la question" ngModel ngDefaultControl />
                 <input type="text" name="labelReponse" placeholder="label de la reponse" ngModel ngDefaultControl />
                 <input type="text" name="estValide" placeholder="vrai ou faux" ngModel ngDefaultControl />
@@ -44,7 +44,7 @@
     <tr>Suppression d'un miahoot : DELETE
         <td>
             <input [(ngModel)]="idMiahoot" placeholder="ID du Miahoot à supprimer" />
-            <button (click)="deleteMiahoot()" >GET </button>
+            <button (click)="deleteMiahoot()" >DELETE </button>
         </td>
 
     </tr>
@@ -52,7 +52,7 @@
     <tr>Suppression d'une question : DELETE
         <td>
             <input [(ngModel)]="idQuestion" placeholder="ID de la question à supprimer" />
-            <button (click)="deleteQuestion()" >GET </button>
+            <button (click)="deleteQuestion()" >DELETE </button>
         </td>
 
     </tr>
@@ -60,7 +60,36 @@
     <tr>Suppression d'une reponse : DELETE
         <td>
             <input [(ngModel)]="idReponse" placeholder="ID de la reponse à supprimer" />
-            <button (click)="deleteReponse()" >GET </button>
+            <button (click)="deleteReponse()" >DELETE </button>
+        </td>
+
+    </tr>
+
+    <tr>Modification d'un miahoot : PATCH
+        <td>
+            <form #miahootPatchForm="ngForm" (ngSubmit)="patchMiahoot(miahootPatchForm)">
+                <input type="number" name="idMia" placeholder="id du miahoot" ngModel ngDefaultControl />
+                <input type="text" name="nomMia" placeholder="nom du miahoot" ngModel ngDefaultControl />
+                <input type="text" name="descriptionMia" placeholder="description du miahoot" ngModel ngDefaultControl />
+                <button type="submit">PATCH</button>
+            </form>
+        </td>
+
+    </tr>
+
+    <tr>Modification d'une question : PATCH
+        <td>
+            <button >Renvoie </button>
+        </td>
+        <td>
+            <form #questionPatchForm="ngForm" (ngSubmit)="patchQuestion(questionPatchForm)">
+                <input type="number" name="idQuestion" placeholder="id de la question" ngModel ngDefaultControl />
+                <input type="text" name="labelQuestion" placeholder="label de la question" ngModel ngDefaultControl />
+                <input type="text" name="idMiahoot" placeholder="id du miahoot" ngModel ngDefaultControl />
+                <input type="text" name="labelReponse" placeholder="label de la réponse" ngModel ngDefaultControl />
+                <input type="text" name="estValide" placeholder="true ou false uniquement" ngModel ngDefaultControl />
+                <button type="submit">PATCH</button>
+            </form>
         </td>
 
     </tr>
