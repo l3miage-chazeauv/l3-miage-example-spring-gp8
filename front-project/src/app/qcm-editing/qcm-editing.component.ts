@@ -37,7 +37,12 @@ postMiahoot(form : NgForm){
 
   */
 
-
+/*
+      Modif à prévoir: lors de la création d'une Miahoot, ajouter automatiquement 
+      son concepteur dans la liste des concepteurs.
+      Note pour le put: ajouter automatique le concepteur qui le modifie si il n'est pas déjà dans la liste des concepteurs.
+      Le concepteur peut ajouter des présentateurs à la liste des présentateurs.
+*/
 
 postMiahoot(form : NgForm){
   

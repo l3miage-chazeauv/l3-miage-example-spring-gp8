@@ -2,6 +2,8 @@ import { ChangeDetectorRef, Component, Input, NgZone } from '@angular/core';
 import { catchError, of } from 'rxjs';
 import { APIService } from '../api.service';
 import { RoutingService } from '../routing.service';
+import { DataService } from '../miahoot.service';
+import { miahootGame } from '../QcmDefinitions';
 
 @Component({
   selector: 'app-recherche-mia',
@@ -13,12 +15,11 @@ export class RechercheMiaComponent {
   public idRecherche? : number;
   public existe: boolean = true;
 
-  constructor(private apiMia: APIService, protected rt: RoutingService, private cdRef: ChangeDetectorRef) { }
+  constructor(private apiMia: APIService, protected rt: RoutingService, private ms: DataService ,private cdRef: ChangeDetectorRef) { }
 
   findMiahootByIdAndGo(): void {
     if (!(this.idRecherche === undefined || this.idRecherche === null)) 
       {
-        console.log("Recherche: " + this.idRecherche);
         this.apiMia.getAPIMiahootById(this.idRecherche).pipe(
           catchError(e => {
             console.log(e.status);
@@ -27,8 +28,12 @@ export class RechercheMiaComponent {
             return of();
           })
         ).subscribe((data: any) => {
-          console.log("appel de toMiahoot avec: " + this.idRecherche);
-          this.rt.toMiahoot(this.idRecherche);
+          if(this.ms.listeMiahootPresentes.indexOf(data.id) > -1){
+            this.rt.toMiahoot(this.idRecherche);
+          } else{
+            this.existe = false;
+            this.cdRef.detectChanges();
+          }
         })
       }
 
