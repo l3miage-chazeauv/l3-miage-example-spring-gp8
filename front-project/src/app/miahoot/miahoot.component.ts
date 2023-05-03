@@ -15,12 +15,7 @@ import { map, of } from 'rxjs';
 export class MiahootComponent{
 
   @Input() idMiahoot!:number;
-  // @Input() listeQuestions:Question[]=[{questionId:999,label: 'montre toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
-  //                                                                                     {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]},
-  //                                     {questionId:998,label: 'cache toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
-  //                                                                                    {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]}];
-
-  public idCourant:number = 0;;
+  public idCourant:number = 1;
   
   constructor(private apiMia: APIService, private router: Router, protected gs: GameService, private cdRef: ChangeDetectorRef) { 
 
@@ -48,14 +43,12 @@ export class MiahootComponent{
   questionSuivante():void{
     this.idCourant=this.idCourant+1; // On passe à la question suivante
     this.cdRef.detectChanges();
-    console.log(this.idCourant);
   }
 
   questionPrecedente():void{
     if(this.idCourant>0){
       this.idCourant=this.idCourant-1; // On passe à la question précédente
       this.cdRef.detectChanges();
-      console.log(this.idCourant);
     }
   }
 }

@@ -1,25 +1,25 @@
-<div *ngIf="this.gs.inGame === true" id="game">
-        <div class="changementQuestion">
-            <h2>{{idCourant}}</h2>
-            <button (click)="this.questionPrecedente()"
-                    [class.hideQuestion]="this.idCourant <= 1">
-                question précédente ({{this.idCourant-1}})</button>
-            <button (click)="this.questionSuivante()">
-                question suivante ({{this.idCourant+1}})</button>
+<app-waiting-room *ngIf="this.gs.inGame === false"></app-waiting-room>
+
+<div *ngIf="this.gs.inGame === true">
+    <div *ngIf="this.gs.miahootGame.listeQuestions">
+        <div class="questions" 
+            *ngFor="let question of this.gs.miahootGame.listeQuestions;let i = index">
+            <app-question class="question" 
+                         [questionId]="i+1" 
+                         [label]="question.label" 
+                         [reponses]="question.reponses"
+                         [class.hide]="i+1 !== idCourant">
+            </app-question>
         </div>
-        
-        <div *ngIf="this.gs.miahootGame.listeQuestions">
-            <div class="questions"
-                *ngFor="let question of this.gs.miahootGame.listeQuestions;let i = index" >
-                <app-question class="question"
-                            [questionId]="i+1"
-                            [label]="question.label"
-                            [reponses]="question.reponses"
-                            [class.showQuestion]="i+1 === idCourant"
-                            [class.hideQuestion]="i+1 !== idCourant">
-                </app-question>
-            </div>
-        </div>
+    </div>
 </div>
 
-<app-waiting-room *ngIf="this.gs.inGame === false"></app-waiting-room>
+<div *ngIf="this.gs.inGame === true"
+      class="buttonsContainer">
+    <button (click)="this.questionPrecedente()"
+            [class.button-19]="this.idCourant > 1"
+            [class.hide]="this.idCourant <= 1">question précédente ({{this.idCourant-1}})</button>
+    <button (click)="this.questionSuivante()"
+            [class.button-19]="this.idCourant < this.gs.miahootGame.listeQuestions.length"
+            [class.hide]="this.idCourant >= this.gs.miahootGame.listeQuestions.length">question suivante ({{this.idCourant+1}})</button>
+</div>

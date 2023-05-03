@@ -94,6 +94,7 @@ export class APIService {
   // Fonction pour la methode POST
   postAPIReponse(endpoint: string, data :any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
-    return this.http.post(url,data );
+    
+    return this.http.post(url,data);
   }
 }
