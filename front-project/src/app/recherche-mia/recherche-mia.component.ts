@@ -10,13 +10,13 @@ import { RoutingService } from '../routing.service';
 })
 export class RechercheMiaComponent {
 
-  public idRecherche: number = -1;
+  public idRecherche? : number;
   public existe: boolean = true;
 
   constructor(private apiMia: APIService, protected rt: RoutingService, private cdRef: ChangeDetectorRef) { }
 
   findMiahootByIdAndGo(): void {
-    if (!(this.idRecherche == -1 || this.idRecherche == null)) 
+    if (!(this.idRecherche === undefined || this.idRecherche === null)) 
       {
         console.log("Recherche: " + this.idRecherche);
         this.apiMia.getAPIMiahootById(this.idRecherche).pipe(
