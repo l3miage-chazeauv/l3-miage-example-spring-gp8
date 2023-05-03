@@ -43,9 +43,7 @@ export class APIService {
   // Fonction pour la methode POST
   postAPIMiahoot(data: any): Observable<any> {
     const url = `${this.apiUrl}/miahoot/`;
-    const headers = {'accept': '*/*',  
-                     'Content-Type': 'application/json'};
-    return this.http.post(url,  data, {headers});
+    return this.http.post(url, data);
   }
 
   
@@ -59,11 +57,7 @@ export class APIService {
   // Fonction pour la methode PATCH des miahoots
   patchAPIMiahootById(id:number, data:any): Observable<any> {
     const url = `${this.apiUrl}/miahoot/${id}`;
-    const body = {
-      "nom": data.nom,
-      "description": data.description
-    };
-    return this.http.patch(url, body);
+    return this.http.patch(url, data);
   }
   /* QUESTIONS */
   // Fonction pour la methode GET des questions d'un miahoot donnee
@@ -84,6 +78,11 @@ export class APIService {
     return this.http.post(url,[] );
   }
 
+  patchAPIQuestionById(id:number, data:any): Observable<any> {
+    const url = `${this.apiUrl}/question/${id}`;
+    return this.http.patch(url, data);
+  }
+
   /* REPONSES */
   // Fonction pour la methode GET
   getAPIReponses(endpoint: string): Observable<any> {
@@ -96,5 +95,11 @@ export class APIService {
     const url = `${this.apiUrl}/${endpoint}`;
     
     return this.http.post(url,data);
+  }
+
+  // Fonction pour la methode DELETE des questions
+  deleteAPIReponseById(id:number): Observable<any> {
+    const url = `${this.apiUrl}/reponse/${id}`;
+    return this.http.delete(url);
   }
 }

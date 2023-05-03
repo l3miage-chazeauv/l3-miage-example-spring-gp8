@@ -11,14 +11,13 @@ import { GameService } from '../game.service';
 export class WaitingRoomComponent {
 
   utilisateurs: MiahootUser[] = [];
-  timer: number = 100000;
+  timer: number = 300;
 
   constructor(private cdr: ChangeDetectorRef, protected gs: GameService) {}
 
   ngOnInit(): void {
     const intervalId = setInterval(() => {
       this.timer--;
-      console.log(this.timer);
       if (this.timer < 0) {
         clearInterval(intervalId);
         this.gs.startGame();

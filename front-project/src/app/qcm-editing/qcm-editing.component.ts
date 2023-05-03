@@ -124,4 +124,54 @@ postMiahoot(form : NgForm){
         }
       });
   }
+
+  deleteReponse() {
+    this.apiMia.deleteAPIReponseById(this.idReponse).subscribe(
+      (data: any) => {
+        if (data == null) {
+          console.log("Reponse supprimé");
+        } else {
+          console.error(data);
+        }
+      });
+  }
+
+  patchMiahoot(form: NgForm) {
+    const data = {
+      "id": form.value.idMia,
+      "nom": form.value.nomMia,
+      "description": form.value.descriptionMia,
+    };
+    this.apiMia.patchAPIMiahootById(form.value.idMia, data).subscribe(
+      (data: any) => {
+        if (data == null) {
+          console.log("Miahoot modifié");
+        } else {
+          console.error(data);
+        }
+      });
+  }
+
+  patchQuestion(form: NgForm) {
+    const data= {
+      "id": form.value.idQuestion,
+      "label": form.value.labelQuestion,
+      "miahootId": form.value.idMiahoot,
+      "reponses": [{
+        "label": form.value.labelReponse,
+        "estValide": form.value.estValide,
+        "questionId": form.value.idQuestion,
+      }]
+    };
+    
+
+    this.apiMia.patchAPIQuestionById(form.value.idQuestion, data).subscribe(
+      (data: any) => {
+        if (data == null) {
+          console.log("Question modifié");
+        } else {
+          console.error(data);
+        }
+      });
+  }
 }
