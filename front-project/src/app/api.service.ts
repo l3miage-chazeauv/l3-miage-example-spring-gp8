@@ -95,12 +95,4 @@ export class APIService {
     
     return this.http.post(url,data);
   }
-
-
-  // Fonction pour la méthode DELETE des questions 
-  deleteAPIQuestionById(idQuestion :number): Observable<any> {
-    const url = `${this.apiUrl}/question/${idQuestion}`;
-    
-    return this.http.delete(url);
-  }
 }
