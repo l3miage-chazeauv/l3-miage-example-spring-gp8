@@ -17,9 +17,11 @@
 
         <td>
             <input [(ngModel)]="idMiahoot" placeholder="ID d'un Miahoot" />
-            <button (click)="getQuestions()" >GET </button>
+            <button (click)="getQuestions()" >GET Questions pour Miahoot </button><br/>
+            <button (click)="getAllQuestions()" >GET All questions </button><br/>
+            <button (click)="getQuestion()">Renvoie une question par son ID ici : {{idMiahoot}}</button>
             <form #questionPostForm="ngForm" (ngSubmit)="postQuestion(questionPostForm)">
-                <input name="labelQuestion" placeholder="label question" />
+                <input name="labelQuestion" placeholder="label question" ngModel ngDefaultControl />
                 <td><button type="submit">POST</button></td>
             </form>
         </td>
@@ -79,15 +81,24 @@
 
     <tr>Modification d'une question : PATCH
         <td>
-            <button >Renvoie </button>
-        </td>
-        <td>
             <form #questionPatchForm="ngForm" (ngSubmit)="patchQuestion(questionPatchForm)">
                 <input type="number" name="idQuestion" placeholder="id de la question" ngModel ngDefaultControl />
                 <input type="text" name="labelQuestion" placeholder="label de la question" ngModel ngDefaultControl />
                 <input type="text" name="idMiahoot" placeholder="id du miahoot" ngModel ngDefaultControl />
                 <input type="text" name="labelReponse" placeholder="label de la réponse" ngModel ngDefaultControl />
                 <input type="text" name="estValide" placeholder="true ou false uniquement" ngModel ngDefaultControl />
+                <button type="submit">PATCH</button>
+            </form>
+        </td>
+
+    </tr>
+
+    <tr>Modification d'une reponse : PATCH
+        <td>
+            <form #reponsePatchForm="ngForm" (ngSubmit)="patchReponse(reponsePatchForm)">
+                <input type="text" name="labelReponse" placeholder="label de la Reponse" ngModel ngDefaultControl />
+                <input type="text" name="estValide" placeholder="true ou false uniquement" ngModel ngDefaultControl />
+                <input type="number" name="idQuestion" placeholder="id de la question" ngModel ngDefaultControl />
                 <button type="submit">PATCH</button>
             </form>
         </td>

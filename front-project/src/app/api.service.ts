@@ -66,6 +66,16 @@ export class APIService {
     return this.http.get(url);
   }
 
+  getAPIAllQuestions(): Observable<any> {
+    const url = `${this.apiUrl}/question/`;
+    return this.http.get(url);
+  }
+
+  getAPIQuestionByMiahootID(idQuestion: number): Observable<any> {
+    const url = `${this.apiUrl}/question/${idQuestion}`;
+    return this.http.get(url);
+  }
+
   // Fonction pour la methode DELETE des questions
   deleteAPIQuestionById(id:number): Observable<any> {
     const url = `${this.apiUrl}/question/${id}`;
@@ -101,5 +111,10 @@ export class APIService {
   deleteAPIReponseById(id:number): Observable<any> {
     const url = `${this.apiUrl}/reponse/${id}`;
     return this.http.delete(url);
+  }
+
+  patchAPIReponseById(id:number, data:any): Observable<any> {
+    const url = `${this.apiUrl}/reponse/${id}`;
+    return this.http.patch(url, data);
   }
 }

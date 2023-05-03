@@ -21,22 +21,6 @@ export class QcmEditingComponent {
     });
   }
 
-  /*
-postMiahoot(form : NgForm){
-      const data = {
-        "nom": form.value.name,
-        "description": form.value.description,
-      };
-
-  */
-
-/*
-      Modif à prévoir: lors de la création d'une Miahoot, ajouter automatiquement 
-      son concepteur dans la liste des concepteurs.
-      Note pour le put: ajouter automatique le concepteur qui le modifie si il n'est pas déjà dans la liste des concepteurs.
-      Le concepteur peut ajouter des présentateurs à la liste des présentateurs.
-*/
-
   postMiahoot(form: NgForm) {
 
     const data = {
@@ -55,7 +39,11 @@ postMiahoot(form : NgForm){
     );
   }
 
-
+  getAllQuestions() {
+    this.apiMia.getAPIAllQuestions().subscribe((data: any) => {
+      console.log(data);
+    });
+  }
 
   getQuestions() {
     this.apiMia.getAPIQuestionsByMiahootID(this.idMiahoot).subscribe((data: any) => {
@@ -63,8 +51,15 @@ postMiahoot(form : NgForm){
     });
   }
 
+  getQuestion() {
+    this.apiMia.getAPIQuestionByMiahootID(this.idMiahoot).subscribe((data: any) => {
+      console.log(data);
+    });
+  }
+
 
   postQuestion(form: NgForm) {
+    console.log(form.value.labelQuestion);
     this.apiMia.postAPIQuestion('miahoot/' + this.idMiahoot + "/question?label=" + form.value.labelQuestion).subscribe(
       //Permet de voir l'erreur dans la console ou le bon fonctionnement
       data => {
@@ -169,11 +164,32 @@ postMiahoot(form : NgForm){
       }]
     };
     
-
     this.apiMia.patchAPIQuestionById(form.value.idQuestion, data).subscribe(
       (data: any) => {
         if (data == null) {
           console.log("Question modifié");
+        } else {
+          console.error(data);
+        }
+      });
+  }
+
+  patchReponse(form: NgForm) {
+
+    let boolRep = false;
+    if (form.value.estValide == "vrai") {
+      boolRep = true;
+    }
+    const data = {
+      "label": form.value.labelReponse,
+      "estValide": boolRep,
+      "questionId": form.value.idQuestion,
+    };
+    console.log(data);
+    this.apiMia.patchAPIReponseById(form.value.idQuestion, data).subscribe(
+      (data: any) => {
+        if (data == null) {
+          console.log("Reponse modifié");
         } else {
           console.error(data);
         }
