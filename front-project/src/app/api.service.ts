@@ -35,13 +35,13 @@ export class APIService {
     const headers = {'accept': '*/*',  
                      'Content-Type': 'application/json'};
     
-    return this.http.post(url,  data,{ headers} );
+    return this.http.post(url, data);
   }
 
   // Fonction pour la méthode POST
   postAPIQuestion(endpoint: string): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
-    const headers = {'accept': '*/*'};
+    
     return this.http.post(url,[] );
   }
 
@@ -58,9 +58,15 @@ export class APIService {
   // Fonction pour la méthode POST
   postAPIReponse(endpoint: string, data :any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
-    const headers = {'accept': '*/*'};
-    return this.http.post(url,data,{ headers} );
+    
+    return this.http.post(url,data);
   }
 
 
+  // Fonction pour la méthode DELETE des questions 
+  deleteAPIQuestionById(idQuestion :number): Observable<any> {
+    const url = `${this.apiUrl}/question/${idQuestion}`;
+    
+    return this.http.delete(url);
+  }
 }
