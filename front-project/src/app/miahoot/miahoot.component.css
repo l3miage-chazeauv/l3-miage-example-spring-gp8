@@ -7,14 +7,14 @@
   flex-direction:row;
   position:absolute;
   justify-content: center;
-  top: 70%;
+  top: 75%;
   width: 100%;
   padding: 10px; 
 }
 
 .button-19 {
   appearance: button;
-  background: linear-gradient(-45deg,#29abf7, #1e7db4,#29abf7, #1e7db4);
+  background: linear-gradient(-45deg,#3585CD, #1e7db4,#3585CD, #1e7db4);
   animation: gradient 5s ease infinite;
   border: solid transparent;
   border-radius: 16px;
@@ -46,7 +46,7 @@
 
 .button-19:after {
   background-clip: padding-box;
-  background-color: #1CB0F6;
+  background-color: #1e7db4;
   border: solid transparent;
   border-radius: 16px;
   border-width: 0 0 4px;
@@ -77,8 +77,8 @@
     background-position: 0 50%;
     box-shadow: 0px 0px 2px #ffffff,
       0px 0px 5px #ffffff,
-      0px 0px 10px #6bc5f8,
-      0px 0px 50px #6bc5f8;
+      0px 0px 10px #1e7db4,
+      0px 0px 50px #1e7db4;
   }
 
   50% {
@@ -93,7 +93,7 @@
     background-position: 0 50%;
     box-shadow: 0px 0px 2px #ffffff,
           0px 0px 5px #ffffff,
-          0px 0px 10px #6bc5f8,
-          0px 0px 50px #6bc5f8;
+          0px 0px 10px #1e7db4,
+          0px 0px 50px #1e7db4;
   }
 }

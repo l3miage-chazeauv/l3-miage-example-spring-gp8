@@ -1,5 +1,6 @@
 table, tr, td {
     border: 1px solid;
+    background: linear-gradient(-45deg,#29abf7, #1e7db4,#29abf7, #1e7db4);
 }
 
 .apiservice{

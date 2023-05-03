@@ -5,7 +5,7 @@
     left:50%;
     top:50%;
     box-sizing: border-box;
-    background: linear-gradient(-45deg,#6bc5f8, #30b2fd,#6bc5f8, #30b2fd);
+    background: linear-gradient(-45deg,#29abf7, #1e7db4,#29abf7, #1e7db4);
     animation: gradient 5s ease infinite;
     background-size: 500% 500%;
     width: 20%;
