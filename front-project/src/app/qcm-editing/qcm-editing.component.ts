@@ -8,7 +8,6 @@ import { APIService } from '../api.service';
 })
 export class QcmEditingComponent {
   
-  public idQuestion?:number;
   public idReponse?:number;
 
   public idMiahoot:number =1;
@@ -16,6 +15,11 @@ export class QcmEditingComponent {
   public nameMia?:string;
   public descriptionMia?:string;
   public dataMia?:[string];
+
+  public labelReponse?:string;
+  public estValide?:string;
+  public questionId?:string;
+
 
   constructor(private apiMia: APIService) {}
 
@@ -63,6 +67,22 @@ export class QcmEditingComponent {
     console.log(data);
     });
   }
+
+
+  postReponse(){
+    const data = {
+      "label": this.labelReponse,
+      "estValide": true,
+      "questionId": this.questionId
+    };
+    const jsonData = JSON.stringify(data);
+    this.apiMia.postAPIReponse('question/' + this.questionId+"/reponse", jsonData).subscribe(
+      (data: any) => {
+        console.error(data);
+        console.log(data);
+      });
+  }
+
 
   
   

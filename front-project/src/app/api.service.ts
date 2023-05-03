@@ -42,20 +42,25 @@ export class APIService {
   postAPIQuestion(endpoint: string): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
     const headers = {'accept': '*/*'};
-    return this.http.post(url,{ headers} );
+    return this.http.post(url,[] );
   }
 
 
   // Fonction pour la méthode GET
   getAPIReponses(endpoint: string): Observable<any> {
-    const url = `${this.apiUrl}/${endpoint}`;
+    const url = `${this.apiUrl}/${endpoint}/`;
     return this.http.get(url);
   }
 
+
+
+
   // Fonction pour la méthode POST
-  postAPIReponses(endpoint: string): Observable<any> {
+  postAPIReponse(endpoint: string, data :any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
     const headers = {'accept': '*/*'};
-    return this.http.post(url,{ headers} );
+    return this.http.post(url,data,{ headers} );
   }
+
+
 }
