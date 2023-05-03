@@ -8,15 +8,17 @@
                 question suivante ({{this.idCourant+1}})</button>
         </div>
         
-        <div class="questions"
-             *ngFor="let question of this.gs.miahootGame.listeQuestions;let i = index" >
-            <app-question class="question"
-                         [questionId]="i+1"
-                         [label]="question.label"
-                         [reponses]="question.reponses"
-                         [class.showQuestion]="i+1 === idCourant"
-                         [class.hideQuestion]="i+1 !== idCourant">
-            </app-question>
+        <div *ngIf="this.gs.miahootGame.listeQuestions">
+            <div class="questions"
+                *ngFor="let question of this.gs.miahootGame.listeQuestions;let i = index" >
+                <app-question class="question"
+                            [questionId]="i+1"
+                            [label]="question.label"
+                            [reponses]="question.reponses"
+                            [class.showQuestion]="i+1 === idCourant"
+                            [class.hideQuestion]="i+1 !== idCourant">
+                </app-question>
+            </div>
         </div>
 </div>
 

@@ -26,28 +26,24 @@ export class MiahootComponent{
 
     const state = this.router.getCurrentNavigation()?.extras.state; // On récupère les données de la route
     this.idMiahoot = state?.['idMiahootRouting'] ?? -1; // On récupère l'id du miahoot
-    this.apiMia.getAPIMiahootById(this.idMiahoot).subscribe((data: any) => {
-      //this.gs.miahootGame.idMiahoot = data.idMiahoot;
-      //this.gs.miahootGame.listeQuestions = this.apiMia.getAPIQuestionsByMiahootID(data.idMiahoo);
-    }); // On récupère le miahoot
-    console.log("Liste des questions" + this.gs.miahootGame.listeQuestions);
 
-    // this.gs.obsMiahootGame$.pipe(
-    //   map(mg => {
-    //     if(mg === undefined){
-    //       this.gs.miahootGame.listeQuestions = [];
-    //       console.log("obsMiahoot: undefined");
-    //     } else {
-    //       this.gs.miahootGame.listeQuestions = mg.listeQuestions;
-    //       console.log("obsMiahoot:" + this.gs.miahootGame.listeQuestions);
-    //     }
-    //   })
-    // );
+    this.apiMia.getAPIQuestionsByMiahootID(this.idMiahoot).subscribe((data: any) => {
+      console.log("Data: " + JSON.stringify(data));
+      data.map((obj: { id: any, label: any, miahootId: any,reponses: any }) => {
+        let question: Question = {
+          label: obj.label, 
+          reponses: obj.reponses,
+          questionId: obj.id
+        };
+        this.gs.miahootGame.listeQuestions.push(question);
+      })
+
+      // console.log("Liste des questions: " + this.gs.miahootGame.listeQuestions);
+      // console.log("Question 1: " + JSON.stringify(this.gs.miahootGame.listeQuestions[0]));
+      // console.log("Question 1 no string: " + this.gs.miahootGame.listeQuestions[0].label);
+      
+    }); // On récupère les questions du miahoot
    }
-
-  ngOnInit(): void {
-    
-  }
   
   questionSuivante():void{
     this.idCourant=this.idCourant+1; // On passe à la question suivante
