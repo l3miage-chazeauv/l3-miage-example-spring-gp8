@@ -12,9 +12,9 @@
     <br/><br/> 
     Id d'un Miahoot
     <br/>
-    <input [(ngModel)]="idMiahoot" placeholder="ID d'un Miahoot"/>
+    <input [(ngModel)]="idMia" placeholder="ID d'un Miahoot"/>
     <br/>
-    <button (click)="getQuestions()">GET </button>
+    <button (click)="getQuestions(idMia)">GET </button>
     <br/><br/>
     <input [(ngModel)]="labelQuestion" placeholder="label question"/>
     <br/>
@@ -24,10 +24,11 @@
     <br/><br/>
     Tests Réponse
     <br/>
+    Renvoie toutes les réponses pour tous les miahoots
     <input type="text" [(ngModel)]="idReponse" placeholder="id de la réponse" />
     <br/>
     
-    <button (click)="getReponses()">GET reponse par ID</button>
+    <button (click)="getAllReponses()">GET reponse par ID</button>
     <br/>
     
     <br/>

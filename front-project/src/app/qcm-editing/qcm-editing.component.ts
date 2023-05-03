@@ -10,7 +10,7 @@ export class QcmEditingComponent {
   
   public idReponse?:number;
 
-  public idMiahoot:number =1;
+  public idMia:number =1;
   public labelQuestion?:string;
   public nameMia?:string;
   public descriptionMia?:string;
@@ -47,22 +47,22 @@ export class QcmEditingComponent {
   }
 
 
-  getQuestions(){
-    this.apiMia.getAPIMiahootByID('miahoot',this.idMiahoot).subscribe((data: any) => {
+  getQuestions(idMiahoot : number){
+    this.apiMia.getAPIMiahootByID('miahoot',this.idMia).subscribe((data: any) => {
     console.log(data);
     });
   }
 
   
   postQuestion(){
-    this.apiMia.postAPIQuestion('miahoot/' + this.idMiahoot+"/question?label="+ this.labelQuestion).subscribe(
+    this.apiMia.postAPIQuestion('miahoot/' + this.idMia+"/question?label="+ this.labelQuestion).subscribe(
       (data: any) => {
         console.log(data);
       });
   }
 
 
-  getReponses(){
+  getAllReponses(){
     this.apiMia.getAPIReponses('reponse').subscribe((data: any) => {
     console.log(data);
     });
