@@ -15,17 +15,10 @@ import { map, of } from 'rxjs';
 export class MiahootComponent{
 
   @Input() idMiahoot!:number;
-<<<<<<< HEAD
-  @Input() listeQuestions:Question[]=[{questionId:999,label: 'montre toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
-                                                                                      {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]},
-                                      {questionId:999,label: 'cache toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
-                                                                                     {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]}];
-=======
   // @Input() listeQuestions:Question[]=[{questionId:999,label: 'montre toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
   //                                                                                     {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]},
   //                                     {questionId:998,label: 'cache toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
   //                                                                                    {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]}];
->>>>>>> 211f5adeaa516b6f29b534a8a8f4b9ed77659166
 
   public idCourant:number = 0;;
   
@@ -49,14 +42,7 @@ export class MiahootComponent{
    }
 
   ngOnInit(): void {
-<<<<<<< HEAD
-    console.log("Initialisation: " + this.idMiahoot);
-    this.apiMia.getAPI('question/'+this.idMiahoot).subscribe((data: any) => { // On récupère les questions
-      this.listeQuestions=data;
-    });
-=======
     
->>>>>>> 211f5adeaa516b6f29b534a8a8f4b9ed77659166
   }
   
   questionSuivante():void{
