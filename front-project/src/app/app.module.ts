@@ -35,6 +35,7 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 import { PresentationsComponent } from './presentations/presentations.component';
 import { MiahootEditingComponent } from './miahoot-editing/miahoot-editing.component';
+import { CreateMiahootComponent } from './create-miahoot/create-miahoot.component';
 import { ArchivePartiesComponent } from './archive-parties/archive-parties.component';
 import { HomeComponent } from './home/home.component';
 
@@ -50,6 +51,7 @@ import { HomeComponent } from './home/home.component';
     Reponse2Component,
     PresentationsComponent,
     MiahootEditingComponent,
+    CreateMiahootComponent,
     ArchivePartiesComponent,
     HomeComponent,
   ],

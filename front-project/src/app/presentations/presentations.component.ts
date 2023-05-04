@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Miahoot } from '../QcmDefinitions';
 import { Observable } from 'rxjs';
 import { Auth, User, authState } from '@angular/fire/auth';
-import { DataService } from '../miahoot.service';
+import { APIService } from '../api.service';
 
 @Component({
   selector: 'app-presentations',
@@ -14,9 +14,9 @@ export class PresentationsComponent {
   protected listePresentations: Miahoot[] = []; // liste des miahoots que l'user peut présenter
   public readonly user: Observable<User | null>; // utilisateur connecté
 
-  idUserFB?: string; // id FireBase de l'utilisateur connecté
+  idUserFB: string = "null"; // id FireBase de l'utilisateur connecté
 
-  constructor(private auth: Auth, private ms: DataService) {
+  constructor(private auth: Auth, private apiMia: APIService) {
     this.user = authState(this.auth); // récupération de l'utilisateur connecté
     
     this.user.subscribe( u => {
@@ -25,7 +25,11 @@ export class PresentationsComponent {
       }
     });
 
-    // this.ms.getMiahootsPresentables(this.idUserFB);
+    this.apiMia.getAPIMmiahootsPresented(this.idUserFB).subscribe( (data: any) => {
+      this.listePresentations = data;
+    });
+
+    console.log("Présentations : " + this.listePresentations);
   }
 
 }

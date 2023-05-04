@@ -56,6 +56,11 @@ export class APIService {
     return this.http.get(url);
   }
 
+  getAPIMmiahootsPresented(idFb: string){
+    const url = `${this.apiUrl}/utilisateur/${idFb}/miahootsPresentes`;
+    return this.http.get(url);
+  }
+
 
 
   // Fonction pour la methode POST
