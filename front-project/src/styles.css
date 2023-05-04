@@ -34,7 +34,6 @@ body{
 .area{
     background: #03224C;  
     background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
-    background-size: cover;
     width: 100%;
     height:100vh;
 }

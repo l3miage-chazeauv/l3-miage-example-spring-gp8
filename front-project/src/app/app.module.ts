@@ -34,6 +34,7 @@ import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 import { PresentationsComponent } from './presentations/presentations.component';
+import { MiahootEditingComponent } from './miahoot-editing/miahoot-editing.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { PresentationsComponent } from './presentations/presentations.component'
     QcmEditingComponent,
     Reponse2Component,
     PresentationsComponent,
+    MiahootEditingComponent,
   ],
   imports: [
     HttpClientModule,

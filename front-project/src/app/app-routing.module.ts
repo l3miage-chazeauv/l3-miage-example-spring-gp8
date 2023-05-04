@@ -7,11 +7,15 @@ import { AppComponent } from './app.component';
 import { QcmEditingComponent } from './qcm-editing/qcm-editing.component';
 import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
 import { PresentationsComponent } from './presentations/presentations.component';
+import { MiahootEditingComponent } from './miahoot-editing/miahoot-editing.component';
 
 const routes: Routes = [
   {
     path:'',
   component: AppComponent
+  },{
+    path:'miahoot-editing',
+  component: MiahootEditingComponent
   }, {
   path:'accountConfig',
   component: AccountConfigComponent
