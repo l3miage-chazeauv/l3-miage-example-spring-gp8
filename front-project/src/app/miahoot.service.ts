@@ -1,8 +1,11 @@
-import { ChangeDetectorRef, Injectable, OnInit } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Auth, authState, User } from '@angular/fire/auth';
 import { docData, Firestore, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from '@angular/fire/firestore';
+import { FormControl, FormGroup } from '@angular/forms';
 import { doc, getDoc, setDoc, updateDoc } from '@firebase/firestore';
 import { filter, map, Observable, of, switchMap, tap } from 'rxjs';
+import { MiahootGame } from './QcmDefinitions';
+import { APIService } from './api.service';
 
 
 export interface MiahootUser{
@@ -66,6 +69,11 @@ export class DataService{
       })
     )
 
+    // this.apiMia.getAPIAllMiahoots().subscribe( (miahoots) => {
+    //   miahoots.forEach( (miahoot: any) => {
+    //     this.listeMiahoots.push(miahoot.id);  // récupération de la liste des miahoots
+    //   });
+    // });
     
   }
 
@@ -75,6 +83,7 @@ export class DataService{
       const userRef = doc(this.fs, `users/${user.uid}`).withConverter(conv)
       updateDoc(userRef, up)
     }
+    
   }
 
   //mettre a jour photo de profil

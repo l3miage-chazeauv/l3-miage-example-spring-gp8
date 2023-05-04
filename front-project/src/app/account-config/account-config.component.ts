@@ -17,7 +17,6 @@ import { Observable, of, switchMap } from 'rxjs';
 export class AccountConfigComponent {
   user !: MiahootUser;
   preview : Observable<string>;
-  name : string ="";
 
   public fg: FormGroup<{ 
     name:      FormControl<string>, 
@@ -34,8 +33,6 @@ export class AccountConfigComponent {
               ) {
 
    
-                
-            
     this.dataUserService.obsMiahootUser$.subscribe(
       u => {
         if( u === undefined){

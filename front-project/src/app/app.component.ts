@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Auth, authState, GoogleAuthProvider, signInWithPopup, signOut, User } from '@angular/fire/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { GameService } from './game.service';
 import { Firestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
 import { APIService } from './api.service';
 import { RoutingService } from './routing.service';
 import { DataService, MiahootUser } from './miahoot.service';
