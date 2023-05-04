@@ -1,0 +1,31 @@
+.card {
+    width: 40%;
+    }
+
+.heading {
+    font-weight: 500;
+    font-size: 150%;
+    /* position: relative;
+    left: 50%;
+    transform: translateX(-50%); */
+  }
+  
+.heading span {
+    color: white;
+    font-size: 2em;
+    font-weight: 800;
+    filter: drop-shadow(0px 0px 10px rgb(255, 255, 255));
+}
+
+.presContainer{
+    background-color: white;
+    padding: 4%;
+    margin-top: 4%;
+    border-radius: 10px;
+    max-height: 200px;
+    width: 100%;
+}
+
+.button-19{
+    width: auto;
+}
