@@ -1,4 +1,8 @@
-# Spring boot example
+# /!\ Note importante
+
+Pour l'instant, le back et le front ont deux gits séparés, ces derniers seront merge sur celui-ci vers la fin du projet...
+
+# Projet intégrateur
 
 Ce projet est un exemple pour les L3 MIAGE de grenoble. Il peut être utilisé comme projet d'amorce.
 
