@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./archive-parties.component.css']
 })
 export class ArchivePartiesComponent {
+  
+  protected archiveParties: any[] = [];
 
+  constructor() { }
+  
+  ngOnInit(): void {
+  
+  }
 }

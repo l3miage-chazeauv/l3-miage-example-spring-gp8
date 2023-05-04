@@ -9,6 +9,7 @@ import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
 import { PresentationsComponent } from './presentations/presentations.component';
 import { MiahootEditingComponent } from './miahoot-editing/miahoot-editing.component';
 import { CreateMiahootComponent } from './create-miahoot/create-miahoot.component';
+import { ArchivePartiesComponent } from './archive-parties/archive-parties.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,9 @@ component: CreateMiahootComponent
 }, {
   path:'presentations',
   component: PresentationsComponent,
+}, {
+  path:'archives',
+  component: ArchivePartiesComponent,
 }, {
   path: '**',
     component: AppComponent }
