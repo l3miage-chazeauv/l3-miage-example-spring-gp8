@@ -15,27 +15,32 @@ export class APIService {
 
   /* UTILISATEURS */
   postAPIUser(data:any): Observable<any> {
-    const url = `${this.apiUrl}/utilisateur/`;
+    const url = `${this.apiUrl}/utilisateur/`; // On crée un utilisateur
     return this.http.post(url, data);
   }
   
   getAPIAllUsers(): Observable<any> {
-    const url = `${this.apiUrl}/utilisateur/`;
+    const url = `${this.apiUrl}/utilisateur/`; // On récupère tous les utilisateurs
     return this.http.get(url);
   }
 
   getAPIUserById(idUser : number): Observable<any> {
-    const url = `${this.apiUrl}/utilisateur/${idUser}`;
+    const url = `${this.apiUrl}/utilisateur/${idUser}`; // On récupère un utilisateur par son id
+    return this.http.get(url);
+  }
+
+  getAPIPresentateurs(miahootId: number): Observable<any> {
+    const url = `${this.apiUrl}/miahoot/${miahootId}/presentateurs`; // On récupère les présentateurs d'un miahoot
     return this.http.get(url);
   }
 
   deleteAPIUserById(id:number): Observable<any> {
-    const url = `${this.apiUrl}/utilisateur/${id}`;
+    const url = `${this.apiUrl}/utilisateur/${id}`; // On supprime un utilisateur par son id
     return this.http.delete(url);
   }
 
   patchAPIUserById(id:number, data:any): Observable<any> {
-    const url = `${this.apiUrl}/utilisateur/${id}`;
+    const url = `${this.apiUrl}/utilisateur/${id}`; //  On modifie un utilisateur par son id
     return this.http.patch(url, data);
   }
   
