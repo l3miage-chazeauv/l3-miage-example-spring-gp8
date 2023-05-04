@@ -8,6 +8,7 @@ import { QcmEditingComponent } from './qcm-editing/qcm-editing.component';
 import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
 import { PresentationsComponent } from './presentations/presentations.component';
 import { MiahootEditingComponent } from './miahoot-editing/miahoot-editing.component';
+import { CreateMiahootComponent } from './create-miahoot/create-miahoot.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,9 @@ const routes: Routes = [
   }, {
   path:'accountConfig',
   component: AccountConfigComponent
+},{
+  path:'create-miahoot',
+component: CreateMiahootComponent
 }, {
   path:'miahootResearch',
   component: RechercheMiaComponent,

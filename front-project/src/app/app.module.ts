@@ -35,6 +35,7 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 import { PresentationsComponent } from './presentations/presentations.component';
 import { MiahootEditingComponent } from './miahoot-editing/miahoot-editing.component';
+import { CreateMiahootComponent } from './create-miahoot/create-miahoot.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { MiahootEditingComponent } from './miahoot-editing/miahoot-editing.compo
     Reponse2Component,
     PresentationsComponent,
     MiahootEditingComponent,
+    CreateMiahootComponent,
   ],
   imports: [
     HttpClientModule,

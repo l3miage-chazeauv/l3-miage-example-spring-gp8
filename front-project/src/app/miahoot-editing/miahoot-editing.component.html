@@ -1,12 +1,20 @@
 <div class="card" id="titre">
-    <h3>Bienvenue dans le menu de création de Miahoot</h3>
+    <h3>Bienvenue dans le menu de conception des Miahoots</h3>
 </div>
 
 <div class="container">
     <div class="card" id="VM">
-        <h3>acceder à vos miahoots</h3>
+        <h3>Vos Miahoots</h3>
+        <span>cliquez ici pour accèder à vos miahoots.</span>
+        <button class="button-19"
+                (click)="this.router.toPresentations()">></button>
     </div>
     <div class="card" id="VM">
-        <h3>créer un miahoot</h3>
+        <h3>
+            Créer un Miahoot
+        </h3>
+        <span>cliquez ici pour créer un nouveau miahoot.</span>
+        <button class="button-19"
+                (click)="this.router.toCreateMiahoot()">></button>
     </div>
 </div>

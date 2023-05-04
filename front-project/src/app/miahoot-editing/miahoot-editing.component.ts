@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { APIService } from '../api.service';
+import { RoutingService } from '../routing.service';
 
 @Component({
   selector: 'app-miahoot-editing',
@@ -14,7 +15,7 @@ export class MiahootEditingComponent {
   public idReponse: number = 1;
   public idUtilisateur: number = 1;
 
-  constructor(private apiMia: APIService) { }
+  constructor(private apiMia: APIService, protected router : RoutingService) { }
 
   getAllMiahoots() {
     this.apiMia.getAPIAllMiahoots().subscribe((data: any) => {
