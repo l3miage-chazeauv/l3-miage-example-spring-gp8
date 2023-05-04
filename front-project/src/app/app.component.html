@@ -5,10 +5,10 @@
 
   <section class="TBButtons" *ngIf="user | async as U; else unlogged">
 
-    <div id="username"> {{U.displayName}} </div>
+    <div id="username"> {{U.name}} </div>
 
    <div id="button-wrapper">
-      <button id="menu" [matMenuTriggerFor]="menu"><img id="pp"  [src]="U.photoURL" /></button>
+      <button id="menu" [matMenuTriggerFor]="menu"><img id="pp"  [src]="U.photoUrl" /></button>
    </div>
 
     <mat-menu #menu="matMenu">

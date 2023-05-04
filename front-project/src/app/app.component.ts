@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Auth, authState, GoogleAuthProvider, signInWithPopup, signOut, User } from '@angular/fire/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { GameService } from './game.service';
@@ -6,6 +6,7 @@ import { Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { APIService } from './api.service';
 import { RoutingService } from './routing.service';
+import { DataService, MiahootUser } from './miahoot.service';
 
 @Component({
   selector: 'app-root',
@@ -14,13 +15,17 @@ import { RoutingService } from './routing.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
+
+
   
   bsAuth = new BehaviorSubject<boolean>(false); // état de la connection
-  public readonly user: Observable<User | null>; // utilisateur connecté
+  public readonly user: Observable<MiahootUser | undefined>; // utilisateur connecté
 
-  constructor(private auth: Auth, firestore: Firestore, protected router: RoutingService, private apiMia: APIService) {
-    this.user = authState(this.auth); // récupération de l'utilisateur connecté
+  constructor(private auth: Auth, firestore: Firestore, protected router: RoutingService, private apiMia: APIService, private data : DataService) {
+    this.user = this.data.obsMiahootUser$; // récupération de l'utilisateur connecté
   }
+  
+  
 
   //Fonction pour se connecter à firebase
   async login() {

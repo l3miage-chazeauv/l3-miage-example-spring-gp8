@@ -86,6 +86,7 @@ export class QcmEditingComponent {
       "nom": form.value.nameMia,
       "description": form.value.descriptionMia,
     };
+    console.log(data);
     this.apiMia.postAPIMiahoot(data).subscribe(
       //Permet de voir l'erreur dans la console ou le bon fonctionnement
       data => {

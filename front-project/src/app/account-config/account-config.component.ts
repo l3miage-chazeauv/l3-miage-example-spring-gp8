@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Output,ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Output,ChangeDetectorRef, EventEmitter } from '@angular/core';
 import { Auth, User } from '@angular/fire/auth';
 import { doc, Firestore } from '@angular/fire/firestore';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -7,7 +7,6 @@ import { DataService, MiahootUser } from '../miahoot.service';
 import { Storage,  ref, uploadBytes } from '@angular/fire/storage';
 import { getDownloadURL } from 'firebase/storage';
 import { Observable, of, switchMap } from 'rxjs';
-import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-account-config',
@@ -22,7 +21,7 @@ export class AccountConfigComponent {
 
   public fg: FormGroup<{ 
     name:      FormControl<string>, 
-    photoURL:  FormControl<string> 
+    photoURL:  FormControl<string>,
     photoFile: FormControl<File | undefined> 
     }>;
   
@@ -31,7 +30,11 @@ export class AccountConfigComponent {
               private fb: FormBuilder,
               private storage: Storage,
               private auth: Auth,
-              private cd: ChangeDetectorRef) {
+              private cd: ChangeDetectorRef,
+              ) {
+
+   
+                
             
     this.dataUserService.obsMiahootUser$.subscribe(
       u => {
@@ -69,6 +72,8 @@ export class AccountConfigComponent {
     )
   }
 
+
+  
   async update(){
     await this.uploadPhoto();
     this.dataUserService.update({
@@ -76,6 +81,7 @@ export class AccountConfigComponent {
       photoUrl: this.fg.controls.photoURL.value,
     })
     this.cd.detectChanges();
+    
   }
 
   async uploadPhoto(){
