@@ -35,7 +35,11 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 import { PresentationsComponent } from './presentations/presentations.component';
 import { MiahootEditingComponent } from './miahoot-editing/miahoot-editing.component';
+<<<<<<< HEAD
 import { CreateMiahootComponent } from './create-miahoot/create-miahoot.component';
+=======
+import { ArchivePartiesComponent } from './archive-parties/archive-parties.component';
+>>>>>>> 08177ec0800eedbfab67b40238c724130e9c8ac2
 
 @NgModule({
   declarations: [
@@ -49,7 +53,11 @@ import { CreateMiahootComponent } from './create-miahoot/create-miahoot.componen
     Reponse2Component,
     PresentationsComponent,
     MiahootEditingComponent,
+<<<<<<< HEAD
     CreateMiahootComponent,
+=======
+    ArchivePartiesComponent,
+>>>>>>> 08177ec0800eedbfab67b40238c724130e9c8ac2
   ],
   imports: [
     HttpClientModule,

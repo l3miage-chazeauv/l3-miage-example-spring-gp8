@@ -5,6 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { doc, getDoc, setDoc, updateDoc } from '@firebase/firestore';
 import { filter, map, Observable, of, switchMap, tap } from 'rxjs';
 import { MiahootGame } from './QcmDefinitions';
+import { APIService } from './api.service';
 
 
 export interface MiahootUser{
@@ -35,8 +36,6 @@ const conv : FirestoreDataConverter<MiahootUser> = {
 })
 
 export class DataService{
-
-  // obsMiahootGames$ = new Observable<MiahootGame[] | undefined>;
   listeMiahoots: number[] = []; // Liste des miahoots (id seulement)
   listeMiahootPresentes: number[] = [8,1]; // Liste des miahoots présentés (id seulement)
 
@@ -69,6 +68,13 @@ export class DataService{
         }
       })
     )
+
+    // this.apiMia.getAPIAllMiahoots().subscribe( (miahoots) => {
+    //   miahoots.forEach( (miahoot: any) => {
+    //     this.listeMiahoots.push(miahoot.id);  // récupération de la liste des miahoots
+    //   });
+    // });
+    
   }
 
   update(up: Partial<MiahootUser>) {
@@ -85,5 +91,26 @@ export class DataService{
     const user = this.auth.currentUser;
     this.test = 555;
   }
+
+  // getMiahootsPresentables(idFb: string | null | undefined): number[] {
+  //   const res: number[] = [];
+  //   const listeIdFbPres: string[] = [];
+
+  //   if(!(idFb === null || idFb === undefined)){
+  //     this.listeMiahoots.forEach( (miahoot) => {
+  //       console.log(JSON.stringify(miahoot));
+  //       this.apiMia.getAPIPresentateurs(1).subscribe( (presentateurs) => {
+  //         presentateurs.forEach( (presentateur: any) => {
+  //           listeIdFbPres.push(presentateur.firebaseId); // récupération de la liste des id des présentateurs
+  //         });
+  //       });
+  //       if(listeIdFbPres.includes(idFb)){
+  //         res.push(1); // si l'id de l'utilisateur est dans la liste des présentateurs, on ajoute le miahoot à la liste des miahoots présentables
+  //       }
+  //     });
+  //   }
+
+  //   return res;
+  // }
 
 }
