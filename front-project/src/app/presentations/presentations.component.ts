@@ -9,28 +9,59 @@ import { APIService } from '../api.service';
   templateUrl: './presentations.component.html',
   styleUrls: ['./presentations.component.css']
 })
-export class PresentationsComponent implements OnInit {
+export class PresentationsComponent {
   idUserFB?: string; // propriété pour stocker l'ID utilisateur
   protected listePresentations: Miahoot[] = []; // liste des miahoots que l'user peut présenter
   public readonly user: Observable<User | null>; // utilisateur connecté
 
   constructor(private auth: Auth, private apiMia: APIService) {
     this.user = authState(this.auth); // récupération de l'utilisateur connecté
-  }
+    
+    // this.user.subscribe( u => {
+      
+    //   if(u != null){
+    //     this.idUserFB = u.uid; // récupération de l'id de l'utilisateur connecté
+    //   }
 
-  ngOnInit() {
-    authState(this.auth).subscribe(u => {
-      if (u != null) {
-        this.idUserFB = u.uid; // mise à jour de l'ID utilisateur
-        console.log("iduser: " + this.idUserFB);
+    //   this.apiMia.getAPIMmiahootsPresented(this.idUserFB).subscribe( (data: any) => {
+    //     this.listePresentations = data;
+    //   });
 
-        // Appel à l'API avec l'ID utilisateur récupéré
-        this.apiMia.getAPIMmiahootsPresented(this.idUserFB).subscribe((data: any) => {
-          this.listePresentations = data;
-        });
+    // });
+
+    const userPromise = new Promise<User | null>((resolve, reject) => {
+      this.user.subscribe(
+        u => {
+          if (u != null) {
+            this.idUserFB = u.uid;
+          }
+          resolve(u);
+        },
+        error => reject(error)
+      );
+    });
+    
+    const apiPromise = userPromise.then(user => {
+      if (user != null) {
+        return this.apiMia.getAPIMmiahootsPresented(this.idUserFB).toPromise();
+      } else {
+        return null;
       }
     });
 
+    Promise.all([userPromise, apiPromise]).then(([user, apiData]) => {
+      if (apiData != null) {
+        // this.listePresentations = apiData;
+        console.log("api: " + apiData.toString());
+        console.log(user?.uid);
+        // le reste du code qui utilise les nouvelles valeurs de idUserFB et listePresentations
+      }
+    }).catch(error => {
+      console.log(error);
+    });
+
+    // console.log("user: " + userPromise.all.tostring());
+    // console.log("listePresentations: " + apiPromise.tostring());
   }
 }
 
