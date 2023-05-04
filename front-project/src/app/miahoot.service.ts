@@ -36,7 +36,8 @@ const conv : FirestoreDataConverter<MiahootUser> = {
 
 export class DataService{
 
-  obsMiahootGames$ = new Observable<MiahootGame[] | undefined>;
+  // obsMiahootGames$ = new Observable<MiahootGame[] | undefined>;
+  listeMiahoots: number[] = []; // Liste des miahoots (id seulement)
   listeMiahootPresentes: number[] = [8,1]; // Liste des miahoots présentés (id seulement)
 
   obsMiahootUser$ : Observable<MiahootUser|undefined>;

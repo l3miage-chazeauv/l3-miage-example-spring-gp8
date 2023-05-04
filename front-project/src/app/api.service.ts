@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { DataService } from './miahoot.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class APIService {
 
   private apiUrl = 'http://129.88.210.111:8080';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private ms: DataService) {}
 
   /* UTILISATEURS */
   postAPIUser(data:any): Observable<any> {
@@ -54,6 +55,7 @@ export class APIService {
 
   // Fonction pour la methode POST
   postAPIMiahoot(data: any): Observable<any> {
+    this.ms.listeMiahoots.push(data); // On ajoute le miahoot a la liste des miahoots
     const url = `${this.apiUrl}/miahoot/`;
     return this.http.post(url, data);
   }
@@ -62,6 +64,7 @@ export class APIService {
 
   // Fonction pour la methode DELETE des miahoots
   deleteAPIQMiahootById(id:number): Observable<any> {
+    this.ms.listeMiahoots.splice(this.ms.listeMiahoots.indexOf(id),1); // On supprime le miahoot de la liste des miahoots
     const url = `${this.apiUrl}/miahoot/${id}`;
     return this.http.delete(url);
   }
