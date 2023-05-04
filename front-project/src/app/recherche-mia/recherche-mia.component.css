@@ -125,7 +125,23 @@
     position: relative;
   }
 
-
+  .card {
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left:50%;
+    top:50%;
+    box-sizing: border-box;
+    animation: gradient 5s ease infinite;
+    background-size: 500% 500%;
+    width: 20%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 2%;
+    border-radius: 20px;
+  }
 
   .cardErreur {
     position: absolute;
