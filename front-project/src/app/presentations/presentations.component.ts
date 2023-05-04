@@ -3,6 +3,7 @@ import { Miahoot } from '../QcmDefinitions';
 import { Observable } from 'rxjs';
 import { Auth, User, authState } from '@angular/fire/auth';
 import { APIService } from '../api.service';
+import { DataService } from '../miahoot.service';
 
 @Component({
   selector: 'app-presentations',
@@ -10,58 +11,27 @@ import { APIService } from '../api.service';
   styleUrls: ['./presentations.component.css']
 })
 export class PresentationsComponent {
-  idUserFB?: string; // propriété pour stocker l'ID utilisateur
+  idUserFB: string = ""; // propriété pour stocker l'ID utilisateur
   protected listePresentations: Miahoot[] = []; // liste des miahoots que l'user peut présenter
   public readonly user: Observable<User | null>; // utilisateur connecté
 
-  constructor(private auth: Auth, private apiMia: APIService) {
+  constructor(private auth: Auth, private apiMia: APIService, private data : DataService) {
     this.user = authState(this.auth); // récupération de l'utilisateur connecté
-    
-    // this.user.subscribe( u => {
-      
-    //   if(u != null){
-    //     this.idUserFB = u.uid; // récupération de l'id de l'utilisateur connecté
-    //   }
 
-    //   this.apiMia.getAPIMmiahootsPresented(this.idUserFB).subscribe( (data: any) => {
-    //     this.listePresentations = data;
-    //   });
+  }
 
-    // });
-
-    const userPromise = new Promise<User | null>((resolve, reject) => {
-      this.user.subscribe(
-        u => {
-          if (u != null) {
-            this.idUserFB = u.uid;
-          }
-          resolve(u);
-        },
-        error => reject(error)
-      );
-    });
-    
-    const apiPromise = userPromise.then(user => {
-      if (user != null) {
-        return this.apiMia.getAPIMmiahootsPresented(this.idUserFB).toPromise();
-      } else {
-        return null;
-      }
-    });
-
-    Promise.all([userPromise, apiPromise]).then(([user, apiData]) => {
-      if (apiData != null) {
-        // this.listePresentations = apiData;
-        console.log("api: " + apiData.toString());
-        console.log(user?.uid);
-        // le reste du code qui utilise les nouvelles valeurs de idUserFB et listePresentations
+  ngOnInit(): void {
+    this.data.getUser().then(id => {
+      if (id != null) {
+        this.idUserFB = id;
+        this.apiMia.getAPIMmiahootsPresented(this.idUserFB).subscribe((data: any) => {
+          this.listePresentations = data;
+          console.log(this.listePresentations);
+        });
       }
     }).catch(error => {
       console.log(error);
     });
-
-    // console.log("user: " + userPromise.all.tostring());
-    // console.log("listePresentations: " + apiPromise.tostring());
   }
 }
 

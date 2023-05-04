@@ -69,12 +69,20 @@ export class DataService{
       })
     )
 
-    // this.apiMia.getAPIAllMiahoots().subscribe( (miahoots) => {
-    //   miahoots.forEach( (miahoot: any) => {
-    //     this.listeMiahoots.push(miahoot.id);  // récupération de la liste des miahoots
-    //   });
-    // });
     
+    
+  }
+
+  getUser(): Promise<string | null> {
+    return new Promise<string | null>((resolve, reject) => {
+      authState(this.auth).subscribe(u => {
+        if (u != null) {
+          resolve(u.uid);
+        }
+      }, error => {
+        reject(error);
+      });
+    });
   }
 
   update(up: Partial<MiahootUser>) {
@@ -92,25 +100,6 @@ export class DataService{
     this.test = 555;
   }
 
-  // getMiahootsPresentables(idFb: string | null | undefined): number[] {
-  //   const res: number[] = [];
-  //   const listeIdFbPres: string[] = [];
 
-  //   if(!(idFb === null || idFb === undefined)){
-  //     this.listeMiahoots.forEach( (miahoot) => {
-  //       console.log(JSON.stringify(miahoot));
-  //       this.apiMia.getAPIPresentateurs(1).subscribe( (presentateurs) => {
-  //         presentateurs.forEach( (presentateur: any) => {
-  //           listeIdFbPres.push(presentateur.firebaseId); // récupération de la liste des id des présentateurs
-  //         });
-  //       });
-  //       if(listeIdFbPres.includes(idFb)){
-  //         res.push(1); // si l'id de l'utilisateur est dans la liste des présentateurs, on ajoute le miahoot à la liste des miahoots présentables
-  //       }
-  //     });
-  //   }
-
-  //   return res;
-  // }
 
 }
