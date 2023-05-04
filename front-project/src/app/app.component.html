@@ -15,6 +15,7 @@
       <button mat-menu-item (click)="this.router.toAccountConfig()">Mon compte</button>
       <button mat-menu-item (click)="this.router.toMiahootResearch()">Recherche de parties</button>
       <button mat-menu-item (click)="this.router.toPresentations()">Présentations</button>
+      <button mat-menu-item (click)="this.router.toMiahootEditing()">Edition Miahoot (offi)</button>
       <button mat-menu-item (click)="logout()">Déconnexion</button>
       <button mat-menu-item (click)="this.router.toEditing()">Edition Miahoot (dev)</button>
     </mat-menu>
@@ -40,5 +41,9 @@
   </div>
   <p id="logText">Connexion en cours...</p>
 </section>
+
+
+
+
 
 <router-outlet></router-outlet>
