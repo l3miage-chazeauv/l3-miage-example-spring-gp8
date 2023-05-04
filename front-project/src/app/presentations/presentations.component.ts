@@ -11,13 +11,8 @@ import { DataService } from '../miahoot.service';
   styleUrls: ['./presentations.component.css']
 })
 export class PresentationsComponent {
-<<<<<<< HEAD
   idUserFB: string = ""; // propriété pour stocker l'ID utilisateur
   protected listePresentations: Miahoot[] = []; // liste des miahoots que l'user peut présenter
-=======
-  
-  protected listePresentations: any[] = []; // liste des miahoots que l'user peut présenter
->>>>>>> 7c2fcba9baf5d59ecb7521e476b86809155e9a43
   public readonly user: Observable<User | null>; // utilisateur connecté
 
   constructor(private auth: Auth, private apiMia: APIService, private data : DataService) {
@@ -25,7 +20,6 @@ export class PresentationsComponent {
 
   }
 
-<<<<<<< HEAD
   ngOnInit(): void {
     this.data.getUser().then(id => {
       if (id != null) {
@@ -34,15 +28,6 @@ export class PresentationsComponent {
           this.listePresentations = data;
           console.log(this.listePresentations);
         });
-=======
-    Promise.all([userPromise, apiPromise]).then(([user, apiData]) => {
-      if (apiData != null) {
-        this.listePresentations = apiData as any[];
-        // console.log(apiData);
-        // console.log(user?.uid);
-        // console.log(this.listePresentations)
-        // le reste du code qui utilise les nouvelles valeurs de idUserFB et listePresentations
->>>>>>> 7c2fcba9baf5d59ecb7521e476b86809155e9a43
       }
     }).catch(error => {
       console.log(error);
