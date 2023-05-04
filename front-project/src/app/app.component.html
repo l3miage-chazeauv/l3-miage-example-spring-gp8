@@ -14,7 +14,6 @@
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="this.router.toAccountConfig()">Mon compte</button>
       <button mat-menu-item (click)="this.router.toMiahootResearch()">Recherche de parties</button>
-      <button mat-menu-item (click)="this.router.toPresentations()">Présentations</button>
       <button mat-menu-item (click)="this.router.toMiahootEditing()">Edition Miahoot (offi)</button>
       <button mat-menu-item (click)="this.router.toEditing()">Edition Miahoot (dev)</button>
       <button mat-menu-item (click)="logout()">Déconnexion</button>
@@ -27,7 +26,6 @@
     </div>
   </ng-template>
 </div>
-
 <section *ngIf="bsAuth | async" id="logProgress">
   <div class="loaderWrapper">
     <div class="loader">
@@ -41,9 +39,5 @@
   </div>
   <p id="logText">Connexion en cours...</p>
 </section>
-
-
-
-
 
 <router-outlet></router-outlet>
