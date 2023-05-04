@@ -11,7 +11,7 @@ import { APIService } from '../api.service';
 })
 export class PresentationsComponent {
   
-  protected listePresentations: Miahoot[] = []; // liste des miahoots que l'user peut présenter
+  protected listePresentations: any[] = []; // liste des miahoots que l'user peut présenter
   public readonly user: Observable<User | null>; // utilisateur connecté
 
   idUserFB: string = "nullUser"; // id FireBase de l'utilisateur connecté
@@ -53,17 +53,15 @@ export class PresentationsComponent {
 
     Promise.all([userPromise, apiPromise]).then(([user, apiData]) => {
       if (apiData != null) {
-        // this.listePresentations = apiData;
-        console.log("api: " + apiData.toString());
-        console.log(user?.uid);
+        this.listePresentations = apiData as any[];
+        // console.log(apiData);
+        // console.log(user?.uid);
+        // console.log(this.listePresentations)
         // le reste du code qui utilise les nouvelles valeurs de idUserFB et listePresentations
       }
     }).catch(error => {
       console.log(error);
     });
-
-    // console.log("user: " + userPromise.all.tostring());
-    // console.log("listePresentations: " + apiPromise.tostring());
   }
 
 }
