@@ -36,6 +36,7 @@ import { environment } from '../environments/environment';
 import { PresentationsComponent } from './presentations/presentations.component';
 import { MiahootEditingComponent } from './miahoot-editing/miahoot-editing.component';
 import { ArchivePartiesComponent } from './archive-parties/archive-parties.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ArchivePartiesComponent } from './archive-parties/archive-parties.compo
     PresentationsComponent,
     MiahootEditingComponent,
     ArchivePartiesComponent,
+    HomeComponent,
   ],
   imports: [
     HttpClientModule,

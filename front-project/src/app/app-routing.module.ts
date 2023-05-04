@@ -9,11 +9,12 @@ import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
 import { PresentationsComponent } from './presentations/presentations.component';
 import { MiahootEditingComponent } from './miahoot-editing/miahoot-editing.component';
 import { CreateMiahootComponent } from './create-miahoot/create-miahoot.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
     path:'',
-  component: AppComponent
+  component: HomeComponent
   },{
     path:'miahoot-editing',
   component: MiahootEditingComponent
