@@ -12,7 +12,7 @@ import { DataService } from '../miahoot.service';
 })
 export class PresentationsComponent {
   idUserFB: string = ""; // propriété pour stocker l'ID utilisateur
-  protected listePresentations: Miahoot[] = []; // liste des miahoots que l'user peut présenter
+  protected listePresentations: any[] = []; // liste des miahoots que l'user peut présenter
   public readonly user: Observable<User | null>; // utilisateur connecté
 
   constructor(private auth: Auth, private apiMia: APIService, private data : DataService) {
@@ -25,7 +25,7 @@ export class PresentationsComponent {
       if (id != null) {
         this.idUserFB = id;
         this.apiMia.getAPIMmiahootsPresented(this.idUserFB).subscribe((data: any) => {
-          this.listePresentations = data;
+          this.listePresentations = data as any[];
           console.log(this.listePresentations);
         });
       }
