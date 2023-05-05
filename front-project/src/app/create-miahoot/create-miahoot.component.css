@@ -1,0 +1,19 @@
+.button-19{
+    position: absolute;
+    top:60%;
+    left : 42%;
+    width: 10%;
+    height: 10%;
+}
+
+.valide{
+    background-color: green;
+    color : white;
+}
+
+#button{
+    left:47%;
+    top:15%;
+    height: fit-content;
+    width: fit-content;
+}

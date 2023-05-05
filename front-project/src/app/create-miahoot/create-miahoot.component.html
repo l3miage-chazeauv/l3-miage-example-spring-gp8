@@ -1,26 +1,40 @@
-
-<div id="creationMiahoot">
+<div class="hide"
+     [class.card]="etape===1"
+     id="creationMiahoot">
     <form #miahootForm="ngForm" (ngSubmit)="postMiahoot(miahootForm)">
         <input type="text" name="nameMia" placeholder="nom du miahoot" ngModel ngDefaultControl />
         <input type="text" name="descriptionMia" placeholder="description du miahoot" ngModel ngDefaultControl />
-        <button type="submit">Créer miahoot</button>
+        <button type="submit"
+                (click)="this.etapeSuivante()">Créer miahoot</button>
     </form>
 </div>
 
-<div id="creationQuestion">
-
+<div class="hide"
+    [class.card]="etape===2" 
+     id="creationQuestion">
     <form #questionForm="ngForm" (ngSubmit)="postQuestion(questionForm)">
         <input type="text" name="labelQuestion" placeholder="label de la question" ngModel ngDefaultControl />
         <input type="text" name="idMiahoot" placeholder="id du miahoot" ngModel ngDefaultControl />
-        <button type="submit">Ajouter question</button>
+        <button type="submit"
+                (click)="this.etapeSuivante()">Ajouter la question</button>
 
     </form>
 </div>
 
-<div id="creationReponse">
+<button class="hide"
+        [class.button-19]="etape===3"
+        id="button"
+        (click)="this.ajouterRep()">+</button>
+    <div class="hide"
+    [class.card]="etape===3"
+     id="creationReponse">
     <form #reponseForm="ngForm" (ngSubmit)="postReponse(reponseForm)">
         <input type="text" name="labelReponse" placeholder="label de la reponse" ngModel ngDefaultControl />
-        <input type="text" name="estValide" placeholder="vrai ou faux" ngModel ngDefaultControl />
-        <button type="submit">Ajouter réponse</button>
+        <button (click)="this.valide(reponseForm)"
+                [class.valide]="reponseForm.value.estValide">est valide ?</button>
+        <button type="submit"
+                (click)="this.etapePrecedente()">Question Suivante</button>
+        <button type="submit"
+                (click)="this.reponseSuivante(idQuestion)">Reponse Suivante</button>
     </form>
 </div>
