@@ -1,19 +1,45 @@
-.button-19{
-    position: absolute;
-    top:60%;
-    left : 42%;
-    width: 10%;
-    height: 10%;
-}
-
 .valide{
     background-color: green;
     color : white;
 }
+.vrai{
+    color: green;
+}
+.faux{
+    color: red;
+}
 
-#button{
-    left:47%;
+.MEGADIV{
+    display: grid;
+    grid-template-columns: 50% 50% ;
+    position: absolute;
     top:15%;
-    height: fit-content;
-    width: fit-content;
+    left:10%;
+    z-index: 2000;
+    background-color: azure;
+    height:80%;
+    width: 80%;
+}
+
+.box{
+    background-color: grey;
+    margin-left: 5%;
+    height: 100%;
+    width: 90%;
+}
+
+.reponses{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+}
+
+span {
+    width: 100%;
+    display: inline-block; white-space: nowrap; overflow: hidden; text-align: center;
+}
+h1, h2, h3, h4, form{
+    margin-top: 5%;
+    width: 100%;
+    display: inline-block; white-space: nowrap; overflow: hidden; text-align: center;
 }

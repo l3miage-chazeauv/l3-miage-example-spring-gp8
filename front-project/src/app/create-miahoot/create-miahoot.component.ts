@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { APIService } from '../api.service';
-import { MiahootUser } from '../miahoot.service';
+import { MiahootService } from '../miahoot.service';
 import { RoutingService } from '../routing.service';
 
 @Component({
@@ -14,15 +14,27 @@ export class CreateMiahootComponent {
   public etape: number =1;
   public rep: boolean = false;
 
+  public idMia: string | undefined; 
   public idMiahoot: number = 1;
   public idQuestion: number = 1;
   public idReponse: number = 1;
   public idUtilisateur: number = 1;
 
-  constructor(private apiMia: APIService, protected router : RoutingService, protected miaU : MiahootUser) {}
+
+  constructor(private apiMia: APIService, protected router : RoutingService, protected miaU : MiahootService) {
+    
+
+  }
 
   ngOnInit(): void {
+    this.miaU.getUser().then( data => {
+      console.log(data?.uid);
+      this.idMia=  data?.uid;
+    }).then(() =>{
+      console.log(this.idMia)
+    })
 
+    
   }
 
 /* je recupere l'id de la question et je recharge l'onglet reponse pour la meme question*/
@@ -50,7 +62,7 @@ export class CreateMiahootComponent {
     const data = {
       "nom": form.value.nameMia,
       "description": form.value.descriptionMia,
-      "firebaseId": "oVLz2O1xBNOy0ij87JmckXitmmP2"
+      "firebaseId": this.idMia
     }; 
     this.apiMia.postAPIMiahoot(data).subscribe(
       //Permet de voir l'erreur dans la console ou le bon fonctionnement
