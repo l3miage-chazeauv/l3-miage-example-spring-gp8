@@ -7,11 +7,12 @@
         <br>
         <button type="submit">Créer miahoot</button>
     </form>
+    <p>SPAMMEZ CETTE TOUCHE POUR AVOIR L ID  --></p><button (click)="this.rechercheIdMiahoot()">{{this.idMiahoot}}</button>
 
     <form #questionForm="ngForm" (ngSubmit)="postQuestion(questionForm)">
         <input type="text" name="labelQuestion" placeholder="label de la question" ngModel ngDefaultControl />
         <br>
-        <h1>{{this.idMiahoot}}</h1>
+        <br>
         <input type="text" name="idMiahoot" placeholder="id du miahoot" ngModel ngDefaultControl />
         <br>
         <button type="submit">Ajouter la question</button>
