@@ -1,8 +1,11 @@
-import { ChangeDetectorRef, Injectable, OnInit } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Auth, authState, User } from '@angular/fire/auth';
 import { docData, Firestore, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from '@angular/fire/firestore';
+import { FormControl, FormGroup } from '@angular/forms';
 import { doc, getDoc, setDoc, updateDoc } from '@firebase/firestore';
 import { filter, map, Observable, of, switchMap, tap } from 'rxjs';
+import { Miahoot, MiahootGame } from './QcmDefinitions';
+import { APIService } from './api.service';
 
 
 export interface MiahootUser{
@@ -32,7 +35,7 @@ const conv : FirestoreDataConverter<MiahootUser> = {
   providedIn: 'root'
 })
 
-export class DataService{
+export class MiahootService{
   listeMiahoots: number[] = []; // Liste des miahoots (id seulement)
   listeMiahootPresentes: number[] = [8,1]; // Liste des miahoots présentés (id seulement)
 
@@ -67,6 +70,20 @@ export class DataService{
     )
 
     
+    
+  }
+
+  getUser(): Promise<User | null> {
+    return new Promise<User | null>((resolve, reject) => {
+      authState(this.auth).subscribe(u => {
+        if (u != null) {
+          
+          resolve(u);
+        }
+      }, error => {
+        reject(error);
+      });
+    });
   }
 
   update(up: Partial<MiahootUser>) {
@@ -75,6 +92,7 @@ export class DataService{
       const userRef = doc(this.fs, `users/${user.uid}`).withConverter(conv)
       updateDoc(userRef, up)
     }
+    
   }
 
   //mettre a jour photo de profil
@@ -82,26 +100,5 @@ export class DataService{
     const user = this.auth.currentUser;
     this.test = 555;
   }
-
-  // getMiahootsPresentables(idFb: string | null | undefined): number[] {
-  //   const res: number[] = [];
-  //   const listeIdFbPres: string[] = [];
-
-  //   if(!(idFb === null || idFb === undefined)){
-  //     this.listeMiahoots.forEach( (miahoot) => {
-  //       console.log(JSON.stringify(miahoot));
-  //       this.apiMia.getAPIPresentateurs(1).subscribe( (presentateurs) => {
-  //         presentateurs.forEach( (presentateur: any) => {
-  //           listeIdFbPres.push(presentateur.firebaseId); // récupération de la liste des id des présentateurs
-  //         });
-  //       });
-  //       if(listeIdFbPres.includes(idFb)){
-  //         res.push(1); // si l'id de l'utilisateur est dans la liste des présentateurs, on ajoute le miahoot à la liste des miahoots présentables
-  //       }
-  //     });
-  //   }
-
-  //   return res;
-  // }
 
 }

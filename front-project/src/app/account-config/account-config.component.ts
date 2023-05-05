@@ -3,7 +3,7 @@ import { Auth, User } from '@angular/fire/auth';
 import { doc, Firestore } from '@angular/fire/firestore';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { updateDoc } from '@firebase/firestore';
-import { DataService, MiahootUser } from '../miahoot.service';
+import { MiahootService, MiahootUser } from '../miahoot.service';
 import { Storage,  ref, uploadBytes } from '@angular/fire/storage';
 import { getDownloadURL } from 'firebase/storage';
 import { Observable, of, switchMap } from 'rxjs';
@@ -17,7 +17,6 @@ import { Observable, of, switchMap } from 'rxjs';
 export class AccountConfigComponent {
   user !: MiahootUser;
   preview : Observable<string>;
-  name : string ="";
 
   public fg: FormGroup<{ 
     name:      FormControl<string>, 
@@ -25,7 +24,7 @@ export class AccountConfigComponent {
     photoFile: FormControl<File | undefined> 
     }>;
   
-  constructor(private dataUserService : DataService,
+  constructor(private ms : MiahootService,
               private fs : Firestore, 
               private fb: FormBuilder,
               private storage: Storage,
@@ -34,9 +33,7 @@ export class AccountConfigComponent {
               ) {
 
    
-                
-            
-    this.dataUserService.obsMiahootUser$.subscribe(
+    this.ms.obsMiahootUser$.subscribe(
       u => {
         if( u === undefined){
         this.fg.controls.name.setValue("")
@@ -76,7 +73,7 @@ export class AccountConfigComponent {
   
   async update(){
     await this.uploadPhoto();
-    this.dataUserService.update({
+    this.ms.update({
       name: this.fg.controls.name.value,
       photoUrl: this.fg.controls.photoURL.value,
     })

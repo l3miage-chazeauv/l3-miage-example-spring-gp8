@@ -1,11 +1,13 @@
 <div class="card">
-    <h1>Miahoots</h1>
-    <div *ngFor="let presentation of this.listePresentations">
-        <!-- <h3>{{ presentation.nom }}</h3>
-        <h4>{{ presentation.description }}</h4>
-        <h5>ID: {{ presentation.id }}</h5> -->
+    <h1 class="heading"><span>Miahoots</span></h1>
+    <div *ngFor="let presentation of this.listePresentations" class="presContainer">
+        <div class="separator"></div>
+        <h3 class="heading">{{ presentation.nom }}</h3>
+        <h4 class="heading">{{ presentation.description }}</h4>
+        <h5 class="heading">ID: {{ presentation.id }}</h5>
         <div class="buttonContainer">
             <button class="button-19">Présenter</button>
         </div>
+        <div class="separator"></div>
     </div>
 </div>

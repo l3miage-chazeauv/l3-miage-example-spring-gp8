@@ -1,12 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Auth, authState, GoogleAuthProvider, signInWithPopup, signOut, User } from '@angular/fire/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { GameService } from './game.service';
 import { Firestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
 import { APIService } from './api.service';
 import { RoutingService } from './routing.service';
-import { DataService, MiahootUser } from './miahoot.service';
+import { MiahootService, MiahootUser } from './miahoot.service';
 
 @Component({
   selector: 'app-root',
@@ -16,13 +14,16 @@ import { DataService, MiahootUser } from './miahoot.service';
 })
 export class AppComponent {
 
+  test: any;
+
 
   
   bsAuth = new BehaviorSubject<boolean>(false); // état de la connection
   public readonly user: Observable<MiahootUser | undefined>; // utilisateur connecté
 
-  constructor(private auth: Auth, firestore: Firestore, protected router: RoutingService, private apiMia: APIService, private data : DataService) {
-    this.user = this.data.obsMiahootUser$; // récupération de l'utilisateur connecté
+  constructor(private auth: Auth, protected router: RoutingService, private ms : MiahootService) {
+    this.user = this.ms.obsMiahootUser$; // récupération de l'utilisateur connecté
+    
   }
   
   
@@ -43,6 +44,17 @@ export class AppComponent {
     }
 
     this.bsAuth.next(false); // on passe l'état de la connection à false
+
+    //créer un utilisateur dans la base de données Spring
+    this.ms.getUser().then(data => {
+      console.log("id : " + data?.uid);
+      this.test = data?.uid;
+      console.log("nom : " + data?.displayName);
+    });
+
+    console.log("test : " + this.test);
+
+
   }
 
   //fonction pour se deconnecter de firebase

@@ -298,3 +298,13 @@ body{
             0px 0px 50px #1e7db4;
     }
   }
+
+  .separator{
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 1px;
+    background: slategray;
+    margin: 10px 0;
+    position: relative;
+  }
