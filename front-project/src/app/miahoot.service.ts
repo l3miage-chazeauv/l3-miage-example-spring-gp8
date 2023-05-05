@@ -37,7 +37,7 @@ const conv : FirestoreDataConverter<MiahootUser> = {
 
 export class MiahootService{
   listeMiahoots: number[] = []; // Liste des miahoots (id seulement)
-  listeMiahootPresentes: number[] = [8,1]; // Liste des miahoots présentés (id seulement)
+  listeMiahootPresentes: number[] = []; // Liste des miahoots présentés (id seulement)
 
   obsMiahootUser$ : Observable<MiahootUser|undefined>;
   public test : number = 555;
@@ -99,6 +99,12 @@ export class MiahootService{
   updatePhoto(up: Partial<MiahootUser>) {
     const user = this.auth.currentUser;
     this.test = 555;
+  }
+
+  //Ajouter l'id du miahoot passé en paramètre à la liste des miahoots présentés
+  addMiahootPresente(idMiahoot: number): void {
+    this.listeMiahootPresentes.push(idMiahoot);
+    console.log("listeMP maj:" + this.listeMiahootPresentes);
   }
 
 }

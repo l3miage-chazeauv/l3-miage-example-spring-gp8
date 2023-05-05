@@ -4,9 +4,9 @@
         <div class="separator"></div>
         <h3 class="heading">{{ presentation.nom }}</h3>
         <h4 class="heading">{{ presentation.description }}</h4>
-        <h5 class="heading">ID: {{ presentation.id }}</h5>
+        <h5 class="heading">Code PIN: {{ presentation.id }}</h5>
         <div class="buttonContainer">
-            <button class="button-19">Présenter</button>
+            <button class="button-19" (click)="this.ms.addMiahootPresente(presentation.id)">Présenter</button>
         </div>
         <div class="separator"></div>
     </div>

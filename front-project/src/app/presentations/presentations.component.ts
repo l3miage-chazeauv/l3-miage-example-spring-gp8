@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Miahoot } from '../QcmDefinitions';
 import { Observable } from 'rxjs';
 import { Auth, User, authState } from '@angular/fire/auth';
@@ -15,7 +15,7 @@ export class PresentationsComponent {
   protected listePresentations: any[] = []; // liste des miahoots que l'user peut présenter
   public readonly user: Observable<User | null>; // utilisateur connecté
 
-  constructor(private auth: Auth, private apiMia: APIService, private ms : MiahootService) {
+  constructor(private auth: Auth, private apiMia: APIService, protected ms : MiahootService, private cdRef: ChangeDetectorRef) {
     this.user = authState(this.auth); // récupération de l'utilisateur connecté
 
   }
@@ -26,7 +26,7 @@ export class PresentationsComponent {
         this.idUserFB = u.uid;
         this.apiMia.getAPIMmiahootsPresented(this.idUserFB).subscribe((data: any) => {
           this.listePresentations = data as any[];
-          console.log(this.listePresentations);
+          this.cdRef.detectChanges();
         });
       }
     }).catch(error => {
