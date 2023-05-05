@@ -29,6 +29,7 @@ export class RechercheMiaComponent {
           })
         ).subscribe((data: any) => {
           if(this.ms.listeMiahootPresentes.indexOf(data.id) > -1){
+            
             this.rt.toMiahoot(this.idRecherche);
           } else{
             this.existe = false;

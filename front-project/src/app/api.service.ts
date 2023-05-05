@@ -24,7 +24,7 @@ export class APIService {
     return this.http.get(url);
   }
 
-  getAPIUserById(idUser : number): Observable<any> {
+  getAPIUserById(idUser : string): Observable<any> {
     const url = `${this.apiUrl}/utilisateur/${idUser}`; // On récupère un utilisateur par son id
     return this.http.get(url);
   }

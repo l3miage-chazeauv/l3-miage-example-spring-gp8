@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Firestore } from '@angular/fire/firestore';
 import { APIService } from './api.service';
 import { RoutingService } from './routing.service';
-import { MiahootService, MiahootUser } from './miahoot.service';
+import { MiahootService, MiahootUser, Partie } from './miahoot.service';
 
 @Component({
   selector: 'app-root',
@@ -14,15 +14,17 @@ import { MiahootService, MiahootUser } from './miahoot.service';
 })
 export class AppComponent {
 
-  test: any;
 
 
   
   bsAuth = new BehaviorSubject<boolean>(false); // état de la connection
   public readonly user: Observable<MiahootUser | undefined>; // utilisateur connecté
+  public readonly partie: Observable<Partie | undefined>; // utilisateur connecté
+
 
   constructor(private auth: Auth, protected router: RoutingService, private ms : MiahootService) {
     this.user = this.ms.obsMiahootUser$; // récupération de l'utilisateur connecté
+    this.partie = this.ms.obsPartie$; // récupération de l'utilisateur connecté
     
   }
   
@@ -48,11 +50,13 @@ export class AppComponent {
     //créer un utilisateur dans la base de données Spring
     this.ms.getUser().then(data => {
       console.log("id : " + data?.uid);
-      this.test = data?.uid;
       console.log("nom : " + data?.displayName);
     });
 
-    console.log("test : " + this.test);
+    this.partie.subscribe(data => {
+      console.log("partie : " + data?.questions);
+      // console.log("partie : " + data?.uid);
+    });
 
 
   }

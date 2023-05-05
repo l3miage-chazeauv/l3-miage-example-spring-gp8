@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { APIService } from '../api.service';
 import { NgForm } from '@angular/forms';
+import { MiahootService } from '../miahoot.service';
 
 @Component({
   selector: 'app-qcm-editing',
@@ -12,9 +13,16 @@ export class QcmEditingComponent {
   public idMiahoot: number = 1;
   public idQuestion: number = 1;
   public idReponse: number = 1;
-  public idUtilisateur: number = 1;
+  public idUtilisateur?: string;
 
-  constructor(private apiMia: APIService) { }
+  constructor(private apiMia: APIService, private ms : MiahootService) {
+    this.ms.getUser().then((data) => {
+
+      this.idUtilisateur = data?.uid;
+      console.log(this.idUtilisateur);
+      });
+
+   }
 
   getAllMiahoots() {
     this.apiMia.getAPIAllMiahoots().subscribe((data: any) => {
@@ -55,11 +63,11 @@ export class QcmEditingComponent {
     });
   }
 
-  getUserById() {
-    this.apiMia.getAPIUserById(this.idUtilisateur).subscribe((data: any) => {
-      console.log(data);
-    });
-  }
+  // getUserById() {
+  //   this.apiMia.getAPIUserById(this.idUtilisateur).subscribe((data: any) => {
+  //     console.log(data);
+  //   });
+  // }
 
   postUser(form: NgForm) {
     const data = {
@@ -81,10 +89,11 @@ export class QcmEditingComponent {
 
 
   postMiahoot(form: NgForm) {
-
+    console.log("Post miahoot");
     const data = {
       "nom": form.value.nameMia,
       "description": form.value.descriptionMia,
+      "firebaseId": this.idUtilisateur
     };
     console.log(data);
     this.apiMia.postAPIMiahoot(data).subscribe(
@@ -232,16 +241,16 @@ export class QcmEditingComponent {
   }
 
 
-  deleteUser() {
-    this.apiMia.deleteAPIUserById(this.idUtilisateur).subscribe(
-      (data: any) => {
-        if (data == null) {
-          console.log("Utilisateur supprimé");
-        } else {
-          console.error(data);
-        }
-      });
-  }
+  // deleteUser() {
+  //   this.apiMia.deleteAPIUserById(this.idUtilisateur).subscribe(
+  //     (data: any) => {
+  //       if (data == null) {
+  //         console.log("Utilisateur supprimé");
+  //       } else {
+  //         console.error(data);
+  //       }
+  //     });
+  // }
 
   patchUser(form: NgForm) {
     const data = {

@@ -56,11 +56,11 @@ export class MiahootEditingComponent {
     });
   }
 
-  getUserById() {
-    this.apiMia.getAPIUserById(this.idUtilisateur).subscribe((data: any) => {
-      console.log(data);
-    });
-  }
+  // getUserById() {
+  //   this.apiMia.getAPIUserById(this.idUtilisateur).subscribe((data: any) => {
+  //     console.log(data);
+  //   });
+  // }
 
   postUser(form: NgForm) {
     const data = {
