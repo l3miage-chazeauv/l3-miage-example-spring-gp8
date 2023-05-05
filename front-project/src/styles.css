@@ -202,6 +202,17 @@ body{
             0px 0px 50px #29abf7;
     }
   }
+
+  .buttonsContainer{
+    display: flex;
+    flex-direction:row;
+    position:absolute;
+    justify-content: center;
+    top: 75%;
+    width: 100%;
+    padding: 10px; 
+  }
+  
   .button-19 {
     appearance: button;
     background: linear-gradient(-45deg,#3585CD, #1e7db4,#3585CD, #1e7db4);
@@ -210,7 +221,7 @@ body{
     border-radius: 16px;
     border-width: 0 0 4px;
     box-sizing: border-box;
-    color: #3585CD;
+    color: #1e7db4;
     cursor: pointer;
     display: inline-block;
     font-family: din-round,sans-serif;
@@ -236,7 +247,7 @@ body{
   
   .button-19:after {
     background-clip: padding-box;
-    background-color: #ffffff;
+    background-color: #FFFFFF;
     border: solid transparent;
     border-radius: 16px;
     border-width: 0 0 4px;
