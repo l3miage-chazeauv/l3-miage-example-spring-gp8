@@ -11,7 +11,6 @@ import { RoutingService } from '../routing.service';
 })
 export class CreateMiahootComponent {
 
-  public etape: number =1;
   public rep: boolean = false;
 
   public idMia: string | undefined; 
@@ -50,13 +49,11 @@ export class CreateMiahootComponent {
     form.value.estValide=!form.value.estValide;
   }
 
-  etapeSuivante(){
-    this.etape++;
-  }
-
-  etapePrecedente(){
-    this.etape--;
-  }
+  rechercheIdMiahoot(){
+    this.apiMia.getAPIAllMiahoots().pipe().subscribe(m =>  {
+      const dernierObjet = m[m.length - 1];
+      this.idMiahoot = dernierObjet.id;
+    });}
 
   postMiahoot(form: NgForm) {
     const data = {
@@ -74,6 +71,7 @@ export class CreateMiahootComponent {
         }
       }
     );
+    this.rechercheIdMiahoot();
   }
 
   postQuestion(form: NgForm) {

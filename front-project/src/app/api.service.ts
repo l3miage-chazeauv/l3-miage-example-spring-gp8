@@ -44,7 +44,6 @@ export class APIService {
     return this.http.patch(url, data);
   }
   
-
   /* MIAHOOTS */
   getAPIAllMiahoots(): Observable<any> {
     const url = `${this.apiUrl}/miahoot/`;
@@ -61,16 +60,12 @@ export class APIService {
     return this.http.get(url);
   }
 
-
-
   // Fonction pour la methode POST
   postAPIMiahoot(data: any): Observable<any> {
     this.ms.listeMiahoots.push(data); // On ajoute le miahoot a la liste des miahoots
     const url = `${this.apiUrl}/miahoot/`;
     return this.http.post(url, data);
   }
-
-  
 
   // Fonction pour la methode DELETE des miahoots
   deleteAPIQMiahootById(id:number): Observable<any> {

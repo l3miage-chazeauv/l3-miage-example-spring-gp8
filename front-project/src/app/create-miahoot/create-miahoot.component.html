@@ -5,17 +5,18 @@
         <br>
         <input type="text" name="descriptionMia" placeholder="description du miahoot" ngModel ngDefaultControl />
         <br>
-        <button type="submit"
-                (click)="this.etapeSuivante()">Créer miahoot</button>
+        <button type="submit">Créer miahoot</button>
     </form>
+
     <form #questionForm="ngForm" (ngSubmit)="postQuestion(questionForm)">
         <input type="text" name="labelQuestion" placeholder="label de la question" ngModel ngDefaultControl />
         <br>
+        <h1>{{this.idMiahoot}}</h1>
         <input type="text" name="idMiahoot" placeholder="id du miahoot" ngModel ngDefaultControl />
         <br>
-        <button type="submit"
-                (click)="this.etapeSuivante()">Ajouter la question</button>
+        <button type="submit">Ajouter la question</button>
     </form>
+    
     <div class="reponses">
     <form #reponseForm1="ngForm" (ngSubmit)="postReponse(reponseForm1)">
         <input type="text" name="labelReponse" placeholder="label de la reponse 1" ngModel ngDefaultControl />
@@ -74,21 +75,4 @@
         </div>
 
     </div>
-</div>
-
-
-<button class="hide"
-        [class.button-19]="etape===3"
-        id="button"
-        (click)="this.ajouterRep()">+</button>
-    <div class="hide"
-    [class.card]="etape===3"
-     id="creationReponse">
-    <form #reponseForm="ngForm" (ngSubmit)="postReponse(reponseForm)">
-        <input type="text" name="labelReponse" placeholder="label de la reponse" ngModel ngDefaultControl />
-        <button (click)="this.valide(reponseForm)"
-                [class.valide]="reponseForm.value.estValide">est valide ?</button>
-        <button type="submit"
-                (click)="this.reponseSuivante(idQuestion)">Reponse Suivante</button>
-    </form>
 </div>
