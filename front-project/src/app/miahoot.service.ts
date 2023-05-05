@@ -123,7 +123,7 @@ export class MiahootService{
 
 
   //Retourne un User (firebase) si l'utilisateur est connecté, erreur sinon
-  getUser(): Promise<User | null> {
+  async getUser(): Promise<User | null> {
     return new Promise<User | null>((resolve, reject) => {
       authState(this.auth).subscribe(u => {
         if (u != null) {
