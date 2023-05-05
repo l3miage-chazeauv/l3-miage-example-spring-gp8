@@ -1,41 +1,26 @@
-<!-- <p>create-miahoot works!</p>
 
-<tr>
-    <td>
-        <form #miahootForm="ngForm" (ngSubmit)="createMiahoot(miahootForm)">
-            <input type="text" name="nomMia" placeholder="nom du miahoot" ngModel ngDefaultControl />
-            <input type="text" name="descriptionMia" placeholder="description du miahoot" ngModel ngDefaultControl />
-            <button type="submit">POST</button>
-        </form>
-    </td>
+<div id="creationMiahoot">
+    <form #miahootForm="ngForm" (ngSubmit)="postMiahoot(miahootForm)">
+        <input type="text" name="nameMia" placeholder="nom du miahoot" ngModel ngDefaultControl />
+        <input type="text" name="descriptionMia" placeholder="description du miahoot" ngModel ngDefaultControl />
+        <button type="submit">Créer miahoot</button>
+    </form>
+</div>
 
-</tr>
+<div id="creationQuestion">
 
-<tr>
-    <td>
+    <form #questionForm="ngForm" (ngSubmit)="postQuestion(questionForm)">
+        <input type="text" name="labelQuestion" placeholder="label de la question" ngModel ngDefaultControl />
+        <input type="text" name="idMiahoot" placeholder="id du miahoot" ngModel ngDefaultControl />
+        <button type="submit">Ajouter question</button>
 
-        <form #questionForm="ngForm" (ngSubmit)="createQuestion(questionForm)">
-            <input type="text" name="labelQuestion" placeholder="label de la question" ngModel ngDefaultControl />
-            <input type="text" name="idMiahoot" placeholder="id du miahoot" ngModel ngDefaultControl />
-            <input type="text" name="labelReponse" placeholder="label de la reponse" ngModel ngDefaultControl />
-            <input type="text" name="estValide" placeholder="vrai ou faux" ngModel ngDefaultControl />
-            <button type="submit">POST</button>
+    </form>
+</div>
 
-        </form>
-    </td>
-
-</tr>
-
-<tr>
-    <td>
-        <form #reponseForm="ngForm" (ngSubmit)="createReponse(reponseForm)">
-            <input type="text" name="labelReponse" placeholder="label de la reponse" ngModel ngDefaultControl />
-            <input type="text" name="estValide" placeholder="vrai ou faux" ngModel ngDefaultControl />
-            <button type="submit">POST</button>
-        </form>
-    </td>
-
-</tr>
-
-<tr>
-    <td> -->
+<div id="creationReponse">
+    <form #reponseForm="ngForm" (ngSubmit)="postReponse(reponseForm)">
+        <input type="text" name="labelReponse" placeholder="label de la reponse" ngModel ngDefaultControl />
+        <input type="text" name="estValide" placeholder="vrai ou faux" ngModel ngDefaultControl />
+        <button type="submit">Ajouter réponse</button>
+    </form>
+</div>

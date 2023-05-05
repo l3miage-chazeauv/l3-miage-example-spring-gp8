@@ -103,8 +103,10 @@ export class MiahootService{
 
   //Ajouter l'id du miahoot passé en paramètre à la liste des miahoots présentés
   addMiahootPresente(idMiahoot: number): void {
-    this.listeMiahootPresentes.push(idMiahoot);
-    console.log("listeMP maj:" + this.listeMiahootPresentes);
+    if(!this.listeMiahootPresentes.includes(idMiahoot)){
+      this.listeMiahootPresentes.push(idMiahoot);
+      // lien front-back
+    }
   }
 
 }
