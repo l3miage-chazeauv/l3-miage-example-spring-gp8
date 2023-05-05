@@ -3,7 +3,7 @@ import { Miahoot } from '../QcmDefinitions';
 import { Observable } from 'rxjs';
 import { Auth, User, authState } from '@angular/fire/auth';
 import { APIService } from '../api.service';
-import { DataService } from '../miahoot.service';
+import { MiahootService } from '../miahoot.service';
 
 @Component({
   selector: 'app-presentations',
@@ -15,15 +15,15 @@ export class PresentationsComponent {
   protected listePresentations: any[] = []; // liste des miahoots que l'user peut présenter
   public readonly user: Observable<User | null>; // utilisateur connecté
 
-  constructor(private auth: Auth, private apiMia: APIService, private data : DataService) {
+  constructor(private auth: Auth, private apiMia: APIService, private ms : MiahootService) {
     this.user = authState(this.auth); // récupération de l'utilisateur connecté
 
   }
 
   ngOnInit(): void {
-    this.data.getUser().then(id => {
-      if (id != null) {
-        this.idUserFB = id;
+    this.ms.getUser().then(u => {
+      if (u != null) {
+        this.idUserFB = u.uid;
         this.apiMia.getAPIMmiahootsPresented(this.idUserFB).subscribe((data: any) => {
           this.listePresentations = data as any[];
           console.log(this.listePresentations);

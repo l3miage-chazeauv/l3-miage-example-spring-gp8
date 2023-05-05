@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, Input, NgZone } from '@angular/core';
 import { catchError, of } from 'rxjs';
 import { APIService } from '../api.service';
 import { RoutingService } from '../routing.service';
-import { DataService } from '../miahoot.service';
+import { MiahootService } from '../miahoot.service';
 import { MiahootGame } from '../QcmDefinitions';
 
 @Component({
@@ -15,7 +15,7 @@ export class RechercheMiaComponent {
   public idRecherche? : number;
   public existe: boolean = true;
 
-  constructor(private apiMia: APIService, protected rt: RoutingService, private ms: DataService ,private cdRef: ChangeDetectorRef) { }
+  constructor(private apiMia: APIService, protected rt: RoutingService, private ms: MiahootService ,private cdRef: ChangeDetectorRef) { }
 
   findMiahootByIdAndGo(): void {
     if (!(this.idRecherche === undefined || this.idRecherche === null)) 

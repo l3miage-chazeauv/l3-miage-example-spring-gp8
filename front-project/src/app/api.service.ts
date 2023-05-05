@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { DataService } from './miahoot.service';
+import { MiahootService } from './miahoot.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class APIService {
 
   private apiUrl = 'http://129.88.210.111:8080';
 
-  constructor(private http: HttpClient, private ms: DataService) {}
+  constructor(private http: HttpClient, private ms: MiahootService) {}
 
   /* UTILISATEURS */
   postAPIUser(data:any): Observable<any> {

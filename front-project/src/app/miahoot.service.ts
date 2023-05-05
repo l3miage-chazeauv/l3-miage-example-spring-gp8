@@ -4,7 +4,7 @@ import { docData, Firestore, FirestoreDataConverter, QueryDocumentSnapshot, Snap
 import { FormControl, FormGroup } from '@angular/forms';
 import { doc, getDoc, setDoc, updateDoc } from '@firebase/firestore';
 import { filter, map, Observable, of, switchMap, tap } from 'rxjs';
-import { MiahootGame } from './QcmDefinitions';
+import { Miahoot, MiahootGame } from './QcmDefinitions';
 import { APIService } from './api.service';
 
 
@@ -35,7 +35,7 @@ const conv : FirestoreDataConverter<MiahootUser> = {
   providedIn: 'root'
 })
 
-export class DataService{
+export class MiahootService{
   listeMiahoots: number[] = []; // Liste des miahoots (id seulement)
   listeMiahootPresentes: number[] = [8,1]; // Liste des miahoots présentés (id seulement)
 
@@ -73,11 +73,12 @@ export class DataService{
     
   }
 
-  getUser(): Promise<string | null> {
-    return new Promise<string | null>((resolve, reject) => {
+  getUser(): Promise<User | null> {
+    return new Promise<User | null>((resolve, reject) => {
       authState(this.auth).subscribe(u => {
         if (u != null) {
-          resolve(u.uid);
+          
+          resolve(u);
         }
       }, error => {
         reject(error);
@@ -99,7 +100,5 @@ export class DataService{
     const user = this.auth.currentUser;
     this.test = 555;
   }
-
-
 
 }
