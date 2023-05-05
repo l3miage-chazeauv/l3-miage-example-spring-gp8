@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Auth, User, authState } from '@angular/fire/auth';
 import { APIService } from '../api.service';
 import { MiahootService } from '../miahoot.service';
+import { RoutingService } from '../routing.service';
 
 @Component({
   selector: 'app-presentations',
@@ -15,7 +16,7 @@ export class PresentationsComponent {
   protected listePresentations: any[] = []; // liste des miahoots que l'user peut présenter
   public readonly user: Observable<User | null>; // utilisateur connecté
 
-  constructor(private auth: Auth, private apiMia: APIService, protected ms : MiahootService, private cdRef: ChangeDetectorRef) {
+  constructor(private auth: Auth, private apiMia: APIService, protected ms : MiahootService, private cdRef: ChangeDetectorRef, protected router : RoutingService) {
     this.user = authState(this.auth); // récupération de l'utilisateur connecté
 
   }
