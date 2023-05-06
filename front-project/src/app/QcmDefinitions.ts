@@ -20,3 +20,14 @@ export interface Question{
   label: string;
   reponses: Reponse[];
 }
+
+export interface MiahootUser{
+  readonly miahootID ?: string;
+  name: string
+  readonly photoUrl : string
+}
+
+export interface Parties{
+  readonly miahootID ?: number;
+  readonly questions ?: Question[]
+}

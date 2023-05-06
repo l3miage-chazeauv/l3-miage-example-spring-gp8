@@ -1,36 +1,14 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Auth, authState, User } from '@angular/fire/auth';
-import { addDoc, collection, docData, Firestore, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, docData, Firestore, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from '@angular/fire/firestore';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FirestoreModule } from '@angular/fire/firestore';
 
 import { doc, getDoc, setDoc, updateDoc } from '@firebase/firestore';
 import { filter, map, Observable, of, switchMap, take, tap } from 'rxjs';
-import { Miahoot, MiahootGame } from './QcmDefinitions';
+import { Miahoot, MiahootGame, MiahootUser, Parties, Question } from './QcmDefinitions';
 import { APIService } from './api.service';
 
-
-
-export interface MiahootUser{
-  readonly miahootID ?: string; // L'id pas obligatoire c'est plus du bricolage qu'autre chose...
-  name: string
-  readonly photoUrl : string
-}
-
-export interface Partie{
-  questions: string
-}
-
-export interface Parties{
-  readonly parties ?: string
-}
-
-const conv2 : FirestoreDataConverter<Parties> = {
-  toFirestore : val => val,
-  fromFirestore : snap => ({
-    parties : snap.get("parties")
-  })
-}
 
 const conv : FirestoreDataConverter<MiahootUser> = {
   toFirestore : val => val,
@@ -51,7 +29,6 @@ export class MiahootService{
   listeMiahootPresentes: number[] = []; // Liste des miahoots présentés (id seulement)
 
   obsMiahootUser$ : Observable<MiahootUser|undefined>;
-  obsParties$ : Observable<Parties|undefined> = of();
 
 
   constructor(private auth: Auth, private fs : Firestore) {
@@ -74,7 +51,7 @@ export class MiahootService{
       })
     ).subscribe()
 
-    console.log("dans le constructeur de miahoot service")
+    // console.log("dans le constructeur de miahoot service")
     // this.obsPartie$.pipe(
     //   filter( p => !!p ),
     //   map( p => p as Partie ),
@@ -103,21 +80,6 @@ export class MiahootService{
         }
       })
     )
-
-    this.obsParties$ = authState(this.auth).pipe(
-      switchMap( (user) => {
-        if(user){
-          const partieRef = collection(this.fs , `parties/`)
-          // const partieData$ = docData(partieRef)
-          // return partieData$
-          return of();
-        } else{
-          return of(undefined)
-        }
-      })
-    )
-
-    
     
   }
 
@@ -148,31 +110,6 @@ export class MiahootService{
   //mettre a jour photo de profil
   updatePhoto(up: Partial<MiahootUser>) {
     const user = this.auth.currentUser;
-  }
-
-  //Ajouter le miahoot passé en paramètre à la liste des miahoots présentés dans FB
-  addMiahootPresente(idMiahoot: number): void {
-    // if(!this.listeMiahootPresentes.includes(idMiahoot)){
-    //   //ajoute le miahoot d'id idMiahoot à la collection parties dans la firebase
-      
-    // }
-
-    this.obsParties$.pipe(
-      take(1),
-      map(async MiahootId => {
-        if (MiahootId) {
-          const PartiesCollection = collection(this.fs , `parties/`)
-          const Partiedata = await addDoc(PartiesCollection, {
-            questions: ""
-          })
-          const miahootActuel = doc(this.fs, `miahoot/${MiahootId}`)
-          await updateDoc(miahootActuel, {
-            currentQCM: Partiedata.id
-          })
-        }
-      }
-      )
-    ).subscribe()
   }
 
 }

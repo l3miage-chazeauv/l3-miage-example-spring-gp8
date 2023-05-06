@@ -3,10 +3,11 @@ import { Auth, User } from '@angular/fire/auth';
 import { doc, Firestore } from '@angular/fire/firestore';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { updateDoc } from '@firebase/firestore';
-import { MiahootService, MiahootUser } from '../miahoot.service';
+import { MiahootService } from '../miahoot.service';
 import { Storage,  ref, uploadBytes } from '@angular/fire/storage';
 import { getDownloadURL } from 'firebase/storage';
 import { Observable, of, switchMap } from 'rxjs';
+import { MiahootUser } from '../QcmDefinitions';
 
 @Component({
   selector: 'app-account-config',
