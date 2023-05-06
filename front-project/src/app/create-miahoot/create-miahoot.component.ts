@@ -31,9 +31,7 @@ export class CreateMiahootComponent {
       this.idMia=  data?.uid;
     }).then(() =>{
       console.log(this.idMia)
-    })
-
-    
+    }) 
   }
 
 /* je recupere l'id de la question et je recharge l'onglet reponse pour la meme question*/
@@ -49,11 +47,23 @@ export class CreateMiahootComponent {
     form.value.estValide=!form.value.estValide;
   }
 
+  /*renvois l'id du dernier miahoot crée*/
   rechercheIdMiahoot(){
     this.apiMia.getAPIAllMiahoots().pipe().subscribe(m =>  {
       const dernierObjet = m[m.length - 1];
       this.idMiahoot = dernierObjet.id;
     });}
+
+  rechercheIdMiahootByLabel(label: string): void {
+      this.apiMia.getAPIAllMiahoots().subscribe((m: any[]) => {
+        const miahootWithLabel = m.find((miahoot) => miahoot.label === label);
+        if (miahootWithLabel) {
+          this.idMiahoot = miahootWithLabel.id;
+        } else {
+          console.error(`No miahoot found with label ${label}`);
+        }
+      });
+    }
 
   postMiahoot(form: NgForm) {
     const data = {
