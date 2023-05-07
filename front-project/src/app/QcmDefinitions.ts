@@ -22,7 +22,7 @@ export interface Question{
 }
 
 export interface MiahootUser{
-  readonly miahootID ?: string;
+  miahootID ?: string;
   name: string
   readonly photoUrl : string
 }

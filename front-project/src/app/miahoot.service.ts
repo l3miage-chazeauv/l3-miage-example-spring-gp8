@@ -15,7 +15,8 @@ const conv : FirestoreDataConverter<MiahootUser> = {
   fromFirestore :snap => ({
     miahootID : snap.get("miahootID"),
     name : snap.get("name"),
-    photoUrl : snap.get("photoUrl")
+    photoUrl : snap.get("photoUrl"),
+    id: snap.get("id")
   })
     
 }
@@ -47,7 +48,7 @@ export class MiahootService{
           } satisfies MiahootUser)
         }
 
-        console.log(u)
+        // console.log(u)
       })
     ).subscribe()
 
@@ -80,7 +81,6 @@ export class MiahootService{
         }
       })
     )
-    
   }
 
 

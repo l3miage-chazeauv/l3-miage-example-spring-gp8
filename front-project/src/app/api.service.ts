@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { MiahootService } from './miahoot.service';
+import { Question } from './QcmDefinitions';
 
 @Injectable({
   providedIn: 'root'
@@ -84,6 +85,16 @@ export class APIService {
   getAPIQuestionsByMiahootID(idMiahoot: number): Observable<any> {
     const url = `${this.apiUrl}/miahoot/${idMiahoot}/questions`;
     return this.http.get(url);
+  }
+
+  getAPIQuestionsByMiahootIDPr(idMiahoot: number): Promise<Question[]> {
+    const url = `${this.apiUrl}/miahoot/${idMiahoot}/questions`;
+    const observable = this.http.get(url);
+    return firstValueFrom(observable).then(
+      (data) => {
+        return data as Question[];
+      }
+    );
   }
 
   getAPIAllQuestions(): Observable<any> {

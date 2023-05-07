@@ -6,7 +6,7 @@
         <h4 class="heading">{{ presentation.description }}</h4>
         <h5 class="heading">Code PIN: {{ presentation.id }}</h5>
         <div class="buttonContainer">
-            <button class="button-19" (click)="this.game.addMiahootPresente(presentation.id) ; this.router.toMiahoot(presentation.id)">Présenter</button>
+            <button class="button-19" (click)="this.game.addMiahootPresente(presentation.id, this.idUserFB) ; this.router.toMiahoot(presentation.id)">Présenter</button>
         </div>
         <div class="separator"></div>
     </div>
