@@ -69,6 +69,11 @@ export class GameService {
   //Ajouter le miahoot passé en paramètre à la liste des miahoots présentés dans FB
   async addMiahootPresente(idMiahoot: number, idUserFB: string): Promise<void> {
 
+    if(await this.verifMiahootPresente(idMiahoot) === true){ // On vérifie que le miahoot n'est pas déjà présenté
+      console.log("Miahoot déjà présenté")
+      return;
+    }
+
     try {
       // On get les questions du miahoot
       const questionsMiahoot: Question[] = await this.apiMia.getAPIQuestionsByMiahootIDPr(idMiahoot);
