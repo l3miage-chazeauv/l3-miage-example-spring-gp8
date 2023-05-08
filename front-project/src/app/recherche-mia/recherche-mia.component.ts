@@ -33,31 +33,24 @@ export class RechercheMiaComponent {
             console.log(e.status);
             this.existe = false;
             this.cdRef.detectChanges();
-            console.log("d1");
             return of();
           })
         ).subscribe( async (data: any) => {
-          console.log("d2:" + data.id);
           if(await this.game.verifMiahootPresente(data.id) === true){
             // on récupère l'id de l'utilisateur FB
-            console.log("d3");
             const idUserFB: string = await this.ms.getUser().then(u => {
               if (u != null) {
-                console.log("d4");
                 return u.uid;
               } else {
                 this.existe = false;
                 this.cdRef.detectChanges();
-                console.log("d5");
                 return "";
               }
             }).catch(error => {
-              console.log("d6: " + error);
             }).toString();
 
             if(this.existe === true){
               // on récupère le miahoot dans la base de données
-              console.log("d7: " + data.id);
               const partieData: DocumentReference<DocumentData> = await this.game.getMiahootPresente(data.id);
 
               this.game.addMIdToUser(partieData, idUserFB);
@@ -65,7 +58,6 @@ export class RechercheMiaComponent {
             }
           } else{
             this.existe = false;
-            console.log("d8");
             this.cdRef.detectChanges();
           }
         })
