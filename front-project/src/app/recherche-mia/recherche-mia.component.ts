@@ -4,6 +4,9 @@ import { APIService } from '../api.service';
 import { RoutingService } from '../routing.service';
 import { MiahootService } from '../miahoot.service';
 import { MiahootGame } from '../QcmDefinitions';
+import { GameService } from '../game.service';
+import { authState } from '@angular/fire/auth';
+import { DocumentData, DocumentReference, Firestore, collection, getDocs, query, where } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-recherche-mia',
@@ -15,9 +18,14 @@ export class RechercheMiaComponent {
   public idRecherche? : number;
   public existe: boolean = true;
 
-  constructor(private apiMia: APIService, protected rt: RoutingService, private ms: MiahootService ,private cdRef: ChangeDetectorRef) { }
+  constructor(private apiMia: APIService, 
+              protected rt: RoutingService, 
+              private ms: MiahootService, 
+              private cdRef: ChangeDetectorRef,
+              private game: GameService,
+              private fs: Firestore) { }
 
-  findMiahootByIdAndGo(): void {
+  async findMiahootByIdAndGo(): Promise<void> {
     if (!(this.idRecherche === undefined || this.idRecherche === null)) 
       {
         this.apiMia.getAPIMiahootById(this.idRecherche).pipe(
@@ -25,14 +33,39 @@ export class RechercheMiaComponent {
             console.log(e.status);
             this.existe = false;
             this.cdRef.detectChanges();
+            console.log("d1");
             return of();
           })
-        ).subscribe((data: any) => {
-          if(this.ms.listeMiahootPresentes.indexOf(data.id) > -1){
-            
-            this.rt.toMiahoot(this.idRecherche);
+        ).subscribe( async (data: any) => {
+          console.log("d2:" + data.id);
+          if(await this.game.verifMiahootPresente(data.id) === true){
+            // on récupère l'id de l'utilisateur FB
+            console.log("d3");
+            const idUserFB: string = await this.ms.getUser().then(u => {
+              if (u != null) {
+                console.log("d4");
+                return u.uid;
+              } else {
+                this.existe = false;
+                this.cdRef.detectChanges();
+                console.log("d5");
+                return "";
+              }
+            }).catch(error => {
+              console.log("d6: " + error);
+            }).toString();
+
+            if(this.existe === true){
+              // on récupère le miahoot dans la base de données
+              console.log("d7: " + data.id);
+              const partieData: DocumentReference<DocumentData> = await this.game.getMiahootPresente(data.id);
+
+              this.game.addMIdToUser(partieData, idUserFB);
+              this.rt.toMiahoot(this.idRecherche);
+            }
           } else{
             this.existe = false;
+            console.log("d8");
             this.cdRef.detectChanges();
           }
         })

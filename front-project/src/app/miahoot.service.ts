@@ -26,11 +26,8 @@ const conv : FirestoreDataConverter<MiahootUser> = {
 })
 
 export class MiahootService{
-  listeMiahoots: number[] = []; // Liste des miahoots (id seulement)
-  listeMiahootPresentes: number[] = []; // Liste des miahoots présentés (id seulement)
 
   obsMiahootUser$ : Observable<MiahootUser|undefined>;
-
 
   constructor(private auth: Auth, private fs : Firestore) {
     authState(this.auth).pipe(
