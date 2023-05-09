@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { APIService } from '../api.service';
 import { NgForm } from '@angular/forms';
-import { MiahootService } from '../miahoot.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-qcm-editing',
@@ -15,7 +15,7 @@ export class QcmEditingComponent {
   public idReponse: number = 1;
   public idUtilisateur?: string;
 
-  constructor(private apiMia: APIService, private ms : MiahootService) {
+  constructor(private apiMia: APIService, private ms : UserService) {
     this.ms.getUser().then((data) => {
 
       this.idUtilisateur = data?.uid;
@@ -74,16 +74,16 @@ export class QcmEditingComponent {
       "username": form.value.username,
       "firebaseId": form.value.firebaseId,
     };
-    this.apiMia.postAPIUser(data).subscribe(
-      //Permet de voir l'erreur dans la console ou le bon fonctionnement
-      data => {
-        if (data == null) {
-          console.log("Utilisateur créé");
-        } else {
-          console.error(data);
-        }
-      }
-    );
+    // this.apiMia.postAPIUser(data).subscribe(
+    //   //Permet de voir l'erreur dans la console ou le bon fonctionnement
+    //   data => {
+    //     if (data == null) {
+    //       console.log("Utilisateur créé");
+    //     } else {
+    //       console.error(data);
+    //     }
+    //   }
+    // );
   }
 
 

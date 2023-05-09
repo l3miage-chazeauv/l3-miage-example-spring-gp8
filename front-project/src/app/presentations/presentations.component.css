@@ -1,13 +1,7 @@
-.card {
-    width: 40%;
-    }
-
-.heading {
+h2, h4 {
     font-weight: 500;
-    font-size: 150%;
-    /* position: relative;
-    left: 50%;
-    transform: translateX(-50%); */
+    color: azure;
+    grid-column: 1/2;
   }
   
 .heading span {
@@ -17,15 +11,25 @@
     filter: drop-shadow(0px 0px 10px rgb(255, 255, 255));
 }
 
-.presContainer{
-    background-color: white;
-    padding: 4%;
-    margin-top: 4%;
-    border-radius: 10px;
-    max-height: 200px;
+.presentations{
+    display: flex;
+    flex-direction: column;
     width: 100%;
 }
 
+.presContainer{
+    margin: 10px;
+    background-color: #193966;
+    padding: 30px;
+    border-radius: 10px;
+    max-height: 200px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 20px;
+}
+
 .button-19{
-    width: auto;
+    /* grid-column: 2/3;
+    grid-row: 1/3; */
 }

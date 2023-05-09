@@ -1,12 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Auth, authState, GoogleAuthProvider, signInWithPopup, signOut, User } from '@angular/fire/auth';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Auth, GoogleAuthProvider, signInWithPopup, signOut, User } from '@angular/fire/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Firestore } from '@angular/fire/firestore';
-import { APIService } from './api.service';
 import { RoutingService } from './routing.service';
-import { MiahootService } from './miahoot.service';
+import { UserService } from './user.service';
 import { MiahootUser, Parties } from './QcmDefinitions';
 import { GameService } from './game.service';
+import { APIService } from './api.service';
 
 @Component({
   selector: 'app-root',
@@ -16,15 +15,13 @@ import { GameService } from './game.service';
 })
 export class AppComponent {
 
-
-
   
   bsAuth = new BehaviorSubject<boolean>(false); // état de la connection
   public readonly user: Observable<MiahootUser | undefined>; // utilisateur connecté
   public readonly parties: Observable<Parties | undefined>; // utilisateur connecté
 
 
-  constructor(private auth: Auth, protected router: RoutingService, private ms : MiahootService, private game: GameService) {
+  constructor(private auth: Auth, protected router: RoutingService, private ms : UserService, private game: GameService, private apiService: APIService) {
     this.user = this.ms.obsMiahootUser$; // récupération de l'utilisateur connecté
     this.parties = this.game.obsParties$; // récupération de l'utilisateur connecté
     
@@ -50,15 +47,31 @@ export class AppComponent {
     this.bsAuth.next(false); // on passe l'état de la connection à false
 
     //créer un utilisateur dans la base de données Spring
-    this.ms.getUser().then(data => {
-      console.log("id : " + data?.uid);
-      console.log("nom : " + data?.displayName);
+    this.ms.getUser().then(user => {
+      this.apiService.getAPIAllUsers().subscribe(other => {
+        
+        let find = false;
+        for(let i =0; i<other.length; i++){
+          if(other[i].firebaseId === user?.uid){
+            find = true;
+          }
+        }
+
+        if(find == false){
+          console.log("User non trouvé dans spring boot");
+          this.apiService.postAPIUser(user?.displayName ? user.displayName : '', user?.uid).subscribe()
+        }
+
     });
+  });
+
+
 
     this.parties.subscribe(data => {
       console.log("parties : " + data);
-      // console.log("partie : " + data?.uid);
     });
+
+
 
 
   }

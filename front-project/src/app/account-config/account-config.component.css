@@ -83,3 +83,20 @@ input{
   padding: 5px 10px;
   cursor: pointer;
 }
+
+#drop-area {
+  border: 2px dashed #ccc;
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+  font-family: sans-serif;
+  margin: 20px auto;
+  width: 50%;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+img {
+  max-width: 100%;
+}

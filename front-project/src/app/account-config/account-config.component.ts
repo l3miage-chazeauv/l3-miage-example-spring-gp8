@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, Output,ChangeDetectorRef, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component,ChangeDetectorRef } from '@angular/core';
 import { Auth, User } from '@angular/fire/auth';
 import { doc, Firestore } from '@angular/fire/firestore';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { updateDoc } from '@firebase/firestore';
-import { MiahootService } from '../miahoot.service';
+import { UserService } from '../user.service';
 import { Storage,  ref, uploadBytes } from '@angular/fire/storage';
 import { getDownloadURL } from 'firebase/storage';
 import { Observable, of, switchMap } from 'rxjs';
@@ -18,6 +18,9 @@ import { MiahootUser } from '../QcmDefinitions';
 export class AccountConfigComponent {
   user !: MiahootUser;
   preview : Observable<string>;
+  imageUrl!: string;
+  isDraggingOver = false;
+
 
   public fg: FormGroup<{ 
     name:      FormControl<string>, 
@@ -25,7 +28,7 @@ export class AccountConfigComponent {
     photoFile: FormControl<File | undefined> 
     }>;
   
-  constructor(private ms : MiahootService,
+  constructor(private ms : UserService,
               private fs : Firestore, 
               private fb: FormBuilder,
               private storage: Storage,
@@ -96,6 +99,26 @@ export class AccountConfigComponent {
       }
     }
   }
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault(); // empêche le navigateur de naviguer vers l'URL de l'image
+    const dataTransfer = event.dataTransfer;
+    if (!dataTransfer) {
+    return;
+  }
+  const file = dataTransfer.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageUrl = reader.result as string;
+      this.fg.controls.photoURL.setValue(this.imageUrl)
+      this.cd.detectChanges(); // force la détection de changements dans la vue
+    };
+    reader.readAsDataURL(file);
+  }
 }
 
 async function loadFileUrl(file: File) : Promise<string>{
@@ -125,3 +148,6 @@ async function loadFile(file: File) : Promise<ArrayBuffer>{
     reader.readAsArrayBuffer(file);
   })
 }
+
+
+

@@ -1,19 +1,4 @@
-  .heading {
-    color: white;
-    font-weight: 500;
-    font-size: 150%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .heading span {
-    font-size: 2em;
-    font-weight: 800;
-    filter: drop-shadow(0px 0px 10px rgb(255, 255, 255));
-  }
+
   
   .content {
     display: flex;
@@ -125,31 +110,12 @@
     position: relative;
   }
 
-  .card {
-    position: absolute;
-    transform: translate(-50%,-50%);
-    left:50%;
-    top:50%;
-    box-sizing: border-box;
-    animation: gradient 5s ease infinite;
-    background-size: 500% 500%;
-    width: 20%;
-    height: 30%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    padding: 2%;
-    border-radius: 20px;
-  }
-
   .cardErreur {
     position: absolute;
     transform: translate(-50%,-50%);
     left:50%;
     top:50%;
     box-sizing: border-box;
-    background: linear-gradient(-45deg,#f86b6b, #e65959,#f86b6b, #e65959);
     animation: gradient 5s ease infinite;
     background-size: 500% 500%;
     width: 20%;

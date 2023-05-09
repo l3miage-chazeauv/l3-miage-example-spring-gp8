@@ -9,37 +9,65 @@
     color: red;
 }
 
-.MEGADIV{
-    display: grid;
-    grid-template-columns: 50% 50% ;
-    position: absolute;
-    top:15%;
-    left:10%;
-    z-index: 2000;
-    background-color: azure;
-    height:80%;
-    width: 80%;
-}
-
 .box{
-    background-color: grey;
     margin-left: 5%;
     height: 100%;
     width: 90%;
+    box-sizing: border-box;
+    padding: 2%;
+    border-radius: 20px;
+    background: linear-gradient(-45deg,#29abf7, #1e7db4,#29abf7, #1e7db4);
+    animation: gradient 10s ease infinite;
 }
 
 .reponses{
+    margin-top: 5%;
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: 50% 50%;
+    gap:10px;
 }
 
+.rep{
+    background-color: whitesmoke;
+}
 span {
     width: 100%;
     display: inline-block; white-space: nowrap; overflow: hidden; text-align: center;
 }
+
 h1, h2, h3, h4, form{
     margin-top: 5%;
     width: 100%;
     display: inline-block; white-space: nowrap; overflow: hidden; text-align: center;
 }
+
+form{
+    background-color: #193966;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-button{
+    /* width: 100%; */
+    padding: 20px;
+    font-size: 2em;
+    margin: 20px;
+    box-sizing: border-box;
+}
+.questions{
+    display: grid;
+    width: 100%;
+    gap: 20px;
+}
+.question{
+
+    background-color: #193966;
+    color: azure;
+}
+
+.reponses-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+

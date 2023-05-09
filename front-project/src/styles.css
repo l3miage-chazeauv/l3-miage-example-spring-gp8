@@ -21,6 +21,7 @@ body{
 }
 
 
+
 .context {
     width: 100%;
     position: absolute;
@@ -40,6 +41,8 @@ body{
     background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
     width: 100%;
     height:100vh;
+    position: fixed;
+    z-index: -10;
 }
 
 .circles{
@@ -159,22 +162,63 @@ body{
 }
 
 .card{
-    position: absolute;
-    transform: translate(-50%,-50%);
-    left:50%;
-    top:50%;
     box-sizing: border-box;
     background: linear-gradient(-45deg,#29abf7, #1e7db4,#29abf7, #1e7db4);
     animation: gradient 10s ease infinite;
     background-size: 500% 500%;
-    width: 20%;
-    height: max-content;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
-    padding: 2%;
+    padding: 30px;
     border-radius: 20px;
+}
+
+.heading {
+    color: white;
+    font-weight: 500;
+    font-size: 150%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .heading span {
+    font-size: 2em;
+    font-weight: 800;
+    filter: drop-shadow(0px 0px 10px rgb(255, 255, 255));
+    margin: 10px;
+  }
+
+#deco{
+    background: linear-gradient(-45deg,#f86b6b, #e65959,#f86b6b, #e65959);
+    color : #e65959;}
+    @keyframes gradient {
+    0% {
+        background-position: 0 50%;
+        box-shadow: 0px 0px 2px #ffffff,
+        0px 0px 5px #ffffff,
+        0px 0px 10px #f86b6b,
+        0px 0px 50px #f86b6b;
+    }
+
+    50% {
+        background-position: 100% 50%;
+        box-shadow: 0px 0px 2px #ffffff,
+        0px 0px 5px #ffffff,
+        0px 0px 10px #e65959,
+        0px 0px 50px #e65959;
+    }
+
+    100% {
+        background-position: 0 50%;
+        box-shadow: 0px 0px 2px #ffffff,
+            0px 0px 5px #ffffff,
+            0px 0px 10px #f86b6b,
+            0px 0px 50px #f86b6b;
+    }
 }
 
 @keyframes gradient {
@@ -229,7 +273,6 @@ body{
     font-weight: 700;
     letter-spacing: .8px;
     line-height: 20px;
-    margin: 3%;
     outline: none;
     overflow: visible;
     padding: 13px 16px;
@@ -242,7 +285,6 @@ body{
     -webkit-user-select: none;
     vertical-align: middle;
     white-space: nowrap;
-    width: 20%;
   }
   
   .button-19:after {

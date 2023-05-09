@@ -4,7 +4,7 @@ import { GameService } from '../game.service';
 import { APIService } from '../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, of } from 'rxjs';
-import { MiahootService } from '../miahoot.service';
+import { UserService } from '../user.service';
 import { User } from '@angular/fire/auth';
 
 @Component({
@@ -33,7 +33,7 @@ export class MiahootComponent{
               private router: Router, 
               private ar: ActivatedRoute,
               protected gs: GameService, 
-              private ms: MiahootService,
+              private ms: UserService,
               private cdRef: ChangeDetectorRef) { 
 
     this.assignUserId().then(() => {
@@ -49,7 +49,7 @@ export class MiahootComponent{
               let question: Question = {
                 label: obj.label, 
                 reponses: obj.reponses,
-                questionId: obj.id
+                id: obj.id
               };
               this.gs.miahootGame.miahoot.listeQuestions.push(question);
             })

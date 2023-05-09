@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Observable, firstValueFrom } from 'rxjs';
-import { MiahootService } from './miahoot.service';
+import { UserService } from './user.service';
 import { Question } from './QcmDefinitions';
 
 @Injectable({
@@ -9,13 +9,18 @@ import { Question } from './QcmDefinitions';
 })
 
 export class APIService {
+    private kyksIp = '111'
+    private paulIp = '142'
+  private apiUrl = `http://129.88.210.${this.kyksIp}:8080`;
 
-  private apiUrl = 'http://129.88.210.111:8080';
-
-  constructor(private http: HttpClient, private ms: MiahootService) {}
+  constructor(private http: HttpClient, private ms: UserService) {}
 
   /* UTILISATEURS */
-  postAPIUser(data:any): Observable<any> {
+  postAPIUser(username:any, firebaseId : any): Observable<any> {
+    const data = {
+      "username": username,
+      "firebaseId": firebaseId
+    };
     const url = `${this.apiUrl}/utilisateur/`; // On crée un utilisateur
     return this.http.post(url, data);
   }
@@ -61,6 +66,13 @@ export class APIService {
     return this.http.get(url);
   }
 
+  getAPIMiahootsCreated(idFb: string){
+    const url = `${this.apiUrl}/utilisateur/${idFb}/miahootsConcus`;
+    return this.http.get(url);
+  }
+
+
+
   // Fonction pour la methode POST
   postAPIMiahoot(data: any): Observable<any> {
     //this.ms.listeMiahoots.push(data); // On ajoute le miahoot a la liste des miahoots
@@ -86,6 +98,10 @@ export class APIService {
     const url = `${this.apiUrl}/miahoot/${idMiahoot}/questions`;
     return this.http.get(url);
   }
+  getAPIQuestionById(questionId: number): Observable<any>{
+    const url = `${this.apiUrl}/question/${questionId}`;
+    return this.http.get(url);
+  }
 
   getAPIQuestionsByMiahootIDPr(idMiahoot: number): Promise<Question[]> {
     const url = `${this.apiUrl}/miahoot/${idMiahoot}/questions`;
@@ -102,14 +118,15 @@ export class APIService {
     return this.http.get(url);
   }
 
-  getAPIQuestionByMiahootID(idQuestion: number): Observable<any> {
-    const url = `${this.apiUrl}/question/${idQuestion}`;
+  getAPIQuestionByMiahootID(idMiahoot: number): Observable<any> {
+    const url = `${this.apiUrl}/miahoot/${idMiahoot}/questions`;
     return this.http.get(url);
   }
 
   // Fonction pour la methode DELETE des questions
   deleteAPIQuestionById(id:number): Observable<any> {
     const url = `${this.apiUrl}/question/${id}`;
+    console.log(`question ${id} supprimée`);
     return this.http.delete(url);
   }
 
@@ -117,6 +134,17 @@ export class APIService {
   postAPIQuestion(endpoint: string): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
     return this.http.post(url,[] );
+  }
+
+  postAPIQuestionPr(endpoint: string): Promise<number> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    const observable = this.http.post(url,[] );
+
+    return firstValueFrom(observable).then(
+      (data) => {
+        return data as number;
+      }
+    );
   }
 
   patchAPIQuestionById(id:number, data:any): Observable<any> {
