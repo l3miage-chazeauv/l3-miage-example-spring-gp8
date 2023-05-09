@@ -1,27 +1,29 @@
 .box {
-    height: 150px;
     display: flex;
-    justify-content: center;
-  }
+    flex-direction: column;
+    grid-column: 2/3;
+}
 
 #pos{
   position: absolute;
   top: 15%;
-  left:15%;
+  left: 15%;
 }
-  .conteneur {
-    width: 80%;
-    height: 80%;
-    position: absolute;
+.conteneur {
     top: 30%;
     left: 10%;
     display: grid;
     justify-content: center;
     grid-template-columns:  20% 20%;
     grid-template-rows:  50%;
-  }
+
+    /* grid */
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 40px;
+}
   
-  .conteneur2 {
+.conteneur2 {
     width: 80%;
     height: 80%;
     position: absolute;
@@ -31,42 +33,37 @@
     justify-content: center;
     grid-template-columns:  20%;
     grid-template-rows:  20% 20% 20% 20%;
-  }
+}
 
-  #MC{
-    width: 50%;
-  }
-  
-  .button-19{
-    height: 50%;
-    width: 50%;
-  }
+#MC{
+    margin-bottom: 30px;
+}
 
-  #deco{
+#deco{
     background: linear-gradient(-45deg,#f86b6b, #e65959,#f86b6b, #e65959);
     color : #e65959;}
     @keyframes gradient {
         0% {
-          background-position: 0 50%;
-          box-shadow: 0px 0px 2px #ffffff,
+            background-position: 0 50%;
+            box-shadow: 0px 0px 2px #ffffff,
             0px 0px 5px #ffffff,
             0px 0px 10px #f86b6b,
             0px 0px 50px #f86b6b;
         }
-      
+        
         50% {
-          background-position: 100% 50%;
-          box-shadow: 0px 0px 2px #ffffff,
+            background-position: 100% 50%;
+            box-shadow: 0px 0px 2px #ffffff,
             0px 0px 5px #ffffff,
             0px 0px 10px #e65959,
             0px 0px 50px #e65959;
         }
-      
+        
         100% {
-          background-position: 0 50%;
-          box-shadow: 0px 0px 2px #ffffff,
+            background-position: 0 50%;
+            box-shadow: 0px 0px 2px #ffffff,
                 0px 0px 5px #ffffff,
                 0px 0px 10px #f86b6b,
                 0px 0px 50px #f86b6b;
-        }
-  }
+    }
+}

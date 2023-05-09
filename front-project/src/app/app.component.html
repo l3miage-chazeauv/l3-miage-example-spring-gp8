@@ -1,43 +1,49 @@
-<div class="toolbar">
-   <img id="logo" 
-        (click)="this.router.toHome()" 
-        src="https://fontmeme.com/permalink/230428/d0ae53168fef4ad1c3b0c34eb8fa1862.png">      
-
-  <section class="TBButtons" *ngIf="user | async as U; else unlogged">
-
-    <div id="username"> {{U.name}} </div>
-
-   <div id="button-wrapper">
-      <button id="menu" [matMenuTriggerFor]="menu"><img id="pp"  [src]="U.photoUrl" /></button>
-   </div>
-
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="this.router.toAccountConfig()">Mon compte</button>
-      <button mat-menu-item (click)="this.router.toMiahootResearch()">Recherche de parties</button>
-      <button mat-menu-item (click)="this.router.toMiahootEditing()">Edition Miahoot (offi)</button>
-      <button mat-menu-item (click)="this.router.toEditing()">Edition Miahoot (dev)</button>
-      <button mat-menu-item (click)="logout()">Déconnexion</button>
-    </mat-menu>
-  </section>
-
-  <ng-template #unlogged class="ngtp">
-    <div class="connectB">
-      <button (click)="login()">Connexion</button>
+<div class="wrapper">
+    <!-- header -->
+    <div class="toolbar">
+        <img id="logo" 
+            (click)="this.router.toHome()" 
+            src="https://fontmeme.com/permalink/230428/d0ae53168fef4ad1c3b0c34eb8fa1862.png">      
+    
+    <section class="TBButtons" *ngIf="user | async as U; else unlogged">
+    
+        <div id="username"> {{U.name}} </div>
+    
+        <div id="button-wrapper">
+        <button id="menu" [matMenuTriggerFor]="menu"><img id="pp"  [src]="U.photoUrl" /></button>
+        </div>
+    
+        <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="this.router.toAccountConfig()">Mon compte</button>
+        <button mat-menu-item (click)="this.router.toMiahootResearch()">Recherche de parties</button>
+        <button mat-menu-item (click)="this.router.toMiahootEditing()">Edition Miahoot (offi)</button>
+        <button mat-menu-item (click)="this.router.toEditing()">Edition Miahoot (dev)</button>
+        <button mat-menu-item (click)="logout()">Déconnexion</button>
+        </mat-menu>
+    </section>
+    
+    <ng-template #unlogged class="ngtp">
+        <div class="connectB">
+        <button (click)="login()">Connexion</button>
+        </div>
+    </ng-template>
     </div>
-  </ng-template>
+    
+    
+    <section *ngIf="bsAuth | async" id="logProgress">
+    <div class="loaderWrapper">
+        <div class="loader">
+        <div class="face">
+            <div class="circle"></div>
+        </div>
+        <div class="face">
+            <div class="circle"></div>
+        </div>
+        </div>
+    </div>
+    <p id="logText">Connexion en cours...</p>
+    </section>
+    
+    <router-outlet></router-outlet>
+ 
 </div>
-<section *ngIf="bsAuth | async" id="logProgress">
-  <div class="loaderWrapper">
-    <div class="loader">
-      <div class="face">
-          <div class="circle"></div>
-      </div>
-      <div class="face">
-          <div class="circle"></div>
-      </div>
-    </div>
-  </div>
-  <p id="logText">Connexion en cours...</p>
-</section>
-
-<router-outlet></router-outlet>

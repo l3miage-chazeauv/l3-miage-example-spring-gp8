@@ -32,12 +32,15 @@ export class PresentationsComponent {
   }
 
   ngOnInit(): void {
+    console.log("oui");
     this.ms.getUser().then(u => {
+        
       if (u != null) {
         this.idUserFB = u.uid;
-        this.apiMia.getAPIMmiahootsPresented(this.idUserFB).subscribe((data: any) => {
+        this.apiMia.getAPIMiahootsCreated(this.idUserFB).subscribe((data: any) => {
           this.listePresentations = data as any[];
           this.cdRef.detectChanges();
+          console.log(this.listePresentations);
         });
       }
     }).catch(error => {
