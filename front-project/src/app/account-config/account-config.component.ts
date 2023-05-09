@@ -19,7 +19,7 @@ export class AccountConfigComponent {
   user !: MiahootUser;
   preview : Observable<string>;
   imageUrl!: string;
-  isDraggingOver = false;
+  affichage: boolean = false;
 
 
   public fg: FormGroup<{ 
@@ -106,6 +106,7 @@ export class AccountConfigComponent {
 
   onDrop(event: DragEvent) {
     event.preventDefault(); // empêche le navigateur de naviguer vers l'URL de l'image
+    this.affichage = true;
     const dataTransfer = event.dataTransfer;
     if (!dataTransfer) {
     return;
