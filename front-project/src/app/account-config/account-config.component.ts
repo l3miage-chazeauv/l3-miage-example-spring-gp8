@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Output,ChangeDetectorRef, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component,ChangeDetectorRef } from '@angular/core';
 import { Auth, User } from '@angular/fire/auth';
 import { doc, Firestore } from '@angular/fire/firestore';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';

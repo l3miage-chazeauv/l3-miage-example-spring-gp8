@@ -67,16 +67,16 @@ export class MiahootEditingComponent {
       "username": form.value.username,
       "firebaseId": form.value.firebaseId,
     };
-    this.apiMia.postAPIUser(data).subscribe(
-      //Permet de voir l'erreur dans la console ou le bon fonctionnement
-      data => {
-        if (data == null) {
-          console.log("Utilisateur créé");
-        } else {
-          console.error(data);
-        }
-      }
-    );
+    // this.apiMia.postAPIUser(data).subscribe(
+    //   //Permet de voir l'erreur dans la console ou le bon fonctionnement
+    //   data => {
+    //     if (data == null) {
+    //       console.log("Utilisateur créé");
+    //     } else {
+    //       console.error(data);
+    //     }
+    //   }
+    // );
   }
 
 
