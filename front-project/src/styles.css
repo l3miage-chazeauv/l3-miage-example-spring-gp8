@@ -21,6 +21,7 @@ body{
 }
 
 
+
 .context {
     width: 100%;
     position: absolute;
@@ -40,6 +41,8 @@ body{
     background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
     width: 100%;
     height:100vh;
+    position: fixed;
+    z-index: -10;
 }
 
 .circles{
@@ -159,21 +162,15 @@ body{
 }
 
 .card{
-    position: absolute;
-    transform: translate(-50%,-50%);
-    left:50%;
-    top:50%;
     box-sizing: border-box;
     background: linear-gradient(-45deg,#29abf7, #1e7db4,#29abf7, #1e7db4);
     animation: gradient 10s ease infinite;
     background-size: 500% 500%;
-    width: 20%;
-    height: max-content;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
-    padding: 2%;
+    padding: 30px;
     border-radius: 20px;
 }
 
@@ -229,7 +226,6 @@ body{
     font-weight: 700;
     letter-spacing: .8px;
     line-height: 20px;
-    margin: 3%;
     outline: none;
     overflow: visible;
     padding: 13px 16px;
@@ -242,7 +238,6 @@ body{
     -webkit-user-select: none;
     vertical-align: middle;
     white-space: nowrap;
-    width: 20%;
   }
   
   .button-19:after {
