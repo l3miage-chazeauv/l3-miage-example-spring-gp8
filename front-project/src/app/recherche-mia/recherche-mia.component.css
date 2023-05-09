@@ -132,7 +132,6 @@
     left:50%;
     top:50%;
     box-sizing: border-box;
-    background: linear-gradient(-45deg,#f86b6b, #e65959,#f86b6b, #e65959);
     animation: gradient 5s ease infinite;
     background-size: 500% 500%;
     width: 20%;
