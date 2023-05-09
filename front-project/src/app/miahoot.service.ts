@@ -94,6 +94,15 @@ export class MiahootService{
     });
   }
 
+  //Retourne un MiahootUser (firebase) si l'utilisateur est connecté, erreur sinon
+  async  getIdUserFB(): Promise<string> {
+    const user = await this.getUser();
+    if (user) {
+      return user.uid;
+    }
+    return "nullUserId";
+  }
+
   //Mettre à jour l'utilisateur courant dans firebase
   update(up: Partial<MiahootUser>) {
     const user = this.auth.currentUser;

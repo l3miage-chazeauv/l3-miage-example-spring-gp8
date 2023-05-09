@@ -5,6 +5,7 @@ import { Auth, authState } from '@angular/fire/auth';
 import { DocumentData, DocumentReference, Firestore, FirestoreDataConverter, addDoc, collection, collectionData, doc, docData, getDocs, query, setDoc, where } from '@angular/fire/firestore';
 import { APIService } from './api.service';
 import { MiahootService } from './miahoot.service';
+import { get } from '@angular/fire/database';
 
 const conv2: FirestoreDataConverter<Parties> = {
   toFirestore: val => val,
@@ -70,7 +71,7 @@ export class GameService {
   async addMiahootPresente(idMiahoot: number, idUserFB: string): Promise<void> {
 
     if(await this.verifMiahootPresente(idMiahoot) === true){ // On vérifie que le miahoot n'est pas déjà présenté
-      console.log("Miahoot déjà présenté")
+      console.log("Miahoot déjà présenté");
       return;
     }
 
@@ -94,11 +95,15 @@ export class GameService {
 
       this.addMIdToUser(partieData, idUserFB);
 
+      this.addPresToParty(idUserFB, idMiahoot);
+
     } catch (error) {
       console.error("Erreur lors de l'ajout du miahoot présenté dans la base de données");
       throw error;
     }
   }
+
+  /* POSTS FIREBASE */
 
   async addMIdToUser(partieData: DocumentReference<DocumentData>, idUserFB: string): Promise<void> {
     // On ajoute l'id du miahoot à l'attribut miahootID du présentateur qui y est connecté automatiquement
@@ -109,20 +114,35 @@ export class GameService {
 
       const miahootUserRef = doc(this.fs, `users/${idUserFB}`).withConverter(conv);
       const miahootUserDoc = docData(miahootUserRef);
-      console.log(miahootUserDoc)
+      // console.log(miahootUserDoc)
+
       const miahootUserData = await firstValueFrom(miahootUserDoc);
-      console.log("miahootUserData : " + JSON.stringify(miahootUserData))
+      // console.log("miahootUserData : " + JSON.stringify(miahootUserData))
 
       if (miahootUserData) {
 
         miahootUserData.miahootID = partieData.id;
-        console.log("changement val miahootID user (post): " + miahootUserData.miahootID)
+        // console.log("changement val miahootID user (post): " + miahootUserData.miahootID)
+
         const miahootUserRef = doc(this.fs, `users/${idUserFB}`).withConverter(conv);
         await setDoc(miahootUserRef, miahootUserData);
 
       }
     }
   }
+
+  async addPresToParty(idUserFB: string, idMiahoot: number): Promise<void> {
+    // On ajoute l'id du présentateur à l'attribut presentateurID de la partie de miahoot
+    const partie = await this.getMiahootPresente(idMiahoot);
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      partieData['presentateurID'] = idUserFB;
+      await setDoc(partie, partieData);
+    }
+  }
+
+  /* GETS FIREBASE */
 
   async getMiahootPresente(miahootID: number): Promise<DocumentReference<DocumentData>> {
     let res = "nullId";
@@ -140,6 +160,22 @@ export class GameService {
     return docPartie;
   }
 
+  async getPresentateurMiahootPresente(miahootID: string): Promise<string> {
+    let res = "nullId";
+
+    const partiesCollection = collection(this.fs, `parties/`);
+    const partieQuery = query(partiesCollection, where('miahootID', '==', parseInt(miahootID)));
+
+    const querySnapshot = await getDocs(partieQuery);
+    if (!querySnapshot.empty) {
+      const docSnapshot = querySnapshot.docs[0];
+      const presentateurID = docSnapshot.get('presentateurID');
+      res = presentateurID;
+    }
+    console.log("res f: " + res)
+    return res;
+  }
+
   async getDocByID(id: string): Promise<DocumentData> { // fonction useless pour l'instant
     const partiesCollection = collection(this.fs, `parties/`);
 
@@ -152,8 +188,9 @@ export class GameService {
 
     const partiesCollection = collection(this.fs, `parties/`);
     const partieQuery = query(partiesCollection, where('miahootID', '==', idMiahoot));
-
-    if (partieQuery) {
+    const partieDoc = await getDocs(partieQuery);
+  
+    if (partieDoc.size > 0 && partieDoc.docs[0].exists()) {
       return true;
     } else {
       return false;
