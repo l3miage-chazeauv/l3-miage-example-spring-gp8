@@ -3,9 +3,7 @@ import { catchError, of } from 'rxjs';
 import { APIService } from '../api.service';
 import { RoutingService } from '../routing.service';
 import { UserService } from '../user.service';
-import { MiahootGame } from '../QcmDefinitions';
 import { GameService } from '../game.service';
-import { authState } from '@angular/fire/auth';
 import { DocumentData, DocumentReference, Firestore, collection, getDocs, query, where } from '@angular/fire/firestore';
 
 @Component({

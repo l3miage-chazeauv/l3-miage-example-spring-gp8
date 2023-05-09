@@ -1,13 +1,10 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Auth, authState, User } from '@angular/fire/auth';
-import { addDoc, collection, collectionData, docData, Firestore, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from '@angular/fire/firestore';
-import { FormControl, FormGroup } from '@angular/forms';
-import { FirestoreModule } from '@angular/fire/firestore';
+import {  docData, Firestore, FirestoreDataConverter } from '@angular/fire/firestore';
 
 import { doc, getDoc, setDoc, updateDoc } from '@firebase/firestore';
 import { filter, map, Observable, of, switchMap, take, tap } from 'rxjs';
-import { Miahoot, MiahootGame, MiahootUser, Parties, Question } from './QcmDefinitions';
-import { APIService } from './api.service';
+import { MiahootUser } from './QcmDefinitions';
 
 
 const conv : FirestoreDataConverter<MiahootUser> = {
@@ -49,23 +46,6 @@ export class UserService{
       })
     ).subscribe()
 
-    // console.log("dans le constructeur de miahoot service")
-    // this.obsPartie$.pipe(
-    //   filter( p => !!p ),
-    //   map( p => p as Partie ),
-    //   tap( async p => {
-    //     const docPartie =  doc(this.fs, `parties/0PKd0zanf4t7QSKXLcvV`).withConverter(conv2);
-    //     const snapPartie = docData( docPartie );
-    //     // if (!snapPartie.exists()) {
-    //     //   setDoc(docPartie, {
-    //     //     questions: p.questions
-    //     //   } satisfies Partie)
-    //     // }
-    //     console.log("partie dans lecture firebase  : " +snapPartie)
-    //     console.log("partie dans lecture firebase  : " +p)
-    //     console.log("partie dans lecture firebase  : " +p.questions)
-    //   })
-    // ).subscribe()
 
     this.obsMiahootUser$ = authState(this.auth).pipe(
       switchMap( (user) => {
