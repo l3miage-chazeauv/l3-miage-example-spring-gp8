@@ -13,6 +13,7 @@
     font-size: 2em;
     font-weight: 800;
     filter: drop-shadow(0px 0px 10px rgb(255, 255, 255));
+    margin: 10px;
   }
   
   .content {
@@ -123,24 +124,6 @@
     border: none;
     padding: 8px;
     position: relative;
-  }
-
-  .card {
-    position: absolute;
-    transform: translate(-50%,-50%);
-    left:50%;
-    top:50%;
-    box-sizing: border-box;
-    animation: gradient 5s ease infinite;
-    background-size: 500% 500%;
-    width: 20%;
-    height: 30%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    padding: 2%;
-    border-radius: 20px;
   }
 
   .cardErreur {

@@ -9,8 +9,9 @@ import { Question } from './QcmDefinitions';
 })
 
 export class APIService {
-
-  private apiUrl = 'http://129.88.210.111:8080';
+    private kyksIp = '111'
+    private paulIp = '142'
+  private apiUrl = `http://129.88.210.${this.paulIp}:8080`;
 
   constructor(private http: HttpClient, private ms: UserService) {}
 
@@ -64,6 +65,13 @@ export class APIService {
     const url = `${this.apiUrl}/utilisateur/${idFb}/miahootsPresentes`;
     return this.http.get(url);
   }
+
+  getAPIMiahootsCreated(idFb: string){
+    const url = `${this.apiUrl}/utilisateur/${idFb}/miahootsConcus`;
+    return this.http.get(url);
+  }
+
+
 
   // Fonction pour la methode POST
   postAPIMiahoot(data: any): Observable<any> {
@@ -121,6 +129,17 @@ export class APIService {
   postAPIQuestion(endpoint: string): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
     return this.http.post(url,[] );
+  }
+
+  postAPIQuestionPr(endpoint: string): Promise<number> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    const observable = this.http.post(url,[] );
+
+    return firstValueFrom(observable).then(
+      (data) => {
+        return data as number;
+      }
+    );
   }
 
   patchAPIQuestionById(id:number, data:any): Observable<any> {

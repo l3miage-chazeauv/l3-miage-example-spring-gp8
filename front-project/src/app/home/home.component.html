@@ -1,22 +1,17 @@
 <div class="conteneur">    
-  <div class="box">
-    <button class="button-19"
-              id="MC"
-              (click)="this.router.toAccountConfig()">Compte</button>
-  </div>
-  <div class="box">
-    <button class="button-19"
-            id="MC"
-            (click)="this.router.toMiahootEditing()">Edition Miahoot (offi)</button>
-  <div class="box">
-    <button class="button-19"
-            id="MC"
-            (click)="this.router.toEditing()">Edition Miahoot (dev)</button>
-  </div>
-  <div class="box">
-    <button class="button-19"
-            id="deco"
-            (click)="logout()">Déconnexion</button>
-  </div>
-  </div>
+    <app-recherche-mia></app-recherche-mia>
+    <div class="box">
+        <button class="button-19"
+                id="MC"
+                (click)="this.router.toAccountConfig()">Compte</button>
+        <button class="button-19"
+                id="MC"
+                (click)="this.router.toMiahootEditing()">Edition Miahoot (offi)</button>
+        <button class="button-19"
+                id="MC"
+                (click)="this.router.toEditing()">Edition Miahoot (dev)</button>
+        <button class="button-19"
+                id="deco"
+                (click)="logout()">Déconnexion</button>
+    </div>
 </div>
