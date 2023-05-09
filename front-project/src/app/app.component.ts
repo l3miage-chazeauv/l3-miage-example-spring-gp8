@@ -47,20 +47,28 @@ export class AppComponent {
     this.bsAuth.next(false); // on passe l'état de la connection à false
 
     //créer un utilisateur dans la base de données Spring
-    this.ms.getUser().then(data => {
-      //retourne ID et nom de l'utilisateur
-      console.log("id : " + data?.uid);
-      console.log("nom : " + data?.displayName);
-      this.apiService.postAPIUser(data?.displayName ? data.displayName : '', data?.uid).subscribe(data => {
-        console.log("data : " + data);
-      });
+    this.ms.getUser().then(user => {
+      this.apiService.getAPIAllUsers().subscribe(other => {
+        
+        let find = false;
+        for(let i =0; i<other.length; i++){
+          if(other[i].firebaseId === user?.uid){
+            find = true;
+          }
+        }
+
+        if(find == false){
+          console.log("User non trouvé dans spring boot");
+          this.apiService.postAPIUser(user?.displayName ? user.displayName : '', user?.uid).subscribe()
+        }
+
     });
+  });
 
 
 
     this.parties.subscribe(data => {
       console.log("parties : " + data);
-      // console.log("partie : " + data?.uid);
     });
 
 
