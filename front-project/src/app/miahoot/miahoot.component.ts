@@ -35,7 +35,7 @@ export class MiahootComponent{
         let question: Question = {
           label: obj.label, 
           reponses: obj.reponses,
-          questionId: obj.id
+          id: obj.id
         };
         this.gs.miahootGame.miahoot.listeQuestions.push(question);
       })

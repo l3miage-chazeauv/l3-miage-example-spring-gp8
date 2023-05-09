@@ -9,7 +9,7 @@
   <br/>
   <h2>URL photo de profil </h2>
   <input matInput type="text" 
-         formControlName ="photoURL" 
+         formControlName ="photoURL"
          placeholder="URL de votre photo..."/>
   <br/>
   <img [src]="preview | async" 
@@ -19,3 +19,9 @@
           (click)="update()">Sauvegarder</button>
 
 </div>
+
+<div id="drop-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+       Déposez votre fichier ici
+</div>
+<img [src]="imageUrl" *ngIf="preview" alt="Image Preview">
+     

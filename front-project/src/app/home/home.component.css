@@ -39,31 +39,3 @@
     margin-bottom: 30px;
 }
 
-#deco{
-    background: linear-gradient(-45deg,#f86b6b, #e65959,#f86b6b, #e65959);
-    color : #e65959;}
-    @keyframes gradient {
-        0% {
-            background-position: 0 50%;
-            box-shadow: 0px 0px 2px #ffffff,
-            0px 0px 5px #ffffff,
-            0px 0px 10px #f86b6b,
-            0px 0px 50px #f86b6b;
-        }
-        
-        50% {
-            background-position: 100% 50%;
-            box-shadow: 0px 0px 2px #ffffff,
-            0px 0px 5px #ffffff,
-            0px 0px 10px #e65959,
-            0px 0px 50px #e65959;
-        }
-        
-        100% {
-            background-position: 0 50%;
-            box-shadow: 0px 0px 2px #ffffff,
-                0px 0px 5px #ffffff,
-                0px 0px 10px #f86b6b,
-                0px 0px 50px #f86b6b;
-    }
-}

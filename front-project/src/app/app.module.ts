@@ -38,6 +38,7 @@ import { MiahootEditingComponent } from './miahoot-editing/miahoot-editing.compo
 import { CreateMiahootComponent } from './create-miahoot/create-miahoot.component';
 import { ArchivePartiesComponent } from './archive-parties/archive-parties.component';
 import { HomeComponent } from './home/home.component';
+import { NewMiahootComponent } from './new-miahoot/new-miahoot.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { HomeComponent } from './home/home.component';
     CreateMiahootComponent,
     ArchivePartiesComponent,
     HomeComponent,
+    NewMiahootComponent,
   ],
   imports: [
     HttpClientModule,

@@ -13,8 +13,11 @@ export class RoutingService{
   toAccountConfig(){
     this.router.navigateByUrl("accountConfig"); // on redirige vers la page de configuration du compte
   }
-  toCreateMiahoot(){
-    this.router.navigateByUrl("create-miahoot"); // on redirige vers la page de configuration du compte
+  toNewMiahoot(){
+    this.router.navigateByUrl("new-miahoot"); // on redirige vers la page de de creation de miahoot
+  }
+  toCreateMiahoot(id: number | undefined){
+    this.router.navigateByUrl(`create-miahoot/${id}`); // on redirige vers la page de configuration du compte
   }
   toMiahootEditing(){
     this.router.navigateByUrl("miahoot-editing"); // on redirige vers la page de configuration du compte
