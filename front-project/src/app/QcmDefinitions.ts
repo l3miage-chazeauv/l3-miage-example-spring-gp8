@@ -3,6 +3,12 @@ export interface Miahoot{
   listeQuestions: Question[];
 }
 
+export interface InfosMiahoot{
+    id: number;
+    nom: string;
+    description: string;
+}
+
 export interface MiahootGame{
   isPresented: boolean;
   miahoot: Miahoot;
@@ -16,7 +22,7 @@ export interface Reponse{
 }
 
 export interface Question{
-  questionId:number;
+  id:number;
   label: string;
   reponses: Reponse[];
 }
