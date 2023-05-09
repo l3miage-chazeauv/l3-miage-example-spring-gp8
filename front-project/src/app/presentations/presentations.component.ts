@@ -3,7 +3,7 @@ import { Miahoot } from '../QcmDefinitions';
 import { Observable } from 'rxjs';
 import { Auth, User, authState } from '@angular/fire/auth';
 import { APIService } from '../api.service';
-import { MiahootService } from '../miahoot.service';
+import { UserService } from '../user.service';
 import { RoutingService } from '../routing.service';
 import { GameService } from '../game.service';
 
@@ -19,7 +19,7 @@ export class PresentationsComponent {
 
   constructor(private auth: Auth, 
               private apiMia: APIService, 
-              protected ms : MiahootService, 
+              protected ms : UserService, 
               private cdRef: ChangeDetectorRef, 
               protected router : RoutingService,
               protected game: GameService) {

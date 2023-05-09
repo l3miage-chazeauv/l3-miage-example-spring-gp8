@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { APIService } from '../api.service';
-import { MiahootService } from '../miahoot.service';
+import { UserService } from '../user.service';
 import { RoutingService } from '../routing.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class CreateMiahootComponent {
   public idUtilisateur: number = 1;
 
 
-  constructor(private apiMia: APIService, protected router : RoutingService, protected miaU : MiahootService) {
+  constructor(private apiMia: APIService, protected router : RoutingService, protected miaU : UserService) {
     
 
   }

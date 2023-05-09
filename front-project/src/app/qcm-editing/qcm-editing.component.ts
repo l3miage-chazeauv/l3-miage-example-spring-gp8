@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { APIService } from '../api.service';
 import { NgForm } from '@angular/forms';
-import { MiahootService } from '../miahoot.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-qcm-editing',
@@ -15,7 +15,7 @@ export class QcmEditingComponent {
   public idReponse: number = 1;
   public idUtilisateur?: string;
 
-  constructor(private apiMia: APIService, private ms : MiahootService) {
+  constructor(private apiMia: APIService, private ms : UserService) {
     this.ms.getUser().then((data) => {
 
       this.idUtilisateur = data?.uid;

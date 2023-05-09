@@ -3,7 +3,7 @@ import { Auth, User } from '@angular/fire/auth';
 import { doc, Firestore } from '@angular/fire/firestore';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { updateDoc } from '@firebase/firestore';
-import { MiahootService } from '../miahoot.service';
+import { UserService } from '../user.service';
 import { Storage,  ref, uploadBytes } from '@angular/fire/storage';
 import { getDownloadURL } from 'firebase/storage';
 import { Observable, of, switchMap } from 'rxjs';
@@ -25,7 +25,7 @@ export class AccountConfigComponent {
     photoFile: FormControl<File | undefined> 
     }>;
   
-  constructor(private ms : MiahootService,
+  constructor(private ms : UserService,
               private fs : Firestore, 
               private fb: FormBuilder,
               private storage: Storage,
