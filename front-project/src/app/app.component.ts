@@ -4,7 +4,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Firestore } from '@angular/fire/firestore';
 import { APIService } from './api.service';
 import { RoutingService } from './routing.service';
-import { MiahootService, MiahootUser, Partie, Parties } from './miahoot.service';
+import { MiahootService } from './miahoot.service';
+import { MiahootUser, Parties } from './QcmDefinitions';
+import { GameService } from './game.service';
 
 @Component({
   selector: 'app-root',
@@ -22,9 +24,9 @@ export class AppComponent {
   public readonly parties: Observable<Parties | undefined>; // utilisateur connecté
 
 
-  constructor(private auth: Auth, protected router: RoutingService, private ms : MiahootService) {
+  constructor(private auth: Auth, protected router: RoutingService, private ms : MiahootService, private game: GameService) {
     this.user = this.ms.obsMiahootUser$; // récupération de l'utilisateur connecté
-    this.parties = this.ms.obsParties$; // récupération de l'utilisateur connecté
+    this.parties = this.game.obsParties$; // récupération de l'utilisateur connecté
     
   }
   

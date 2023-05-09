@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { MiahootService } from './miahoot.service';
+import { Question } from './QcmDefinitions';
 
 @Injectable({
   providedIn: 'root'
@@ -62,14 +63,14 @@ export class APIService {
 
   // Fonction pour la methode POST
   postAPIMiahoot(data: any): Observable<any> {
-    this.ms.listeMiahoots.push(data); // On ajoute le miahoot a la liste des miahoots
+    //this.ms.listeMiahoots.push(data); // On ajoute le miahoot a la liste des miahoots
     const url = `${this.apiUrl}/miahoot/`;
     return this.http.post(url, data);
   }
 
   // Fonction pour la methode DELETE des miahoots
   deleteAPIQMiahootById(id:number): Observable<any> {
-    this.ms.listeMiahoots.splice(this.ms.listeMiahoots.indexOf(id),1); // On supprime le miahoot de la liste des miahoots
+    //this.ms.listeMiahoots.splice(this.ms.listeMiahoots.indexOf(id),1); // On supprime le miahoot de la liste des miahoots
     const url = `${this.apiUrl}/miahoot/${id}`;
     return this.http.delete(url);
   }
@@ -84,6 +85,16 @@ export class APIService {
   getAPIQuestionsByMiahootID(idMiahoot: number): Observable<any> {
     const url = `${this.apiUrl}/miahoot/${idMiahoot}/questions`;
     return this.http.get(url);
+  }
+
+  getAPIQuestionsByMiahootIDPr(idMiahoot: number): Promise<Question[]> {
+    const url = `${this.apiUrl}/miahoot/${idMiahoot}/questions`;
+    const observable = this.http.get(url);
+    return firstValueFrom(observable).then(
+      (data) => {
+        return data as Question[];
+      }
+    );
   }
 
   getAPIAllQuestions(): Observable<any> {
