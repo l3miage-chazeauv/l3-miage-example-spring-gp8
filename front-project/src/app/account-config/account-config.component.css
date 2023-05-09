@@ -1,46 +1,4 @@
-/* .card{
-  position: absolute;
-  transform: translate(-50%,-50%);
-  left:50%;
-  top:50%;
-  box-sizing: border-box;
-  background: linear-gradient(-45deg,#29abf7, #1e7db4,#29abf7, #1e7db4);
-  animation: gradient 5s ease infinite;
-  background-size: 500% 500%;
-  width: 20%;
-  height: max-content;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  padding: 2%;
-  border-radius: 20px;
-  }
-  
-  @keyframes gradient {
-    0% {
-      background-position: 0 50%;
-      box-shadow: 0px 0px 2px #ffffff,
-        0px 0px 5px #ffffff,
-        0px 0px 10px #6bc5f8,
-        0px 0px 50px #6bc5f8;
-    }
-  
-    50% {
-      background-position: 100% 50%;
-      box-shadow: 0px 0px 2px #ffffff,
-        0px 0px 5px #ffffff,
-        0px 0px 10px #30b2fd,
-        0px 0px 50px #30b2fd;
-    }
-  
-    100% {
-      background-position: 0 50%;
-      box-shadow: 0px 0px 2px #ffffff,
-            0px 0px 5px #ffffff,
-            0px 0px 10px #6bc5f8,
-            0px 0px 50px #6bc5f8;
-    }
-  } */
+
 
 button{
   box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
@@ -85,6 +43,7 @@ input{
 }
 
 #drop-area {
+  color: white;
   border: 2px dashed #ccc;
   border-radius: 20px;
   padding: 25px;
@@ -98,5 +57,7 @@ input{
 }
 
 img {
+  color:white;
   max-width: 100%;
+  max-height: 150px;
 }

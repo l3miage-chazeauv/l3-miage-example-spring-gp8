@@ -15,13 +15,14 @@
   <img [src]="preview | async" 
         style="max-width : 200px"/>
   <br/>
-  <button mat-raised-button color="primary" 
-          (click)="update()">Sauvegarder</button>
+          <div id="drop-area" 
+              (drop)="onDrop($event)" 
+              (dragover)="onDragOver($event)">Déposez votre fichier ici</div>
+       <img [src]="imageUrl" *ngIf="preview" alt="Image Preview">
 
+       <button mat-raised-button color="primary" 
+       (click)="update()">Sauvegarder</button>
 </div>
 
-<div id="drop-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
-       Déposez votre fichier ici
-</div>
-<img [src]="imageUrl" *ngIf="preview" alt="Image Preview">
+
      
