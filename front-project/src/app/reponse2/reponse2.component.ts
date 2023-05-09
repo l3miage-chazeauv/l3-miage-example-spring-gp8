@@ -1,4 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { GameService } from '../game.service';
+import { UserService } from '../user.service';
+
 
 @Component({
   selector: 'app-reponse2',
@@ -11,6 +14,16 @@ export class Reponse2Component {
     @Input() reponseId!: number 
     @Input() label!:String 
     @Input() estCorrecte!:Boolean
+    @Input() idPresentateur?: string
   
     public estCochee:Boolean = false;
+    public idUserFB: string = "nullIdUserFB";
+
+    constructor(private ms:UserService) {
+      this.ms.getUser().then((user) => {
+        if(user) {
+          this.idUserFB = user.uid;
+        }
+      })
+     }
 }

@@ -8,6 +8,7 @@
                          [questionId]="i+1" 
                          [label]="question.label" 
                          [reponses]="question.reponses"
+                         [idPresentateur]="this.idPresentateur"
                          [class.hide]="i+1 !== idCourant">
             </app-question>
         </div>
@@ -18,8 +19,8 @@
       class="buttonsContainer">
     <button (click)="this.questionPrecedente()"
             [class.button-19]="this.idCourant > 1"
-            [class.hide]="this.idCourant <= 1">Précédente ({{this.idCourant-1}})</button>
+            [class.hide]="this.idCourant <= 1 || this.idPresentateur !== this.idUserFB">Précédente ({{this.idCourant-1}})</button>
     <button (click)="this.questionSuivante()"
             [class.button-19]="this.idCourant < this.gs.miahootGame.miahoot.listeQuestions.length"
-            [class.hide]="this.idCourant >= this.gs.miahootGame.miahoot.listeQuestions.length">Suivante ({{this.idCourant+1}})</button>
+            [class.hide]="this.idCourant >= this.gs.miahootGame.miahoot.listeQuestions.length || this.idPresentateur !== this.idUserFB">Suivante ({{this.idCourant+1}})</button>
 </div>

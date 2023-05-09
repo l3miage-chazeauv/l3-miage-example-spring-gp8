@@ -2,8 +2,10 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@a
 import { MiahootUser, Question } from '../QcmDefinitions';
 import { GameService } from '../game.service';
 import { APIService } from '../api.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map, of } from 'rxjs';
+import { UserService } from '../user.service';
+import { User } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-miahoot[idMiahoot]',
@@ -23,29 +25,42 @@ export class MiahootComponent{
   public idCourant:number = 1;
   private concepteurs?: MiahootUser[];
   private presentateurs?: MiahootUser[];
+
+  public idPresentateur?: string;
+  public idUserFB: string = "nullIdUserFB";
   
-  constructor(private apiMia: APIService, private router: Router, protected gs: GameService, private cdRef: ChangeDetectorRef) { 
+  constructor(private apiMia: APIService, 
+              private router: Router, 
+              private ar: ActivatedRoute,
+              protected gs: GameService, 
+              private ms: UserService,
+              private cdRef: ChangeDetectorRef) { 
 
-    const state = this.router.getCurrentNavigation()?.extras.state; // On récupère les données de la route
-    this.idMiahoot = state?.['idMiahootRouting'] ?? -1; // On récupère l'id du miahoot
+    this.assignUserId().then(() => {
+      this.idMiahoot = this.ar.snapshot.params['id'];
 
-    this.apiMia.getAPIQuestionsByMiahootID(this.idMiahoot).subscribe((data: any) => {
-      // console.log("Data: " + JSON.stringify(data));
-      data.map((obj: { id: any, label: any, miahootId: any,reponses: any }) => {
-        let question: Question = {
-          label: obj.label, 
-          reponses: obj.reponses,
-          id: obj.id
-        };
-        this.gs.miahootGame.miahoot.listeQuestions.push(question);
-      })
+      if(this.idMiahoot) {
+        console.log("Id du miahoot: " + this.idMiahoot);
+        this.assignPresentateur(this.idMiahoot).then(() => {
 
-      // console.log("Liste des questions: " + this.gs.miahootGame.listeQuestions);
-      // console.log("Question 1: " + JSON.stringify(this.gs.miahootGame.listeQuestions[0]));
-      // console.log("Question 1 no string: " + this.gs.miahootGame.listeQuestions[0].label);
-      
-    }); // On récupère les questions du miahoot
-   }
+          this.apiMia.getAPIQuestionsByMiahootID(this.idMiahoot).subscribe((data: any) => {
+
+            data.map((obj: { id: any, label: any, miahootId: any,reponses: any }) => {
+              let question: Question = {
+                label: obj.label, 
+                reponses: obj.reponses,
+                id: obj.id
+              };
+              this.gs.miahootGame.miahoot.listeQuestions.push(question);
+            })
+          }); // On récupère les questions du miahoot
+    
+          console.log("Présentateur: " + this.idPresentateur);
+          console.log("User courant: " + this.idUserFB);
+          });
+      }
+    });
+  }
   
   questionSuivante():void{
     this.idCourant=this.idCourant+1; // On passe à la question suivante
@@ -58,4 +73,14 @@ export class MiahootComponent{
       this.cdRef.detectChanges();
     }
   }
+
+  async assignPresentateur(idMiahoot: number) {
+    this.idPresentateur = await this.gs.getPresentateurMiahootPresente(idMiahoot.toString());
+  }
+
+  async assignUserId(): Promise<void> {
+    this.idUserFB = await this.ms.getIdUserFB();
+  }
+
+  
 }
