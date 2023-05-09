@@ -119,6 +119,17 @@ export class APIService {
     return this.http.post(url,[] );
   }
 
+  postAPIQuestionPr(endpoint: string): Promise<number> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    const observable = this.http.post(url,[] );
+
+    return firstValueFrom(observable).then(
+      (data) => {
+        return data as number;
+      }
+    );
+  }
+
   patchAPIQuestionById(id:number, data:any): Observable<any> {
     const url = `${this.apiUrl}/question/${id}`;
     return this.http.patch(url, data);

@@ -9,15 +9,16 @@ import { RoutingService } from '../routing.service';
   templateUrl: './create-miahoot.component.html',
   styleUrls: ['./create-miahoot.component.css']
 })
-export class CreateMiahootComponent {
+export class CreateMiahootComponent{
 
   public rep: boolean = false;
 
   public idMia: string | undefined; 
   public idMiahoot?: number;
   public idQuestion?: number;
-  public idReponse: number = 1;
-  public idUtilisateur: number = 1;
+  // public idReponse: number = 1;
+  // public idUtilisateur: number = 1;
+  public reponses: NgForm[]=[];
 
 
   constructor(private apiMia: APIService, protected router : RoutingService, protected miaU : UserService) {
@@ -74,18 +75,10 @@ export class CreateMiahootComponent {
     );
   }
 
-  postQuestion(form: NgForm) {
+  async postQuestion(form: NgForm) {
     console.log(form.value.labelQuestion);
-    this.apiMia.postAPIQuestion('miahoot/' + this.idMiahoot + "/question?label=" + form.value.labelQuestion).subscribe(
-      //Permet de voir l'erreur dans la console ou le bon fonctionnement
-      data => {
-        if (data == null) {
-          console.log("Question créé");
-        } else {
-          console.error(data);
-        }
-        this.idQuestion = data;
-      });
+    this.idQuestion = await this.apiMia.postAPIQuestionPr('miahoot/' + this.idMiahoot + "/question?label=" + form.value.labelQuestion);
+    console.log("idQuest: " + this.idQuestion)
   }
 
 
@@ -109,7 +102,6 @@ export class CreateMiahootComponent {
         }
       });
   }
-
 
   postQuestionAvecReponses(formQuestion: NgForm, reponses:NgForm[]):void{
     this.postQuestion(formQuestion);
