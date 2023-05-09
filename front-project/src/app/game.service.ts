@@ -172,7 +172,7 @@ export class GameService {
       const presentateurID = docSnapshot.get('presentateurID');
       res = presentateurID;
     }
-    console.log("res f: " + res)
+
     return res;
   }
 

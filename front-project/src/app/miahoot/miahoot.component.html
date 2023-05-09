@@ -5,18 +5,18 @@
         <div class="questions" 
             *ngFor="let question of this.gs.miahootGame.miahoot.listeQuestions;let i = index">
             <app-question class="question" 
-                         [questionId]="i+1" 
-                         [label]="question.label" 
-                         [reponses]="question.reponses"
-                         [idPresentateur]="this.idPresentateur"
-                         [class.hide]="i+1 !== idCourant">
+                        [questionId]="i+1" 
+                        [label]="question.label" 
+                        [reponses]="question.reponses"
+                        [idPresentateur]="this.idPresentateur"
+                        [class.hide]="i+1 !== idCourant">
             </app-question>
         </div>
     </div>
 </div>
 
 <div *ngIf="this.gs.inGame === true"
-      class="buttonsContainer">
+    class="buttonsContainer">
     <button (click)="this.questionPrecedente()"
             [class.button-19]="this.idCourant > 1"
             [class.hide]="this.idCourant <= 1 || this.idPresentateur !== this.idUserFB">Précédente ({{this.idCourant-1}})</button>
