@@ -9,7 +9,7 @@
             <h2 class="titre">{{ presentation.nom }}</h2>
             <h4 class="description">{{ presentation.description }}</h4>
             <!-- <h5 class="heading">Code PIN: {{ presentation.id }}</h5> -->
-            <button class="button-19" (click)="this.ms.addMiahootPresente(presentation.id) ; this.router.toMiahoot(presentation.id)">Présenter</button>
+            <button class="button-19" (click)="this.router.toMiahoot(presentation.id)">Présenter</button>
         </div>
     </div>
 </div>
