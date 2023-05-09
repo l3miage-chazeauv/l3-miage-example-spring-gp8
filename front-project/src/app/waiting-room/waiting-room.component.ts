@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
-import { MiahootUser } from '../miahoot.service';
 import { GameService } from '../game.service';
+import { MiahootUser } from '../QcmDefinitions';
 
 @Component({
   selector: 'app-waiting-room',

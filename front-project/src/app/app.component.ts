@@ -4,7 +4,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Firestore } from '@angular/fire/firestore';
 import { APIService } from './api.service';
 import { RoutingService } from './routing.service';
-import { MiahootService, MiahootUser, Partie } from './miahoot.service';
+import { UserService } from './user.service';
+import { MiahootUser, Parties } from './QcmDefinitions';
+import { GameService } from './game.service';
 
 @Component({
   selector: 'app-root',
@@ -19,12 +21,12 @@ export class AppComponent {
   
   bsAuth = new BehaviorSubject<boolean>(false); // état de la connection
   public readonly user: Observable<MiahootUser | undefined>; // utilisateur connecté
-  public readonly partie: Observable<Partie | undefined>; // utilisateur connecté
+  public readonly parties: Observable<Parties | undefined>; // utilisateur connecté
 
 
-  constructor(private auth: Auth, protected router: RoutingService, private ms : MiahootService) {
+  constructor(private auth: Auth, protected router: RoutingService, private ms : UserService, private game: GameService) {
     this.user = this.ms.obsMiahootUser$; // récupération de l'utilisateur connecté
-    this.partie = this.ms.obsPartie$; // récupération de l'utilisateur connecté
+    this.parties = this.game.obsParties$; // récupération de l'utilisateur connecté
     
   }
   
@@ -53,8 +55,8 @@ export class AppComponent {
       console.log("nom : " + data?.displayName);
     });
 
-    this.partie.subscribe(data => {
-      console.log("partie : " + data?.questions);
+    this.parties.subscribe(data => {
+      console.log("parties : " + data);
       // console.log("partie : " + data?.uid);
     });
 

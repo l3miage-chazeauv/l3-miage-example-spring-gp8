@@ -1,39 +1,22 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Auth, authState, User } from '@angular/fire/auth';
-import { docData, Firestore, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, docData, Firestore, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from '@angular/fire/firestore';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FirestoreModule } from '@angular/fire/firestore';
 
 import { doc, getDoc, setDoc, updateDoc } from '@firebase/firestore';
-import { filter, map, Observable, of, switchMap, tap } from 'rxjs';
-import { Miahoot, MiahootGame } from './QcmDefinitions';
+import { filter, map, Observable, of, switchMap, take, tap } from 'rxjs';
+import { Miahoot, MiahootGame, MiahootUser, Parties, Question } from './QcmDefinitions';
 import { APIService } from './api.service';
 
-
-
-export interface MiahootUser{
-  readonly miahootID ?: string; // L'id pas obligatoire c'est plus du bricolage qu'autre chose...
-  name: string
-  readonly photoUrl : string
-}
-
-export interface Partie{
-  questions: string
-}
-
-const conv2 : FirestoreDataConverter<Partie> = {
-  toFirestore : val => val,
-  fromFirestore : snap => ({
-    questions : snap.get("questions")
-  })
-}
 
 const conv : FirestoreDataConverter<MiahootUser> = {
   toFirestore : val => val,
   fromFirestore :snap => ({
     miahootID : snap.get("miahootID"),
     name : snap.get("name"),
-    photoUrl : snap.get("photoUrl")
+    photoUrl : snap.get("photoUrl"),
+    id: snap.get("id")
   })
     
 }
@@ -42,13 +25,9 @@ const conv : FirestoreDataConverter<MiahootUser> = {
   providedIn: 'root'
 })
 
-export class MiahootService{
-  listeMiahoots: number[] = []; // Liste des miahoots (id seulement)
-  listeMiahootPresentes: number[] = []; // Liste des miahoots présentés (id seulement)
+export class UserService{
 
   obsMiahootUser$ : Observable<MiahootUser|undefined>;
-  obsPartie$ : Observable<Partie|undefined> = of();
-
 
   constructor(private auth: Auth, private fs : Firestore) {
     authState(this.auth).pipe(
@@ -66,11 +45,11 @@ export class MiahootService{
           } satisfies MiahootUser)
         }
 
-        console.log(u)
+        // console.log(u)
       })
     ).subscribe()
 
-    console.log("dans le constructeur de miahoot service")
+    // console.log("dans le constructeur de miahoot service")
     // this.obsPartie$.pipe(
     //   filter( p => !!p ),
     //   map( p => p as Partie ),
@@ -99,26 +78,11 @@ export class MiahootService{
         }
       })
     )
-
-    this.obsPartie$ = authState(this.auth).pipe(
-      switchMap( (user) => {
-        if(user){
-          const partieRef = doc(this.fs , `parties/0PKd0zanf4t7QSKXLcvV`).withConverter(conv2)
-          const partieData$ = docData(partieRef)
-          return partieData$
-        } else{
-          return of(undefined)
-        }
-      })
-    )
-
-    
-    
   }
 
 
   //Retourne un User (firebase) si l'utilisateur est connecté, erreur sinon
-  getUser(): Promise<User | null> {
+  async getUser(): Promise<User | null> {
     return new Promise<User | null>((resolve, reject) => {
       authState(this.auth).subscribe(u => {
         if (u != null) {
@@ -143,14 +107,6 @@ export class MiahootService{
   //mettre a jour photo de profil
   updatePhoto(up: Partial<MiahootUser>) {
     const user = this.auth.currentUser;
-  }
-
-  //Ajouter l'id du miahoot passé en paramètre à la liste des miahoots présentés
-  addMiahootPresente(idMiahoot: number): void {
-    if(!this.listeMiahootPresentes.includes(idMiahoot)){
-      this.listeMiahootPresentes.push(idMiahoot);
-      // lien front-back
-    }
   }
 
 }

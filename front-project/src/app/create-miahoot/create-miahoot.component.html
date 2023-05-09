@@ -1,26 +1,75 @@
-
-<div id="creationMiahoot">
+<div class="MEGADIV">
+    <div class="box">
     <form #miahootForm="ngForm" (ngSubmit)="postMiahoot(miahootForm)">
         <input type="text" name="nameMia" placeholder="nom du miahoot" ngModel ngDefaultControl />
+        <br>
         <input type="text" name="descriptionMia" placeholder="description du miahoot" ngModel ngDefaultControl />
+        <br>
         <button type="submit">Créer miahoot</button>
     </form>
-</div>
-
-<div id="creationQuestion">
 
     <form #questionForm="ngForm" (ngSubmit)="postQuestion(questionForm)">
         <input type="text" name="labelQuestion" placeholder="label de la question" ngModel ngDefaultControl />
-        <input type="text" name="idMiahoot" placeholder="id du miahoot" ngModel ngDefaultControl />
-        <button type="submit">Ajouter question</button>
-
+        <br>
+        <button type="submit">Ajouter la question</button>
     </form>
-</div>
-
-<div id="creationReponse">
-    <form #reponseForm="ngForm" (ngSubmit)="postReponse(reponseForm)">
-        <input type="text" name="labelReponse" placeholder="label de la reponse" ngModel ngDefaultControl />
-        <input type="text" name="estValide" placeholder="vrai ou faux" ngModel ngDefaultControl />
-        <button type="submit">Ajouter réponse</button>
+   
+    <div class="reponses">
+    <form #reponseForm1="ngForm" (ngSubmit)="postReponse(reponseForm1)">
+        <input type="text" name="labelReponse" placeholder="label de la reponse 1" ngModel ngDefaultControl />
+        <button (click)="this.valide(reponseForm1)"
+                [class.valide]="reponseForm1.value.estValide">correcte</button>
+                <br>
+        <button type="submit">SUBMIT</button>
     </form>
+    <form #reponseForm2="ngForm" (ngSubmit)="postReponse(reponseForm2)">
+        <input type="text" name="labelReponse" placeholder="label de la reponse 2" ngModel ngDefaultControl />
+        <button (click)="this.valide(reponseForm2)"
+                [class.valide]="reponseForm2.value.estValide">correcte</button>
+                <br>
+                <button type="submit">SUBMIT</button>
+    </form>
+    <form #reponseForm3="ngForm" (ngSubmit)="postReponse(reponseForm3)">
+        <input type="text" name="labelReponse" placeholder="label de la reponse 3" ngModel ngDefaultControl />
+        <button (click)="this.valide(reponseForm3)"
+                [class.valide]="reponseForm3.value.estValide">correcte</button>
+                <br>
+                <button type="submit">SUBMIT</button>
+    </form>
+    <form #reponseForm4="ngForm" (ngSubmit)="postReponse(reponseForm4)">
+        <input type="text" name="labelReponse" placeholder="label de la reponse 4" ngModel ngDefaultControl />
+        <button (click)="this.valide(reponseForm4)"
+                [class.valide]="reponseForm4.value.estValide">correcte</button>
+                <br>
+                <button type="submit">SUBMIT</button>
+    </form>
+</div> 
+    </div>
+    <div class="card2"><div class="box">
+        <h1 class="heading"><span>Titre : {{ miahootForm.value.nameMia }}</span> 
+        </h1>
+        <span> description : {{ miahootForm.value.descriptionMia }}</span>
+        <br>
+        <h3> Question : {{ questionForm.value.labelQuestion }} ?</h3>
+        <br>
+        <div class="reponses">
+            <div class="rep">
+                <span><b>réponse A :</b></span><span [class.faux]="!reponseForm1.value.estValide"
+                                                     [class.vrai]="reponseForm1.value.estValide">  {{ reponseForm1.value.labelReponse }}</span>
+            </div>
+            <div class="rep">
+                <span><b>réponse B :</b></span><span [class.faux]="!reponseForm2.value.estValide" 
+                                                     [class.vrai]="reponseForm2.value.estValide">  {{ reponseForm2.value.labelReponse }}</span>
+            </div>
+            <div class="rep">
+                <span><b>réponse C :</b></span><span [class.faux]="!reponseForm3.value.estValide" 
+                                                     [class.vrai]="reponseForm3.value.estValide">  {{ reponseForm3.value.labelReponse }}</span>
+            </div>
+            <div class="rep">
+                <span><b>réponse D :</b></span><span [class.faux]="!reponseForm4.value.estValide" 
+                                                     [class.vrai]="reponseForm4.value.estValide">  {{ reponseForm4.value.labelReponse }}</span>
+            </div>
+        </div>
+
+    </div></div>
 </div>

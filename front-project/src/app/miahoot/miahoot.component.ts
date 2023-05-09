@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { Question } from '../QcmDefinitions';
+import { MiahootUser, Question } from '../QcmDefinitions';
 import { GameService } from '../game.service';
 import { APIService } from '../api.service';
 import { Router } from '@angular/router';
 import { map, of } from 'rxjs';
-import { MiahootUser } from '../miahoot.service';
 
 @Component({
   selector: 'app-miahoot[idMiahoot]',
