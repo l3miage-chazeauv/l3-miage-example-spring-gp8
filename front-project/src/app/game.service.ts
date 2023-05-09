@@ -4,7 +4,7 @@ import { Observable, firstValueFrom, map, of, switchMap, take } from 'rxjs';
 import { Auth, authState } from '@angular/fire/auth';
 import { DocumentData, DocumentReference, Firestore, FirestoreDataConverter, addDoc, collection, collectionData, doc, docData, getDocs, query, setDoc, where } from '@angular/fire/firestore';
 import { APIService } from './api.service';
-import { MiahootService } from './miahoot.service';
+import { UserService } from './user.service';
 
 const conv2: FirestoreDataConverter<Parties> = {
   toFirestore: val => val,
@@ -37,7 +37,7 @@ export class GameService {
 
   obsParties$: Observable<Parties | undefined> = of();
 
-  constructor(private auth: Auth, private fs: Firestore, private apiMia: APIService, private ms: MiahootService) {
+  constructor(private auth: Auth, private fs: Firestore, private apiMia: APIService, private ms: UserService) {
 
     this.obsParties$ = authState(this.auth).pipe(
       switchMap((user) => {

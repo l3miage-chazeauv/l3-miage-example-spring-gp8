@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, firstValueFrom } from 'rxjs';
-import { MiahootService } from './miahoot.service';
+import { UserService } from './user.service';
 import { Question } from './QcmDefinitions';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class APIService {
 
   private apiUrl = 'http://129.88.210.111:8080';
 
-  constructor(private http: HttpClient, private ms: MiahootService) {}
+  constructor(private http: HttpClient, private ms: UserService) {}
 
   /* UTILISATEURS */
   postAPIUser(data:any): Observable<any> {

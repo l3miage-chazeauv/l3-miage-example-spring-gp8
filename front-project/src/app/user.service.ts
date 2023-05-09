@@ -25,7 +25,7 @@ const conv : FirestoreDataConverter<MiahootUser> = {
   providedIn: 'root'
 })
 
-export class MiahootService{
+export class UserService{
 
   obsMiahootUser$ : Observable<MiahootUser|undefined>;
 

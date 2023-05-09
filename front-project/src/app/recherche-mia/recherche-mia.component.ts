@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, Input, NgZone } from '@angular/core';
 import { catchError, of } from 'rxjs';
 import { APIService } from '../api.service';
 import { RoutingService } from '../routing.service';
-import { MiahootService } from '../miahoot.service';
+import { UserService } from '../user.service';
 import { MiahootGame } from '../QcmDefinitions';
 import { GameService } from '../game.service';
 import { authState } from '@angular/fire/auth';
@@ -20,7 +20,7 @@ export class RechercheMiaComponent {
 
   constructor(private apiMia: APIService, 
               protected rt: RoutingService, 
-              private ms: MiahootService, 
+              private ms: UserService, 
               private cdRef: ChangeDetectorRef,
               private game: GameService,
               private fs: Firestore) { }
@@ -47,6 +47,10 @@ export class RechercheMiaComponent {
                 return "";
               }
             }).catch(error => {
+              console.log(error);
+              this.existe = false;
+              this.cdRef.detectChanges();
+              return "";
             }).toString();
 
             if(this.existe === true){
