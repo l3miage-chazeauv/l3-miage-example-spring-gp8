@@ -18,7 +18,7 @@
           <div id="drop-area" 
               (drop)="onDrop($event)" 
               (dragover)="onDragOver($event)">Déposez votre fichier ici</div>
-       <img [src]="imageUrl" *ngIf="preview" alt="Image Preview">
+       <img [src]="imageUrl" *ngIf="affichage" alt="Image Preview">
 
        <button mat-raised-button color="primary" 
        (click)="update()">Sauvegarder</button>
