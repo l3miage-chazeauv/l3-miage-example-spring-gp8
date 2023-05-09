@@ -94,6 +94,10 @@ export class APIService {
     const url = `${this.apiUrl}/miahoot/${idMiahoot}/questions`;
     return this.http.get(url);
   }
+  getAPIQuestionById(questionId: number): Observable<any>{
+    const url = `${this.apiUrl}/question/${questionId}`;
+    return this.http.get(url);
+  }
 
   getAPIQuestionsByMiahootIDPr(idMiahoot: number): Promise<Question[]> {
     const url = `${this.apiUrl}/miahoot/${idMiahoot}/questions`;
@@ -110,14 +114,15 @@ export class APIService {
     return this.http.get(url);
   }
 
-  getAPIQuestionByMiahootID(idQuestion: number): Observable<any> {
-    const url = `${this.apiUrl}/question/${idQuestion}`;
+  getAPIQuestionByMiahootID(idMiahoot: number): Observable<any> {
+    const url = `${this.apiUrl}/miahoot/${idMiahoot}/questions`;
     return this.http.get(url);
   }
 
   // Fonction pour la methode DELETE des questions
   deleteAPIQuestionById(id:number): Observable<any> {
     const url = `${this.apiUrl}/question/${id}`;
+    console.log(`question ${id} supprimée`);
     return this.http.delete(url);
   }
 
