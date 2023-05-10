@@ -29,6 +29,10 @@ export class CreateMiahootComponent{
     
   }
 
+  resetRep():void{
+    
+  }
+
   ngOnInit(): void {
     this.idMia = this.route.snapshot.params['id'];
     console.log(this.idMia);

@@ -3,7 +3,11 @@ input{
 }
 
 button{
-    margin-top: 40px;
+    margin-top: 20px;
+}
+
+label{
+    margin-top: 10px;
 }
 
 form{
