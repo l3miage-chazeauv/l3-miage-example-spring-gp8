@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MiahootUser, Question } from '../QcmDefinitions';
 import { GameService } from '../game.service';
 import { APIService } from '../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, of } from 'rxjs';
+import { firstValueFrom, map, of } from 'rxjs';
 import { UserService } from '../user.service';
 import { User } from '@angular/fire/auth';
 
@@ -14,73 +14,82 @@ import { User } from '@angular/fire/auth';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class MiahootComponent{
+export class MiahootComponent {
 
-  @Input() idMiahoot!:number;
+  @Input() idMiahoot!: number;
   // @Input() listeQuestions:Question[]=[{questionId:999,label: 'montre toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
   //                                                                                     {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]},
   //                                     {questionId:998,label: 'cache toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
   //                                                                                    {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]}];
 
-  public idCourant:number = 1;
+  public idCourant: number = 1;
   private concepteurs?: MiahootUser[];
   private presentateurs?: MiahootUser[];
 
-  public idPresentateur?: string;
+  public idPresentateur: string = "nullIdPresentateur";
   public idUserFB: string = "nullIdUserFB";
-  
-  constructor(private apiMia: APIService, 
-              private router: Router, 
-              private ar: ActivatedRoute,
-              protected gs: GameService, 
-              private ms: UserService,
-              private cdRef: ChangeDetectorRef) { 
 
-    this.assignUserId().then(() => {
+  @Output() OPIdPresentateur = new EventEmitter<string>();
+  @Output() OPIdUserFB = new EventEmitter<string>();
+
+  constructor(private apiMia: APIService,
+    private router: Router,
+    private ar: ActivatedRoute,
+    protected gs: GameService,
+    private ms: UserService,
+    private cdRef: ChangeDetectorRef) {
+
+  }
+
+  async ngOnInit(): Promise<void> {
+    this.assignUserId().then(async () => {
       this.idMiahoot = this.ar.snapshot.params['id'];
 
-      if(this.idMiahoot) {
+      if (this.idMiahoot) {
         console.log("Id du miahoot: " + this.idMiahoot);
-        this.assignPresentateur(this.idMiahoot).then(() => {
+        await this.assignPresentateur(this.idMiahoot).then(() => {
 
           this.apiMia.getAPIQuestionsByMiahootID(this.idMiahoot).subscribe((data: any) => {
 
-            data.map((obj: { id: any, label: any, miahootId: any,reponses: any }) => {
+            data.map((obj: { id: any, label: any, miahootId: any, reponses: any }) => {
               let question: Question = {
-                label: obj.label, 
+                label: obj.label,
                 reponses: obj.reponses,
                 id: obj.id
               };
               this.gs.miahootGame.miahoot.listeQuestions.push(question);
             })
           }); // On récupère les questions du miahoot
-    
-          console.log("Présentateur: " + this.idPresentateur);
-          console.log("User courant: " + this.idUserFB);
-          });
+        });
       }
     });
   }
-  
-  questionSuivante():void{
-    this.idCourant=this.idCourant+1; // On passe à la question suivante
+
+  questionSuivante(): void {
+    this.idCourant = this.idCourant + 1; // On passe à la question suivante
     this.cdRef.detectChanges();
   }
 
-  questionPrecedente():void{
-    if(this.idCourant>0){
-      this.idCourant=this.idCourant-1; // On passe à la question précédente
+  questionPrecedente(): void {
+    if (this.idCourant > 0) {
+      this.idCourant = this.idCourant - 1; // On passe à la question précédente
       this.cdRef.detectChanges();
     }
   }
 
   async assignPresentateur(idMiahoot: number) {
     this.idPresentateur = await this.gs.getPresentateurMiahootPresente(idMiahoot.toString());
+    this.cdRef.detectChanges();
   }
 
   async assignUserId(): Promise<void> {
     this.idUserFB = await this.ms.getIdUserFB();
+    this.cdRef.detectChanges();
   }
 
-  
+  isPresenting(): boolean {
+    console.log("isPresenting: " + this.idUserFB + " == " + this.idPresentateur)
+    return this.idUserFB == this.idPresentateur;
+  }
+
 }

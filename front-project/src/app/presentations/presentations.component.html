@@ -10,7 +10,7 @@
             <h4 class="description">{{ presentation.description }}</h4>
             <!-- <h5 class="heading">Code PIN: {{ presentation.id }}</h5> -->
             <button class="button-19" (click)="this.router.toCreateMiahoot(presentation.id)">Editer</button>
-            <button class="button-19" (click)="this.router.toMiahoot(presentation.id)">Présenter</button>
+            <button class="button-19" (click)="this.game.addMiahootPresente(presentation.id, this.idUserFB); this.router.toMiahoot(presentation.id)">Présenter</button>
         </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { GameService } from '../game.service';
 import { UserService } from '../user.service';
 
@@ -19,11 +19,18 @@ export class Reponse2Component {
     public estCochee:Boolean = false;
     public idUserFB: string = "nullIdUserFB";
 
-    constructor(private ms:UserService) {
-      this.ms.getUser().then((user) => {
+    constructor(private ms:UserService, private cdRef: ChangeDetectorRef) {
+    }
+
+    async ngOnInit(): Promise<void> {
+      await this.ms.getUser().then((user) => {
         if(user) {
           this.idUserFB = user.uid;
+          this.cdRef.detectChanges();
         }
-      })
-     }
+      });
+
+      console.log("idUserFB reponse2: " + this.idUserFB);
+      console.log("idPresentateur reponse2: " + this.idPresentateur);
+    }
 }

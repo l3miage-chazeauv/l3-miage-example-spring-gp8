@@ -83,7 +83,9 @@ export class GameService {
       // On instancie une partie de miahoot dans FB
       const partiesCollection = collection(this.fs, `parties/`);
       const partieData = await addDoc(partiesCollection, {
-        miahootID: idMiahoot
+        miahootID: idMiahoot,
+        idQuestionCourante: 0,
+        userConnected: 0
       });
       // console.log("PartieData : " + JSON.stringify(PartieData))
 
@@ -142,6 +144,17 @@ export class GameService {
     }
   }
 
+  async postIdQuestionCourante(idMiahoot: number, idQuestionCourante: number): Promise<void> {
+    // On ajoute l'id de la question courante à l'attribut idQuestionCourante de la partie de miahoot
+    const partie = await this.getMiahootPresente(idMiahoot);
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      partieData['idQuestionCourante'] = idQuestionCourante;
+      await setDoc(partie, partieData);
+    }
+  }
+
   /* GETS FIREBASE */
 
   async getMiahootPresente(miahootID: number): Promise<DocumentReference<DocumentData>> {
@@ -172,7 +185,7 @@ export class GameService {
       const presentateurID = docSnapshot.get('presentateurID');
       res = presentateurID;
     }
-    console.log("res f: " + res)
+
     return res;
   }
 
@@ -182,6 +195,12 @@ export class GameService {
     const docRef = doc(this.fs, "partieCollection", id);
 
     return docRef;
+  }
+
+  async getIdQuestionCourante(idPartie: string){
+    const partie = doc(this.fs, `parties/${idPartie}`);
+    const partieData = await firstValueFrom(docData(partie));
+    return partieData['idQuestionCourante'];
   }
 
   async verifMiahootPresente(idMiahoot: number): Promise<boolean> { // vérifie si le miahoot d'id idMiahoot existe dans firebase
