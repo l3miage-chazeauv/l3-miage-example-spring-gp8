@@ -87,4 +87,9 @@ export class MiahootComponent {
     this.cdRef.detectChanges();
   }
 
+  isPresenting(): boolean {
+    console.log("isPresenting: " + this.idUserFB + " == " + this.idPresentateur)
+    return this.idUserFB == this.idPresentateur;
+  }
+
 }

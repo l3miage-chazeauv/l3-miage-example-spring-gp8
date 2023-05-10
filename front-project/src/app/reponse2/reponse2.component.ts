@@ -23,7 +23,7 @@ export class Reponse2Component {
     }
 
     async ngOnInit(): Promise<void> {
-      this.ms.getUser().then((user) => {
+      await this.ms.getUser().then((user) => {
         if(user) {
           this.idUserFB = user.uid;
           this.cdRef.detectChanges();
