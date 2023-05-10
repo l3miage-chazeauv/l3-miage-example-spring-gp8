@@ -12,6 +12,10 @@ body{
     overflow-x: hidden
 }
 
+footer{
+    padding: 20px;  
+}
+
 
 @import url('https://fonts.googleapis.com/css?family=Exo:400,700');
 

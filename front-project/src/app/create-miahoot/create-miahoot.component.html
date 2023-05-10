@@ -1,109 +1,56 @@
 
-    <!-- <div class="box">
-        <form #miahootForm="ngForm" (ngSubmit)="postMiahoot(miahootForm)">
-            <input type="text" name="nameMia" placeholder="nom du miahoot" ngModel ngDefaultControl />
-            <br>
-            <input type="text" name="descriptionMia" placeholder="description du miahoot" ngModel ngDefaultControl />
-            <br>
-            <button type="submit">Créer miahoot</button>
-        </form>
 
-        <form #questionForm="ngForm" (ngSubmit)="postQuestionAvecReponses(questionForm, this.reponses)">
-            <input type="text" name="labelQuestion" placeholder="label de la question" ngModel ngDefaultControl />
-            <br>
-            <button type="submit">Ajouter la question</button>
-        </form>
-
-        <div class="reponses">
-            <form #reponseForm1="ngForm" (ngSubmit)="this.reponses.push(reponseForm1)">
-                <input type="text" name="labelReponse" placeholder="label de la reponse 1" ngModel ngDefaultControl />
-                <button (click)="this.valide(reponseForm1)"
-                    [class.valide]="reponseForm1.value.estValide">correcte</button>
-                <br>
-                <button type="submit">SUBMIT</button>
-            </form>
-            <form #reponseForm2="ngForm" (ngSubmit)="this.reponses.push(reponseForm2)">
-                <input type="text" name="labelReponse" placeholder="label de la reponse 2" ngModel ngDefaultControl />
-                <button (click)="this.valide(reponseForm2)"
-                    [class.valide]="reponseForm2.value.estValide">correcte</button>
-                <br>
-                <button type="submit">SUBMIT</button>
-            </form>
-            <form #reponseForm3="ngForm" (ngSubmit)="this.reponses.push(reponseForm3)">
-                <input type="text" name="labelReponse" placeholder="label de la reponse 3" ngModel ngDefaultControl />
-                <button (click)="this.valide(reponseForm3)"
-                    [class.valide]="reponseForm3.value.estValide">correcte</button>
-                <br>
-                <button type="submit">SUBMIT</button>
-            </form>
-            <form #reponseForm4="ngForm" (ngSubmit)="this.reponses.push(reponseForm4)">
-                <input type="text" name="labelReponse" placeholder="label de la reponse 4" ngModel ngDefaultControl />
-                <button (click)="this.valide(reponseForm4)"
-                    [class.valide]="reponseForm4.value.estValide">correcte</button>
-                <br>
-                <button type="submit">SUBMIT</button>
-            </form>
-        </div>
-    </div> -->
     <div class="card">
-            <h1 class="heading"><span>Titre : {{ miahoot.nom }}</span>
-            </h1>
-            <span> description : {{ miahoot.description }}</span>
+            <div class="header">
+                <h1 class="heading"><span>Titre : {{ miahoot.nom }}</span></h1>
+                <div class="danger" (click)="this.deleteMiahoot(this.miahoot.id)">Supprimer</div>
+            </div>
+            <span>{{ miahoot.description }}</span>
             <h2> Questions :</h2>
-
-
-            <!-- formulaire d'ajout d'une question  -->
             
-            <form #questionForm="ngForm" (ngSubmit)="postQuestion(questionForm)">
+
+
+
+            <!-- affichage des questions créées -->
+            <div class="questions">
+                <div class="question" *ngFor="let question of this.questions">
+                    <div class="question-header">
+                        <h2>{{ question.label }}</h2>
+                        <div id="deco" class="button-19" (click)="this.deleteQuestion(question.id)">Supprimer</div>
+                    </div>
+
+                    
+                    <div class="reponses">
+                        <h3>Reponses</h3>
+                        <div class="reponses-container">
+                            <div *ngFor="let reponse of question.reponses" class="reponse" [ngClass]="{'false': !reponse.estCorrecte}">
+                                <h3>{{ reponse.label }}</h3>
+                                <div id="deco" class="delete-reponse" (click)="this.deleteReponse(reponse.id)">Supprimer</div>
+          
+    
+                                
+                            </div>
+                            <div class="reponse">
+                                <form #reponseForm="ngForm" (ngSubmit)="this.postReponse(reponseForm, question.id)">
+                                    <input type="text" name="labelReponse" placeholder="label de la reponse 1" ngModel ngDefaultControl />
+
+                                    <button type="button" (click)="this.valide(reponseForm)"
+                                        [class.valide]="reponseForm.value.estCorrecte">correcte</button>
+                                    <button class="add-button" type="submit">+</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+
+            </div>
+            <!-- formulaire d'ajout d'une question  -->
+            <form class="ajout-question" #questionForm="ngForm" (ngSubmit)="postQuestion(questionForm)">
                 <h3>Ajouter une question</h3>
                 <input type="text" name="labelQuestion" placeholder="label de la question" ngModel ngDefaultControl />
                 <br>
                 <button class="button-19 add-button" type="submit">+</button>
             </form>
-            <!-- affichage des questions créées -->
-            <div class="questions">
-                <div class="question" *ngFor="let question of this.questions">
-                    <h2>{{ question.label }}</h2>
-                    <div id="deco" class="button-19" (click)="this.deleteQuestion(question.id)">Supprimer</div>
-                    <h3>Reponses</h3>
-                    <div class="reponses-container">
-                        <div *ngFor="let reponse of question.reponses" class="reponse">
-                            <h3>{{ reponse.label }}</h3>
-                            <!-- bouton pour ajouter une question -->
-      
-
-                            
-                        </div>
-                        <div class="reponse">
-                            <form #reponseForm="ngForm" (ngSubmit)="this.postReponse(reponseForm, question.id)">
-                                <input type="text" name="labelReponse" placeholder="label de la reponse 1" ngModel ngDefaultControl />
-                                <button (click)="this.valide(reponseForm)"
-                                        [class.valide]="reponseForm.value.estValide">correcte</button>
-                                <br>
-                                <button class="button-19 add-button" type="submit">+</button>
-                            </form>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-
-
-                <!-- <div class="rep">
-                    <span><b>réponse A :</b></span><span [class.faux]="!reponseForm1.value.estValide"
-                        [class.vrai]="reponseForm1.value.estValide"></span>
-                </div>
-                <div class="rep">
-                    <span><b>réponse B :</b></span><span [class.faux]="!reponseForm2.value.estValide"
-                        [class.vrai]="reponseForm2.value.estValide"></span>
-                </div>
-                <div class="rep">
-                    <span><b>réponse C :</b></span><span [class.faux]="!reponseForm3.value.estValide"
-                        [class.vrai]="reponseForm3.value.estValide"></span>
-                </div>
-                <div class="rep">
-                    <span><b>réponse D :</b></span><span [class.faux]="!reponseForm4.value.estValide"
-                        [class.vrai]="reponseForm4.value.estValide"></span>
-                </div>
-            </div> -->
     </div>
