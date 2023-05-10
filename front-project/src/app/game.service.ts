@@ -1,8 +1,8 @@
-import { Injectable, OnInit } from '@angular/core';
+import { EventEmitter, Injectable, OnInit } from '@angular/core';
 import { Question, Reponse, MiahootGame, Parties, MiahootUser } from './QcmDefinitions';
 import { Observable, firstValueFrom, map, of, switchMap, take } from 'rxjs';
 import { Auth, authState, user } from '@angular/fire/auth';
-import { DocumentData, DocumentReference, Firestore, FirestoreDataConverter, addDoc, collection, collectionData, doc, docData, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { CollectionReference, DocumentData, DocumentReference, Firestore, FirestoreDataConverter, addDoc, collection, collectionData, doc, docData, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 import { APIService } from './api.service';
 import { UserService } from './user.service';
 import { update } from '@angular/fire/database';
@@ -44,31 +44,10 @@ export class GameService {
 
   obsMiahootGame$ = new Observable<MiahootGame | undefined>;
 
-  obsParties$: Observable<Parties | undefined> = of();
 
   constructor(private auth: Auth, private fs: Firestore, private apiMia: APIService, private ms: UserService) {
 
-    this.obsParties$ = authState(this.auth).pipe(
-      switchMap((user) => {
-        if (user) {
-          const partiesRef = collection(this.fs, `parties/`).withConverter(conv2)
-          return collectionData(partiesRef).pipe(
-            map((querySnapshot) => {
-              // console.log("querySnapshot : " + JSON.stringify(querySnapshot))
-              return querySnapshot[0]
-            })
-          );
-        } else {
-          return of(undefined)
-        }
-      })
-    )
-
-
-
   }
-
-
 
 
   letsGoParty(miahootGame: MiahootGame): void { // On initialise le jeu (fonction utilisable par un présentateur/concepteur)
@@ -79,27 +58,45 @@ export class GameService {
     this.inGame = true;
   }
 
+ 
 
-  // Déclaration de la fonction asynchrone getNumberOfUserConnected
-  async postAddUserConnected(idMiahoot: number): Promise<void> {
+  async addConnectedUser(idMiahoot: number): Promise<void> {
 
-    // Obtention de la référence à la collection "parties"
-    const partiesCollection = collection(this.fs, `parties/`);
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
 
-    // Création de la requête pour récupérer les documents ayant l'id Miahoot correspondant
-    const partieQuery = query(partiesCollection, where('miahootID', '==', idMiahoot));
-    const querySnapshot = await getDocs(partieQuery);
-
-    if (!querySnapshot.empty) {
-      // Récupération du premier document trouvé
-      const docSnapshot = querySnapshot.docs[0];
-
-      // Récupération de la valeur de la propriété 'userConnected' dans le document
-      const userConnected = docSnapshot.get('userConnected');
+    if (partieData) {
+      partieData['userConnected'] ++;
+      await setDoc(partie, partieData);
     }
 
-    // Retour du nombre d'utilisateurs connectés
   }
+
+ /* async postIdQuestionCourante(idMiahoot: number, idQuestionCourante: number): Promise<void> {
+    // On ajoute l'id de la question courante à l'attribut idQuestionCourante de la partie de miahoot
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      partieData['idQuestionCourante'] = idQuestionCourante;
+      await updateDoc(partie, partieData);
+    }
+
+  }*/
+
+  async suppConnectedUser(idMiahoot: number): Promise<void> {
+
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      console.log("userConnected : " + partieData['userConnected']);
+      partieData['userConnected'] --;
+      await setDoc(partie, partieData);
+    }
+
+  }
+
 
   // Déclaration de la fonction asynchrone getNumberOfUserConnected
   async getNumberOfUserConnected(idMiahoot: number): Promise<number> {
@@ -238,7 +235,7 @@ export class GameService {
     const partiesCollection = collection(this.fs, `parties/`);
     const partieQuery = query(partiesCollection, where('miahootID', '==', parseInt(miahootID)));
 
-    const partieDoc = await getDocs(partieQuery).then((querySnapshot) => {
+    await getDocs(partieQuery).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         res = doc.id;
       })
