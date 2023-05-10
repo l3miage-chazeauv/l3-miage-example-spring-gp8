@@ -119,4 +119,18 @@ export class CreateMiahootComponent{
           }
         });
   }
+
+
+  deleteMiahoot(miahootId: number) {
+    this.apiMia.deleteAPIQMiahootById(miahootId).subscribe(
+        (data: any) => {
+          if (data == null) {
+            //miahoot bien supprimé
+            //redirige
+            this.router.toPresentations();
+          } else {
+            console.error(data);
+          }
+        });
+    }
 }
