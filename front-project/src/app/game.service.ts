@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Question, Reponse, MiahootGame, Parties, MiahootUser } from './QcmDefinitions';
 import { Observable, firstValueFrom, map, of, switchMap, take } from 'rxjs';
 import { Auth, authState } from '@angular/fire/auth';
-import { DocumentData, DocumentReference, Firestore, FirestoreDataConverter, addDoc, collection, collectionData, doc, docData, getDocs, query, setDoc, where } from '@angular/fire/firestore';
+import { DocumentData, DocumentReference, Firestore, FirestoreDataConverter, addDoc, collection, collectionData, doc, docData, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 import { APIService } from './api.service';
 import { UserService } from './user.service';
+import { update } from '@angular/fire/database';
 
 
 const conv2: FirestoreDataConverter<Parties> = {
@@ -84,7 +85,7 @@ export class GameService {
       const partiesCollection = collection(this.fs, `parties/`);
       const partieData = await addDoc(partiesCollection, {
         miahootID: idMiahoot,
-        idQuestionCourante: 0,
+        idQuestionCourante: 1,
         userConnected: 0
       });
       // console.log("PartieData : " + JSON.stringify(PartieData))
@@ -135,7 +136,7 @@ export class GameService {
 
   async addPresToParty(idUserFB: string, idMiahoot: number): Promise<void> {
     // On ajoute l'id du présentateur à l'attribut presentateurID de la partie de miahoot
-    const partie = await this.getMiahootPresente(idMiahoot);
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
     const partieData = await firstValueFrom(docData(partie));
 
     if (partieData) {
@@ -146,22 +147,23 @@ export class GameService {
 
   async postIdQuestionCourante(idMiahoot: number, idQuestionCourante: number): Promise<void> {
     // On ajoute l'id de la question courante à l'attribut idQuestionCourante de la partie de miahoot
-    const partie = await this.getMiahootPresente(idMiahoot);
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
     const partieData = await firstValueFrom(docData(partie));
 
     if (partieData) {
       partieData['idQuestionCourante'] = idQuestionCourante;
-      await setDoc(partie, partieData);
+      await updateDoc(partie, partieData);
     }
+
   }
 
   /* GETS FIREBASE */
 
-  async getMiahootPresente(miahootID: number): Promise<DocumentReference<DocumentData>> {
+  async getMiahootPresente(miahootID: string): Promise<DocumentReference<DocumentData>> {
     let res = "nullId";
 
     const partiesCollection = collection(this.fs, `parties/`);
-    const partieQuery = query(partiesCollection, where('miahootID', '==', miahootID));
+    const partieQuery = query(partiesCollection, where('miahootID', '==', parseInt(miahootID)));
 
     const partieDoc = await getDocs(partieQuery).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -197,11 +199,28 @@ export class GameService {
     return docRef;
   }
 
-  async getIdQuestionCourante(idPartie: string){
-    const partie = doc(this.fs, `parties/${idPartie}`);
-    const partieData = await firstValueFrom(docData(partie));
-    return partieData['idQuestionCourante'];
+  // async getIdQuestionCourante(idPartie: string){
+  //   const partie = doc(this.fs, `parties/${idPartie}`);
+  //   const partieData = await firstValueFrom(docData(partie));
+  //   return partieData['idQuestionCourante'];
+  // }
+
+  async getIdQuestionCourante(miahootID: string) {
+    let res = 0;
+
+    const partiesCollection = collection(this.fs, `parties/`);
+    const partieQuery = query(partiesCollection, where('miahootID', '==', parseInt(miahootID)));
+
+    const querySnapshot = await getDocs(partieQuery);
+    if (!querySnapshot.empty) {
+      const docSnapshot = querySnapshot.docs[0];
+      const idQuestionCourante = docSnapshot.get('idQuestionCourante');
+      res = idQuestionCourante;
+    }
+
+    return res;
   }
+    
 
   async verifMiahootPresente(idMiahoot: number): Promise<boolean> { // vérifie si le miahoot d'id idMiahoot existe dans firebase
 

@@ -3,7 +3,7 @@ import { MiahootUser, Question } from '../QcmDefinitions';
 import { GameService } from '../game.service';
 import { APIService } from '../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { firstValueFrom, map, of } from 'rxjs';
+import { Observable, firstValueFrom, map, of } from 'rxjs';
 import { UserService } from '../user.service';
 import { User } from '@angular/fire/auth';
 
@@ -22,7 +22,8 @@ export class MiahootComponent {
   //                                     {questionId:998,label: 'cache toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
   //                                                                                    {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]}];
 
-  public idCourant: number = 1;
+  // public obsIdQuestionCourante: Observable<number> = of(1);
+  protected idQuestionCourante: number = 1;
   private concepteurs?: MiahootUser[];
   private presentateurs?: MiahootUser[];
 
@@ -42,6 +43,7 @@ export class MiahootComponent {
   }
 
   async ngOnInit(): Promise<void> {
+
     this.assignUserId().then(async () => {
       this.idMiahoot = this.ar.snapshot.params['id'];
 
@@ -65,14 +67,18 @@ export class MiahootComponent {
     });
   }
 
-  questionSuivante(): void {
-    this.idCourant = this.idCourant + 1; // On passe à la question suivante
+  async questionSuivante(): Promise<void> {
+    // On passe à la question suivante
+    await this.gs.postIdQuestionCourante(this.idMiahoot, ++this.idQuestionCourante);
+    this.idQuestionCourante = await this.gs.getIdQuestionCourante(this.idMiahoot.toString());
     this.cdRef.detectChanges();
   }
 
-  questionPrecedente(): void {
-    if (this.idCourant > 0) {
-      this.idCourant = this.idCourant - 1; // On passe à la question précédente
+  async questionPrecedente(): Promise<void> {
+    if (this.idQuestionCourante > 1) {
+      // On passe à la question précédente
+      await this.gs.postIdQuestionCourante(this.idMiahoot, --this.idQuestionCourante);
+      this.idQuestionCourante = await this.gs.getIdQuestionCourante(this.idMiahoot.toString());
       this.cdRef.detectChanges();
     }
   }
@@ -88,7 +94,7 @@ export class MiahootComponent {
   }
 
   isPresenting(): boolean {
-    console.log("isPresenting: " + this.idUserFB + " == " + this.idPresentateur)
+    // console.log("isPresenting: " + this.idUserFB + " == " + this.idPresentateur)
     return this.idUserFB == this.idPresentateur;
   }
 
