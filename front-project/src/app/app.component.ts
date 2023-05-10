@@ -68,7 +68,7 @@ export class AppComponent {
 
 
     this.parties.subscribe(data => {
-      console.log("parties : " + data);
+      // console.log("parties : " + data);
     });
 
 

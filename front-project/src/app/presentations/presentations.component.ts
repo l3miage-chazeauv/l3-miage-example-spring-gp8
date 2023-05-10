@@ -14,25 +14,24 @@ import { GameService } from '../game.service';
 })
 export class PresentationsComponent {
 
-  public labelRecherche: string ="";
+  public labelRecherche: string = "";
 
   idUserFB: string = ""; // propriété pour stocker l'ID utilisateur
   protected listePresentations: any[] = []; // liste des miahoots que l'user peut présenter
   protected resultatRecherche: any[] = [];
   public readonly user: Observable<User | null>; // utilisateur connecté
 
-  constructor(private auth: Auth, 
-              private apiMia: APIService, 
-              protected ms : UserService, 
-              private cdRef: ChangeDetectorRef, 
-              protected router : RoutingService,
-              protected game: GameService) {
+  constructor(private auth: Auth,
+    private apiMia: APIService,
+    protected ms: UserService,
+    private cdRef: ChangeDetectorRef,
+    protected router: RoutingService,
+    protected game: GameService) {
     this.user = authState(this.auth); // récupération de l'utilisateur connecté
-    
+
   }
 
   ngOnInit(): void {
-    console.log("oui");
     this.ms.getUser().then(u => {
       if (u != null) {
         this.idUserFB = u.uid;
@@ -51,8 +50,8 @@ export class PresentationsComponent {
   /* renvois la liste de tous les miahoots avec le label contenu dans leurs description*/
   rechercheMiahootsByLabel(label: string) {
     this.resultatRecherche = this.listePresentations.filter((miahoot) => miahoot.description.includes(label));
-}
-  
+  }
+
   /* on recherche les miahoot by label et on modifie la liste de presentations*/
   newListByLabel(): void {
     this.labelRecherche = this.labelRecherche.trim()
