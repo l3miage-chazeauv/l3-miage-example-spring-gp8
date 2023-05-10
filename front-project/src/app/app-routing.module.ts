@@ -21,6 +21,9 @@ const routes: Routes = [
     path:'miahoot-editing',
   component: MiahootEditingComponent
   },{
+    path:'archive-partie',
+  component: ArchivePartiesComponent
+  },{
     path:'new-miahoot',
   component: NewMiahootComponent
   }, {

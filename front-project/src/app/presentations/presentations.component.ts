@@ -47,21 +47,13 @@ export class PresentationsComponent {
   }
 
   /* renvois la liste de tous les miahoots avec le label contenu dans leurs description*/
-  rechercheMiahootsByLabel(label: string): Observable<any[]> {
-    return this.apiMia.getAPIAllMiahoots().pipe(
-      map((m: any[]) => {
-        console.log(m);
-        console.log(label);
-        console.log(m.filter((miahoot) => miahoot.description.includes(label)));
-        return m.filter((miahoot) => miahoot.description.includes(label));
-      })
-    );
-  }
+  rechercheMiahootsByLabel(label: string) {
+    this.resultatRecherche= this.listePresentations.filter((miahoot) => miahoot.description.includes(label));
+}
+  
   /* on recherche les miahoot by label et on modifie la liste de presentations*/
   newListByLabel(): void {
-    this.rechercheMiahootsByLabel(this.labelRecherche).subscribe((miahoots: any[]) => {
-      const presentations = miahoots.map((miahoot) => miahoot.presentation);
-      this.resultatRecherche = presentations.join(', ').split(', ');
-    });
+    this.labelRecherche = this.labelRecherche.trim()
+    this.rechercheMiahootsByLabel(this.labelRecherche)
   }
 }
