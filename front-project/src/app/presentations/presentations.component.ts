@@ -28,6 +28,7 @@ export class PresentationsComponent {
               protected router : RoutingService,
               protected game: GameService) {
     this.user = authState(this.auth); // récupération de l'utilisateur connecté
+    
   }
 
   ngOnInit(): void {
@@ -37,6 +38,7 @@ export class PresentationsComponent {
         this.idUserFB = u.uid;
         this.apiMia.getAPIMiahootsCreated(this.idUserFB).subscribe((data: any) => {
           this.listePresentations = data as any[];
+          this.rechercheMiahootsByLabel("");
           this.cdRef.detectChanges();
           console.log(this.listePresentations);
         });
@@ -48,7 +50,7 @@ export class PresentationsComponent {
 
   /* renvois la liste de tous les miahoots avec le label contenu dans leurs description*/
   rechercheMiahootsByLabel(label: string) {
-    this.resultatRecherche= this.listePresentations.filter((miahoot) => miahoot.description.includes(label));
+    this.resultatRecherche = this.listePresentations.filter((miahoot) => miahoot.description.includes(label));
 }
   
   /* on recherche les miahoot by label et on modifie la liste de presentations*/
