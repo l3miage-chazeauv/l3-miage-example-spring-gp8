@@ -67,9 +67,9 @@
                     <div id="deco" class="button-19" (click)="this.deleteQuestion(question.id)">Supprimer</div>
                     <h3>Reponses</h3>
                     <div class="reponses-container">
-                        <div *ngFor="let reponse of question.reponses" class="reponse">
+                        <div *ngFor="let reponse of question.reponses" class="reponse" [ngClass]="{'false': !reponse.estCorrecte}">
                             <h3>{{ reponse.label }}</h3>
-                            <!-- bouton pour ajouter une question -->
+                            <div id="deco" class="button-19" (click)="this.deleteReponse(reponse.id)">Supprimer</div>
       
 
                             
@@ -77,8 +77,9 @@
                         <div class="reponse">
                             <form #reponseForm="ngForm" (ngSubmit)="this.postReponse(reponseForm, question.id)">
                                 <input type="text" name="labelReponse" placeholder="label de la reponse 1" ngModel ngDefaultControl />
-                                <button (click)="this.valide(reponseForm)"
-                                    [class.valide]="reponseForm.value.estValide">correcte</button>
+
+                                <button type="button" (click)="this.valide(reponseForm)"
+                                    [class.valide]="reponseForm.value.estCorrecte">correcte</button>
                                 <br>
                                 <button class="button-19 add-button" type="submit">+</button>
                             </form>

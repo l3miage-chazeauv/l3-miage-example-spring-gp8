@@ -15,7 +15,7 @@ export interface MiahootGame{
 }
 
 export interface Reponse{
-  reponseId:number;
+  id:number;
   label: string;
   estCochee: boolean;
   estCorrecte: boolean;

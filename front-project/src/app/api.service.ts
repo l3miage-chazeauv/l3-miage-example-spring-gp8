@@ -11,7 +11,7 @@ import { Question } from './QcmDefinitions';
 export class APIService {
     private kyksIp = '111'
     private paulIp = '142'
-  private apiUrl = `http://129.88.210.${this.kyksIp}:8080`;
+    private apiUrl = `http://129.88.210.${this.paulIp}:8080`;
 
   constructor(private http: HttpClient, private ms: UserService) {}
 
@@ -156,6 +156,11 @@ export class APIService {
   // Fonction pour la methode GET
   getAPIReponses(endpoint: string): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}/`;
+    return this.http.get(url);
+  }
+
+  getAPIReponseById(reponseId: number): Observable<any>{
+    const url = `${this.apiUrl}/reponse/${reponseId}`;
     return this.http.get(url);
   }
 
