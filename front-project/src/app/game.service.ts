@@ -72,27 +72,52 @@ export class GameService {
     this.inGame = true;
   }
 
-  async getNumberOfUserConnected(idMiahoot: number): Promise<number> {
-    let nbUserConnected = 0;
+
+  // Déclaration de la fonction asynchrone getNumberOfUserConnected
+  async postAddUserConnected(idMiahoot: number): Promise<void> {
+
+    // Obtention de la référence à la collection "parties"
     const partiesCollection = collection(this.fs, `parties/`);
-    // const partie = doc(this.fs, `parties/`);
 
-    // const partieQuery = query(partiesCollection, where('miahootID', '==', idMiahoot));
+    // Création de la requête pour récupérer les documents ayant l'id Miahoot correspondant
     const partieQuery = query(partiesCollection, where('miahootID', '==', idMiahoot));
-
-
     const querySnapshot = await getDocs(partieQuery);
+
     if (!querySnapshot.empty) {
+      // Récupération du premier document trouvé
       const docSnapshot = querySnapshot.docs[0];
+
+      // Récupération de la valeur de la propriété 'userConnected' dans le document
       const userConnected = docSnapshot.get('userConnected');
-      nbUserConnected = userConnected;
-
-
-
-      
     }
-    return nbUserConnected;
+
+    // Retour du nombre d'utilisateurs connectés
   }
+
+  // Déclaration de la fonction asynchrone getNumberOfUserConnected
+  async getNumberOfUserConnected(idMiahoot: number): Promise<number> {
+    // Initialisation du nombre d'utilisateurs connectés à 0
+    let userConnected = 0;
+
+    // Obtention de la référence à la collection "parties"
+    const partiesCollection = collection(this.fs, `parties/`);
+
+    // Création de la requête pour récupérer les documents ayant l'id Miahoot correspondant
+    const partieQuery = query(partiesCollection, where('miahootID', '==', idMiahoot));
+    const querySnapshot = await getDocs(partieQuery);
+
+    if (!querySnapshot.empty) {
+      // Récupération du premier document trouvé
+      const docSnapshot = querySnapshot.docs[0];
+
+      // Récupération de la valeur de la propriété 'userConnected' dans le document
+      userConnected = docSnapshot.get('userConnected');
+    }
+
+    // Retour du nombre d'utilisateurs connectés
+    return userConnected;
+  }
+
 
   //Ajouter le miahoot passé en paramètre à la liste des miahoots présentés dans FB
   async addMiahootPresente(idMiahoot: number, idUserFB: string): Promise<void> {
