@@ -78,7 +78,7 @@
                             <form #reponseForm="ngForm" (ngSubmit)="this.postReponse(reponseForm, question.id)">
                                 <input type="text" name="labelReponse" placeholder="label de la reponse 1" ngModel ngDefaultControl />
                                 <button (click)="this.valide(reponseForm)"
-                                    [class.valide]="reponseForm.value.estValide">correcte</button>
+                                        [class.valide]="reponseForm.value.estValide">correcte</button>
                                 <br>
                                 <button class="button-19 add-button" type="submit">+</button>
                             </form>

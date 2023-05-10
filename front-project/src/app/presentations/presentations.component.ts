@@ -18,6 +18,7 @@ export class PresentationsComponent {
 
   idUserFB: string = ""; // propriété pour stocker l'ID utilisateur
   protected listePresentations: any[] = []; // liste des miahoots que l'user peut présenter
+  protected resultatRecherche: any[] = [];
   public readonly user: Observable<User | null>; // utilisateur connecté
 
   constructor(private auth: Auth, 
@@ -26,15 +27,12 @@ export class PresentationsComponent {
               private cdRef: ChangeDetectorRef, 
               protected router : RoutingService,
               protected game: GameService) {
-
     this.user = authState(this.auth); // récupération de l'utilisateur connecté
-
   }
 
   ngOnInit(): void {
     console.log("oui");
     this.ms.getUser().then(u => {
-        
       if (u != null) {
         this.idUserFB = u.uid;
         this.apiMia.getAPIMiahootsCreated(this.idUserFB).subscribe((data: any) => {
@@ -52,7 +50,10 @@ export class PresentationsComponent {
   rechercheMiahootsByLabel(label: string): Observable<any[]> {
     return this.apiMia.getAPIAllMiahoots().pipe(
       map((m: any[]) => {
-        return m.filter((miahoot) => miahoot.label.includes(label));
+        console.log(m);
+        console.log(label);
+        console.log(m.filter((miahoot) => miahoot.description.includes(label)));
+        return m.filter((miahoot) => miahoot.description.includes(label));
       })
     );
   }
@@ -60,7 +61,7 @@ export class PresentationsComponent {
   newListByLabel(): void {
     this.rechercheMiahootsByLabel(this.labelRecherche).subscribe((miahoots: any[]) => {
       const presentations = miahoots.map((miahoot) => miahoot.presentation);
-      this.listePresentations = presentations.join(', ').split(', ');
+      this.resultatRecherche = presentations.join(', ').split(', ');
     });
   }
 }
