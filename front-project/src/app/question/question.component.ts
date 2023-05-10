@@ -22,8 +22,8 @@ export class QuestionComponent {
 
   ngOnInit(): void {
     this.cdRef.detectChanges();
-    console.log("QuestionComponent ngOnInit");
-    console.log("idPresentateur: " + this.idPresentateur);
+    // console.log("QuestionComponent ngOnInit");
+    // console.log("idPresentateur: " + this.idPresentateur);
   }
 
 }
