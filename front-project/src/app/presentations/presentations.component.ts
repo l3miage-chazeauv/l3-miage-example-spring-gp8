@@ -18,6 +18,7 @@ export class PresentationsComponent {
 
   idUserFB: string = ""; // propriété pour stocker l'ID utilisateur
   protected listePresentations: any[] = []; // liste des miahoots que l'user peut présenter
+  protected resultatRecherche: any[] = [];
   public readonly user: Observable<User | null>; // utilisateur connecté
 
   constructor(private auth: Auth, 
@@ -26,19 +27,17 @@ export class PresentationsComponent {
               private cdRef: ChangeDetectorRef, 
               protected router : RoutingService,
               protected game: GameService) {
-
     this.user = authState(this.auth); // récupération de l'utilisateur connecté
-
   }
 
   ngOnInit(): void {
     console.log("oui");
     this.ms.getUser().then(u => {
-        
       if (u != null) {
         this.idUserFB = u.uid;
         this.apiMia.getAPIMiahootsCreated(this.idUserFB).subscribe((data: any) => {
           this.listePresentations = data as any[];
+          this.rechercheMiahootsByLabel("");
           this.cdRef.detectChanges();
           console.log(this.listePresentations);
         });
@@ -49,18 +48,13 @@ export class PresentationsComponent {
   }
 
   /* renvois la liste de tous les miahoots avec le label contenu dans leurs description*/
-  rechercheMiahootsByLabel(label: string): Observable<any[]> {
-    return this.apiMia.getAPIAllMiahoots().pipe(
-      map((m: any[]) => {
-        return m.filter((miahoot) => miahoot.label.includes(label));
-      })
-    );
-  }
+  rechercheMiahootsByLabel(label: string) {
+    this.resultatRecherche= this.listePresentations.filter((miahoot) => miahoot.description.includes(label));
+}
+  
   /* on recherche les miahoot by label et on modifie la liste de presentations*/
   newListByLabel(): void {
-    this.rechercheMiahootsByLabel(this.labelRecherche).subscribe((miahoots: any[]) => {
-      const presentations = miahoots.map((miahoot) => miahoot.presentation);
-      this.listePresentations = presentations.join(', ').split(', ');
-    });
+    this.labelRecherche = this.labelRecherche.trim()
+    this.rechercheMiahootsByLabel(this.labelRecherche)
   }
 }
