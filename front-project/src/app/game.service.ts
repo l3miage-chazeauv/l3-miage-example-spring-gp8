@@ -38,26 +38,9 @@ export class GameService {
 
   obsMiahootGame$ = new Observable<MiahootGame | undefined>;
 
-  obsParties$: Observable<Parties | undefined> = of();
 
   constructor(private auth: Auth, private fs: Firestore, private apiMia: APIService, private ms: UserService) {
 
-
-    this.obsParties$ = authState(this.auth).pipe(
-      switchMap((user) => {
-        if (user) {
-          const partiesRef = collection(this.fs, `parties/`).withConverter(conv2)
-          return collectionData(partiesRef).pipe(
-            map((querySnapshot) => {
-              // console.log("querySnapshot : " + JSON.stringify(querySnapshot))
-              return querySnapshot[0]
-            })
-          );
-        } else {
-          return of(undefined)
-        }
-      })
-    )
   }
 
 
@@ -74,13 +57,35 @@ export class GameService {
   async addConnectedUser(idMiahoot: number): Promise<void> {
 
     const partie = await this.getMiahootPresente(idMiahoot.toString());
-
-
     const partieData = await firstValueFrom(docData(partie));
-
 
     if (partieData) {
       partieData['userConnected'] ++;
+      await setDoc(partie, partieData);
+    }
+
+  }
+
+ /* async postIdQuestionCourante(idMiahoot: number, idQuestionCourante: number): Promise<void> {
+    // On ajoute l'id de la question courante à l'attribut idQuestionCourante de la partie de miahoot
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      partieData['idQuestionCourante'] = idQuestionCourante;
+      await updateDoc(partie, partieData);
+    }
+
+  }*/
+
+  async suppConnectedUser(idMiahoot: number): Promise<void> {
+
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      console.log("userConnected : " + partieData['userConnected']);
+      partieData['userConnected'] --;
       await setDoc(partie, partieData);
     }
 
