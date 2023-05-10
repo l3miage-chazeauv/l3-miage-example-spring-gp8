@@ -3,7 +3,7 @@ import { MiahootUser, Question } from '../QcmDefinitions';
 import { GameService } from '../game.service';
 import { APIService } from '../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, firstValueFrom, map, of } from 'rxjs';
+import { BehaviorSubject, Observable, firstValueFrom, map, of } from 'rxjs';
 import { UserService } from '../user.service';
 import { User } from '@angular/fire/auth';
 
@@ -17,21 +17,14 @@ import { User } from '@angular/fire/auth';
 export class MiahootComponent {
 
   @Input() idMiahoot!: number;
-  // @Input() listeQuestions:Question[]=[{questionId:999,label: 'montre toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
-  //                                                                                     {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]},
-  //                                     {questionId:998,label: 'cache toi', reponses: [{reponseId:1, label: 'reponse 1', estCochee: false, estCorrecte: false},
-  //                                                                                    {reponseId:2, label: 'reponse 2', estCochee: false, estCorrecte: true}]}];
 
-  // public obsIdQuestionCourante: Observable<number> = of(1);
+  public obsPartie$: Observable<any>;
   protected idQuestionCourante: number = 1;
   private concepteurs?: MiahootUser[];
   private presentateurs?: MiahootUser[];
 
   public idPresentateur: string = "nullIdPresentateur";
   public idUserFB: string = "nullIdUserFB";
-
-  @Output() OPIdPresentateur = new EventEmitter<string>();
-  @Output() OPIdUserFB = new EventEmitter<string>();
 
   constructor(private apiMia: APIService,
     private router: Router,
@@ -40,12 +33,23 @@ export class MiahootComponent {
     private ms: UserService,
     private cdRef: ChangeDetectorRef) {
 
+      this.idMiahoot = this.ar.snapshot.params['id'];
+      
+      this.gs.postIdQuestionCourante(this.idMiahoot, 1);
+
+      this.obsPartie$ = this.gs.setObsPartie(this.idMiahoot.toString());
+
+      this.obsPartie$.pipe(
+        map(data => data[0].idQuestionCourante)
+      ).subscribe((id) => {
+        this.idQuestionCourante = id;
+      });
+
   }
 
   async ngOnInit(): Promise<void> {
 
     this.assignUserId().then(async () => {
-      this.idMiahoot = this.ar.snapshot.params['id'];
 
       if (this.idMiahoot) {
         await this.assignPresentateur(this.idMiahoot).then(() => {
@@ -73,16 +77,16 @@ export class MiahootComponent {
 
   async questionSuivante(): Promise<void> {
     // On passe à la question suivante
-    await this.gs.postIdQuestionCourante(this.idMiahoot, ++this.idQuestionCourante);
-    this.idQuestionCourante = await this.gs.getIdQuestionCourante(this.idMiahoot.toString());
+    ++this.idQuestionCourante;
+    await this.gs.postIdQuestionCourante(this.idMiahoot, this.idQuestionCourante);
     this.cdRef.detectChanges();
   }
 
   async questionPrecedente(): Promise<void> {
     if (this.idQuestionCourante > 1) {
       // On passe à la question précédente
-      await this.gs.postIdQuestionCourante(this.idMiahoot, --this.idQuestionCourante);
-      this.idQuestionCourante = await this.gs.getIdQuestionCourante(this.idMiahoot.toString());
+      --this.idQuestionCourante;
+      await this.gs.postIdQuestionCourante(this.idMiahoot, this.idQuestionCourante);
       this.cdRef.detectChanges();
     }
   }

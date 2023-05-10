@@ -6,6 +6,7 @@ import { CollectionReference, DocumentData, DocumentReference, Firestore, Firest
 import { APIService } from './api.service';
 import { UserService } from './user.service';
 import { update } from '@angular/fire/database';
+import { getValueChanges } from '@angular/fire/remote-config';
 
 
 const conv2: FirestoreDataConverter<Parties> = {
@@ -215,6 +216,9 @@ export class GameService {
     });
 
     const docPartie = doc(this.fs, `parties/${res}`);
+    // console.log("docPartie : " + JSON.stringify(docPartie))
+    // console.log("partieDOc :" + JSON.stringify(partieDoc))
+    // console.log("partie Collection :" + JSON.stringify(partieDoc))
     return docPartie;
   }
 
@@ -278,6 +282,12 @@ export class GameService {
     }
   }
 
+  setObsPartie(miahootID: string): Observable<any> {
+    const partie = collection(this.fs, `parties/`);
+    const partieQuery = query(partie, where('miahootID', '==', parseInt(miahootID)));
 
+    const partieObs = collectionData(partieQuery, { idField: 'id' });
+    return partieObs;
+  }
 
 }
