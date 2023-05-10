@@ -110,46 +110,4 @@
     position: relative;
   }
 
-  .cardErreur {
-    position: absolute;
-    transform: translate(-50%,-50%);
-    left:50%;
-    top:50%;
-    box-sizing: border-box;
-    animation: gradient 5s ease infinite;
-    background-size: 500% 500%;
-    width: 20%;
-    height: 30%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    padding: 2%;
-    border-radius: 20px;
-  }
   
-  @keyframes gradient {
-    0% {
-      background-position: 0 50%;
-      box-shadow: 0px 0px 2px #ffffff,
-        0px 0px 5px #ffffff,
-        0px 0px 10px #fefefe,
-        0px 0px 50px #fefefe;
-    }
-  
-    50% {
-      background-position: 100% 50%;
-      box-shadow: 0px 0px 2px #ffffff,
-        0px 0px 5px #ffffff,
-        0px 0px 10px #ffffff,
-        0px 0px 50px #ffffff;
-    }
-  
-    100% {
-      background-position: 0 50%;
-      box-shadow: 0px 0px 2px #ffffff,
-            0px 0px 5px #ffffff,
-            0px 0px 10px #5e5c5c,
-            0px 0px 50px #fefefe;
-    }
-  }

@@ -13,6 +13,9 @@ export class RoutingService{
   toAccountConfig(){
     this.router.navigateByUrl("accountConfig"); // on redirige vers la page de configuration du compte
   }
+  toArchive(){
+    this.router.navigateByUrl("archive-parties"); // on redirige vers la page de configuration du compte
+  }
   toNewMiahoot(){
     this.router.navigateByUrl("new-miahoot"); // on redirige vers la page de de creation de miahoot
   }
