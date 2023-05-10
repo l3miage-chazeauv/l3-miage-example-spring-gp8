@@ -28,6 +28,7 @@ export class PresentationsComponent {
               protected router : RoutingService,
               protected game: GameService) {
     this.user = authState(this.auth); // récupération de l'utilisateur connecté
+    
   }
 
   ngOnInit(): void {
@@ -49,7 +50,7 @@ export class PresentationsComponent {
 
   /* renvois la liste de tous les miahoots avec le label contenu dans leurs description*/
   rechercheMiahootsByLabel(label: string) {
-    this.resultatRecherche= this.listePresentations.filter((miahoot) => miahoot.description.includes(label));
+    this.resultatRecherche = this.listePresentations.filter((miahoot) => miahoot.description.includes(label));
 }
   
   /* on recherche les miahoot by label et on modifie la liste de presentations*/
