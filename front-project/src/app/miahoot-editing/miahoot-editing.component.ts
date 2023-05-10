@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { APIService } from '../api.service';
 import { RoutingService } from '../routing.service';
+import { GameService } from '../game.service';
 
 @Component({
   selector: 'app-miahoot-editing',

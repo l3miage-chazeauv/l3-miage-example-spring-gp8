@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Question, Reponse, MiahootGame, Parties, MiahootUser } from './QcmDefinitions';
 import { Observable, firstValueFrom, map, of, switchMap, take } from 'rxjs';
-import { Auth, authState } from '@angular/fire/auth';
+import { Auth, authState, user } from '@angular/fire/auth';
 import { DocumentData, DocumentReference, Firestore, FirestoreDataConverter, addDoc, collection, collectionData, doc, docData, getDocs, query, setDoc, where } from '@angular/fire/firestore';
 import { APIService } from './api.service';
 import { UserService } from './user.service';
@@ -56,8 +56,12 @@ export class GameService {
       })
     )
 
+      
 
   }
+  
+
+  
 
   letsGoParty(miahootGame: MiahootGame): void { // On initialise le jeu (fonction utilisable par un présentateur/concepteur)
     miahootGame.isPresented = true;
@@ -66,6 +70,57 @@ export class GameService {
   startGame(): void {
     this.inGame = true;
   }
+
+  async getNumberOfUserConnected(idMiahoot: number): Promise <number> {
+    let nbUserConnected = 0;
+    const partiesCollection = collection(this.fs, `parties/`);
+    // const partie = doc(this.fs, `parties/`);
+
+    // const partieQuery = query(partiesCollection, where('miahootID', '==', idMiahoot));
+    const partieQuery = query(partiesCollection, where('miahootID', '==', idMiahoot));
+
+    
+    const querySnapshot = await getDocs(partieQuery);
+    if (!querySnapshot.empty) {
+          const docSnapshot = querySnapshot.docs[0];
+          const userConnected = docSnapshot.get('userConnected');
+          nbUserConnected = userConnected;
+        }
+    // const partieData = partieDoc.then((querySnapshot) => {);
+    // return partieData;
+
+    // async getIdQuestionCourante(idPartie: string){
+    //   const partie = doc(this.fs, `parties/${idPartie}`);
+      // const partieData = await firstValueFrom(docData(partie));
+    //   return partieData['idQuestionCourante'];
+    // }
+
+    // console.log("partieData version JSON: " + JSON.stringify(partieData))
+    // console.log("partieData : " + partieData)
+    
+
+
+
+    // return partieData['userConnected'];
+    return nbUserConnected;
+  }
+
+  // async getPresentateurMiahootPresente(miahootID: string): Promise<string> {
+  //   let res = "nullId";
+
+  //   const partiesCollection = collection(this.fs, `parties/`);
+  //   const partieQuery = query(partiesCollection, where('miahootID', '==', parseInt(miahootID)));
+
+  //   const querySnapshot = await getDocs(partieQuery);
+  //   if (!querySnapshot.empty) {
+  //     const docSnapshot = querySnapshot.docs[0];
+  //     const presentateurID = docSnapshot.get('presentateurID');
+  //     res = presentateurID;
+  //   }
+
+  //   return res;
+  // }
+
 
   //Ajouter le miahoot passé en paramètre à la liste des miahoots présentés dans FB
   async addMiahootPresente(idMiahoot: number, idUserFB: string): Promise<void> {
@@ -93,7 +148,7 @@ export class GameService {
       const questiondata = await addDoc(questionsCollection, {
         questions: questionsMiahoot
       });
-      // console.log("Questiondata : " + JSON.stringify(Questiondata))
+      // console.log("Questiondata : " + JSON.stringify(questiondata))
 
       this.addMIdToUser(partieData, idUserFB);
 
@@ -170,6 +225,9 @@ export class GameService {
     });
 
     const docPartie = doc(this.fs, `parties/${res}`);
+    console.log("docPartie : " + JSON.stringify(docPartie))
+    console.log("partieDOc :" + JSON.stringify(partieDoc))
+    console.log("partie Collection :" + JSON.stringify(partieDoc))
     return docPartie;
   }
 
@@ -215,5 +273,7 @@ export class GameService {
       return false;
     }
   }
+
+  
 
 }

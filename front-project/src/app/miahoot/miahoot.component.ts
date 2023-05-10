@@ -46,7 +46,6 @@ export class MiahootComponent {
       this.idMiahoot = this.ar.snapshot.params['id'];
 
       if (this.idMiahoot) {
-        console.log("Id du miahoot: " + this.idMiahoot);
         await this.assignPresentateur(this.idMiahoot).then(() => {
 
           this.apiMia.getAPIQuestionsByMiahootID(this.idMiahoot).subscribe((data: any) => {
@@ -63,6 +62,11 @@ export class MiahootComponent {
         });
       }
     });
+
+    // this.gs.getNumberOfUserConnected(this.idMiahoot).then((data: any) => {
+    //   console.log("Nombre de joueurs connectés: idmiahoot " + this.idMiahoot);
+    //     console.log("Nombre de joueurs connectés: data " + data);
+    // });
   }
 
   questionSuivante(): void {
