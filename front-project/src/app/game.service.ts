@@ -56,12 +56,12 @@ export class GameService {
       })
     )
 
-      
+
 
   }
-  
 
-  
+
+
 
   letsGoParty(miahootGame: MiahootGame): void { // On initialise le jeu (fonction utilisable par un présentateur/concepteur)
     miahootGame.isPresented = true;
@@ -71,7 +71,7 @@ export class GameService {
     this.inGame = true;
   }
 
-  async getNumberOfUserConnected(idMiahoot: number): Promise <number> {
+  async getNumberOfUserConnected(idMiahoot: number): Promise<number> {
     let nbUserConnected = 0;
     const partiesCollection = collection(this.fs, `parties/`);
     // const partie = doc(this.fs, `parties/`);
@@ -79,53 +79,24 @@ export class GameService {
     // const partieQuery = query(partiesCollection, where('miahootID', '==', idMiahoot));
     const partieQuery = query(partiesCollection, where('miahootID', '==', idMiahoot));
 
-    
+
     const querySnapshot = await getDocs(partieQuery);
     if (!querySnapshot.empty) {
-          const docSnapshot = querySnapshot.docs[0];
-          const userConnected = docSnapshot.get('userConnected');
-          nbUserConnected = userConnected;
-        }
-    // const partieData = partieDoc.then((querySnapshot) => {);
-    // return partieData;
-
-    // async getIdQuestionCourante(idPartie: string){
-    //   const partie = doc(this.fs, `parties/${idPartie}`);
-      // const partieData = await firstValueFrom(docData(partie));
-    //   return partieData['idQuestionCourante'];
-    // }
-
-    // console.log("partieData version JSON: " + JSON.stringify(partieData))
-    // console.log("partieData : " + partieData)
-    
+      const docSnapshot = querySnapshot.docs[0];
+      const userConnected = docSnapshot.get('userConnected');
+      nbUserConnected = userConnected;
 
 
 
-    // return partieData['userConnected'];
+      
+    }
     return nbUserConnected;
   }
-
-  // async getPresentateurMiahootPresente(miahootID: string): Promise<string> {
-  //   let res = "nullId";
-
-  //   const partiesCollection = collection(this.fs, `parties/`);
-  //   const partieQuery = query(partiesCollection, where('miahootID', '==', parseInt(miahootID)));
-
-  //   const querySnapshot = await getDocs(partieQuery);
-  //   if (!querySnapshot.empty) {
-  //     const docSnapshot = querySnapshot.docs[0];
-  //     const presentateurID = docSnapshot.get('presentateurID');
-  //     res = presentateurID;
-  //   }
-
-  //   return res;
-  // }
-
 
   //Ajouter le miahoot passé en paramètre à la liste des miahoots présentés dans FB
   async addMiahootPresente(idMiahoot: number, idUserFB: string): Promise<void> {
 
-    if(await this.verifMiahootPresente(idMiahoot) === true){ // On vérifie que le miahoot n'est pas déjà présenté
+    if (await this.verifMiahootPresente(idMiahoot) === true) { // On vérifie que le miahoot n'est pas déjà présenté
       console.log("Miahoot déjà présenté");
       return;
     }
@@ -255,7 +226,7 @@ export class GameService {
     return docRef;
   }
 
-  async getIdQuestionCourante(idPartie: string){
+  async getIdQuestionCourante(idPartie: string) {
     const partie = doc(this.fs, `parties/${idPartie}`);
     const partieData = await firstValueFrom(docData(partie));
     return partieData['idQuestionCourante'];
@@ -266,7 +237,7 @@ export class GameService {
     const partiesCollection = collection(this.fs, `parties/`);
     const partieQuery = query(partiesCollection, where('miahootID', '==', idMiahoot));
     const partieDoc = await getDocs(partieQuery);
-  
+
     if (partieDoc.size > 0 && partieDoc.docs[0].exists()) {
       return true;
     } else {
@@ -274,6 +245,6 @@ export class GameService {
     }
   }
 
-  
+
 
 }
