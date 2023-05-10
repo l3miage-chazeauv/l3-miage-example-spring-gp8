@@ -1,0 +1,14 @@
+input{
+    padding: 7px;
+}
+
+button{
+    margin-top: 40px;
+}
+
+form{
+    color:#FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
