@@ -25,6 +25,7 @@ export class RechercheMiaComponent {
   }
 
   async findMiahootByIdAndGo(): Promise<void> {
+    this.existe = true;
     if (!(this.idRecherche === undefined || this.idRecherche === null)) {
       this.apiMia.getAPIMiahootById(this.idRecherche).pipe(
         catchError(e => {
@@ -50,15 +51,11 @@ export class RechercheMiaComponent {
             this.cdRef.detectChanges();
             return "";
           }).toString();
-
           if (this.existe === true) {
             // on récupère le miahoot dans la base de données
             const partieData: DocumentReference<DocumentData> = await this.game.getMiahootPresente(data.id);
-
             this.game.addMIdToUser(partieData, idUserFB);
             this.rt.toMiahoot(this.idRecherche);
-
-
             //ajouter un utilisateur connecté à la partie
             //appel de la fonction addConnectedUser
             if (this.idRecherche != undefined) {
