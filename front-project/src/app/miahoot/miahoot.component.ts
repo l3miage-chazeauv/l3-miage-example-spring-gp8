@@ -46,9 +46,8 @@ export class MiahootComponent {
         this.cdRef.detectChanges();
       });
 
-      
-
-  }
+    }
+    
 
   ngOnDestroy(): void {
     this.gs.inGameFalse(this.idMiahoot);
@@ -78,10 +77,6 @@ export class MiahootComponent {
       }
     });
 
-    // this.gs.getNumberOfUserConnected(this.idMiahoot).then((data: any) => {
-    //   console.log("Nombre de joueurs connectés: idmiahoot " + this.idMiahoot);
-    //     console.log("Nombre de joueurs connectés: data " + data);
-    // });
   }
 
   async questionSuivante(): Promise<void> {

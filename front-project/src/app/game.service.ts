@@ -123,7 +123,7 @@ export class GameService {
     const partieData = await firstValueFrom(docData(partie));
 
     if (partieData) {
-      console.log("userConnected : " + partieData['userConnected']);
+      // console.log("userConnected : " + partieData['userConnected']);
       partieData['userConnected'] --;
       await setDoc(partie, partieData);
     }

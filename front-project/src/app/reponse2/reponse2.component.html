@@ -1,9 +1,9 @@
 <section>
     <button (click)="estCochee=!estCochee"
-            class="reponse"
+            class="reponse ; button-19"
+
             [class.coche]="estCochee === true"
             [class.noncoche]="estCochee === false"
-            [class.hide]="this.idPresentateur === this.idUserFB">{{label}}</button>
-            <h1>{{label}}</h1>
+            [disabled]="this.idPresentateur === this.idUserFB">{{label}}</button>
 
 </section>
