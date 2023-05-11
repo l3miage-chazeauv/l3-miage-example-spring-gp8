@@ -69,7 +69,7 @@ export class GameService {
     });
 
     // console.log("dehors de l'observable " + this.inGame);
-    
+
   }
 
 
@@ -114,7 +114,7 @@ export class GameService {
     const partieData = await firstValueFrom(docData(partie));
 
     if (partieData) {
-      partieData['userConnected'] ++;
+      partieData['userConnected']++;
       await setDoc(partie, partieData);
     }
 
@@ -139,35 +139,10 @@ export class GameService {
 
     if (partieData) {
       // console.log("userConnected : " + partieData['userConnected']);
-      partieData['userConnected'] --;
+      partieData['userConnected']--;
       await setDoc(partie, partieData);
     }
 
-  }
-
-
-  // Déclaration de la fonction asynchrone getNumberOfUserConnected
-  async getNumberOfUserConnected(idMiahoot: number): Promise<number> {
-    // Initialisation du nombre d'utilisateurs connectés à 0
-    let userConnected = 0;
-
-    // Obtention de la référence à la collection "parties"
-    const partiesCollection = collection(this.fs, `parties/`);
-
-    // Création de la requête pour récupérer les documents ayant l'id Miahoot correspondant
-    const partieQuery = query(partiesCollection, where('miahootID', '==', idMiahoot));
-    const querySnapshot = await getDocs(partieQuery);
-
-    if (!querySnapshot.empty) {
-      // Récupération du premier document trouvé
-      const docSnapshot = querySnapshot.docs[0];
-
-      // Récupération de la valeur de la propriété 'userConnected' dans le document
-      userConnected = docSnapshot.get('userConnected');
-    }
-
-    // Retour du nombre d'utilisateurs connectés
-    return userConnected;
   }
 
 
@@ -313,7 +288,7 @@ export class GameService {
   }
 
   async delVote(miahootID: number, questionID: number, reponseID: number): Promise<void> {
-    
+
     //Décrémenter le nombre de votes de la réponse numéro idReponse de la question numéro idQuestion
 
     const partie = await this.getMiahootPresente(miahootID.toString()); // On récupère la partie de miahoot
@@ -341,18 +316,6 @@ export class GameService {
         await setDoc(partie, partieData);
 
       }
-    }
-
-  }
-
-  async addConnectedUser(idMiahoot: number): Promise<void> {
-
-    const partie = await this.getMiahootPresente(idMiahoot.toString());
-    const partieData = await firstValueFrom(docData(partie));
-
-    if (partieData) {
-      partieData['userConnected']++;
-      await setDoc(partie, partieData);
     }
 
   }
@@ -446,21 +409,6 @@ export class GameService {
 
     // Retour du nombre d'utilisateurs connectés
     return userConnected;
-  }
-
-  /* DELETES FIREBASE */
-
-  async suppConnectedUser(idMiahoot: number): Promise<void> {
-
-    const partie = await this.getMiahootPresente(idMiahoot.toString());
-    const partieData = await firstValueFrom(docData(partie));
-
-    if (partieData) {
-      console.log("userConnected : " + partieData['userConnected']);
-      partieData['userConnected']--;
-      await setDoc(partie, partieData);
-    }
-
   }
 
   /* AUTRES FONCTIONS FIREBASE */
