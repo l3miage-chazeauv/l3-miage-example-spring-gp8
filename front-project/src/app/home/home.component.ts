@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Auth, signOut } from '@angular/fire/auth';
 import { RoutingService } from '../routing.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +11,9 @@ import { RoutingService } from '../routing.service';
 export class HomeComponent {
 
 
-  constructor(protected router : RoutingService,private auth: Auth){}
+  constructor(protected router : RoutingService,private auth: Auth, private pr : AppComponent){}
 
   async logout() {
-    await signOut(this.auth); // on se déconnecte
-    this.router.toHome(); // on retourne à la page d'accueil
+    this.pr.logout();
   }
 }

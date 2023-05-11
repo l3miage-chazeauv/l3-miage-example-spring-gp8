@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable, OnInit } from '@angular/core';
+import { ChangeDetectorRef, EventEmitter, Injectable, OnInit } from '@angular/core';
 import { Question, Reponse, MiahootGame, Parties, MiahootUser } from './QcmDefinitions';
 import { Observable, firstValueFrom, map, of, switchMap, take } from 'rxjs';
 import { Auth, authState, user } from '@angular/fire/auth';
@@ -7,6 +7,7 @@ import { APIService } from './api.service';
 import { UserService } from './user.service';
 import { update } from '@angular/fire/database';
 import { getValueChanges } from '@angular/fire/remote-config';
+import { ActivatedRoute } from '@angular/router';
 
 const conv3: FirestoreDataConverter<any> = {
   toFirestore: val => val,
@@ -40,13 +41,35 @@ export class GameService {
 
 
   inGame: boolean = false;
+  idMiahoot: number = 0;
   miahootGame: MiahootGame = { isPresented: false, miahoot: { idMiahoot: 0, listeQuestions: [] } };
+  protected obsPartie$: Observable<any> = new Observable();
+
 
   obsMiahootGame$ = new Observable<MiahootGame | undefined>;
 
+  /*
+  this.obsPartie$ = this.gs.setObsPartie(this.idMiahoot.toString());
 
-  constructor(private auth: Auth, private fs: Firestore, private apiMia: APIService, private ms: UserService) {
+      this.obsPartie$.pipe(
+        map(data => data[0].idQuestionCourante)
+      ).subscribe((id) => {
+        this.idQuestionCourante = id;
+        this.cdRef.detectChanges();
+      });
+  */
 
+
+  constructor(private auth: Auth, private fs: Firestore, private apiMia: APIService, private ms: UserService, private ar: ActivatedRoute) {
+    this.obsPartie$ = this.setObsPartie("12");
+    this.obsPartie$.pipe(
+      map(data => data[0].inGame)
+    ).subscribe((inGame) => {
+      this.inGame = inGame;
+    });
+
+    // console.log("dehors de l'observable " + this.inGame);
+    
   }
 
 
@@ -55,10 +78,31 @@ export class GameService {
   }
 
   startGame(): void {
-    this.inGame = true;
+    this.inGameTrue(12);
   }
 
- 
+  async inGameTrue(idMiahoot: number): Promise<void> {
+
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      partieData['inGame'] = true;
+      await setDoc(partie, partieData);
+    }
+
+  }
+  async inGameFalse(idMiahoot: number): Promise<void> {
+
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      partieData['inGame'] = false;
+      await setDoc(partie, partieData);
+    }
+
+  }
 
   async addConnectedUser(idMiahoot: number): Promise<void> {
 
@@ -72,17 +116,6 @@ export class GameService {
 
   }
 
- /* async postIdQuestionCourante(idMiahoot: number, idQuestionCourante: number): Promise<void> {
-    // On ajoute l'id de la question courante à l'attribut idQuestionCourante de la partie de miahoot
-    const partie = await this.getMiahootPresente(idMiahoot.toString());
-    const partieData = await firstValueFrom(docData(partie));
-
-    if (partieData) {
-      partieData['idQuestionCourante'] = idQuestionCourante;
-      await updateDoc(partie, partieData);
-    }
-
-  }*/
 
   async suppConnectedUser(idMiahoot: number): Promise<void> {
 
@@ -142,6 +175,7 @@ export class GameService {
         miahootID: idMiahoot,
         idQuestionCourante: 1,
         userConnected: 0,
+        inGame: false,
         questions: questionsMiahoot
       });
       // console.log("PartieData : " + JSON.stringify(PartieData))

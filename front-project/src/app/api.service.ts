@@ -9,7 +9,6 @@ import { Question } from './QcmDefinitions';
 })
 
 export class APIService {
-
     private apiUrl = `/api`;
 
   constructor(private http: HttpClient, private ms: UserService) {}

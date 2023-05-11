@@ -46,7 +46,15 @@ export class MiahootComponent {
         this.cdRef.detectChanges();
       });
 
+      
+
   }
+
+  ngOnDestroy(): void {
+    this.gs.inGameFalse(this.idMiahoot);
+    this.cdRef.detectChanges();
+  }
+
 
   async ngOnInit(): Promise<void> {
 
