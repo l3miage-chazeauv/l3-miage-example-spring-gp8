@@ -66,12 +66,10 @@ export class UserService{
     return new Promise<User | null>((resolve, reject) => {
       authState(this.auth).subscribe(u => {
         if (u != null) {
-        console.log("resssoollvee"  + u);
 
           resolve(u);
         }
       }, error => {
-        console.log("errrurrrrrr"  + error);
         reject(error);
       });
     });

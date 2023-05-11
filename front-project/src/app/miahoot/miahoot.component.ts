@@ -20,9 +20,10 @@ export class MiahootComponent {
 
   public obsPartie$: Observable<any>;
   protected idQuestionCourante: number = 1;
-  public voirRep: boolean = false;
   private concepteurs?: MiahootUser[];
   private presentateurs?: MiahootUser[];
+  public voirRep: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
 
   protected idPresentateur: string = "nullIdPresentateur";
   protected idUserFB: string = "nullIdUserFB";
@@ -56,7 +57,6 @@ export class MiahootComponent {
       //On récupère l'id de l'utilisateur
       this.user.getIdUserFB().then((id) => {
         this.idUserFB = id;
-        console.log("idUserFB " + this.idUserFB);
         // this.cdr.detectChanges();
       });
       
@@ -132,7 +132,8 @@ export class MiahootComponent {
   }
 
   showBonneReponse(): void {
-    this.voirRep=!this.voirRep;
+    this.voirRep.next(true);
+
   }
 
 }

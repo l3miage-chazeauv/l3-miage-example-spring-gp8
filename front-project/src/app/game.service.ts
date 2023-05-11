@@ -81,8 +81,9 @@ export class GameService {
   }
 
 
-  startGame(): void {
-    this.inGameTrue(12);
+  startGame(idMia : string ): void {
+    console.log("startGame " + idMia + ' type of ' + typeof(idMia));
+    this.inGameTrue(parseInt(idMia));
   }
 
   async inGameTrue(idMiahoot: number): Promise<void> {
@@ -108,42 +109,9 @@ export class GameService {
 
   }
 
-  async addConnectedUser(idMiahoot: number): Promise<void> {
 
-    const partie = await this.getMiahootPresente(idMiahoot.toString());
-    const partieData = await firstValueFrom(docData(partie));
 
-    if (partieData) {
-      partieData['userConnected']++;
-      await setDoc(partie, partieData);
-    }
-
-  }
-
-  /* async postIdQuestionCourante(idMiahoot: number, idQuestionCourante: number): Promise<void> {
-    // On ajoute l'id de la question courante à l'attribut idQuestionCourante de la partie de miahoot
-    const partie = await this.getMiahootPresente(idMiahoot.toString());
-    const partieData = await firstValueFrom(docData(partie));
-
-    if (partieData) {
-      partieData['idQuestionCourante'] = idQuestionCourante;
-      await updateDoc(partie, partieData);
-    }
-
-  }*/
-
-  async suppConnectedUser(idMiahoot: number): Promise<void> {
-
-    const partie = await this.getMiahootPresente(idMiahoot.toString());
-    const partieData = await firstValueFrom(docData(partie));
-
-    if (partieData) {
-      // console.log("userConnected : " + partieData['userConnected']);
-      partieData['userConnected']--;
-      await setDoc(partie, partieData);
-    }
-
-  }
+  
 
 
   //Ajouter le miahoot passé en paramètre à la liste des miahoots présentés dans FB
@@ -387,7 +355,7 @@ export class GameService {
     return res;
   }
 
-  // Déclaration de la fonction asynchrone getNumberOfUserConnected
+  // Retoura le nombre de participant connecté durant la partie
   async getNumberOfUserConnected(idMiahoot: number): Promise<number> {
     // Initialisation du nombre d'utilisateurs connectés à 0
     let userConnected = 0;
