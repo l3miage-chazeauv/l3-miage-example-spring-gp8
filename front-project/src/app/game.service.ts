@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable, OnInit } from '@angular/core';
+import { ChangeDetectorRef, EventEmitter, Injectable, OnInit } from '@angular/core';
 import { Question, Reponse, MiahootGame, Parties, MiahootUser } from './QcmDefinitions';
 import { Observable, firstValueFrom, map, of, switchMap, take } from 'rxjs';
 import { Auth, authState, user } from '@angular/fire/auth';
@@ -7,6 +7,7 @@ import { APIService } from './api.service';
 import { UserService } from './user.service';
 import { update } from '@angular/fire/database';
 import { getValueChanges } from '@angular/fire/remote-config';
+import { ActivatedRoute } from '@angular/router';
 
 const conv3: FirestoreDataConverter<any> = {
   toFirestore: val => val,
@@ -40,13 +41,35 @@ export class GameService {
 
 
   inGame: boolean = false;
+  idMiahoot: number = 0;
   miahootGame: MiahootGame = { isPresented: false, miahoot: { idMiahoot: 0, listeQuestions: [] } };
+  protected obsPartie$: Observable<any> = new Observable();
+
 
   obsMiahootGame$ = new Observable<MiahootGame | undefined>;
 
+  /*
+  this.obsPartie$ = this.gs.setObsPartie(this.idMiahoot.toString());
 
-  constructor(private auth: Auth, private fs: Firestore, private apiMia: APIService, private ms: UserService) {
+      this.obsPartie$.pipe(
+        map(data => data[0].idQuestionCourante)
+      ).subscribe((id) => {
+        this.idQuestionCourante = id;
+        this.cdRef.detectChanges();
+      });
+  */
 
+
+  constructor(private auth: Auth, private fs: Firestore, private apiMia: APIService, private ms: UserService, private ar: ActivatedRoute) {
+    this.obsPartie$ = this.setObsPartie("12");
+    this.obsPartie$.pipe(
+      map(data => data[0].inGame)
+    ).subscribe((inGame) => {
+      this.inGame = inGame;
+    });
+
+    // console.log("dehors de l'observable " + this.inGame);
+    
   }
 
 
@@ -54,12 +77,48 @@ export class GameService {
     miahootGame.isPresented = true;
   }
 
-  startGame(): void {
-    this.inGame = true;
+  endGame(): void { // On termine le jeu (fonction utilisable par un présentateur/concepteur)
   }
 
 
-  /* POSTS FIREBASE */
+  startGame(): void {
+    this.inGameTrue(12);
+  }
+
+  async inGameTrue(idMiahoot: number): Promise<void> {
+
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      partieData['inGame'] = true;
+      await setDoc(partie, partieData);
+    }
+
+  }
+  async inGameFalse(idMiahoot: number): Promise<void> {
+
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      partieData['inGame'] = false;
+      await setDoc(partie, partieData);
+    }
+
+  }
+
+  async addConnectedUser(idMiahoot: number): Promise<void> {
+
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      partieData['userConnected'] ++;
+      await setDoc(partie, partieData);
+    }
+
+  }
 
   /* async postIdQuestionCourante(idMiahoot: number, idQuestionCourante: number): Promise<void> {
     // On ajoute l'id de la question courante à l'attribut idQuestionCourante de la partie de miahoot
@@ -72,6 +131,44 @@ export class GameService {
     }
 
   }*/
+
+  async suppConnectedUser(idMiahoot: number): Promise<void> {
+
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      // console.log("userConnected : " + partieData['userConnected']);
+      partieData['userConnected'] --;
+      await setDoc(partie, partieData);
+    }
+
+  }
+
+
+  // Déclaration de la fonction asynchrone getNumberOfUserConnected
+  async getNumberOfUserConnected(idMiahoot: number): Promise<number> {
+    // Initialisation du nombre d'utilisateurs connectés à 0
+    let userConnected = 0;
+
+    // Obtention de la référence à la collection "parties"
+    const partiesCollection = collection(this.fs, `parties/`);
+
+    // Création de la requête pour récupérer les documents ayant l'id Miahoot correspondant
+    const partieQuery = query(partiesCollection, where('miahootID', '==', idMiahoot));
+    const querySnapshot = await getDocs(partieQuery);
+
+    if (!querySnapshot.empty) {
+      // Récupération du premier document trouvé
+      const docSnapshot = querySnapshot.docs[0];
+
+      // Récupération de la valeur de la propriété 'userConnected' dans le document
+      userConnected = docSnapshot.get('userConnected');
+    }
+
+    // Retour du nombre d'utilisateurs connectés
+    return userConnected;
+  }
 
 
   //Ajouter le miahoot passé en paramètre à la liste des miahoots présentés dans FB
@@ -93,6 +190,7 @@ export class GameService {
         miahootID: idMiahoot,
         idQuestionCourante: 1,
         userConnected: 0,
+        inGame: false,
         questions: questionsMiahoot
       });
 

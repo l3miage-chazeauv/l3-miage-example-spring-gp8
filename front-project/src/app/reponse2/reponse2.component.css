@@ -1,23 +1,8 @@
-.noncoche {
-  appearance: none; /* pour masquer le style par défaut */
-  -webkit-appearance: none; /* pour les anciennes versions de navigateurs WebKit */
-  border-radius: 10px; 
-  border: 2px solid #ccc; 
-  width: 20px; 
-  height: 20px;
-  margin-right: 5px; 
-  vertical-align: middle;
+.reponse{
+  width: 80%;
+  height: 100%;
 }
 
 .coche{
-  border-radius: 10px; 
-  border: 2px solid #ccc; 
-  width: 20px; 
-  height: 20px; 
-  margin-right: 5px; 
-  vertical-align: middle; 
-}
-
-.invisible{
-  display: none;
+  color:black;
 }
