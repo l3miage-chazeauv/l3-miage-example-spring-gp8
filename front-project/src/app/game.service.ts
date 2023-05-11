@@ -69,7 +69,7 @@ export class GameService {
     });
 
     // console.log("dehors de l'observable " + this.inGame);
-
+    
   }
 
 
@@ -256,7 +256,7 @@ export class GameService {
   }
 
   async delVote(miahootID: number, questionID: number, reponseID: number): Promise<void> {
-
+    
     //Décrémenter le nombre de votes de la réponse numéro idReponse de la question numéro idQuestion
 
     const partie = await this.getMiahootPresente(miahootID.toString()); // On récupère la partie de miahoot
@@ -284,6 +284,18 @@ export class GameService {
         await setDoc(partie, partieData);
 
       }
+    }
+
+  }
+
+  async addConnectedUser(idMiahoot: number): Promise<void> {
+
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      partieData['userConnected']++;
+      await setDoc(partie, partieData);
     }
 
   }
@@ -379,6 +391,21 @@ export class GameService {
     return userConnected;
   }
 
+  /* DELETES FIREBASE */
+
+  async suppConnectedUser(idMiahoot: number): Promise<void> {
+
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      console.log("userConnected : " + partieData['userConnected']);
+      partieData['userConnected']--;
+      await setDoc(partie, partieData);
+    }
+
+  }
+
   /* AUTRES FONCTIONS FIREBASE */
 
   async verifMiahootPresente(idMiahoot: number): Promise<boolean> { // vérifie si le miahoot d'id idMiahoot existe dans firebase
@@ -425,6 +452,6 @@ export class GameService {
 
     const partieObs = collectionData(partieQuery, { idField: 'id' });
     return partieObs;
-  }
+}
 
 }

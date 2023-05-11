@@ -132,7 +132,12 @@ export class MiahootComponent {
   }
 
   showBonneReponse(): void {
-    this.voirRep.next(true);
+    if (this.voirRep.getValue() == true) {
+      this.voirRep.next(false);
+    } else if (this.voirRep.getValue() == false) {
+      this.voirRep.next(true);
+      
+    }
 
   }
 

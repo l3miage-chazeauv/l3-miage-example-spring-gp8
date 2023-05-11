@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angu
 import { GameService } from '../game.service';
 import { UserService } from '../user.service';
 import { MiahootComponent } from '../miahoot/miahoot.component';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class Reponse2Component {
   @Input() label!: String
   @Input() estCorrecte!: Boolean
   @Input() idPresentateur?: string
-    protected voirRep: boolean = false;
+  protected voirRep: boolean = false;
 
   @Output() estCocheeChange = new EventEmitter<Boolean>();
 
@@ -24,31 +25,35 @@ export class Reponse2Component {
   public estCochee: Boolean = false;
   public idUserFB: string = "nullIdUserFB";
 
-    constructor(private ms:UserService, private cdRef: ChangeDetectorRef, private miahoot : MiahootComponent) {
-      this.miahoot.voirRep.subscribe((data) => {
-        this.voirRep = data;
-      console.log("voir rep reponse: " + this.voirRep);
 
-        // this.cdRef.detectChanges();
-      });
+  constructor(private ms:UserService, private cdRef: ChangeDetectorRef, private miahoot : MiahootComponent) {
+    
 
+  }
+
+async ngOnInit(): Promise<void> {
+
+   this.miahoot.voirRep.subscribe((value) => {
+    console.log("nouvelle valeur recu du behavior : " + value);
+    this.voirRep = value; // Attribue la valeur reçue à la variable
+    this.cdRef.detectChanges();
+  });
+
+  await this.ms.getUser().then((user) => {
+    if (user) {
+      this.idUserFB = user.uid;
+      this.cdRef.detectChanges();
     }
+  });
 
-  async ngOnInit(): Promise<void> {
-    await this.ms.getUser().then((user) => {
-      if (user) {
-        this.idUserFB = user.uid;
-        this.cdRef.detectChanges();
-      }
-    });
+  // console.log("idUserFB reponse2: " + this.idUserFB);
+  // console.log("idPresentateur reponse2: " + this.idPresentateur);
+}
 
-    // console.log("idUserFB reponse2: " + this.idUserFB);
-    // console.log("idPresentateur reponse2: " + this.idPresentateur);
-  }
-
-  toggleEstCochee() {
-    this.estCochee = !this.estCochee;
-    this.estCocheeChange.emit(this.estCochee);
-  }
+toggleEstCochee() {
+  console.log("toggleEstCochee REPONSE");
+  this.estCochee = !this.estCochee;
+  this.estCocheeChange.emit(this.estCochee);
+}
 
 }
