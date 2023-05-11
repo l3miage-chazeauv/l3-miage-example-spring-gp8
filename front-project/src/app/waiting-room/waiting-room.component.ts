@@ -46,12 +46,14 @@ export class WaitingRoomComponent implements OnInit {
     //On récupère l'id de l'utilisateur
     this.user.getIdUserFB().then((id) => {
       this.idUserFB = id;
-      console.log("idUserFB " + this.idUserFB);
       // this.cdr.detectChanges();
     });
 
 
 
+  }
+  start(){
+    this.gs.startGame(this.idMiahoot);
   }
 
 

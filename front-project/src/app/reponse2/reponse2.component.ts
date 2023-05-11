@@ -22,8 +22,13 @@ export class Reponse2Component {
     public idUserFB: string = "nullIdUserFB";
 
     constructor(private ms:UserService, private cdRef: ChangeDetectorRef, private miahoot : MiahootComponent) {
-      this.voirRep = this.miahoot.voirRep;
+      this.miahoot.voirRep.subscribe((data) => {
+        this.voirRep = data;
       console.log("voir rep reponse: " + this.voirRep);
+
+        // this.cdRef.detectChanges();
+      });
+
     }
 
     async ngOnInit(): Promise<void> {

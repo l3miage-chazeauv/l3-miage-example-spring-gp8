@@ -81,8 +81,9 @@ export class GameService {
   }
 
 
-  startGame(): void {
-    this.inGameTrue(12);
+  startGame(idMia : string ): void {
+    console.log("startGame " + idMia + ' type of ' + typeof(idMia));
+    this.inGameTrue(parseInt(idMia));
   }
 
   async inGameTrue(idMiahoot: number): Promise<void> {
