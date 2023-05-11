@@ -8,6 +8,12 @@ import { UserService } from './user.service';
 import { update } from '@angular/fire/database';
 import { getValueChanges } from '@angular/fire/remote-config';
 
+const conv3: FirestoreDataConverter<any> = {
+  toFirestore: val => val,
+  fromFirestore: snap => ({
+    questions: snap.get("questions")
+  })
+}
 
 const conv2: FirestoreDataConverter<Parties> = {
   toFirestore: val => val,
@@ -135,15 +141,18 @@ export class GameService {
       const partieData = await addDoc(partiesCollection, {
         miahootID: idMiahoot,
         idQuestionCourante: 1,
-        userConnected: 0
+        userConnected: 0,
+        questions: questionsMiahoot
       });
       // console.log("PartieData : " + JSON.stringify(PartieData))
 
-      const questionsCollection = collection(this.fs, `parties/${partieData.id}/questions`);
-      const questiondata = await addDoc(questionsCollection, {
-        questions: questionsMiahoot
-      });
+      // const questionsCollection = collection(this.fs, `parties/${partieData.id}/questions`);
+      // const questiondata = await addDoc(questionsCollection, {
+      //   questions: questionsMiahoot
+      // });
       // console.log("Questiondata : " + JSON.stringify(questiondata))
+
+      this.postNbVotesAttribute(idMiahoot);
 
       this.addMIdToUser(partieData, idUserFB);
 
@@ -204,6 +213,18 @@ export class GameService {
       await updateDoc(partie, partieData);
     }
 
+  }
+
+  async postNbVotesAttribute(miahootID: number): Promise<void> {
+    // Ajout de l'attribut nbVotes de type number aux questions d'une partie de miahoot
+    console.log("miahootID : " + miahootID + " type : " + typeof (miahootID))
+    const partie = await this.getMiahootPresente(miahootID.toString()); // On récupère la partie de miahoot
+
+    // On récupère le champs question de la partie de miahoot
+    const partieData = await firstValueFrom(docData(partie));
+    console.log("partieData : " + JSON.stringify(partieData))
+    const questions = partieData['questions'];
+    console.log("questions : " + JSON.stringify(questions))
   }
 
   /* GETS FIREBASE */
@@ -272,7 +293,8 @@ export class GameService {
 
     return res;
   }
-    
+
+  /* AUTRES FONCTIONS FIREBASE */
 
   async verifMiahootPresente(idMiahoot: number): Promise<boolean> { // vérifie si le miahoot d'id idMiahoot existe dans firebase
 
@@ -286,6 +308,31 @@ export class GameService {
       return false;
     }
   }
+
+  async compteVotes(idMiahoot: number, idQuestion: number): Promise<number[]> {
+    // compte le nombre de votes pour chaque réponse d'une question donnée
+    const partiesCollection = collection(this.fs, `parties/`);
+    const partieQuery = query(partiesCollection, where('miahootID', '==', idMiahoot));
+    const partieDoc = await getDocs(partieQuery);
+
+    let res: number[] = [];
+
+    if (partieDoc.size > 0 && partieDoc.docs[0].exists()) {
+      const docSnapshot = partieDoc.docs[0];
+      const questions = docSnapshot.get('questions');
+      const question = questions[idQuestion];
+      const reponses = question.reponses;
+
+      for (let i = 0; i < reponses.length; i++) {
+        const reponse = reponses[i];
+        res.push(reponse.nbVotes);
+      }
+    }
+
+    return res;
+  }
+
+  /* FCT SETUP OBSERVABLE FIREBASE */
 
   setObsPartie(miahootID: string): Observable<any> {
     const partie = collection(this.fs, `parties/`);

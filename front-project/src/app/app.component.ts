@@ -59,9 +59,8 @@ export class AppComponent {
           this.apiService.postAPIUser(user?.displayName ? user.displayName : '', user?.uid).subscribe()
         }
 
+      });
     });
-  });
-
   }
 
   //fonction pour se deconnecter de firebase

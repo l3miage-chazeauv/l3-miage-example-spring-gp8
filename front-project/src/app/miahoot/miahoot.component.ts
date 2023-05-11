@@ -43,6 +43,7 @@ export class MiahootComponent {
         map(data => data[0].idQuestionCourante)
       ).subscribe((id) => {
         this.idQuestionCourante = id;
+        this.cdRef.detectChanges();
       });
 
   }
