@@ -9,8 +9,6 @@ import { Question } from './QcmDefinitions';
 })
 
 export class APIService {
-    private kyksIp = '111'
-    private paulIp = '142'
     private apiUrl = `/api`;
 
   constructor(private http: HttpClient, private ms: UserService) {}
