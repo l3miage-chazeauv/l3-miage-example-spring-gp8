@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { GameService } from '../game.service';
 import { UserService } from '../user.service';
 import { MiahootComponent } from '../miahoot/miahoot.component';
@@ -11,15 +11,18 @@ import { MiahootComponent } from '../miahoot/miahoot.component';
 })
 export class Reponse2Component {
 
-    // @Input() reponse: Reponse = {reponseId:1, label: '', estCochee: false, estCorrecte: false};
-    @Input() reponseId!: number 
-    @Input() label!:String 
-    @Input() estCorrecte!:Boolean
-    @Input() idPresentateur?: string
+  // @Input() reponse: Reponse = {reponseId:1, label: '', estCochee: false, estCorrecte: false};
+  @Input() reponseId!: number
+  @Input() label!: String
+  @Input() estCorrecte!: Boolean
+  @Input() idPresentateur?: string
     protected voirRep: boolean = false;
-  
-    public estCochee:Boolean = false;
-    public idUserFB: string = "nullIdUserFB";
+
+  @Output() estCocheeChange = new EventEmitter<Boolean>();
+
+
+  public estCochee: Boolean = false;
+  public idUserFB: string = "nullIdUserFB";
 
     constructor(private ms:UserService, private cdRef: ChangeDetectorRef, private miahoot : MiahootComponent) {
       this.miahoot.voirRep.subscribe((data) => {
@@ -31,15 +34,21 @@ export class Reponse2Component {
 
     }
 
-    async ngOnInit(): Promise<void> {
-      await this.ms.getUser().then((user) => {
-        if(user) {
-          this.idUserFB = user.uid;
-          this.cdRef.detectChanges();
-        }
-      });
+  async ngOnInit(): Promise<void> {
+    await this.ms.getUser().then((user) => {
+      if (user) {
+        this.idUserFB = user.uid;
+        this.cdRef.detectChanges();
+      }
+    });
 
-      // console.log("idUserFB reponse2: " + this.idUserFB);
-      // console.log("idPresentateur reponse2: " + this.idPresentateur);
-    }
+    // console.log("idUserFB reponse2: " + this.idUserFB);
+    // console.log("idPresentateur reponse2: " + this.idPresentateur);
+  }
+
+  toggleEstCochee() {
+    this.estCochee = !this.estCochee;
+    this.estCocheeChange.emit(this.estCochee);
+  }
+
 }
