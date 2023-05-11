@@ -3,6 +3,11 @@ width: 60%;
 height: fit-content;
 }
 
+.conteneur{
+  display: flex;
+  justify-content: center;
+}
+
 .heading {
   color: white;
   font-weight: 25%;
