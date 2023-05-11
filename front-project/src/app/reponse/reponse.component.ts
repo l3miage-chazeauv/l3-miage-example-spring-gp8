@@ -6,9 +6,9 @@ import { Subscription } from 'rxjs/internal/Subscription';
 
 
 @Component({
-  selector: 'app-reponse2',
-  templateUrl: './reponse2.component.html',
-  styleUrls: ['./reponse2.component.css']
+  selector: 'app-reponse',
+  templateUrl: './reponse.component.html',
+  styleUrls: ['./reponse.component.css']
 })
 export class Reponse2Component {
 
