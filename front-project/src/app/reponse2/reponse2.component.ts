@@ -34,7 +34,6 @@ export class Reponse2Component {
 async ngOnInit(): Promise<void> {
 
    this.miahoot.voirRep.subscribe((value) => {
-    console.log("nouvelle valeur recu du behavior : " + value);
     this.voirRep = value; // Attribue la valeur reçue à la variable
     this.cdRef.detectChanges();
   });
@@ -46,8 +45,6 @@ async ngOnInit(): Promise<void> {
     }
   });
 
-  // console.log("idUserFB reponse2: " + this.idUserFB);
-  // console.log("idPresentateur reponse2: " + this.idPresentateur);
 }
 
 toggleEstCochee() {
