@@ -109,67 +109,9 @@ export class GameService {
 
   }
 
-  async addConnectedUser(idMiahoot: number): Promise<void> {
-
-    const partie = await this.getMiahootPresente(idMiahoot.toString());
-    const partieData = await firstValueFrom(docData(partie));
-
-    if (partieData) {
-      partieData['userConnected'] ++;
-      await setDoc(partie, partieData);
-    }
-
-  }
-
-  /* async postIdQuestionCourante(idMiahoot: number, idQuestionCourante: number): Promise<void> {
-    // On ajoute l'id de la question courante à l'attribut idQuestionCourante de la partie de miahoot
-    const partie = await this.getMiahootPresente(idMiahoot.toString());
-    const partieData = await firstValueFrom(docData(partie));
-
-    if (partieData) {
-      partieData['idQuestionCourante'] = idQuestionCourante;
-      await updateDoc(partie, partieData);
-    }
-
-  }*/
-
-  async suppConnectedUser(idMiahoot: number): Promise<void> {
-
-    const partie = await this.getMiahootPresente(idMiahoot.toString());
-    const partieData = await firstValueFrom(docData(partie));
-
-    if (partieData) {
-      // console.log("userConnected : " + partieData['userConnected']);
-      partieData['userConnected'] --;
-      await setDoc(partie, partieData);
-    }
-
-  }
 
 
-  // Déclaration de la fonction asynchrone getNumberOfUserConnected
-  async getNumberOfUserConnected(idMiahoot: number): Promise<number> {
-    // Initialisation du nombre d'utilisateurs connectés à 0
-    let userConnected = 0;
-
-    // Obtention de la référence à la collection "parties"
-    const partiesCollection = collection(this.fs, `parties/`);
-
-    // Création de la requête pour récupérer les documents ayant l'id Miahoot correspondant
-    const partieQuery = query(partiesCollection, where('miahootID', '==', idMiahoot));
-    const querySnapshot = await getDocs(partieQuery);
-
-    if (!querySnapshot.empty) {
-      // Récupération du premier document trouvé
-      const docSnapshot = querySnapshot.docs[0];
-
-      // Récupération de la valeur de la propriété 'userConnected' dans le document
-      userConnected = docSnapshot.get('userConnected');
-    }
-
-    // Retour du nombre d'utilisateurs connectés
-    return userConnected;
-  }
+  
 
 
   //Ajouter le miahoot passé en paramètre à la liste des miahoots présentés dans FB
@@ -425,7 +367,7 @@ export class GameService {
     return res;
   }
 
-  // Déclaration de la fonction asynchrone getNumberOfUserConnected
+  // Retoura le nombre de participant connecté durant la partie
   async getNumberOfUserConnected(idMiahoot: number): Promise<number> {
     // Initialisation du nombre d'utilisateurs connectés à 0
     let userConnected = 0;

@@ -49,8 +49,6 @@ export class WaitingRoomComponent implements OnInit {
       // this.cdr.detectChanges();
     });
 
-
-
   }
   start(){
     this.gs.startGame(this.idMiahoot);
