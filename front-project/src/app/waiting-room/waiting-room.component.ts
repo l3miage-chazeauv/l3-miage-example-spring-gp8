@@ -12,10 +12,10 @@ import { UserService } from '../user.service';
   styleUrls: ['./waiting-room.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WaitingRoomComponent implements OnInit{
+export class WaitingRoomComponent implements OnInit {
 
   nbUtilisateurs: number = 0;
-  idMiahoot :string ="" ;
+  idMiahoot: string = "";
   idUserFB: string = '';
 
   protected obsNbUserConnected: Observable<any> = new Observable();
@@ -24,90 +24,46 @@ export class WaitingRoomComponent implements OnInit{
 
   constructor(private cdr: ChangeDetectorRef, protected gs: GameService, private user: UserService, private ar: ActivatedRoute,) {
     this.idMiahoot = this.ar.snapshot.params['id'];
-    
+
     this.obsNbUserConnected = this.gs.setObsPartie(this.idMiahoot);
     this.obsNbUserConnected.subscribe((partie) => {
       this.nbUtilisateurs = partie[0].userConnected;
       this.cdr.detectChanges();
     });
-    this.saveUserStatus();
   }
 
 
   ngOnInit() {
-    // Écouteur d'événement pour l'événement beforeunload
-    window.addEventListener('beforeunload', this.handleBeforeUnload);
-    window.addEventListener('unload', this.handleUnload);
-
-    
-    // Vérifier si l'utilisateur est revenu sur la page après un rafraîchissement
-    console.log("localstorage avant if " + localStorage.getItem('usersConnected'));
-    if (localStorage.getItem('usersConnected') == null) {
-
-      this.saveUserStatus();
-    this.gs.addConnectedUser(parseInt(this.idMiahoot));
-
-      // sessionStorage.removeItem('usersConnected');
-      // this.gs.suppConnectedUser(parseInt(this.idMiahoot)); 
-    }else{
-      this.checkUserStatus();
-      // this.gs.suppConnectedUser(parseInt(this.idMiahoot));
-    }
-
-    // Vérifier si l'utilisateur est déjà connecté lors du chargement de la page
-    //  this.checkUserStatus();
+    this.checkUserStatus();
   }
+
 
   async checkUserStatus() {
-    const storedUsersConnected = localStorage.getItem('usersConnected');
-    console.log('storedUsersConnected', storedUsersConnected);
-    if (storedUsersConnected === await this.user.getIdUserFB().then((user) => {
+    //On regarde si c'est la première fois que l'utilisateur se connecte
+    if (localStorage.getItem('usersConnected') == null) {
+
+      //On enregistre l'utilisateur comme connecté
+      this.saveUserStatus();
+      this.gs.addConnectedUser(parseInt(this.idMiahoot));
+    }
+  }
+
+  async saveUserStatus() {
+    localStorage.setItem('usersConnected', await this.user.getIdUserFB().then((user) => {
       this.idUserFB = user;
       return user;
-    })) {
-      // this.gs.suppConnectedUser(parseInt(this.idMiahoot));
-      // console.log('storedUsersConnected', storedUsersConnected);
-      // this.gs.suppConnectedUser(parseInt(this.idMiahoot));
-      console.log('dans le if');
-    }
+    }));
+
   }
 
-  async saveUserStatus(){
-    localStorage.setItem('usersConnected', await this.user.getIdUserFB().then((user) => {
-        this.idUserFB = user;
-        return user;
-      }));
-      
-  }
+  ngOnDestroy() {
 
-    ngOnDestroy() {
-    // Supprimer l'écouteur d'événement lors de la destruction du composant
-
-    //verifier si le idUserFr est présent dans le localstorage avant de le supprimer
+    //On supprime l'utilisateur de la liste des connectés
+    //si il quitte la page
     if (localStorage.getItem('usersConnected') == this.idUserFB) {
       localStorage.removeItem('usersConnected');
+      localStorage.setItem('closed', 'true');
       this.gs.suppConnectedUser(parseInt(this.idMiahoot));
     }
-
-    // this.gs.suppConnectedUser(parseInt(this.idMiahoot));
-    // localStorage.setItem('closed', 'true');
-
-    window.removeEventListener('beforeunload', this.handleBeforeUnload);
-    window.removeEventListener('unload', this.handleUnload);
   }
-
-  handleUnload(event: Event) {
-    // Appeler la méthode de déconnexion lorsque l'événement de fermeture d'onglet ou de rafraîchissement se produit
-    // this.gs.suppConnectedUser(parseInt(this.idMiahoot));s
-    this.saveUserStatus();
-  }
-
-  handleBeforeUnload() {
-    // L'utilisateur a quitté la page (fermeture d'onglet, changement d'URL, etc.)
-    localStorage.setItem('closed', 'true');
-    // this.gs.suppConnectedUser(parseInt(this.idMiahoot)); 
-    this.saveUserStatus();
-
-  }
-
 }

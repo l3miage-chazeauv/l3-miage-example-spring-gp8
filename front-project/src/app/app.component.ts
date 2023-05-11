@@ -24,8 +24,7 @@ export class AppComponent {
     this.user = this.ms.obsMiahootUser$; // récupération de l'utilisateur connecté
     
   }
-  
-  
+   
 
   //Fonction pour se connecter à firebase
   async login() {
