@@ -3,6 +3,7 @@
     <h3>{{ label }}</h3>
   </h4>
     <div class="propositions">
+
       <p *ngFor="let reponse of reponses; let i = index">
         <app-reponse2
           [reponseId]="i"

@@ -22,9 +22,6 @@ export class RoutingService{
   toCreateMiahoot(id: number | undefined){
     this.router.navigateByUrl(`create-miahoot/${id}`); // on redirige vers la page de configuration du compte
   }
-  toMiahootEditing(){
-    this.router.navigateByUrl("miahoot-editing"); // on redirige vers la page de configuration du compte
-  }
   toMiahootResearch(){
     this.router.navigateByUrl("miahootResearch"); // on redirige vers la page de recherche de miahoot
   }
