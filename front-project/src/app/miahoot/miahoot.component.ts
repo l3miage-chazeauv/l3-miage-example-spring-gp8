@@ -64,8 +64,9 @@ export class MiahootComponent {
     }
     
 
-  ngOnDestroy(): void {
-    this.gs.inGameFalse(this.idMiahoot);
+  async ngOnDestroy(): Promise<void> {
+    await this.gs.inGameFalse(this.idMiahoot);
+    await this.gs.postIdQuestionCourante(this.idMiahoot,0);
     this.cdRef.detectChanges();
   }
 

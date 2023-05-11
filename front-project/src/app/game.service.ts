@@ -111,9 +111,6 @@ export class GameService {
 
 
 
-  
-
-
   //Ajouter le miahoot passé en paramètre à la liste des miahoots présentés dans FB
   async addMiahootPresente(idMiahoot: number, idUserFB: string): Promise<void> {
 
