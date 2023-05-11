@@ -14,14 +14,15 @@
             </div>
 
 
-            <div class="reponses"
-            >
+            <div class="reponses">
                 <h3>Reponses</h3>
                 <div class="reponses-container">
-                    <div *ngFor="let reponse of question.reponses" class="reponse"
+                    <div *ngFor="let reponse of question.reponses" class="reponse" 
                         [ngClass]="{'false': !reponse.estCorrecte}">
                         <h3>{{ reponse.label }}</h3>
-                        <div id="deco" class="delete-reponse" (click)="this.deleteReponse(reponse.id)">Supprimer</div>
+                        <div class="delete-reponse"
+                             [class.valide]="this.reponse.estCorrecte"
+                             (click)="this.deleteReponse(reponse.id)">Supprimer</div>
                     </div>
 
                     <div class="reponse"
@@ -49,7 +50,7 @@
 
     </div>
     <!-- formulaire d'ajout d'une question  -->
-    <form class="ajout-question" #questionForm="ngForm" (ngSubmit)="postQuestion(questionForm)">
+    <form class="ajout-question" #questionForm="ngForm" (ngSubmit)="postQuestion(questionForm); questionForm.reset()">
         <h3>Ajouter une question</h3>
         <input type="text" name="labelQuestion" placeholder="label de la question" ngModel ngDefaultControl />
         <br>
