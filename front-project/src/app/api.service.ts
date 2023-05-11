@@ -11,7 +11,7 @@ import { Question } from './QcmDefinitions';
 export class APIService {
     private kyksIp = '111'
     private paulIp = '142'
-    private apiUrl = `http://129.88.210.${this.kyksIp}:8080`;
+    private apiUrl = `/api`;
 
   constructor(private http: HttpClient, private ms: UserService) {}
 
