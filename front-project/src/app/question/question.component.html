@@ -8,7 +8,8 @@
           [reponseId]="i"
           [label]="reponse.label"
           [estCorrecte]="reponse.estCorrecte"
-          [idPresentateur]="this.idPresentateur"></app-reponse2>
+          [idPresentateur]="this.idPresentateur"
+          (estCocheeChange)="toggleEstCochee(i, $event)"></app-reponse2>
       </p>
     </div>
 </div>

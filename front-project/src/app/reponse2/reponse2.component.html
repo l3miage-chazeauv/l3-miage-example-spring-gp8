@@ -3,6 +3,6 @@
         [class.coche]="estCochee === true"
         [class.noncoche]="estCochee === false"
         [class.hide]="this.idPresentateur === this.idUserFB"
-        (click)="estCochee=!estCochee"/>
+        (click)="toggleEstCochee()"/>
     <label>{{label}}</label>
 </section>

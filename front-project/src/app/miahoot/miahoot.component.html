@@ -9,7 +9,9 @@
                         [label]="question.label" 
                         [reponses]="question.reponses"
                         [idPresentateur]="this.idPresentateur"
-                        [class.hide]="i+1 !== idQuestionCourante">
+                        [class.hide]="i+1 !== idQuestionCourante"
+                        (incrVote)="this.gs.addVote(this.idMiahoot ,i, $event)"
+                        (decrVote)="this.gs.delVote(this.idMiahoot, i, $event)">
             </app-question>
         </div>
     </div>

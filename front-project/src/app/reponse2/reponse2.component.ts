@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { GameService } from '../game.service';
 import { UserService } from '../user.service';
 
@@ -10,27 +10,36 @@ import { UserService } from '../user.service';
 })
 export class Reponse2Component {
 
-    // @Input() reponse: Reponse = {reponseId:1, label: '', estCochee: false, estCorrecte: false};
-    @Input() reponseId!: number 
-    @Input() label!:String 
-    @Input() estCorrecte!:Boolean
-    @Input() idPresentateur?: string
-  
-    public estCochee:Boolean = false;
-    public idUserFB: string = "nullIdUserFB";
+  // @Input() reponse: Reponse = {reponseId:1, label: '', estCochee: false, estCorrecte: false};
+  @Input() reponseId!: number
+  @Input() label!: String
+  @Input() estCorrecte!: Boolean
+  @Input() idPresentateur?: string
 
-    constructor(private ms:UserService, private cdRef: ChangeDetectorRef) {
-    }
+  @Output() estCocheeChange = new EventEmitter<Boolean>();
 
-    async ngOnInit(): Promise<void> {
-      await this.ms.getUser().then((user) => {
-        if(user) {
-          this.idUserFB = user.uid;
-          this.cdRef.detectChanges();
-        }
-      });
 
-      // console.log("idUserFB reponse2: " + this.idUserFB);
-      // console.log("idPresentateur reponse2: " + this.idPresentateur);
-    }
+  public estCochee: Boolean = false;
+  public idUserFB: string = "nullIdUserFB";
+
+  constructor(private ms: UserService, private cdRef: ChangeDetectorRef) {
+  }
+
+  async ngOnInit(): Promise<void> {
+    await this.ms.getUser().then((user) => {
+      if (user) {
+        this.idUserFB = user.uid;
+        this.cdRef.detectChanges();
+      }
+    });
+
+    // console.log("idUserFB reponse2: " + this.idUserFB);
+    // console.log("idPresentateur reponse2: " + this.idPresentateur);
+  }
+
+  toggleEstCochee() {
+    this.estCochee = !this.estCochee;
+    this.estCocheeChange.emit(this.estCochee);
+  }
+
 }
