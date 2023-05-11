@@ -21,14 +21,14 @@
 <div *ngIf="this.gs.inGame === true"
     [class.buttonsContainer]="isPresenting()"
     [class.hide]="!isPresenting()">
-    <button (click)="this.questionPrecedente()"
+    <button (click)="this.questionPrecedente() ; this.hideReponses()"
             [class.button-19]="this.idQuestionCourante > 1"
             [class.hide]="this.idQuestionCourante <= 1">Précédente ({{this.idQuestionCourante-1}})</button>
-    <button (click)="this.questionSuivante()"
+    <button (click)="this.questionSuivante() ; this.hideReponses()"
             [class.button-19]="this.idQuestionCourante < this.gs.miahootGame.miahoot.listeQuestions.length"
             [class.hide]="this.idQuestionCourante >= this.gs.miahootGame.miahoot.listeQuestions.length">Suivante ({{this.idQuestionCourante+1}})</button>
     <button class="button-19"
-            (click)="this.showBonneReponse()">Voir solution</button>
+            (click)="this.showReponses()">Voir solution</button>
     <button class="button-19"
             (click)="this.gs.endGame()"
             [class.hide]="this.idQuestionCourante != this.gs.miahootGame.miahoot.listeQuestions.length-1">Fin de Partie

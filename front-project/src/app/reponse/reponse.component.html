@@ -1,8 +1,8 @@
 <section>
     <button (click)="toggleEstCochee()"
             class="reponse button-19"
+            [class.solution]="voirRep === true && estCorrecte === true"
             [class.coche]="estCochee === true"
             [class.noncoche]="estCochee === false"
             [disabled]="this.idPresentateur === this.idUserFB">{{label}}</button>
-
 </section>

@@ -18,7 +18,7 @@ import { QuestionComponent } from './question/question.component';
 import { MiahootComponent } from './miahoot/miahoot.component';
 import { AccountConfigComponent } from './account-config/account-config.component';
 import { QcmEditingComponent } from './qcm-editing/qcm-editing.component';
-import { Reponse2Component } from './reponse2/reponse2.component';
+import { Reponse2Component } from './reponse/reponse.component';
 import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
 import { RechercheMiaComponent } from './recherche-mia/recherche-mia.component';
 
