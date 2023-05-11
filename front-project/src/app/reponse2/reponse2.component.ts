@@ -30,7 +30,7 @@ export class Reponse2Component {
         }
       });
 
-      console.log("idUserFB reponse2: " + this.idUserFB);
-      console.log("idPresentateur reponse2: " + this.idPresentateur);
+      // console.log("idUserFB reponse2: " + this.idUserFB);
+      // console.log("idPresentateur reponse2: " + this.idPresentateur);
     }
 }

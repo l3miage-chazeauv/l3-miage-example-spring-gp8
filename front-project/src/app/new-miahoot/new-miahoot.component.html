@@ -1,24 +1,16 @@
 <div class="card">
     <div class="heading">
-        <span>Nouveau Miahoot</span>
+        <span>Création de Miahoot</span>
     </div>
     <form #miahootForm="ngForm" (ngSubmit)="postMiahoot(miahootForm)">
-        <label for="nom">Nom du Miahoot :</label>
+        <label for="nom">Nom du Miahoot</label>
+        <br>
         <input type="text" name="nameMia" placeholder="nom du miahoot" ngModel ngDefaultControl />
         <br>
-        <label for="description">description du Miahoot :</label>
+        <label for="description">Description du Miahoot</label>
+        <br>
         <input type="text" name="descriptionMia" placeholder="description du miahoot" ngModel ngDefaultControl />
         <br>
-        <button type="submit">Créer miahoot</button>
+        <button class="button-19" type="submit">Créer</button>
     </form>
-
-    <!-- <form action="">
-
-        
-        <input type="text" name="nom">
-        
-        <textarea name="description" id="" cols="30" rows="10"></textarea>
-        <button></button>
-    </form> -->
-
 </div>

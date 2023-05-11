@@ -21,18 +21,19 @@ export class CreateMiahootComponent{
   // public idReponse: number = 1;
   // public idUtilisateur: number = 1;
   public reponses: NgForm[]=[];
-
   public idMia!: number;
 
-
-  constructor(protected apiMia: APIService, protected router : RoutingService, protected miaU : UserService, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {
+  constructor(protected apiMia: APIService, 
+              protected router : RoutingService, 
+              protected miaU : UserService, 
+              private route: ActivatedRoute, 
+              private cdr: ChangeDetectorRef) {
     
   }
 
   ngOnInit(): void {
     this.idMia = this.route.snapshot.params['id'];
     console.log(this.idMia);
-
     //get le miahoot correspondant à l'id
     this.apiMia.getAPIMiahootById(this.idMia).subscribe(miahoot =>{
         this.miahoot = miahoot;
@@ -42,9 +43,7 @@ export class CreateMiahootComponent{
             this.cdr.detectChanges();
             console.log(questions);
         });
-    });
-
-    
+    });  
   }
 
   valide(form: NgForm){
@@ -75,12 +74,9 @@ export class CreateMiahootComponent{
         });
     }
 
-
-
   postReponse(form: NgForm, questionId: number) {
     // console.log(form.value);
     //Formater en format JSON
-    
     const data = {
       label: form.value.labelReponse,
       estCorrecte: form.value.estCorrecte,
@@ -92,13 +88,10 @@ export class CreateMiahootComponent{
         this.apiMia.getAPIReponseById(reponseId).subscribe(reponse=>{
             console.log(reponse);
             this.questions.filter(question => question.id === questionId)[0].reponses.push(reponse);
-            this.cdr.detectChanges();
-
-        });
-        
-
+            this.cdr.detectChanges();});
       });
   }
+
   deleteReponse(reponseId : number){
     //recupere l'id de la question
     this.apiMia.getAPIReponseById(reponseId).subscribe(reponse=>{
@@ -112,15 +105,12 @@ export class CreateMiahootComponent{
         (data: any) => {
           if (data == null) {
             //reponse bien supprimée
-           
             console.log("Question supprimé");
           } else {
             console.error(data);
           }
         });
   }
-
-
   deleteMiahoot(miahootId: number) {
     this.apiMia.deleteAPIQMiahootById(miahootId).subscribe(
         (data: any) => {

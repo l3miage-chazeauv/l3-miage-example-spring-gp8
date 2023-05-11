@@ -56,7 +56,7 @@ export class AccountConfigComponent {
       })
     }
     
-    this.fg = fb.nonNullable.group({
+    this.fg = this.fb.nonNullable.group({
       name: [""],
       photoURL: [""],
       photoFile: [undefined as undefined | File]

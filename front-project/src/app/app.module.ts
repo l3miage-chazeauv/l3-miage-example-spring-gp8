@@ -1,6 +1,6 @@
 
 import { AppRoutingModule } from './app-routing.module';
-import { NgModule,Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { NgModule,Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';

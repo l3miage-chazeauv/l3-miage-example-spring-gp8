@@ -18,16 +18,13 @@ export class AppComponent {
   
   bsAuth = new BehaviorSubject<boolean>(false); // état de la connection
   public readonly user: Observable<MiahootUser | undefined>; // utilisateur connecté
-  public readonly parties: Observable<Parties | undefined>; // utilisateur connecté
 
 
   constructor(private auth: Auth, protected router: RoutingService, private ms : UserService, private game: GameService, private apiService: APIService) {
     this.user = this.ms.obsMiahootUser$; // récupération de l'utilisateur connecté
-    this.parties = this.game.obsParties$; // récupération de l'utilisateur connecté
     
   }
-  
-  
+   
 
   //Fonction pour se connecter à firebase
   async login() {
@@ -62,24 +59,15 @@ export class AppComponent {
           this.apiService.postAPIUser(user?.displayName ? user.displayName : '', user?.uid).subscribe()
         }
 
+      });
     });
-  });
-
-
-
-    this.parties.subscribe(data => {
-      console.log("parties : " + data);
-    });
-
-
-
-
   }
 
   //fonction pour se deconnecter de firebase
   async logout() {
     await signOut(this.auth); // on se déconnecte
     this.router.toHome(); // on retourne à la page d'accueil
+    
   }
 
 }
