@@ -25,11 +25,11 @@ export class WaitingRoomComponent implements OnInit {
 
   constructor(private cdr: ChangeDetectorRef, protected gs: GameService, private user: UserService, private ar: ActivatedRoute,) {
     this.idMiahoot = this.ar.snapshot.params['id'];
-
+    console.log("idMiahoot" + this.idMiahoot)
     this.obsNbUserConnected = this.gs.setObsPartie(this.idMiahoot);
     this.obsNbUserConnected.subscribe((partie) => {
       this.gs.inGame = partie[0].inGame;
-      console.log("InGame dans firebase " +this.gs.inGame);
+      // console.log("InGame dans firebase " +this.gs.inGame);
       this.nbUtilisateurs = partie[0].userConnected;
       this.cdr.detectChanges();
     });

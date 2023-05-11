@@ -7,6 +7,7 @@ import { APIService } from './api.service';
 import { UserService } from './user.service';
 import { update } from '@angular/fire/database';
 import { getValueChanges } from '@angular/fire/remote-config';
+import { ActivatedRoute } from '@angular/router';
 
 const conv3: FirestoreDataConverter<any> = {
   toFirestore: val => val,
@@ -40,6 +41,7 @@ export class GameService {
 
 
   inGame: boolean = false;
+  idMiahoot: number = 0;
   miahootGame: MiahootGame = { isPresented: false, miahoot: { idMiahoot: 0, listeQuestions: [] } };
   protected obsPartie$: Observable<any> = new Observable();
 
@@ -58,18 +60,15 @@ export class GameService {
   */
 
 
-  constructor(private auth: Auth, private fs: Firestore, private apiMia: APIService, private ms: UserService) {
-    this.obsPartie$ = this.setObsPartie("24");
+  constructor(private auth: Auth, private fs: Firestore, private apiMia: APIService, private ms: UserService, private ar: ActivatedRoute) {
+    this.obsPartie$ = this.setObsPartie("12");
     this.obsPartie$.pipe(
       map(data => data[0].inGame)
     ).subscribe((inGame) => {
       this.inGame = inGame;
-      console.log("inGame locale: " + this.inGame);
-      console.log("inGame firebase: " + inGame);
-
     });
 
-    console.log("dehors de l'observable " + this.inGame);
+    // console.log("dehors de l'observable " + this.inGame);
     
   }
 
@@ -79,20 +78,27 @@ export class GameService {
   }
 
   startGame(): void {
-    this.inGame = true;
-    console.log("inGame : " + this.inGame);
-    this.updateInGame(12);
+    this.inGameTrue(12);
   }
 
-  async updateInGame(idMiahoot: number): Promise<void> {
+  async inGameTrue(idMiahoot: number): Promise<void> {
 
     const partie = await this.getMiahootPresente(idMiahoot.toString());
     const partieData = await firstValueFrom(docData(partie));
 
     if (partieData) {
-      console.log("inGame : " + partieData['inGame']);
-      console.log("ca met à jour normalement")
       partieData['inGame'] = true;
+      await setDoc(partie, partieData);
+    }
+
+  }
+  async inGameFalse(idMiahoot: number): Promise<void> {
+
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      partieData['inGame'] = false;
       await setDoc(partie, partieData);
     }
 

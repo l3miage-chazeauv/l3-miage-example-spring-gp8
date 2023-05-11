@@ -19,9 +19,7 @@ export class MiahootComponent {
   @Input() idMiahoot!: number;
 
   public obsPartie$: Observable<any>;
-  public obsTest$: Observable<any>;
   protected idQuestionCourante: number = 1;
-  private inGame = false;
   private concepteurs?: MiahootUser[];
   private presentateurs?: MiahootUser[];
 
@@ -48,15 +46,15 @@ export class MiahootComponent {
         this.cdRef.detectChanges();
       });
 
-      this.obsTest$ = this.gs.setObsPartie(this.idMiahoot.toString());
-
-
-      this.obsTest$.subscribe((data) => {
-        console.log("InGame dans firebase dans obs miahoot " + data[0].inGame);
-        this.cdRef.detectChanges();
-      });
+      
 
   }
+
+  ngOnDestroy(): void {
+    this.gs.inGameFalse(this.idMiahoot);
+    this.cdRef.detectChanges();
+  }
+
 
   async ngOnInit(): Promise<void> {
 
