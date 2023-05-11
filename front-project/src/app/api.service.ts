@@ -71,8 +71,6 @@ export class APIService {
     return this.http.get(url);
   }
 
-
-
   // Fonction pour la methode POST
   postAPIMiahoot(data: any): Observable<any> {
     //this.ms.listeMiahoots.push(data); // On ajoute le miahoot a la liste des miahoots
