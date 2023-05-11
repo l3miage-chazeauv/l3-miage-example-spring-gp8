@@ -47,6 +47,7 @@ export class Reponse2Component {
   }
 
   toggleEstCochee() {
+    console.log("toggleEstCochee REPONSE");
     this.estCochee = !this.estCochee;
     this.estCocheeChange.emit(this.estCochee);
   }

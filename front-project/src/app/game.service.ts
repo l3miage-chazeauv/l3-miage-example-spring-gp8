@@ -61,7 +61,7 @@ export class GameService {
 
 
   constructor(private auth: Auth, private fs: Firestore, private apiMia: APIService, private ms: UserService, private ar: ActivatedRoute) {
-    this.obsPartie$ = this.setObsPartie("12");
+    this.obsPartie$ = this.setObsPartie("2");
     this.obsPartie$.pipe(
       map(data => data[0].inGame)
     ).subscribe((inGame) => {
@@ -69,7 +69,7 @@ export class GameService {
     });
 
     // console.log("dehors de l'observable " + this.inGame);
-
+    
   }
 
 
@@ -224,9 +224,10 @@ export class GameService {
 
   }
 
-  async addVote(miahootID: number, questionID: number, reponseID: number): Promise<void> {
+  async addVote(miahootID: number, questionIndex: number, reponseIndex: number): Promise<void> {
+    console.log("miahootID: " + miahootID + " questionIndex: " + questionIndex + " reponseIndex: " + reponseIndex)
     //Incrémenter le nombre de votes de la réponse numéro idReponse de la question numéro idQuestion
-
+    console.log("addVote")
     const partie = await this.getMiahootPresente(miahootID.toString()); // On récupère la partie de miahoot
     const partieSnap = await getDoc(partie) // On récupère le snapshot de la partie de miahoot 
     let partieData = partieSnap.data(); // On récupère les données de la partie de miahoot
@@ -235,11 +236,12 @@ export class GameService {
       if (partieData !== undefined) {
 
         // On parcourt chaque question de la partie et on ajoute l'attribut nbVotes
-        const updatedQuestions = partieData['questions'].map((question: any) => {
-          if (question.id === questionID) {
-            const updatedResponses = question.reponses.map((reponse: any) => {
-              if (reponse.id === reponseID) {
+        const updatedQuestions = partieData['questions'].map((question: any, qIndex: number) => {
+          if (qIndex === questionIndex) {
+            const updatedResponses = question.reponses.map((reponse: any, rIndex: number) => {
+              if (rIndex === reponseIndex) {
                 reponse.nbVotes++;
+                console.log("reponse.nbVotes incrémenté: " + reponse.nbVotes)
               }
               return reponse;
             });
@@ -255,10 +257,10 @@ export class GameService {
     }
   }
 
-  async delVote(miahootID: number, questionID: number, reponseID: number): Promise<void> {
+  async delVote(miahootID: number, questionIndex: number, reponseIndex: number): Promise<void> {
 
     //Décrémenter le nombre de votes de la réponse numéro idReponse de la question numéro idQuestion
-
+    console.log("delVote")
     const partie = await this.getMiahootPresente(miahootID.toString()); // On récupère la partie de miahoot
     const partieSnap = await getDoc(partie) // On récupère le snapshot de la partie de miahoot 
     let partieData = partieSnap.data(); // On récupère les données de la partie de miahoot
@@ -267,11 +269,12 @@ export class GameService {
       if (partieData !== undefined) {
 
         // On parcourt chaque question de la partie et on ajoute l'attribut nbVotes
-        const updatedQuestions = partieData['questions'].map((question: any) => {
-          if (question.id === questionID) {
-            const updatedResponses = question.reponses.map((reponse: any) => {
-              if (reponse.id === reponseID) {
+        const updatedQuestions = partieData['questions'].map((question: any, qIndex: number) => {
+          if (qIndex === questionIndex) {
+            const updatedResponses = question.reponses.map((reponse: any, rIndex: number) => {
+              if (rIndex === reponseIndex) {
                 reponse.nbVotes--;
+                console.log("reponse.nbVotes décrémenté: " + reponse.nbVotes)
               }
               return reponse;
             });
@@ -284,6 +287,18 @@ export class GameService {
         await setDoc(partie, partieData);
 
       }
+    }
+
+  }
+
+  async addConnectedUser(idMiahoot: number): Promise<void> {
+
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      partieData['userConnected']++;
+      await setDoc(partie, partieData);
     }
 
   }
@@ -379,6 +394,21 @@ export class GameService {
     return userConnected;
   }
 
+  /* DELETES FIREBASE */
+
+  async suppConnectedUser(idMiahoot: number): Promise<void> {
+
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      console.log("userConnected : " + partieData['userConnected']);
+      partieData['userConnected']--;
+      await setDoc(partie, partieData);
+    }
+
+  }
+
   /* AUTRES FONCTIONS FIREBASE */
 
   async verifMiahootPresente(idMiahoot: number): Promise<boolean> { // vérifie si le miahoot d'id idMiahoot existe dans firebase
@@ -425,6 +455,6 @@ export class GameService {
 
     const partieObs = collectionData(partieQuery, { idField: 'id' });
     return partieObs;
-  }
+  }
 
 }
