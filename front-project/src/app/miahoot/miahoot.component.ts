@@ -131,7 +131,7 @@ export class MiahootComponent {
     return this.idUserFB == this.idPresentateur;
   }
 
-  showBonneReponse(): void {
+  showReponses(): void {
     if (this.voirRep.getValue() == true) {
       this.voirRep.next(false);
     } else if (this.voirRep.getValue() == false) {
@@ -140,5 +140,11 @@ export class MiahootComponent {
     }
 
   }
+
+  //cacher bonne reponse
+  hideReponses(): void {
+    this.voirRep.next(false);
+  }
+
 
 }
