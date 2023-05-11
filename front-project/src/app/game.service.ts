@@ -77,6 +77,10 @@ export class GameService {
     miahootGame.isPresented = true;
   }
 
+  endGame(): void { // On termine le jeu (fonction utilisable par un présentateur/concepteur)
+  }
+
+
   startGame(): void {
     this.inGameTrue(12);
   }

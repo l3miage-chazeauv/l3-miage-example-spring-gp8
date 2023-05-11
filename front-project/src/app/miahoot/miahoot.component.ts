@@ -20,18 +20,20 @@ export class MiahootComponent {
 
   public obsPartie$: Observable<any>;
   protected idQuestionCourante: number = 1;
+  public voirRep: boolean = false;
   private concepteurs?: MiahootUser[];
   private presentateurs?: MiahootUser[];
 
-  public idPresentateur: string = "nullIdPresentateur";
-  public idUserFB: string = "nullIdUserFB";
+  protected idPresentateur: string = "nullIdPresentateur";
+  protected idUserFB: string = "nullIdUserFB";
 
   constructor(private apiMia: APIService,
     private router: Router,
     private ar: ActivatedRoute,
     protected gs: GameService,
     private ms: UserService,
-    private cdRef: ChangeDetectorRef) {
+    private cdRef: ChangeDetectorRef,
+    private user: UserService) {
 
       this.idMiahoot = this.ar.snapshot.params['id'];
       
@@ -44,7 +46,20 @@ export class MiahootComponent {
       ).subscribe((id) => {
         this.idQuestionCourante = id;
         this.cdRef.detectChanges();
+      }); 
+
+      this.gs.getPresentateurMiahootPresente(this.idMiahoot.toString()).then((id) => {
+        this.idPresentateur = id;
+        // this.cdr.detectChanges();
       });
+  
+      //On récupère l'id de l'utilisateur
+      this.user.getIdUserFB().then((id) => {
+        this.idUserFB = id;
+        console.log("idUserFB " + this.idUserFB);
+        // this.cdr.detectChanges();
+      });
+      
 
     }
     
@@ -57,25 +72,28 @@ export class MiahootComponent {
 
   async ngOnInit(): Promise<void> {
 
-    this.assignUserId().then(async () => {
 
-      if (this.idMiahoot) {
-        await this.assignPresentateur(this.idMiahoot).then(() => {
 
-          this.apiMia.getAPIQuestionsByMiahootID(this.idMiahoot).subscribe((data: any) => {
+    if (this.idMiahoot) {
 
-            data.map((obj: { id: any, label: any, miahootId: any, reponses: any }) => {
-              let question: Question = {
-                label: obj.label,
-                reponses: obj.reponses,
-                id: obj.id
-              };
-              this.gs.miahootGame.miahoot.listeQuestions.push(question);
-            })
-          }); // On récupère les questions du miahoot
-        });
-      }
+    await this.assignPresentateur(this.idMiahoot).then(() => {
+
+      this.apiMia.getAPIQuestionsByMiahootID(this.idMiahoot).subscribe((data: any) => {
+
+        data.map((obj: { id: any, label: any, miahootId: any, reponses: any }) => {
+          let question: Question = {
+            label: obj.label,
+            reponses: obj.reponses,
+            id: obj.id
+          };
+          this.gs.miahootGame.miahoot.listeQuestions.push(question);
+        })
+      }); // On récupère les questions du miahoot
+    }).catch((err) => {
+      console.log("première erreur chef"+err);
     });
+  }
+
 
   }
 
@@ -102,12 +120,19 @@ export class MiahootComponent {
 
   async assignUserId(): Promise<void> {
     this.idUserFB = await this.ms.getIdUserFB();
+    if (this.idUserFB == null) {
+      this.idUserFB = "nullIdUserFB";
+    }
     this.cdRef.detectChanges();
   }
 
   isPresenting(): boolean {
     // console.log("isPresenting: " + this.idUserFB + " == " + this.idPresentateur)
     return this.idUserFB == this.idPresentateur;
+  }
+
+  showBonneReponse(): void {
+    this.voirRep=!this.voirRep;
   }
 
 }

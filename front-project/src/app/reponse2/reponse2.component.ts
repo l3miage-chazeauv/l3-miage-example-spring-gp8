@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { GameService } from '../game.service';
 import { UserService } from '../user.service';
+import { MiahootComponent } from '../miahoot/miahoot.component';
 
 
 @Component({
@@ -15,11 +16,14 @@ export class Reponse2Component {
     @Input() label!:String 
     @Input() estCorrecte!:Boolean
     @Input() idPresentateur?: string
+    protected voirRep: boolean = false;
   
     public estCochee:Boolean = false;
     public idUserFB: string = "nullIdUserFB";
 
-    constructor(private ms:UserService, private cdRef: ChangeDetectorRef) {
+    constructor(private ms:UserService, private cdRef: ChangeDetectorRef, private miahoot : MiahootComponent) {
+      this.voirRep = this.miahoot.voirRep;
+      console.log("voir rep reponse: " + this.voirRep);
     }
 
     async ngOnInit(): Promise<void> {

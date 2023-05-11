@@ -24,7 +24,7 @@ export class WaitingRoomComponent implements OnInit {
 
 
 
-  constructor(private cdr: ChangeDetectorRef, protected gs: GameService, private user: UserService, private ar: ActivatedRoute,) {
+  constructor(private cdr: ChangeDetectorRef, protected gs: GameService, private user: UserService, private ar: ActivatedRoute, private miahoot : MiahootComponent) {
     //On récupère l'id du miaHoot
     this.idMiahoot = this.ar.snapshot.params['id'];
 
@@ -36,10 +36,10 @@ export class WaitingRoomComponent implements OnInit {
       this.cdr.detectChanges();
     });
 
+
     //On récupère l'id du présentateur
     this.gs.getPresentateurMiahootPresente(this.idMiahoot).then((id) => {
       this.idPresentateur = id;
-      console.log("idPresentateur " + this.idPresentateur);
       // this.cdr.detectChanges();
     });
 
