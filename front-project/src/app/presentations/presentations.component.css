@@ -1,3 +1,6 @@
+h1{
+    margin-bottom: 20px;
+}
 h2, h4 {
     font-weight: 500;
     color: azure;
@@ -15,10 +18,14 @@ h2, h4 {
     display: flex;
     flex-direction: column;
     width: 100%;
+    gap: 20px;
+}
+.presentations input{
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .presContainer{
-    margin: 10px;
     background-color: #193966;
     padding: 30px;
     border-radius: 10px;

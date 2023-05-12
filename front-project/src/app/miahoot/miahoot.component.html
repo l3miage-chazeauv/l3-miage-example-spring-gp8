@@ -5,7 +5,7 @@
     {{this.idQuestionCourante}} / {{this.gs.miahootGame.miahoot.listeQuestions.length}}
 </h1>
 
-<div *ngIf="this.gs.inGame === true">
+<div class="miahoot-container" *ngIf="this.gs.inGame === true">
 
     <div *ngIf="this.gs.miahootGame.miahoot.listeQuestions">
         <div class="questions" 
@@ -49,3 +49,5 @@
         </button>
     </div>
 </div>
+
+<div class="grid-extender"></div> <!-- empty div set to keep the grid layout while using position absolute, check css for more info -->
