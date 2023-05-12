@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { GameService } from '../game.service';
 import { MiahootUser } from '../QcmDefinitions';
 import { MiahootComponent } from '../miahoot/miahoot.component';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserService } from '../user.service';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-waiting-room',
@@ -14,14 +15,18 @@ import { UserService } from '../user.service';
 })
 export class WaitingRoomComponent implements OnInit {
 
-  elementType = 'url';
-  value = 'Techiediaries';
+  @Input() url!:string;
+
+  public myAngularxQrCode: string = "";
+  public qrCodeDownloadLink: SafeUrl = "";
+
 
   nbUtilisateurs: number = 0;
   idMiahoot: string = "";
   idUserFB: string = 'nullIdUserFB';
   idPresentateur: string = "nullIdPresentateur";
   // inGame = false;
+
 
   protected obsNbUserConnected: Observable<any> = new Observable();
 
@@ -30,7 +35,7 @@ export class WaitingRoomComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef, protected gs: GameService, private user: UserService, private ar: ActivatedRoute, private miahoot : MiahootComponent) {
     //On récupère l'id du miaHoot
     this.idMiahoot = this.ar.snapshot.params['id'];
-
+    this.myAngularxQrCode = this.url;
     this.obsNbUserConnected = this.gs.setObsPartie(this.idMiahoot);
     this.obsNbUserConnected.subscribe((partie) => {
       this.gs.inGame = partie[0].inGame;
@@ -91,4 +96,9 @@ export class WaitingRoomComponent implements OnInit {
 
     // }
   }
+
+  onChangeURL(url: SafeUrl) {
+    this.qrCodeDownloadLink = url;
+  }
+
 }

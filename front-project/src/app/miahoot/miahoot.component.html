@@ -1,4 +1,6 @@
-<app-waiting-room *ngIf="this.gs.inGame === false"></app-waiting-room>
+<app-waiting-room *ngIf="this.gs.inGame === false"
+                  [url]="this.urlMiahoot"
+></app-waiting-room>
 
 <div *ngIf="this.gs.inGame === true">
 
@@ -32,8 +34,6 @@
     <button class="button-19"
             (click)="this.togglePopup()"
             [class.hide]="this.idQuestionCourante != this.gs.miahootGame.miahoot.listeQuestions.length-1">Fin de Partie
-    
-
     </button>
 </div>
 
