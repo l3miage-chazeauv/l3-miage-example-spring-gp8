@@ -30,6 +30,7 @@ export class WaitingRoomComponent implements OnInit {
 
 
   constructor(private cdr: ChangeDetectorRef, protected gs: GameService, private user: UserService, private ar: ActivatedRoute) {
+
     //On récupère l'id du miaHoot
     this.idMiahoot = this.ar.snapshot.params['id'];
 
