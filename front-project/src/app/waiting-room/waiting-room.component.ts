@@ -14,6 +14,9 @@ import { UserService } from '../user.service';
 })
 export class WaitingRoomComponent implements OnInit {
 
+  elementType = 'url';
+  value = 'Techiediaries';
+
   nbUtilisateurs: number = 0;
   idMiahoot: string = "";
   idUserFB: string = 'nullIdUserFB';

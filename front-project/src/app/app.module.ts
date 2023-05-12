@@ -12,6 +12,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from "@angular/material/menu";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { QRCodeModule } from 'angularx-qrcode';
 
 import { AppComponent } from './app.component';
 import { QuestionComponent } from './question/question.component';
@@ -69,6 +71,8 @@ import { NewMiahootComponent } from './new-miahoot/new-miahoot.component';
     MatFormFieldModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
+    NgxQRCodeModule,
+    QRCodeModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),

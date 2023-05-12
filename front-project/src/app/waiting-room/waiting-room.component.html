@@ -4,11 +4,20 @@
     <ul>
         <!-- <li *ngFor="let utilisateur of utilisateurs">{{utilisateur.name}}</li> -->
     </ul>
+    <div class="qrcodeImage">
+        <qrcode
+        [qrdata]="'https://github.com/Cordobo/angularx-qrcode'"
+        [allowEmptyString]="true"
+        [elementType]="'canvas'"
+        [errorCorrectionLevel]="'M'"
+        [margin]="4"
+        [scale]="1"
+        [width]="300">
+        </qrcode>
+    </div>
 </div>
 
 <div class="buttonsContainer">
-      <button class="button-19"
-             (click)="this.start()"
-             [class.hide]="this.idPresentateur !== this.idUserFB">Commencer</button>
+    <button class="button-19" (click)="this.start()"
+        [class.hide]="this.idPresentateur !== this.idUserFB">Commencer</button>
 </div>
-  

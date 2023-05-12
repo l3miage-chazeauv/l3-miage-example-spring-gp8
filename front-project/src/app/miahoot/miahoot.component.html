@@ -30,9 +30,16 @@
     <button class="button-19"
             (click)="this.showReponses()">Voir solution</button>
     <button class="button-19"
-            (click)="this.gs.endGame()"
+            (click)="this.togglePopup()"
             [class.hide]="this.idQuestionCourante != this.gs.miahootGame.miahoot.listeQuestions.length-1">Fin de Partie
     
 
     </button>
+</div>
+
+<div *ngIf="showPopup"
+    class="card">
+    <div class="heading">
+        <span>Partie terminée !</span>
+    </div>
 </div>
