@@ -87,6 +87,8 @@ export class MiahootComponent {
 
     if (this.idMiahoot) {
 
+      this.gs.miahootGame.miahoot.listeQuestions = [];
+
       await this.assignPresentateur(this.idMiahoot).then(() => {
 
         this.apiMia.getAPIQuestionsByMiahootID(this.idMiahoot).subscribe((data: any) => {
