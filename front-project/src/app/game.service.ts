@@ -44,21 +44,9 @@ export class GameService {
   inGame: boolean = false;
   idMiahoot: number = 0;
   miahootGame: MiahootGame = { isPresented: false, miahoot: { idMiahoot: 0, listeQuestions: [] } };
-  // public obsPartie$: Observable<any> = new Observable();
 
 
   obsMiahootGame$ = new Observable<MiahootGame | undefined>;
-
-  /*
-  this.obsPartie$ = this.gs.setObsPartie(this.idMiahoot.toString());
-
-      this.obsPartie$.pipe(
-        map(data => data[0].idQuestionCourante)
-      ).subscribe((id) => {
-        this.idQuestionCourante = id;
-        this.cdRef.detectChanges();
-      });
-  */
 
 
   constructor(private auth: Auth, 
@@ -67,14 +55,6 @@ export class GameService {
               private ms: UserService, 
               private ar: ActivatedRoute,
               private rs: RoutingService) {
-    // this.obsPartie$ = this.setObsPartie("2");
-    // this.obsPartie$.pipe(
-    //   map(data => data[0].inGame)
-    // ).subscribe((inGame) => {
-    //   this.inGame = inGame;
-    // });
-
-    // console.log("dehors de l'observable " + this.inGame);
     
               }
 
