@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { APIService } from '../api.service';
 import { RoutingService } from '../routing.service';
-import { GameService } from '../game.service';
 
 @Component({
   selector: 'app-miahoot-editing',
@@ -57,27 +56,13 @@ export class MiahootEditingComponent {
     });
   }
 
-  // getUserById() {
-  //   this.apiMia.getAPIUserById(this.idUtilisateur).subscribe((data: any) => {
-  //     console.log(data);
-  //   });
-  // }
+  
 
   postUser(form: NgForm) {
     const data = {
       "username": form.value.username,
       "firebaseId": form.value.firebaseId,
     };
-    // this.apiMia.postAPIUser(data).subscribe(
-    //   //Permet de voir l'erreur dans la console ou le bon fonctionnement
-    //   data => {
-    //     if (data == null) {
-    //       console.log("Utilisateur créé");
-    //     } else {
-    //       console.error(data);
-    //     }
-    //   }
-    // );
   }
 
 

@@ -18,10 +18,8 @@ export class NewMiahootComponent {
   
     ngOnInit(): void {
       this.miaU.getUser().then( data => {
-        console.log(data?.uid);
         this.idMia=  data?.uid;
       }).then(() =>{
-        console.log(this.idMia)
       }) 
     }
     
@@ -32,15 +30,10 @@ export class NewMiahootComponent {
           "firebaseId": this.idMia
         }; 
         this.apiMia.postAPIMiahoot(data).subscribe(
-          //Permet de voir l'erreur dans la console ou le bon fonctionnement
           miahootId => {
             if (typeof miahootId == "number") {
-              console.log("Miahoot créé");
               this.router.toCreateMiahoot(miahootId);
-            } else {
-              console.error(miahootId);
-            }
-            // recuperer
+            } 
           }
         );
       }
