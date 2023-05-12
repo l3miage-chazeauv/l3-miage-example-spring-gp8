@@ -50,6 +50,18 @@ export class MiahootComponent {
     this.gs.postIdQuestionCourante(this.idMiahoot, 1);
 
     this.obsPartie$ = this.gs.setObsPartie(this.idMiahoot.toString());
+    this.obsPartie$.pipe(
+      map(data => data[0].inGame)
+    ).subscribe((inGame) => {
+      this.gs.inGame = inGame;
+    });
+    
+    // this.gs.obsPartie$ = this.gs.setObsPartie(this.idMiahoot.toString());
+    // this.gs.obsPartie$.pipe(
+    //   map(data => data[0].inGame)
+    // ).subscribe((inGame) => {
+    //   this.gs.inGame = inGame;
+    // });
 
     this.obsPartie$.pipe(
       map(data => data[0].idQuestionCourante)
@@ -76,7 +88,7 @@ export class MiahootComponent {
   async ngOnDestroy(): Promise<void> {
     await this.gs.inGameFalse(this.idMiahoot);
     await this.gs.suppConnectedUser(this.idMiahoot);
-    await this.gs.postIdQuestionCourante(this.idMiahoot,0);
+    await this.gs.postIdQuestionCourante(this.idMiahoot,1);
     this.cdRef.detectChanges();
   }
 
@@ -86,6 +98,8 @@ export class MiahootComponent {
 
 
     if (this.idMiahoot) {
+
+      this.gs.miahootGame.miahoot.listeQuestions = [];
 
       await this.assignPresentateur(this.idMiahoot).then(() => {
 
