@@ -2,7 +2,7 @@ import { ChangeDetectorRef, EventEmitter, Injectable, OnInit } from '@angular/co
 import { Question, Reponse, MiahootGame, Parties, MiahootUser } from './QcmDefinitions';
 import { Observable, firstValueFrom, map, of, switchMap, take } from 'rxjs';
 import { Auth, authState, user } from '@angular/fire/auth';
-import { CollectionReference, DocumentData, DocumentReference, Firestore, FirestoreDataConverter, addDoc, collection, collectionData, doc, docData, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { CollectionReference, DocumentData, DocumentReference, Firestore, FirestoreDataConverter, addDoc, collection, collectionData, deleteDoc, doc, docData, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 import { APIService } from './api.service';
 import { UserService } from './user.service';
 import { update } from '@angular/fire/database';
@@ -83,15 +83,18 @@ export class GameService {
     miahootGame.isPresented = true;
   }
 
-  endGame(): void { // On termine le jeu (fonction utilisable par un présentateur/concepteur)
+  endGame(miahootID: number): void { // On termine le jeu (fonction utilisable par un présentateur/concepteur)
     this.miahootGame.isPresented = false;
 
-    this.rs.toHome();
+    // On inverse l'attribut inGame dans firebase
+    this.inGameFalse(miahootID);
+
+    // On delete la partie de firebase
+    this.suppMiahootPresente(miahootID);
   }
 
 
   startGame(idMia : string ): void {
-    console.log("startGame " + idMia + ' type of ' + typeof(idMia));
     this.inGameTrue(parseInt(idMia));
   }
 
@@ -411,6 +414,18 @@ export class GameService {
       console.log("userConnected : " + partieData['userConnected']);
       partieData['userConnected']--;
       await setDoc(partie, partieData);
+    }
+
+  }
+
+  async suppMiahootPresente(idMiahoot: number): Promise<void> {
+    // supprime le miahoot d'id idMiahoot de firebase
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      console.log("suppression du miahoot");
+      await deleteDoc(partie);
     }
 
   }

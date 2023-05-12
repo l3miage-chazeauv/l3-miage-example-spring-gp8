@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, firstValueFrom, map, of } from 'rxjs';
 import { UserService } from '../user.service';
 import { User } from '@angular/fire/auth';
+import { RoutingService } from '../routing.service';
 
 @Component({
   selector: 'app-miahoot[idMiahoot]',
@@ -34,6 +35,7 @@ export class MiahootComponent {
   constructor(private apiMia: APIService,
     private router: Router,
     private ar: ActivatedRoute,
+    protected rs: RoutingService,
     protected gs: GameService,
     private ms: UserService,
     private cdRef: ChangeDetectorRef,
@@ -166,7 +168,7 @@ export class MiahootComponent {
     this.showPopup = !this.showPopup;
     this.cdRef.detectChanges();
 
-    this.gs.endGame();
+    this.gs.endGame(this.idMiahoot);
   }
 
 
