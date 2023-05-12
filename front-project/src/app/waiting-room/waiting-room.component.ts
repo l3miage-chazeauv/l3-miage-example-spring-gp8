@@ -22,6 +22,7 @@ export class WaitingRoomComponent implements OnInit {
   protected obsNbUserConnected: Observable<any> = new Observable();
 
   constructor(private cdr: ChangeDetectorRef, protected gs: GameService, private user: UserService, private ar: ActivatedRoute) {
+
     //On récupère l'id du miaHoot
     this.idMiahoot = this.ar.snapshot.params['id'];
 

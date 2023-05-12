@@ -50,7 +50,7 @@
     <!-- formulaire d'ajout d'une question  -->
     <form class="ajout-question" #questionForm="ngForm" (ngSubmit)="postQuestion(questionForm); questionForm.reset()">
         <h3>Ajouter une question</h3>
-        <input type="text" name="labelQuestion" placeholder="label de la question" ngModel ngDefaultControl />
+        <input type="text" name="labelQuestion" placeholder="Label" ngModel ngDefaultControl />
         <br>
         <button class="button-19 add-button" type="submit">+</button>
     </form>

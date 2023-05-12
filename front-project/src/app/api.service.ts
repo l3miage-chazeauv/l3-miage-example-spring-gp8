@@ -38,6 +38,11 @@ export class APIService {
     return this.http.get(url);
   }
 
+  getAPIConcepteurs(miahootId: number): Observable<any> {
+    const url = `${this.apiUrl}/miahoot/${miahootId}/concepteurs`; // On récupère les présentateurs d'un miahoot
+    return this.http.get(url);
+  }
+
   deleteAPIUserById(id:number): Observable<any> {
     const url = `${this.apiUrl}/utilisateur/${id}`; // On supprime un utilisateur par son id
     return this.http.delete(url);
