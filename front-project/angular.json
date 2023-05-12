@@ -74,6 +74,7 @@
               "browserTarget": "front-project:build:production"
             },
             "development": {
+              "host": "0.0.0.0",
               "browserTarget": "front-project:build:development"
             }
           },
