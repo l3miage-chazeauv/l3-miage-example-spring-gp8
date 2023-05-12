@@ -59,7 +59,7 @@ export class RechercheMiaComponent {
             //ajouter un utilisateur connecté à la partie
             //appel de la fonction addConnectedUser
             if (this.idRecherche != undefined) {
-              this.game.addConnectedUser(this.idRecherche);
+              // this.game.addConnectedUser(this.idRecherche);
               this.game.getNumberOfUserConnected(this.idRecherche);
             }
           }

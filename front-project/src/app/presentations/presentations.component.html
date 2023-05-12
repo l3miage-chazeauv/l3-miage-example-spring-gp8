@@ -5,7 +5,6 @@
         placeholder="Recherche par description" 
         autofocus (keyup.enter)="newListByLabel()"
         [(ngModel)]="labelRecherche">
-
         <div *ngFor="let presentation of this.resultatRecherche" class="presContainer">
             <h2 class="titre">{{ presentation.nom }} <span>({{presentation.id}})</span></h2>
             <h4 class="description">{{ presentation.description }}</h4>
@@ -13,5 +12,6 @@
             <button class="button-19" (click)="this.router.toCreateMiahoot(presentation.id)">Editer</button>
             <button class="button-19" (click)="this.game.addMiahootPresente(presentation.id, this.idUserFB); this.router.toMiahoot(presentation.id)">Présenter</button>
         </div>
+        <button class="button-19" (click)="this.router.toNewMiahoot()">Créer un nouveau Miahoot</button>
     </div>
 </div>

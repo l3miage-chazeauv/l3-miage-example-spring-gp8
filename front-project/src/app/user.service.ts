@@ -66,6 +66,7 @@ export class UserService{
     return new Promise<User | null>((resolve, reject) => {
       authState(this.auth).subscribe(u => {
         if (u != null) {
+
           resolve(u);
         }
       }, error => {

@@ -1,12 +1,13 @@
-import { EventEmitter, Injectable, OnInit } from '@angular/core';
+import { ChangeDetectorRef, EventEmitter, Injectable, OnInit } from '@angular/core';
 import { Question, Reponse, MiahootGame, Parties, MiahootUser } from './QcmDefinitions';
 import { Observable, firstValueFrom, map, of, switchMap, take } from 'rxjs';
 import { Auth, authState, user } from '@angular/fire/auth';
-import { CollectionReference, DocumentData, DocumentReference, Firestore, FirestoreDataConverter, addDoc, collection, collectionData, doc, docData, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { CollectionReference, DocumentData, DocumentReference, Firestore, FirestoreDataConverter, addDoc, collection, collectionData, doc, docData, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 import { APIService } from './api.service';
 import { UserService } from './user.service';
 import { update } from '@angular/fire/database';
 import { getValueChanges } from '@angular/fire/remote-config';
+import { ActivatedRoute } from '@angular/router';
 
 const conv3: FirestoreDataConverter<any> = {
   toFirestore: val => val,
@@ -40,13 +41,35 @@ export class GameService {
 
 
   inGame: boolean = false;
+  idMiahoot: number = 0;
   miahootGame: MiahootGame = { isPresented: false, miahoot: { idMiahoot: 0, listeQuestions: [] } };
+  protected obsPartie$: Observable<any> = new Observable();
+
 
   obsMiahootGame$ = new Observable<MiahootGame | undefined>;
 
+  /*
+  this.obsPartie$ = this.gs.setObsPartie(this.idMiahoot.toString());
 
-  constructor(private auth: Auth, private fs: Firestore, private apiMia: APIService, private ms: UserService) {
+      this.obsPartie$.pipe(
+        map(data => data[0].idQuestionCourante)
+      ).subscribe((id) => {
+        this.idQuestionCourante = id;
+        this.cdRef.detectChanges();
+      });
+  */
 
+
+  constructor(private auth: Auth, private fs: Firestore, private apiMia: APIService, private ms: UserService, private ar: ActivatedRoute) {
+    this.obsPartie$ = this.setObsPartie("2");
+    this.obsPartie$.pipe(
+      map(data => data[0].inGame)
+    ).subscribe((inGame) => {
+      this.inGame = inGame;
+    });
+
+    // console.log("dehors de l'observable " + this.inGame);
+    
   }
 
 
@@ -54,73 +77,38 @@ export class GameService {
     miahootGame.isPresented = true;
   }
 
-  startGame(): void {
-    this.inGame = true;
+  endGame(): void { // On termine le jeu (fonction utilisable par un présentateur/concepteur)
   }
 
- 
 
-  async addConnectedUser(idMiahoot: number): Promise<void> {
+  startGame(idMia : string ): void {
+    console.log("startGame " + idMia + ' type of ' + typeof(idMia));
+    this.inGameTrue(parseInt(idMia));
+  }
+
+  async inGameTrue(idMiahoot: number): Promise<void> {
 
     const partie = await this.getMiahootPresente(idMiahoot.toString());
     const partieData = await firstValueFrom(docData(partie));
 
     if (partieData) {
-      partieData['userConnected'] ++;
+      partieData['inGame'] = true;
+      await setDoc(partie, partieData);
+    }
+
+  }
+  async inGameFalse(idMiahoot: number): Promise<void> {
+
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      partieData['inGame'] = false;
       await setDoc(partie, partieData);
     }
 
   }
 
- /* async postIdQuestionCourante(idMiahoot: number, idQuestionCourante: number): Promise<void> {
-    // On ajoute l'id de la question courante à l'attribut idQuestionCourante de la partie de miahoot
-    const partie = await this.getMiahootPresente(idMiahoot.toString());
-    const partieData = await firstValueFrom(docData(partie));
-
-    if (partieData) {
-      partieData['idQuestionCourante'] = idQuestionCourante;
-      await updateDoc(partie, partieData);
-    }
-
-  }*/
-
-  async suppConnectedUser(idMiahoot: number): Promise<void> {
-
-    const partie = await this.getMiahootPresente(idMiahoot.toString());
-    const partieData = await firstValueFrom(docData(partie));
-
-    if (partieData) {
-      console.log("userConnected : " + partieData['userConnected']);
-      partieData['userConnected'] --;
-      await setDoc(partie, partieData);
-    }
-
-  }
-
-
-  // Déclaration de la fonction asynchrone getNumberOfUserConnected
-  async getNumberOfUserConnected(idMiahoot: number): Promise<number> {
-    // Initialisation du nombre d'utilisateurs connectés à 0
-    let userConnected = 0;
-
-    // Obtention de la référence à la collection "parties"
-    const partiesCollection = collection(this.fs, `parties/`);
-
-    // Création de la requête pour récupérer les documents ayant l'id Miahoot correspondant
-    const partieQuery = query(partiesCollection, where('miahootID', '==', idMiahoot));
-    const querySnapshot = await getDocs(partieQuery);
-
-    if (!querySnapshot.empty) {
-      // Récupération du premier document trouvé
-      const docSnapshot = querySnapshot.docs[0];
-
-      // Récupération de la valeur de la propriété 'userConnected' dans le document
-      userConnected = docSnapshot.get('userConnected');
-    }
-
-    // Retour du nombre d'utilisateurs connectés
-    return userConnected;
-  }
 
 
   //Ajouter le miahoot passé en paramètre à la liste des miahoots présentés dans FB
@@ -142,15 +130,9 @@ export class GameService {
         miahootID: idMiahoot,
         idQuestionCourante: 1,
         userConnected: 0,
+        inGame: false,
         questions: questionsMiahoot
       });
-      // console.log("PartieData : " + JSON.stringify(PartieData))
-
-      // const questionsCollection = collection(this.fs, `parties/${partieData.id}/questions`);
-      // const questiondata = await addDoc(questionsCollection, {
-      //   questions: questionsMiahoot
-      // });
-      // console.log("Questiondata : " + JSON.stringify(questiondata))
 
       this.postNbVotesAttribute(idMiahoot);
 
@@ -163,8 +145,6 @@ export class GameService {
       throw error;
     }
   }
-
-  /* POSTS FIREBASE */
 
   async addMIdToUser(partieData: DocumentReference<DocumentData>, idUserFB: string): Promise<void> {
     // On ajoute l'id du miahoot à l'attribut miahootID du présentateur qui y est connecté automatiquement
@@ -217,14 +197,107 @@ export class GameService {
 
   async postNbVotesAttribute(miahootID: number): Promise<void> {
     // Ajout de l'attribut nbVotes de type number aux questions d'une partie de miahoot
-    console.log("miahootID : " + miahootID + " type : " + typeof (miahootID))
+    // On récupère la partie de miahoot en cours de présentation
     const partie = await this.getMiahootPresente(miahootID.toString()); // On récupère la partie de miahoot
+    const partieSnap = await getDoc(partie) // On récupère le snapshot de la partie de miahoot 
+    let partieData = partieSnap.data(); // On récupère les données de la partie de miahoot
 
-    // On récupère le champs question de la partie de miahoot
+    if (partieSnap.exists()) {
+      if (partieData !== undefined) {
+
+        // On parcourt chaque question de la partie et on ajoute l'attribut nbVotes
+        const updatedQuestions = partieData['questions'].map((question: any) => {
+          const updatedResponses = question.reponses.map((reponse: any) => {
+            return { ...reponse, nbVotes: 0 };
+          });
+          return { ...question, reponses: updatedResponses };
+        });
+
+        partieData['questions'] = updatedQuestions;
+        await setDoc(partie, partieData);
+
+      }
+    }
+
+  }
+
+  async addVote(miahootID: number, questionIndex: number, reponseIndex: number): Promise<void> {
+    console.log("miahootID: " + miahootID + " questionIndex: " + questionIndex + " reponseIndex: " + reponseIndex)
+    //Incrémenter le nombre de votes de la réponse numéro idReponse de la question numéro idQuestion
+    console.log("addVote")
+    const partie = await this.getMiahootPresente(miahootID.toString()); // On récupère la partie de miahoot
+    const partieSnap = await getDoc(partie) // On récupère le snapshot de la partie de miahoot 
+    let partieData = partieSnap.data(); // On récupère les données de la partie de miahoot
+
+    if (partieSnap.exists()) {
+      if (partieData !== undefined) {
+
+        // On parcourt chaque question de la partie et on ajoute l'attribut nbVotes
+        const updatedQuestions = partieData['questions'].map((question: any, qIndex: number) => {
+          if (qIndex === questionIndex) {
+            const updatedResponses = question.reponses.map((reponse: any, rIndex: number) => {
+              if (rIndex === reponseIndex) {
+                reponse.nbVotes++;
+                console.log("reponse.nbVotes incrémenté: " + reponse.nbVotes)
+              }
+              return reponse;
+            });
+            return { ...question, reponses: updatedResponses };
+          }
+          return question;
+        });
+
+        partieData['questions'] = updatedQuestions;
+        await setDoc(partie, partieData);
+
+      }
+    }
+  }
+
+  async delVote(miahootID: number, questionIndex: number, reponseIndex: number): Promise<void> {
+
+    //Décrémenter le nombre de votes de la réponse numéro idReponse de la question numéro idQuestion
+    console.log("delVote")
+    const partie = await this.getMiahootPresente(miahootID.toString()); // On récupère la partie de miahoot
+    const partieSnap = await getDoc(partie) // On récupère le snapshot de la partie de miahoot 
+    let partieData = partieSnap.data(); // On récupère les données de la partie de miahoot
+
+    if (partieSnap.exists()) {
+      if (partieData !== undefined) {
+
+        // On parcourt chaque question de la partie et on ajoute l'attribut nbVotes
+        const updatedQuestions = partieData['questions'].map((question: any, qIndex: number) => {
+          if (qIndex === questionIndex) {
+            const updatedResponses = question.reponses.map((reponse: any, rIndex: number) => {
+              if (rIndex === reponseIndex) {
+                reponse.nbVotes--;
+                console.log("reponse.nbVotes décrémenté: " + reponse.nbVotes)
+              }
+              return reponse;
+            });
+            return { ...question, reponses: updatedResponses };
+          }
+          return question;
+        });
+
+        partieData['questions'] = updatedQuestions;
+        await setDoc(partie, partieData);
+
+      }
+    }
+
+  }
+
+  async addConnectedUser(idMiahoot: number): Promise<void> {
+
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
     const partieData = await firstValueFrom(docData(partie));
-    console.log("partieData : " + JSON.stringify(partieData))
-    const questions = partieData['questions'];
-    console.log("questions : " + JSON.stringify(questions))
+
+    if (partieData) {
+      partieData['userConnected']++;
+      await setDoc(partie, partieData);
+    }
+
   }
 
   /* GETS FIREBASE */
@@ -294,6 +367,45 @@ export class GameService {
     return res;
   }
 
+  // Retoura le nombre de participant connecté durant la partie
+  async getNumberOfUserConnected(idMiahoot: number): Promise<number> {
+    // Initialisation du nombre d'utilisateurs connectés à 0
+    let userConnected = 0;
+
+    // Obtention de la référence à la collection "parties"
+    const partiesCollection = collection(this.fs, `parties/`);
+
+    // Création de la requête pour récupérer les documents ayant l'id Miahoot correspondant
+    const partieQuery = query(partiesCollection, where('miahootID', '==', idMiahoot));
+    const querySnapshot = await getDocs(partieQuery);
+
+    if (!querySnapshot.empty) {
+      // Récupération du premier document trouvé
+      const docSnapshot = querySnapshot.docs[0];
+
+      // Récupération de la valeur de la propriété 'userConnected' dans le document
+      userConnected = docSnapshot.get('userConnected');
+    }
+
+    // Retour du nombre d'utilisateurs connectés
+    return userConnected;
+  }
+
+  /* DELETES FIREBASE */
+
+  async suppConnectedUser(idMiahoot: number): Promise<void> {
+
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      console.log("userConnected : " + partieData['userConnected']);
+      partieData['userConnected']--;
+      await setDoc(partie, partieData);
+    }
+
+  }
+
   /* AUTRES FONCTIONS FIREBASE */
 
   async verifMiahootPresente(idMiahoot: number): Promise<boolean> { // vérifie si le miahoot d'id idMiahoot existe dans firebase
@@ -340,6 +452,6 @@ export class GameService {
 
     const partieObs = collectionData(partieQuery, { idField: 'id' });
     return partieObs;
-  }
+  }
 
 }

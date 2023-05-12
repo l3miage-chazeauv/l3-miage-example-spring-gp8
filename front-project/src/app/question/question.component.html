@@ -1,17 +1,18 @@
-<div class="card">
-  <h4 class="heading">Question n°{{questionId}}
-    <h3>{{ label }}</h3>
-  </h4>
+<div class="conteneur">
+  <div class="card">
+    <h4 class="heading">Question n°{{questionId}}
+      <h3>{{ label }}</h3>
+    </h4>
     <div class="propositions">
+
       <p *ngFor="let reponse of reponses; let i = index">
-        <app-reponse2
+        <app-reponse
           [reponseId]="i"
           [label]="reponse.label"
           [estCorrecte]="reponse.estCorrecte"
-          [idPresentateur]="this.idPresentateur"></app-reponse2>
+          [idPresentateur]="this.idPresentateur"
+          (estCocheeChange)="toggleEstCochee(i, $event)"></app-reponse>
       </p>
     </div>
+  </div>
 </div>
-
-
-  
