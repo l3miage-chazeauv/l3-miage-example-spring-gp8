@@ -14,12 +14,3 @@
     width: 100%;
 }
 
-.buttonsContainer{
-    grid-area: 2 / 3;
-    position: absolute;
-}
-
-.grid-extender{
-    grid-area: 2 / 3;
-    height: 80px;
-}
