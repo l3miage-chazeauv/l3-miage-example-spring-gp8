@@ -110,4 +110,6 @@
     position: relative;
   }
 
-  
+  .card{
+    width: 100%;
+  }
