@@ -50,6 +50,18 @@ export class MiahootComponent {
     this.gs.postIdQuestionCourante(this.idMiahoot, 1);
 
     this.obsPartie$ = this.gs.setObsPartie(this.idMiahoot.toString());
+    this.obsPartie$.pipe(
+      map(data => data[0].inGame)
+    ).subscribe((inGame) => {
+      this.gs.inGame = inGame;
+    });
+    
+    // this.gs.obsPartie$ = this.gs.setObsPartie(this.idMiahoot.toString());
+    // this.gs.obsPartie$.pipe(
+    //   map(data => data[0].inGame)
+    // ).subscribe((inGame) => {
+    //   this.gs.inGame = inGame;
+    // });
 
     this.obsPartie$.pipe(
       map(data => data[0].idQuestionCourante)
