@@ -67,16 +67,14 @@ export class GameService {
               private ms: UserService, 
               private ar: ActivatedRoute,
               private rs: RoutingService) {
-    this.obsPartie$ = this.setObsPartie("2");
-    this.obsPartie$.pipe(
-      map(data => data[0].inGame)
-    ).subscribe((inGame) => {
-      this.inGame = inGame;
-    });
-
-    // console.log("dehors de l'observable " + this.inGame);
     
-  }
+                this.obsPartie$ = this.setObsPartie("12");
+                this.obsPartie$.pipe(
+                  map(data => data[0].inGame)
+                ).subscribe((inGame) => {
+                  this.inGame = inGame;
+                });
+              }
 
 
   letsGoParty(miahootGame: MiahootGame): void { // On initialise le jeu (fonction utilisable par un présentateur/concepteur)
@@ -91,8 +89,8 @@ export class GameService {
 
 
   startGame(idMia : string ): void {
-    console.log("startGame " + idMia + ' type of ' + typeof(idMia));
     this.inGameTrue(parseInt(idMia));
+
   }
 
   async inGameTrue(idMiahoot: number): Promise<void> {
@@ -102,6 +100,8 @@ export class GameService {
 
     if (partieData) {
       partieData['inGame'] = true;
+      this.inGame = true;
+
       await setDoc(partie, partieData);
     }
 
@@ -113,6 +113,7 @@ export class GameService {
 
     if (partieData) {
       partieData['inGame'] = false;
+      this.inGame = false;
       await setDoc(partie, partieData);
     }
 
@@ -237,7 +238,6 @@ export class GameService {
     const partie = await this.getMiahootPresente(miahootID.toString()); // On récupère la partie de miahoot
     const partieSnap = await getDoc(partie) // On récupère le snapshot de la partie de miahoot 
     let partieData = partieSnap.data(); // On récupère les données de la partie de miahoot
-
     if (partieSnap.exists()) {
       if (partieData !== undefined) {
 
