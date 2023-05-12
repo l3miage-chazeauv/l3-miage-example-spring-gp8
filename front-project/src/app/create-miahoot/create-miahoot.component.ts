@@ -5,6 +5,7 @@ import { UserService } from '../user.service';
 import { RoutingService } from '../routing.service';
 import { ActivatedRoute } from '@angular/router';
 import { InfosMiahoot, Miahoot, Question, Reponse } from '../QcmDefinitions';
+import { GameService } from '../game.service';
 
 @Component({
   selector: 'app-create-miahoot',
@@ -27,22 +28,33 @@ export class CreateMiahootComponent{
               protected router : RoutingService, 
               protected miaU : UserService, 
               private route: ActivatedRoute, 
-              private cdr: ChangeDetectorRef) {
-    
-  }
+              private cdr: ChangeDetectorRef,
+              private gameService: GameService) {
 
-  ngOnInit(): void {
     this.idMia = this.route.snapshot.params['id'];
-    console.log(this.idMia);
     //get le miahoot correspondant à l'id
     this.apiMia.getAPIMiahootById(this.idMia).subscribe(miahoot =>{
-        this.miahoot = miahoot;
-        //get les questions correspondant au miahoot recu
-        this.apiMia.getAPIQuestionByMiahootID(this.miahoot.id).subscribe(questions =>{
-            this.questions = questions;
-            this.cdr.detectChanges();
-            console.log(questions);
-        });
+        //verifie que l'utilisateur est un concepteur
+        this.apiMia.getAPIConcepteurs(miahoot.id).subscribe(concepteurs =>{
+            this.miaU.getIdUserFB().then(fbId => {
+                if(concepteurs.some((concepteur: any) =>{
+                    return concepteur.firebaseId == fbId;
+                })){
+                    //fonctionnement normal
+                    this.miahoot = miahoot;
+                    //get les questions correspondant au miahoot recu
+                    this.apiMia.getAPIQuestionByMiahootID(this.miahoot.id).subscribe(questions =>{
+                        this.questions = questions;
+                        this.cdr.detectChanges();
+                        console.log(questions);
+                    });
+                }
+                else{
+                    //redirige l'utilisateur car n'est pas autorisé à modifier le miahoot
+                    this.router.toPresentations();
+                }
+            });
+        })
     });  
   }
 

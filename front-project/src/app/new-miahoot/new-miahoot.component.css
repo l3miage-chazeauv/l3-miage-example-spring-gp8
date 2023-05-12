@@ -1,5 +1,6 @@
 input{
     padding: 7px;
+    border-radius: 10px;
 }
 
 button{
@@ -8,6 +9,7 @@ button{
 
 label{
     margin-top: 10px;
+    margin-bottom: 5px;
 }
 
 form{
@@ -15,4 +17,8 @@ form{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+form button{
+    margin-top: 25px;
 }

@@ -1,6 +1,6 @@
 <div class="conteneur">    
     <app-recherche-mia></app-recherche-mia>
-    <div class="box">
+    <div class="box" [class.hide]="this.disconnected">
         <button class="button-19"
                 id="MC"
                 (click)="this.router.toAccountConfig()">Mon Compte</button>
