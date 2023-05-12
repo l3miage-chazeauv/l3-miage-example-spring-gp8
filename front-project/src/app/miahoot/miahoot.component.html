@@ -1,4 +1,9 @@
-<app-waiting-room *ngIf="this.gs.inGame === false"></app-waiting-room>
+<app-waiting-room *ngIf="this.gs.inGame === false && this.idQuestionCourante !== this.gs.miahootGame.miahoot.listeQuestions.length"
+></app-waiting-room>
+
+<h1>
+    {{this.idQuestionCourante}} / {{this.gs.miahootGame.miahoot.listeQuestions.length}}
+</h1>
 
 <div class="miahoot-container" *ngIf="this.gs.inGame === true">
 
@@ -30,11 +35,19 @@
     <button class="button-19"
             (click)="this.showReponses()">Voir solution</button>
     <button class="button-19"
-            (click)="this.gs.endGame()"
-            [class.hide]="this.idQuestionCourante != this.gs.miahootGame.miahoot.listeQuestions.length-1">Fin de Partie
-    
+            (click)="this.togglePopup()"
+            [class.hide]="this.idQuestionCourante != this.gs.miahootGame.miahoot.listeQuestions.length">Fin de Partie</button>
+</div>
 
-    </button>
+<div *ngIf="this.gs.inGame === false && this.idQuestionCourante === this.gs.miahootGame.miahoot.listeQuestions.length"
+    class="card">
+    <div class="heading">
+        <span>Partie terminée !</span>
+        <button class="button-19"
+                (click)="this.rs.toHome()">
+            Retour à l'accueil
+        </button>
+    </div>
 </div>
 
 <div class="grid-extender"></div> <!-- empty div set to keep the grid layout while using position absolute, check css for more info -->
