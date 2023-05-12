@@ -17,10 +17,7 @@ import { SafeUrl } from '@angular/platform-browser';
 })
 export class WaitingRoomComponent implements OnInit {
 
-  @Input() url!:string;
-
-  public myAngularxQrCode: string = "";
-  public qrCodeDownloadLink: SafeUrl = "";
+  
 
 
   nbUtilisateurs: number = 0;
@@ -38,7 +35,6 @@ export class WaitingRoomComponent implements OnInit {
 
     
 
-    this.myAngularxQrCode = this.url;
     this.obsNbUserConnected = this.gs.setObsPartie(this.idMiahoot);
       this.obsNbUserConnected.pipe().subscribe((partie) => {
         this.nbUtilisateurs = partie[0].userConnected;
@@ -102,8 +98,5 @@ export class WaitingRoomComponent implements OnInit {
     this.gs.startGame(this.idMiahoot);
   }
 
-  onChangeURL(url: SafeUrl) {
-    this.qrCodeDownloadLink = url;
-  }
 
 }
