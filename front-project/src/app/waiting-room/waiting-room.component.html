@@ -1,14 +1,9 @@
-<div id="waitingRoom">
+<div id="waitingRoom" class="card">
     <h1>Salle d'attente</h1>
     <label>il y a {{nbUtilisateurs}} utilisateurs dans la room</label>
-    <ul>
-        <!-- <li *ngFor="let utilisateur of utilisateurs">{{utilisateur.name}}</li> -->
-    </ul>
 </div>
 
-<div class="buttonsContainer">
-      <button class="button-19"
-             (click)="this.start()"
-             [class.hide]="this.idPresentateur !== this.idUserFB">Commencer</button>
-</div>
-  
+
+<button class="button-19"
+        (click)="this.start()"
+        [class.hide]="this.idPresentateur !== this.idUserFB">Commencer</button>

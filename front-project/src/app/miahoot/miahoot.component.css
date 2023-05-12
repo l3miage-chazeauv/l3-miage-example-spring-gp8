@@ -1,0 +1,25 @@
+:host{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    place-items: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+:host > *{
+    grid-column: 2;
+}
+
+.miahoot-container{
+    width: 100%;
+}
+
+.buttonsContainer{
+    grid-area: 2 / 3;
+    position: absolute;
+}
+
+.grid-extender{
+    grid-area: 2 / 3;
+    height: 80px;
+}

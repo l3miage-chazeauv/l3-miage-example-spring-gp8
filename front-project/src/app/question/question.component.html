@@ -5,14 +5,14 @@
     </h4>
     <div class="propositions">
 
-      <p *ngFor="let reponse of reponses; let i = index">
+      <div *ngFor="let reponse of reponses; let i = index">
         <app-reponse
           [reponseId]="i"
           [label]="reponse.label"
           [estCorrecte]="reponse.estCorrecte"
           [idPresentateur]="this.idPresentateur"
           (estCocheeChange)="toggleEstCochee(i, $event)"></app-reponse>
-      </p>
+      </div>
     </div>
   </div>
 </div>

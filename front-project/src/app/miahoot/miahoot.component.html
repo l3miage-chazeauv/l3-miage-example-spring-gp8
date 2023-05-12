@@ -1,6 +1,6 @@
 <app-waiting-room *ngIf="this.gs.inGame === false"></app-waiting-room>
 
-<div *ngIf="this.gs.inGame === true">
+<div class="miahoot-container" *ngIf="this.gs.inGame === true">
 
     <div *ngIf="this.gs.miahootGame.miahoot.listeQuestions">
         <div class="questions" 
@@ -36,3 +36,5 @@
 
     </button>
 </div>
+
+<div class="grid-extender"></div> <!-- empty div set to keep the grid layout while using position absolute, check css for more info -->
