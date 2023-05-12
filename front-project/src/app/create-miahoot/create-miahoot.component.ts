@@ -19,8 +19,6 @@ export class CreateMiahootComponent{
   public miahoot!: InfosMiahoot;
 
   public questions: Question[] = [];
-  // public idReponse: number = 1;
-  // public idUtilisateur: number = 1;
   public reponses: NgForm[]=[];
   public idMia!: number;
 
@@ -28,11 +26,9 @@ export class CreateMiahootComponent{
               protected router : RoutingService, 
               protected miaU : UserService, 
               private route: ActivatedRoute, 
-              private cdr: ChangeDetectorRef,
-              private gameService: GameService) {
+              private cdr: ChangeDetectorRef) {
 
     this.idMia = this.route.snapshot.params['id'];
-    //get le miahoot correspondant à l'id
     this.apiMia.getAPIMiahootById(this.idMia).subscribe(miahoot =>{
         //verifie que l'utilisateur est un concepteur
         this.apiMia.getAPIConcepteurs(miahoot.id).subscribe(concepteurs =>{
@@ -40,17 +36,15 @@ export class CreateMiahootComponent{
                 if(concepteurs.some((concepteur: any) =>{
                     return concepteur.firebaseId == fbId;
                 })){
-                    //fonctionnement normal
                     this.miahoot = miahoot;
                     //get les questions correspondant au miahoot recu
                     this.apiMia.getAPIQuestionByMiahootID(this.miahoot.id).subscribe(questions =>{
                         this.questions = questions;
                         this.cdr.detectChanges();
-                        console.log(questions);
                     });
                 }
                 else{
-                    //redirige l'utilisateur car n'est pas autorisé à modifier le miahoot
+                    //redirige l'utilisateur car il n'est pas autorisé à modifier le miahoot
                     this.router.toPresentations();
                 }
             });
@@ -65,7 +59,6 @@ export class CreateMiahootComponent{
   async postQuestion(form: NgForm) {
     //créer la question
     this.lastQuestionId = await this.apiMia.postAPIQuestionPr('miahoot/' + this.miahoot.id + "/question?label=" + form.value.labelQuestion);
-    console.log("idQuest: " + this.lastQuestionId)
     //obtient la question et l'ajoute à la liste
     this.apiMia.getAPIQuestionById(this.lastQuestionId).subscribe(question =>{
         this.questions.push(question);
@@ -79,7 +72,6 @@ export class CreateMiahootComponent{
             //question bien supprimée
             this.questions = this.questions.filter(question => question.id != questionId);
             this.cdr.detectChanges();
-            console.log("Question supprimé");
           } else {
             console.error(data);
           }
@@ -87,18 +79,15 @@ export class CreateMiahootComponent{
     }
 
   postReponse(form: NgForm, questionId: number) {
-    // console.log(form.value);
     //Formater en format JSON
     const data = {
       label: form.value.labelReponse,
       estCorrecte: form.value.estCorrecte,
     };
-    console.log(data);
     this.apiMia.postAPIReponse('question/' + questionId + "/reponse", data).subscribe(
       (reponseId: number) => {
         //recuperer la reponse créée
         this.apiMia.getAPIReponseById(reponseId).subscribe(reponse=>{
-            console.log(reponse);
             this.questions.filter(question => question.id === questionId)[0].reponses.push(reponse);
             this.cdr.detectChanges();});
       });

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { Auth, signOut } from '@angular/fire/auth';
+import { Auth } from '@angular/fire/auth';
 import { RoutingService } from '../routing.service';
 import { AppComponent } from '../app.component';
 import { UserService } from '../user.service';
@@ -13,10 +13,6 @@ export class HomeComponent {
     protected disconnected!: boolean;
 
   constructor(protected router : RoutingService,private auth: Auth, private pr : AppComponent, private userS: UserService, private cdRef: ChangeDetectorRef){
-    // userS.getUser().then(user =>{
-    //     console.log("qkjgfksgdf")
-    //     console.log(user);
-    // })
 
     this.userS.obsMiahootUser$.subscribe(user =>{
         this.disconnected = user == undefined;
