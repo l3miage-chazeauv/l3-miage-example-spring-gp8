@@ -1,6 +1,10 @@
 <app-waiting-room *ngIf="this.gs.inGame === false"
 ></app-waiting-room>
 
+<h1>
+    {{this.idQuestionCourante}} / {{this.gs.miahootGame.miahoot.listeQuestions.length}}
+</h1>
+
 <div *ngIf="this.gs.inGame === true">
 
     <div *ngIf="this.gs.miahootGame.miahoot.listeQuestions">
