@@ -31,8 +31,10 @@ export class QuestionComponent {
 
   toggleEstCochee(index: number, estCochee: Boolean) {
     if (estCochee) {
+      console.log("toggleEstCochee INCR");
       this.incrVote.emit(index);
     } else {
+      console.log("toggleEstCochee DECR");
       this.decrVote.emit(index);
     }
   }

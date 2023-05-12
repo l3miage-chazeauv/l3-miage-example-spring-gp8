@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { GameService } from '../game.service';
 import { MiahootUser } from '../QcmDefinitions';
 import { MiahootComponent } from '../miahoot/miahoot.component';
@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable, firstValueFrom, take } from 'rxjs';
 import { UserService } from '../user.service';
 import { docData, setDoc } from '@angular/fire/firestore';
 import { set } from '@angular/fire/database';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-waiting-room',
@@ -15,6 +16,12 @@ import { set } from '@angular/fire/database';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WaitingRoomComponent implements OnInit {
+
+  @Input() url!:string;
+
+  public myAngularxQrCode: string = "";
+  public qrCodeDownloadLink: SafeUrl = "";
+
 
   nbUtilisateurs: number = 0;
   idMiahoot: string = "";
@@ -31,6 +38,7 @@ export class WaitingRoomComponent implements OnInit {
 
     
 
+    this.myAngularxQrCode = this.url;
     this.obsNbUserConnected = this.gs.setObsPartie(this.idMiahoot);
       this.obsNbUserConnected.pipe().subscribe((partie) => {
         this.nbUtilisateurs = partie[0].userConnected;
@@ -93,4 +101,9 @@ export class WaitingRoomComponent implements OnInit {
   start(){
     this.gs.startGame(this.idMiahoot);
   }
+
+  onChangeURL(url: SafeUrl) {
+    this.qrCodeDownloadLink = url;
+  }
+
 }

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, firstValueFrom, map, of } from 'rxjs';
 import { UserService } from '../user.service';
 import { User } from '@angular/fire/auth';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-miahoot[idMiahoot]',
@@ -22,11 +23,17 @@ export class MiahootComponent {
   protected idQuestionCourante: number = 1;
   private concepteurs?: MiahootUser[];
   private presentateurs?: MiahootUser[];
+
   public voirRep: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+
+  public urlMiahoot:string="http://localhost:4200/miahoot/"+this.idMiahoot;
 
 
   protected idPresentateur: string = "nullIdPresentateur";
   protected idUserFB: string = "nullIdUserFB";
+
+  showPopup: boolean = false;
 
   constructor(private apiMia: APIService,
     private router: Router,
@@ -36,33 +43,33 @@ export class MiahootComponent {
     private cdRef: ChangeDetectorRef,
     private user: UserService) {
 
-      this.idMiahoot = this.ar.snapshot.params['id'];
-      
-      this.gs.postIdQuestionCourante(this.idMiahoot, 1);
+    this.idMiahoot = this.ar.snapshot.params['id'];
 
-      this.obsPartie$ = this.gs.setObsPartie(this.idMiahoot.toString());
+    this.gs.postIdQuestionCourante(this.idMiahoot, 1);
 
-      this.obsPartie$.pipe(
-        map(data => data[0].idQuestionCourante)
-      ).subscribe((id) => {
-        this.idQuestionCourante = id;
-        this.cdRef.detectChanges();
-      }); 
+    this.obsPartie$ = this.gs.setObsPartie(this.idMiahoot.toString());
 
-      this.gs.getPresentateurMiahootPresente(this.idMiahoot.toString()).then((id) => {
-        this.idPresentateur = id;
-        // this.cdr.detectChanges();
-      });
-  
-      //On récupère l'id de l'utilisateur
-      this.user.getIdUserFB().then((id) => {
-        this.idUserFB = id;
-        // this.cdr.detectChanges();
-      });
-      
+    this.obsPartie$.pipe(
+      map(data => data[0].idQuestionCourante)
+    ).subscribe((id) => {
+      this.idQuestionCourante = id;
+      this.cdRef.detectChanges();
+    });
 
-    }
-    
+    this.gs.getPresentateurMiahootPresente(this.idMiahoot.toString()).then((id) => {
+      this.idPresentateur = id;
+      // this.cdr.detectChanges();
+    });
+
+    //On récupère l'id de l'utilisateur
+    this.user.getIdUserFB().then((id) => {
+      this.idUserFB = id;
+      // this.cdr.detectChanges();
+    });
+
+
+  }
+
 
   async ngOnDestroy(): Promise<void> {
     await this.gs.inGameFalse(this.idMiahoot);
@@ -78,23 +85,23 @@ export class MiahootComponent {
 
     if (this.idMiahoot) {
 
-    await this.assignPresentateur(this.idMiahoot).then(() => {
+      await this.assignPresentateur(this.idMiahoot).then(() => {
 
-      this.apiMia.getAPIQuestionsByMiahootID(this.idMiahoot).subscribe((data: any) => {
+        this.apiMia.getAPIQuestionsByMiahootID(this.idMiahoot).subscribe((data: any) => {
 
-        data.map((obj: { id: any, label: any, miahootId: any, reponses: any }) => {
-          let question: Question = {
-            label: obj.label,
-            reponses: obj.reponses,
-            id: obj.id
-          };
-          this.gs.miahootGame.miahoot.listeQuestions.push(question);
-        })
-      }); // On récupère les questions du miahoot
-    }).catch((err) => {
-      console.log("première erreur chef"+err);
-    });
-  }
+          data.map((obj: { id: any, label: any, miahootId: any, reponses: any }) => {
+            let question: Question = {
+              label: obj.label,
+              reponses: obj.reponses,
+              id: obj.id
+            };
+            this.gs.miahootGame.miahoot.listeQuestions.push(question);
+          })
+        }); // On récupère les questions du miahoot
+      }).catch((err) => {
+        console.log("première erreur chef" + err);
+      });
+    }
 
 
   }
@@ -138,7 +145,7 @@ export class MiahootComponent {
       this.voirRep.next(false);
     } else if (this.voirRep.getValue() == false) {
       this.voirRep.next(true);
-      
+
     }
 
   }
@@ -146,6 +153,25 @@ export class MiahootComponent {
   //cacher bonne reponse
   hideReponses(): void {
     this.voirRep.next(false);
+  }
+
+  togglePopup(): void {
+    this.showPopup = !this.showPopup;
+    this.cdRef.detectChanges();
+
+    let count = 5;
+    const interval = setInterval(() => {
+      count--;
+      console.log('Compteur : ', count);
+      if (count <= 0) {
+        clearInterval(interval); // arrête l'exécution de la fonction
+      }
+    }, 1000);
+
+    this.showPopup = !this.showPopup;
+    this.cdRef.detectChanges();
+
+    this.gs.endGame();
   }
 
 
