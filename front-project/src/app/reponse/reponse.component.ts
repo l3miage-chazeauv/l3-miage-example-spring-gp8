@@ -1,8 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
-import { GameService } from '../game.service';
 import { UserService } from '../user.service';
 import { MiahootComponent } from '../miahoot/miahoot.component';
-import { Subscription } from 'rxjs/internal/Subscription';
 
 
 @Component({
@@ -28,7 +26,6 @@ export class Reponse2Component {
 
   constructor(private ms:UserService, private cdRef: ChangeDetectorRef, private miahoot : MiahootComponent) {
     
-
   }
 
 async ngOnInit(): Promise<void> {

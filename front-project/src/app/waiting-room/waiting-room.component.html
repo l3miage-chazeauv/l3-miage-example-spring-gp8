@@ -1,9 +1,7 @@
 <div id="waitingRoom" class="card">
-    <h1>Salle d'attente</h1>
     <label>il y a {{nbUtilisateurs}} utilisateurs dans la room</label>
 </div>
 
-
 <button class="button-19"
         (click)="this.start()"
-        [class.hide]="this.idPresentateur !== this.idUserFB">Commencer</button>
+        [class.hide]="(this.idPresentateur |async) !== (this.idUserFB |async )">Commencer</button>

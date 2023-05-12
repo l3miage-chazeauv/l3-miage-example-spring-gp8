@@ -1,6 +1,5 @@
-import { R3PartialDeclaration } from '@angular/compiler';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Question, Reponse } from '../QcmDefinitions';
+import {  Reponse } from '../QcmDefinitions';
 import { GameService } from '../game.service';
 
 @Component({
@@ -25,16 +24,12 @@ export class QuestionComponent {
 
   ngOnInit(): void {
     this.cdRef.detectChanges();
-    // console.log("QuestionComponent ngOnInit");
-    // console.log("idPresentateur: " + this.idPresentateur);
   }
 
   toggleEstCochee(index: number, estCochee: Boolean) {
     if (estCochee) {
-      console.log("toggleEstCochee INCR");
       this.incrVote.emit(index);
     } else {
-      console.log("toggleEstCochee DECR");
       this.decrVote.emit(index);
     }
   }

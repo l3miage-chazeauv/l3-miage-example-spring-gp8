@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Miahoot } from '../QcmDefinitions';
 import { Observable, map } from 'rxjs';
 import { Auth, User, authState } from '@angular/fire/auth';
 import { APIService } from '../api.service';
@@ -39,7 +38,6 @@ export class PresentationsComponent {
           this.listePresentations = data as any[];
           this.rechercheMiahootsByLabel("");
           this.cdRef.detectChanges();
-          console.log(this.listePresentations);
         });
       }
     }).catch(error => {

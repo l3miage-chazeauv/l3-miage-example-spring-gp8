@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, Component, Input, NgZone } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { catchError, of } from 'rxjs';
 import { APIService } from '../api.service';
 import { RoutingService } from '../routing.service';
 import { UserService } from '../user.service';
 import { GameService } from '../game.service';
-import { DocumentData, DocumentReference, Firestore, collection, getDocs, query, where } from '@angular/fire/firestore';
+import { DocumentData, DocumentReference, Firestore} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-recherche-mia',
