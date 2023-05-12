@@ -1,6 +1,10 @@
-.reponse{
-  width: 80%;
-  height: 100%;
+:host{
+    width: 100%;
+    display: block;
+}
+button{
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .coche{
@@ -9,4 +13,5 @@
 
 .solution{
   color:green;
+  background: green;
 }

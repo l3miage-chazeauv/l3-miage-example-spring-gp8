@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, firstValueFrom, map, of } from 'rxjs';
 import { UserService } from '../user.service';
 import { User } from '@angular/fire/auth';
+import { RoutingService } from '../routing.service';
 import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
@@ -38,6 +39,7 @@ export class MiahootComponent {
   constructor(private apiMia: APIService,
     private router: Router,
     private ar: ActivatedRoute,
+    protected rs: RoutingService,
     protected gs: GameService,
     private ms: UserService,
     private cdRef: ChangeDetectorRef,
@@ -48,6 +50,18 @@ export class MiahootComponent {
     this.gs.postIdQuestionCourante(this.idMiahoot, 1);
 
     this.obsPartie$ = this.gs.setObsPartie(this.idMiahoot.toString());
+    this.obsPartie$.pipe(
+      map(data => data[0].inGame)
+    ).subscribe((inGame) => {
+      this.gs.inGame = inGame;
+    });
+    
+    // this.gs.obsPartie$ = this.gs.setObsPartie(this.idMiahoot.toString());
+    // this.gs.obsPartie$.pipe(
+    //   map(data => data[0].inGame)
+    // ).subscribe((inGame) => {
+    //   this.gs.inGame = inGame;
+    // });
 
     this.obsPartie$.pipe(
       map(data => data[0].idQuestionCourante)
@@ -84,6 +98,8 @@ export class MiahootComponent {
 
 
     if (this.idMiahoot) {
+
+      this.gs.miahootGame.miahoot.listeQuestions = [];
 
       await this.assignPresentateur(this.idMiahoot).then(() => {
 
@@ -171,7 +187,7 @@ export class MiahootComponent {
     this.showPopup = !this.showPopup;
     this.cdRef.detectChanges();
 
-    this.gs.endGame();
+    this.gs.endGame(this.idMiahoot);
   }
 
 

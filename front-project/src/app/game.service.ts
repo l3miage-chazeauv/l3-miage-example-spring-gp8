@@ -2,7 +2,7 @@ import { ChangeDetectorRef, EventEmitter, Injectable, OnInit } from '@angular/co
 import { Question, Reponse, MiahootGame, Parties, MiahootUser } from './QcmDefinitions';
 import { Observable, firstValueFrom, map, of, switchMap, take } from 'rxjs';
 import { Auth, authState, user } from '@angular/fire/auth';
-import { CollectionReference, DocumentData, DocumentReference, Firestore, FirestoreDataConverter, addDoc, collection, collectionData, doc, docData, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { CollectionReference, DocumentData, DocumentReference, Firestore, FirestoreDataConverter, addDoc, collection, collectionData, deleteDoc, doc, docData, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 import { APIService } from './api.service';
 import { UserService } from './user.service';
 import { update } from '@angular/fire/database';
@@ -44,7 +44,7 @@ export class GameService {
   inGame: boolean = false;
   idMiahoot: number = 0;
   miahootGame: MiahootGame = { isPresented: false, miahoot: { idMiahoot: 0, listeQuestions: [] } };
-  protected obsPartie$: Observable<any> = new Observable();
+  // public obsPartie$: Observable<any> = new Observable();
 
 
   obsMiahootGame$ = new Observable<MiahootGame | undefined>;
@@ -67,13 +67,15 @@ export class GameService {
               private ms: UserService, 
               private ar: ActivatedRoute,
               private rs: RoutingService) {
+    // this.obsPartie$ = this.setObsPartie("2");
+    // this.obsPartie$.pipe(
+    //   map(data => data[0].inGame)
+    // ).subscribe((inGame) => {
+    //   this.inGame = inGame;
+    // });
+
+    // console.log("dehors de l'observable " + this.inGame);
     
-                this.obsPartie$ = this.setObsPartie("12");
-                this.obsPartie$.pipe(
-                  map(data => data[0].inGame)
-                ).subscribe((inGame) => {
-                  this.inGame = inGame;
-                });
               }
 
 
@@ -81,10 +83,14 @@ export class GameService {
     miahootGame.isPresented = true;
   }
 
-  endGame(): void { // On termine le jeu (fonction utilisable par un présentateur/concepteur)
+  endGame(miahootID: number): void { // On termine le jeu (fonction utilisable par un présentateur/concepteur)
     this.miahootGame.isPresented = false;
 
-    this.rs.toHome();
+    // On inverse l'attribut inGame dans firebase
+    this.inGameFalse(miahootID);
+
+    // On delete la partie de firebase
+    this.suppMiahootPresente(miahootID);
   }
 
 
@@ -413,6 +419,18 @@ export class GameService {
     }
 
 
+
+  }
+
+  async suppMiahootPresente(idMiahoot: number): Promise<void> {
+    // supprime le miahoot d'id idMiahoot de firebase
+    const partie = await this.getMiahootPresente(idMiahoot.toString());
+    const partieData = await firstValueFrom(docData(partie));
+
+    if (partieData) {
+      console.log("suppression du miahoot");
+      await deleteDoc(partie);
+    }
 
   }
 

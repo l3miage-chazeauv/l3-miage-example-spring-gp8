@@ -176,6 +176,7 @@ footer{
     flex-direction: column;
     padding: 30px;
     border-radius: 20px;
+    color: white;
 }
 
 .heading {
@@ -254,11 +255,8 @@ footer{
   .buttonsContainer{
     display: flex;
     flex-direction:row;
-    position:absolute;
-    justify-content: center;
-    top: 75%;
-    width: 100%;
-    padding: 10px; 
+    place-self: end;
+    gap: 20px;
   }
   
   .button-19 {
@@ -288,7 +286,7 @@ footer{
     user-select: none;
     -webkit-user-select: none;
     vertical-align: middle;
-    white-space: nowrap;
+    word-wrap: break-word;
   }
   
   .button-19:after {
@@ -370,4 +368,14 @@ footer{
 
 .cardErreur{
   background: linear-gradient(-45deg,#c9534f, #f72929,#c9534f, #f72929);
+}
+
+.buttonsContainer{
+    grid-area: 2 / 3;
+    position: absolute;
+}
+
+.grid-extender{
+    grid-area: 2 / 3;
+    height: 80px;
 }
