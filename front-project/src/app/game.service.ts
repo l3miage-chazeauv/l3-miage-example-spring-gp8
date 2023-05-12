@@ -306,7 +306,7 @@ export class GameService {
     const partieData = await firstValueFrom(docData(partie));
 
     if (partieData) {
-      partieData['userConnected']++;
+      partieData['userConnected'] = partieData['userConnected'] + 1;
       await setDoc(partie, partieData);
     }
 
@@ -411,10 +411,11 @@ export class GameService {
     const partieData = await firstValueFrom(docData(partie));
 
     if (partieData) {
-      console.log("userConnected : " + partieData['userConnected']);
-      partieData['userConnected']--;
+      partieData['userConnected'] = partieData['userConnected'] - 1;
       await setDoc(partie, partieData);
     }
+
+
 
   }
 

@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable, firstValueFrom, map, of } from 'rxjs';
 import { UserService } from '../user.service';
 import { User } from '@angular/fire/auth';
 import { RoutingService } from '../routing.service';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-miahoot[idMiahoot]',
@@ -25,6 +26,9 @@ export class MiahootComponent {
   private presentateurs?: MiahootUser[];
 
   public voirRep: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+
+  public urlMiahoot:string="http://localhost:4200/miahoot/"+this.idMiahoot;
 
 
   protected idPresentateur: string = "nullIdPresentateur";
@@ -71,7 +75,8 @@ export class MiahootComponent {
 
   async ngOnDestroy(): Promise<void> {
     await this.gs.inGameFalse(this.idMiahoot);
-    await this.gs.postIdQuestionCourante(this.idMiahoot, 0);
+    await this.gs.suppConnectedUser(this.idMiahoot);
+    await this.gs.postIdQuestionCourante(this.idMiahoot,0);
     this.cdRef.detectChanges();
   }
 
