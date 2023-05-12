@@ -323,9 +323,11 @@ export class GameService {
     const partieQuery = query(partiesCollection, where('miahootID', '==', parseInt(miahootID)));
 
     const querySnapshot = await getDocs(partieQuery);
+    console.log("querySnapshot : " + JSON.stringify(querySnapshot))
     if (!querySnapshot.empty) {
       const docSnapshot = querySnapshot.docs[0];
       const presentateurID = docSnapshot.get('presentateurID');
+      console.log("ici  : ");
       res = presentateurID;
     }
 

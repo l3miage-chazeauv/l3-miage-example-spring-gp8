@@ -72,13 +72,13 @@ export class MiahootComponent {
 
     this.gs.getPresentateurMiahootPresente(this.idMiahoot.toString()).then((id) => {
       this.idPresentateur = id;
-      // this.cdr.detectChanges();
+      this.cdRef.detectChanges();
     });
 
     //On récupère l'id de l'utilisateur
     this.user.getIdUserFB().then((id) => {
       this.idUserFB = id;
-      // this.cdr.detectChanges();
+      this.cdRef.detectChanges();
     });
 
 
