@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { QcmEditingComponent } from './qcm-editing.component';
 
 describe('QcmEditingComponent', () => {
